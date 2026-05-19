@@ -59,6 +59,14 @@ input double InpProgressiveTrimGapPct = 0.0;  // [TRIM] tanca POSICIO mes negati
 input int    InpProgressiveTrimMinSec = 60;   // [TRIM] pausa min entre trims (sec)
 input int    InpProgressiveTrimMaxPerTick = 1; // [TRIM] max posicions a tancar per tick
 
+input group "=== Filtre Direccional EMA (NOU) ==="
+input bool   InpTrendFilterEnabled  = false;  // [TREND] ON/OFF
+input ENUM_TIMEFRAMES InpTrendTF    = PERIOD_H4;  // TF per calcular EMA (H1, H4, D1)
+input int    InpTrendFastEMA        = 20;     // EMA ràpid (fast)
+input int    InpTrendSlowEMA        = 50;     // EMA lent (slow)
+input double InpTrendThresholdPct   = 0.1;    // % de separació min EMAs per detectar trend
+input bool   InpTrendAllowCounter   = false;  // si true permet 1 pendent en direcció contrària al trend
+
 input group "=== Safety ==="
 input double InpMaxDrawdownPct      = 20.0;   // kill switch: tanca tot si equity < start*(1-this/100)
 input int    InpMaxSpreadPoints     = 80;
@@ -424,9 +432,63 @@ void CloseAllAndCancelAll()
 //+------------------------------------------------------------------+
 //| Col.locacio del grid bidireccional (BUY+SELL a cada nivell, TPs)  |
 //+------------------------------------------------------------------+
+// Trend filter state
+enum TrendDir { TREND_NEUTRAL=0, TREND_UP=1, TREND_DOWN=-1 };
+TrendDir g_trend = TREND_NEUTRAL;
+datetime g_last_trend_check = 0;
+
+void UpdateTrend()
+{
+   if(!InpTrendFilterEnabled) { g_trend = TREND_NEUTRAL; return; }
+
+   // recalcula al canviar barra
+   datetime cur_bar = iTime(_Symbol, InpTrendTF, 0);
+   if(cur_bar == g_last_trend_check) return;
+   g_last_trend_check = cur_bar;
+
+   double ema_fast[], ema_slow[];
+   ArraySetAsSeries(ema_fast, true);
+   ArraySetAsSeries(ema_slow, true);
+
+   int handle_fast = iMA(_Symbol, InpTrendTF, InpTrendFastEMA, 0, MODE_EMA, PRICE_CLOSE);
+   int handle_slow = iMA(_Symbol, InpTrendTF, InpTrendSlowEMA, 0, MODE_EMA, PRICE_CLOSE);
+   if(handle_fast == INVALID_HANDLE || handle_slow == INVALID_HANDLE) return;
+
+   if(CopyBuffer(handle_fast, 0, 1, 1, ema_fast) != 1) return;
+   if(CopyBuffer(handle_slow, 0, 1, 1, ema_slow) != 1) return;
+
+   double fast = ema_fast[0];
+   double slow = ema_slow[0];
+   double threshold = slow * (InpTrendThresholdPct / 100.0);
+
+   TrendDir new_trend;
+   if(fast > slow + threshold)      new_trend = TREND_UP;
+   else if(fast < slow - threshold) new_trend = TREND_DOWN;
+   else                              new_trend = TREND_NEUTRAL;
+
+   if(new_trend != g_trend)
+   {
+      PrintFormat("[DGv2R TREND] %s -> %s (fast=%.2f slow=%.2f diff=%.4f%%)",
+                  EnumToString(g_trend), EnumToString(new_trend),
+                  fast, slow, (fast-slow)/slow*100.0);
+      g_trend = new_trend;
+   }
+}
+
 void PlacePendingPair(double level, bool above)
 {
    if(!SpreadOk() || !WeekendOk()) return;
+
+   // Filtre direccional: en trend, només permet entrades en la direcció del trend
+   // Exception: above=true (preu sobre el nivell -> obrir BUY_STOP/SELL_LIMIT)
+   //            above=false (preu sota nivell -> obrir BUY_LIMIT/SELL_STOP)
+   bool allow_buy  = true;
+   bool allow_sell = true;
+   if(InpTrendFilterEnabled && g_trend != TREND_NEUTRAL)
+   {
+      if(g_trend == TREND_UP)   allow_sell = InpTrendAllowCounter;
+      if(g_trend == TREND_DOWN) allow_buy  = InpTrendAllowCounter;
+   }
 
    // Si TP virtual: passem TP=0 al broker (no es veu cap linia). Si TP natiu: passem el valor calculat.
    double tp_buy  = InpUseVirtualTP ? 0 : NormPrice(level + InpFluidTPUSD);
@@ -450,14 +512,14 @@ void PlacePendingPair(double level, bool above)
       if(short_total + InpLotSize > InpMaxLotPerSide + 1e-9) short_cap_ok = false;
    }
 
-   // BUY: nomes si no hi ha pendent BUY al nivell NI posicio LONG oberta al nivell I no excedeix cap
-   if(long_cap_ok && !PendingExistsAt(level, buy_type) && !PositionExistsAt(level, DIR_LONG))
+   // BUY: nomes si no hi ha pendent BUY al nivell NI posicio LONG oberta al nivell I no excedeix cap I trend permet
+   if(allow_buy && long_cap_ok && !PendingExistsAt(level, buy_type) && !PositionExistsAt(level, DIR_LONG))
    {
       if(above) g_trade.BuyStop (InpLotSize, level, _Symbol, sl_buy, tp_buy, ORDER_TIME_GTC, 0, c);
       else      g_trade.BuyLimit(InpLotSize, level, _Symbol, sl_buy, tp_buy, ORDER_TIME_GTC, 0, c);
    }
-   // SELL: nomes si no hi ha pendent SELL al nivell NI posicio SHORT oberta al nivell I no excedeix cap
-   if(short_cap_ok && !PendingExistsAt(level, sell_type) && !PositionExistsAt(level, DIR_SHORT))
+   // SELL: nomes si no hi ha pendent SELL al nivell NI posicio SHORT oberta al nivell I no excedeix cap I trend permet
+   if(allow_sell && short_cap_ok && !PendingExistsAt(level, sell_type) && !PositionExistsAt(level, DIR_SHORT))
    {
       if(above) g_trade.SellLimit(InpLotSize, level, _Symbol, sl_sell, tp_sell, ORDER_TIME_GTC, 0, c);
       else      g_trade.SellStop (InpLotSize, level, _Symbol, sl_sell, tp_sell, ORDER_TIME_GTC, 0, c);
@@ -1350,6 +1412,9 @@ void OnTick()
    // 1.6) Progressive Trim (tanca pitjor 1 a 1)
    CheckProgressiveTrim();
    if(g_killed) return;
+
+   // 1.7) Actualitza trend filter (nou)
+   UpdateTrend();
 
    // 2) Manté el grid bidireccional centrat al voltant del preu
    MaintainPendingWindow();
