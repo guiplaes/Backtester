@@ -1,0 +1,61 @@
+Testing MA variants (SMA vs EMA vs WMA, std vs ATR bands)...
+
+--- EURGBP D1 LONG ---
+  sma+std   : n=  28 WR 89.3% Net=$  +1,804 PF15.40
+  sma+atr   : n=  25 WR 96.0% Net=$  +1,642 PF33.59
+  ema+std   : n=  31 WR 90.3% Net=$  +1,972 PF18.03
+  ema+atr   : n=  29 WR 96.6% Net=$  +1,877 PF285.34
+  wma+std   : n=  31 WR 90.3% Net=$  +1,878 PF 8.18
+  wma+atr   : n=  27 WR 88.9% Net=$  +1,412 PF15.63
+
+--- EURGBP H4 LONG ---
+  sma+std   : n=  37 WR 91.9% Net=$  +1,796 PF 7.43
+  sma+atr   : n=  78 WR 61.5% Net=$  +1,760 PF 2.36
+  ema+std   : n=  35 WR 91.4% Net=$  +1,391 PF 6.57
+  ema+atr   : n=  56 WR 80.4% Net=$  +2,071 PF 3.33
+  wma+std   : n=  41 WR 92.7% Net=$  +1,599 PF10.05
+  wma+atr   : n=  54 WR 88.9% Net=$  +1,936 PF 3.58
+
+--- EURJPY H4 LONG ---
+  sma+std   : n=  37 WR 97.3% Net=$ +35,773 PF 4.57
+  sma+atr   : n=  98 WR 65.3% Net=$ +42,514 PF 2.26
+  ema+std   : n=  38 WR 94.7% Net=$ +30,282 PF 4.39
+  ema+atr   : n=  59 WR 89.8% Net=$ +38,421 PF 2.31
+  wma+std   : n=  49 WR 93.9% Net=$ +33,192 PF 3.13
+  wma+atr   : n=  65 WR 92.3% Net=$ +38,175 PF 2.56
+
+--- EURCHF H4 SHORT ---
+  sma+std   : n=  36 WR 91.7% Net=$  +1,645 PF18.27
+  sma+atr   : n=  37 WR 97.3% Net=$  +1,933 PF 5.11
+  ema+std   : n=  36 WR 91.7% Net=$  +1,243 PF10.84
+  ema+atr   : n=  34 WR 94.1% Net=$  +1,646 PF 5.72
+  wma+std   : n=  32 WR 75.0% Net=$    +963 PF 4.38
+  wma+atr   : n=  38 WR 89.5% Net=$  +1,131 PF 3.25
+
+--- CHFJPY H4 LONG ---
+  sma+std   : n=  36 WR 94.4% Net=$ +39,722 PF53.10
+  sma+atr   : n= 115 WR 56.5% Net=$ +24,979 PF 1.48
+  ema+std   : n=  36 WR 97.2% Net=$ +28,396 PF46.25
+  ema+atr   : n=  68 WR 77.9% Net=$ +30,952 PF 2.21
+  wma+std   : n=  43 WR 93.0% Net=$ +35,481 PF12.28
+  wma+atr   : n=  78 WR 82.1% Net=$ +32,879 PF 1.86
+
+========================================================================================================================
+PIVOT (Net):
+variant           ema+atr   ema+std   sma+atr   sma+std   wma+atr   wma+std
+cfg                                                                        
+CHFJPY H4 LONG   30952.50  28396.00  24979.00  39722.50  32878.50  35481.00
+EURCHF H4 SHORT   1646.10   1243.25   1933.05   1644.55   1131.00    963.30
+EURGBP D1 LONG    1876.65   1972.10   1642.45   1804.05   1411.80   1878.15
+EURGBP H4 LONG    2071.30   1391.20   1759.60   1795.65   1936.45   1598.65
+EURJPY H4 LONG   38420.50  30281.50  42514.00  35773.50  38175.50  33192.50
+
+Totals per variant:
+  sma+std       : Net total=$+80,740
+  sma+atr       : Net total=$+72,828
+  ema+std       : Net total=$+63,284
+  ema+atr       : Net total=$+74,967
+  wma+std       : Net total=$+73,114
+  wma+atr       : Net total=$+75,533
+
+DONE

@@ -1,0 +1,65 @@
+XAUUSD M15 — Trade Setup Snapshot
+Date/Time UTC: 2026-05-06T13:30:00.000Z
+Setup direction (mechanical filter triggered): LONG
+Entry price (current bar close): 4695.25
+
+LAST 20 M15 BARS (oldest → current):
+  06 08:45 O=4677.43 H=4702.96 L=4677.35 C=4700.15 V=29457
+  06 09:00 O=4700.15 H=4708.52 L=4689.04 C=4695.46 V=21139
+  06 09:15 O=4695.46 H=4705.03 L=4691.35 C=4700.00 V=15723
+  06 09:30 O=4700.00 H=4706.08 L=4695.69 C=4696.01 V=15217
+  06 09:45 O=4696.01 H=4702.78 L=4694.24 C=4701.63 V=11181
+  06 10:00 O=4701.63 H=4705.83 L=4695.86 C=4698.04 V=15016
+  06 10:15 O=4698.04 H=4704.78 L=4695.41 C=4704.48 V=10434
+  06 10:30 O=4704.48 H=4716.16 L=4704.48 C=4714.23 V=16643
+  06 10:45 O=4714.23 H=4723.09 L=4707.13 C=4717.79 V=24081
+  06 11:00 O=4717.79 H=4721.28 L=4709.14 C=4711.91 V=21264
+  06 11:15 O=4711.91 H=4713.60 L=4705.46 C=4705.46 V=15530
+  06 11:30 O=4705.46 H=4715.46 L=4697.96 C=4699.69 V=17508
+  06 11:45 O=4699.69 H=4702.67 L=4690.90 C=4691.83 V=17308
+  06 12:00 O=4691.83 H=4693.04 L=4670.39 C=4672.18 V=23014
+  06 12:15 O=4672.18 H=4688.76 L=4660.21 C=4683.43 V=27240
+  06 12:30 O=4683.43 H=4685.41 L=4677.78 C=4682.70 V=18295
+  06 12:45 O=4682.70 H=4684.68 L=4676.80 C=4683.04 V=14350
+  06 13:00 O=4683.04 H=4692.48 L=4668.74 C=4683.47 V=29190
+  06 13:15 O=4683.47 H=4691.26 L=4679.37 C=4685.02 V=17680
+  06 13:30 O=4685.02 H=4699.02 L=4680.11 C=4695.25 V=33164
+
+LAST 6 H1 CANDLES (aggregated, oldest → current):
+  1: O=4670.04 H=4682.46 L=4669.95 C=4677.43 UP
+  2: O=4677.43 H=4708.52 L=4677.35 C=4696.01 UP
+  3: O=4696.01 H=4716.16 L=4694.24 C=4714.23 UP
+  4: O=4714.23 H=4723.09 L=4697.96 C=4699.69 DN
+  5: O=4699.69 H=4702.67 L=4660.21 C=4682.70 DN
+  6: O=4682.70 H=4699.02 L=4668.74 C=4695.25 UP
+
+INDICATORS NOW:
+  EMA21:   4687.66 (current price 7.59 above)
+  SMA50:   4670.13 (current price 25.12 above)
+  ATR(14): 13.63
+  RSI(14): 57.2
+  Last 20-bar swing HIGH: 4723.09 (27.84 above entry)
+  Last 20-bar swing LOW:  4660.21 (35.04 below entry)
+
+MECHANICAL TRADE PARAMETERS (already locked):
+  SL: 1.5×ATR = 20.44 below entry
+  TP: 3.0×ATR = 40.88 above entry
+  Timeout: 8 bars (2h)
+
+YOUR TASK:
+You are an expert intraday gold trader. Given ONLY the data above (NO future information), decide if this is a HIGH-QUALITY setup worth taking.
+
+Consider:
+- Trend quality across M15 and H1
+- Structure (HH/HL or LH/LL pattern)
+- Distance to swing extremes vs TP target
+- Volatility regime (ATR appropriate?)
+- RSI overextended or healthy?
+- Candle quality (clean reversal vs choppy?)
+- Time of day (London session ~7-12 UTC, NY ~13-20 UTC)
+
+REPLY FORMAT (strict, two lines only, nothing else):
+DECISION: ACT
+or
+DECISION: SKIP
+REASON: <one short sentence, max 25 words>

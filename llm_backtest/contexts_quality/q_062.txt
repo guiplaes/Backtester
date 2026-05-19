@@ -1,0 +1,122 @@
+XAUUSD M15 — Trading Decision Context
+
+⏰ TIME: 2026-05-11T00:15:00.000Z | UTC 0:00 | Session: Asia (low liq)
+💰 Current price: 4683.03
+
+━━━ MECHANICAL FILTER FLAGGED THIS AS: FAILED_BREAKOUT ━━━
+Suggested direction: LONG
+
+(But you are the trader. The mechanical filter only sees text patterns. You decide whether this is a REAL high-quality opportunity or a false signal. Skip if the context doesn't support it.)
+
+━━━ KEY LEVELS ━━━
+PDH: 4715.93 (+32.90 from current)
+PDL: 4678.67 (-4.36 from current)
+20-bar Swing HIGH: 4728.95 (+45.92)
+20-bar Swing LOW:  4678.67 (-4.36)
+Position in 20-bar range: 9%
+
+━━━ TREND CONTEXT ━━━
+EMA21:        4701.51 (price below by 18.48)
+SMA50:        4714.07 (price below)
+SMA50 slope:  -2.79 over last 5 bars
+ATR(14):      8.69
+RSI(14):      32.3 
+Volume current: 10049 (1.59× avg20)
+
+━━━ H1 CONTEXT (last 6) ━━━
+  O=4715.10 H=4728.57 L=4715.10 C=4727.54 BULL
+  O=4727.54 H=4728.95 L=4719.86 C=4723.51 BEAR
+  O=4723.51 H=4726.88 L=4716.81 C=4718.51 BEAR
+  O=4718.51 H=4718.86 L=4678.67 C=4694.44 BEAR
+  O=4694.44 H=4697.18 L=4686.74 C=4694.62 BULL
+  O=4694.62 H=4698.80 L=4675.78 C=4683.03 BEAR
+
+━━━ M15 BARS (last 40) ━━━
+  08 13:15 O=4720.44 H=4727.68 L=4719.49 C=4727.07 V=15165
+  08 13:30 O=4727.07 H=4744.31 L=4726.88 C=4738.03 V=30582
+  08 13:45 O=4738.03 H=4747.66 L=4735.03 C=4747.58 V=21754
+  08 14:00 O=4747.58 H=4749.20 L=4718.94 C=4731.60 V=33163
+  08 14:15 O=4731.60 H=4733.84 L=4716.55 C=4716.55 V=25438
+  08 14:30 O=4716.55 H=4725.53 L=4714.34 C=4722.71 V=27885
+  08 14:45 O=4722.71 H=4724.58 L=4713.30 C=4715.91 V=19942
+  08 15:00 O=4715.91 H=4720.91 L=4706.31 C=4707.86 V=20101
+  08 15:15 O=4707.86 H=4713.38 L=4704.41 C=4713.16 V=23021
+  08 15:30 O=4713.16 H=4714.98 L=4704.41 C=4705.98 V=21116
+  08 15:45 O=4705.98 H=4711.13 L=4702.03 C=4707.09 V=14735
+  08 16:00 O=4707.09 H=4712.45 L=4705.53 C=4711.40 V=11798
+  08 16:15 O=4711.40 H=4717.65 L=4711.32 C=4717.65 V=10153
+  08 16:30 O=4717.65 H=4720.24 L=4713.20 C=4713.21 V=9893
+  08 16:45 O=4713.21 H=4716.18 L=4711.35 C=4712.50 V=10291
+  08 17:00 O=4712.50 H=4716.13 L=4712.28 C=4715.10 V=9580
+  08 17:15 O=4715.10 H=4722.06 L=4715.10 C=4720.52 V=8975
+  08 17:30 O=4720.52 H=4721.77 L=4719.57 C=4720.78 V=4979
+  08 17:45 O=4720.78 H=4722.71 L=4719.22 C=4720.73 V=4500
+  08 18:00 O=4720.73 H=4728.57 L=4720.58 C=4727.54 V=11621
+  08 18:15 O=4727.54 H=4728.95 L=4723.82 C=4725.57 V=7027
+  08 18:30 O=4725.57 H=4726.52 L=4723.86 C=4724.60 V=5556
+  08 18:45 O=4724.60 H=4724.68 L=4719.86 C=4721.95 V=6851
+  08 19:00 O=4721.95 H=4725.71 L=4720.84 C=4723.51 V=5650
+  08 19:15 O=4723.51 H=4725.09 L=4723.30 C=4723.67 V=3289
+  08 19:30 O=4723.67 H=4726.88 L=4721.51 C=4725.38 V=6522
+  08 19:45 O=4725.38 H=4725.99 L=4722.89 C=4724.05 V=8506
+  08 20:00 O=4724.05 H=4724.20 L=4716.81 C=4718.51 V=2577
+  08 20:15 O=4718.51 H=4718.85 L=4714.90 C=4717.03 V=2189
+  08 20:30 O=4717.03 H=4718.86 L=4715.44 C=4715.93 V=1238
+  10 22:00 O=4715.93 H=4715.93 L=4678.67 C=4686.96 V=13833
+  10 22:15 O=4686.96 H=4696.19 L=4681.59 C=4694.44 V=7221
+  10 22:30 O=4694.44 H=4694.44 L=4686.74 C=4691.18 V=5870
+  10 22:45 O=4691.18 H=4694.60 L=4689.88 C=4691.80 V=4956
+  10 23:00 O=4691.80 H=4696.72 L=4688.43 C=4689.89 V=5433
+  10 23:15 O=4689.89 H=4697.18 L=4688.80 C=4694.62 V=4068
+  10 23:30 O=4694.62 H=4698.50 L=4694.62 C=4697.43 V=3610
+  10 23:45 O=4697.43 H=4698.80 L=4689.95 C=4691.65 V=5020
+  11 00:00 O=4691.75 H=4691.75 L=4680.42 C=4682.50 V=11564
+  11 00:15 O=4682.50 H=4686.63 L=4675.78 C=4683.03 V=10049
+
+═══════════════════════════════════════════════════════════════
+🧠 TRADING DECISION FRAMEWORK
+
+You are an XAUUSD intraday trader analyzing this moment. Reason through this systematically:
+
+STEP 1: DOMINANT TREND
+  - M15 and H1 — what's the trend direction and strength?
+  - Are they aligned or conflicting?
+
+STEP 2: PRICE LOCATION
+  - Is price at an extreme (top/bottom of range)?
+  - At a key level (PDH/PDL/swing)?
+  - In the middle of a move (continuation potential)?
+  - At a pullback to EMA (high-probability spot)?
+
+STEP 3: SCENARIO PROBABILITY
+  Consider both directional scenarios:
+  - CONTINUATION: trend continues — when likely?
+  - REVERSAL: trend exhausts — when likely?
+  - RANGE BOUNCE: chop continues — when likely?
+
+  Key signals:
+  - Vertical move + RSI extreme + at swing = LIKELY exhaustion
+  - Pullback to MA + reversal candle + trend intact = LIKELY continuation
+  - Failed breakout = LIKELY mean revert
+  - Compression then expansion = LIKELY directional move
+
+STEP 4: ASYMMETRY CHECK
+  - Where would your SL be? (must be at a logical structure point)
+  - Where would your TP be? (must be at next clear level)
+  - Is the R:R asymmetric (>1.5)?
+
+STEP 5: ACT or SKIP
+  - ACT only if you have clear bias AND asymmetric R:R AND specific scenario
+  - SKIP if: ambiguous, no clean entry, poor R:R, or you're talking yourself into it
+
+REPLY EXACTLY in this format:
+TREND: <description of trend M15 and H1>
+LOCATION: <where price is>
+SCENARIO: <most likely scenario, with reasoning>
+ASYMMETRY: <where SL would be, where TP would be>
+DECISION: NO_TRADE / LONG / SHORT
+ENTRY: <price> or -
+SL: <price> or -
+TP: <price> or -
+CONFIDENCE: <1-10>
+REASON: <2-3 sentence summary>

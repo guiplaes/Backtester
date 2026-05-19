@@ -1,0 +1,36 @@
+{
+  "run_id": "sens_edge10_w70_reb5",
+  "initial_capital": 1000.0,
+  "initial_reserve_pct": 0.05,
+  "snapshot_every_min": 240,
+  "rebalance_every_min": 2,
+  "bots": {
+    "PAXG_USDT": {
+      "symbol": "PAXG_USDT",
+      "width_pct": 0.0224,
+      "rows": 8
+    },
+    "BTC_USDT": {
+      "symbol": "BTC_USDT",
+      "width_pct": 0.03612,
+      "rows": 12
+    },
+    "ETH_USDT": {
+      "symbol": "ETH_USDT",
+      "width_pct": 0.0469,
+      "rows": 12
+    },
+    "SOL_USDT": {
+      "symbol": "SOL_USDT",
+      "width_pct": 0.049,
+      "rows": 9
+    }
+  },
+  "weights": {
+    "PAXG_USDT": 0.4,
+    "BTC_USDT": 0.3,
+    "ETH_USDT": 0.2,
+    "SOL_USDT": 0.1
+  },
+  "started_at": "2026-05-13T18:40:12.050516+00:00"
+}

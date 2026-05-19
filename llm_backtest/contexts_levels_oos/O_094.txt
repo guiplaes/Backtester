@@ -1,0 +1,92 @@
+XAUUSD M15 — LEVEL TOUCH DECISION
+
+⏰ TIME: 2026-04-23T08:30:00.000Z | UTC 8:00 | Session: London
+💰 Current price: 4703.45
+
+━━━ THE LEVEL ━━━
+Touched: R50_4700 @ 4700.00 (support)
+Distance: -3.45 pts
+Confluence with other levels (within 0.5×ATR): none
+Prior tests today: 8
+
+━━━ APPROACH CONTEXT ━━━
+Net move last 8 bars (2h): -1.04 pts (-0.1× ATR)
+Volume trend approaching: stable
+ATR(14): 12.82
+RSI(14): 39.8 
+
+━━━ H1 CONTEXT (last 6) ━━━
+  O=4740.38 H=4742.31 L=4725.82 C=4726.07 BEAR
+  O=4726.12 H=4754.20 L=4694.14 C=4747.77 BULL
+  O=4747.76 H=4750.06 L=4698.40 C=4699.10 BEAR
+  O=4699.02 H=4708.74 L=4698.26 C=4704.49 BULL
+  O=4704.55 H=4721.57 L=4692.48 C=4713.11 BULL
+  O=4713.10 H=4725.11 L=4701.78 C=4703.45 BEAR
+
+━━━ M15 BARS (last 24, oldest → current) ━━━
+  22 20:00 O=4740.38 H=4740.55 L=4734.59 C=4737.11 V=7135
+  22 20:30 O=4737.12 H=4740.97 L=4736.27 C=4740.45 V=4926
+  22 22:00 O=4741.96 H=4742.31 L=4732.69 C=4732.94 V=4180
+  22 22:30 O=4733.01 H=4735.28 L=4725.82 C=4726.07 V=6485
+  22 23:00 O=4726.12 H=4730.01 L=4723.65 C=4728.52 V=7266
+  22 23:30 O=4728.52 H=4729.27 L=4723.91 C=4727.88 V=4493
+  23 00:00 O=4727.89 H=4742.37 L=4694.14 C=4741.43 V=40608
+  23 00:30 O=4741.44 H=4754.20 L=4741.03 C=4747.77 V=23298
+  23 01:00 O=4747.76 H=4750.06 L=4727.39 C=4728.29 V=23258
+  23 01:30 O=4728.43 H=4737.15 L=4722.35 C=4723.56 V=20676
+  23 02:00 O=4723.54 H=4724.81 L=4705.17 C=4713.94 V=21104
+  23 02:30 O=4714.07 H=4715.72 L=4698.40 C=4699.10 V=25014
+  23 03:00 O=4699.02 H=4708.74 L=4698.26 C=4703.31 V=19277
+  23 03:30 O=4703.36 H=4707.65 L=4701.28 C=4704.10 V=14895
+  23 04:00 O=4704.03 H=4707.23 L=4700.87 C=4705.79 V=9777
+  23 04:30 O=4705.77 H=4707.26 L=4698.94 C=4704.49 V=7962
+  23 05:00 O=4704.55 H=4710.35 L=4703.48 C=4705.94 V=9185
+  23 05:30 O=4706.07 H=4715.36 L=4692.48 C=4713.63 V=20932
+  23 06:00 O=4713.65 H=4718.35 L=4708.60 C=4712.20 V=16548
+  23 06:30 O=4712.20 H=4721.57 L=4709.27 C=4713.11 V=18010
+  23 07:00 O=4713.10 H=4716.60 L=4703.20 C=4706.06 V=21549
+  23 07:30 O=4706.05 H=4720.59 L=4703.69 C=4719.27 V=16788
+  23 08:00 O=4719.28 H=4725.11 L=4715.01 C=4715.40 V=15419
+  23 08:30 O=4715.65 H=4716.31 L=4701.78 C=4703.45 V=16782
+
+═══════════════════════════════════════════════════════════════
+🎯 SINGLE QUESTION: REJECT or BREAK?
+
+Price has just touched R50_4700 at 4700.00. In the next 8 M15 bars (2 hours), will the level:
+  A) REJECT — price bounces away → trade LONG
+  B) BREAK — price continues through → trade SHORT
+  C) UNCLEAR — no clean read, skip
+
+The level is the bias. You are NOT inventing a trade — you are reading what this specific level is telling you.
+
+REJECT is more likely when:
+  - Strong momentum INTO level (exhaustion at resistance/support)
+  - Volume fading on approach
+  - RSI extreme + at significant level
+  - Multiple prior tests today (zone holding)
+  - Counter-trend H1 (level fits broader structure)
+
+BREAK is more likely when:
+  - Aggressive momentum WITH volume into level
+  - H1 trend aligned with break direction
+  - First test of the day (no defenders yet)
+  - Approach was a clean consolidation, not exhaustion
+
+UNCLEAR is the correct answer when:
+  - Mixed signals
+  - Approach was choppy/sideways (no information)
+  - Level is weak in context
+
+For asymmetric R:R:
+  REJECT trade: SL just beyond level (small risk), TP at next opposing level (large reward)
+  BREAK trade: SL back inside on close-through, TP at next level beyond
+
+REPLY EXACTLY in this format:
+READ: <1-sentence read of what the level is showing>
+BIAS: REJECT / BREAK / UNCLEAR
+RATIONALE: <2-3 sentences explaining the read>
+DECISION: NO_TRADE / LONG / SHORT
+ENTRY: <price> or -
+SL: <price> or -
+TP: <price> or -
+CONFIDENCE: <1-10>

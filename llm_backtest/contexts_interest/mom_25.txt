@@ -1,0 +1,63 @@
+XAUUSD M15 — HIGH INTEREST moment detected
+Time: 2026-05-06T10:30:00.000Z (UTC hour 10)
+Current price: 4714.23
+
+INTEREST SCORE: 6/6
+Signals firing: vol_expand, aligned, near_swing, breakout, active_hour, rsi_extreme
+
+Detected because: vol_expand=volatility bar > 1×ATR | aligned=trend EMA21+SMA50 same side | near_swing=close to swing extreme | breakout=cons breakout | active_hour=London/NY | rsi_extreme=RSI>70 or <30
+
+LAST 30 M15 BARS:
+  06 03:15 O=4647.61 H=4651.22 L=4644.26 C=4645.79
+  06 03:30 O=4645.79 H=4652.03 L=4642.45 C=4647.68
+  06 03:45 O=4647.68 H=4648.18 L=4642.79 C=4643.54
+  06 04:00 O=4643.54 H=4647.72 L=4643.23 C=4647.59
+  06 04:15 O=4647.59 H=4653.53 L=4645.31 C=4652.60
+  06 04:30 O=4652.60 H=4652.68 L=4645.92 C=4647.64
+  06 04:45 O=4647.64 H=4652.57 L=4647.10 C=4649.05
+  06 05:00 O=4649.05 H=4656.61 L=4648.69 C=4654.62
+  06 05:15 O=4654.62 H=4655.25 L=4649.31 C=4650.47
+  06 05:30 O=4650.47 H=4652.11 L=4644.43 C=4649.89
+  06 05:45 O=4649.89 H=4663.89 L=4649.21 C=4663.09
+  06 06:00 O=4663.09 H=4666.03 L=4656.97 C=4660.50
+  06 06:15 O=4660.50 H=4666.72 L=4657.82 C=4666.00
+  06 06:30 O=4666.00 H=4668.75 L=4659.74 C=4664.30
+  06 06:45 O=4664.30 H=4669.83 L=4662.70 C=4669.27
+  06 07:00 O=4669.27 H=4670.58 L=4658.40 C=4658.48
+  06 07:15 O=4658.48 H=4670.03 L=4657.30 C=4667.27
+  06 07:30 O=4667.27 H=4670.18 L=4662.95 C=4670.04
+  06 07:45 O=4670.04 H=4681.85 L=4669.95 C=4681.27
+  06 08:00 O=4681.27 H=4682.46 L=4675.12 C=4679.51
+  06 08:15 O=4679.51 H=4680.76 L=4676.64 C=4677.02
+  06 08:30 O=4677.02 H=4678.90 L=4671.67 C=4677.43
+  06 08:45 O=4677.43 H=4702.96 L=4677.35 C=4700.15
+  06 09:00 O=4700.15 H=4708.52 L=4689.04 C=4695.46
+  06 09:15 O=4695.46 H=4705.03 L=4691.35 C=4700.00
+  06 09:30 O=4700.00 H=4706.08 L=4695.69 C=4696.01
+  06 09:45 O=4696.01 H=4702.78 L=4694.24 C=4701.63
+  06 10:00 O=4701.63 H=4705.83 L=4695.86 C=4698.04
+  06 10:15 O=4698.04 H=4704.78 L=4695.41 C=4704.48
+  06 10:30 O=4704.48 H=4716.16 L=4704.48 C=4714.23
+
+INDICATORS NOW:
+  EMA21: 4682.33 (above)
+  SMA50: 4644.92 (above)
+  ATR(14): 10.50
+  RSI(14): 75.3
+  Swing HIGH (30b): 4708.52 (-5.71 above)
+  Swing LOW (30b):  4638.34 (75.89 below)
+
+THIS IS NOT random — pre-filter detected 6 signals. Something IS happening here.
+
+YOUR TASK as discretionary intraday trader:
+Decide: would you take a trade in next 2 hours (8 M15 bars)?
+- LONG / SHORT / NO_TRADE
+- Set entry, SL, TP based on what you see
+- Be DECISIVE — this is a moment of high signal
+
+REPLY EXACTLY:
+DECISION: NO_TRADE/LONG/SHORT
+ENTRY: <price> or -
+SL: <price> or -
+TP: <price> or -
+REASON: <max 30 words>

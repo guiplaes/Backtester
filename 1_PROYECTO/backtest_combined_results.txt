@@ -1,0 +1,232 @@
+Loading...
+Aggregating extra TFs...
+  M15: 118188 bars
+  M30: 59100 bars
+  H1: 29565 bars
+  H2: 15430 bars
+  H4: 7996 bars
+  H6: 5423 bars
+  H8: 4135 bars
+  H12: 2845 bars
+  D1: 1555 bars
+Precomputing...
+
+======================================================================================================================================================
+EXTRA TFs BASELINE (sense filtres):
+======================================================================================================================================================
+
+H2 (config: SL2.0 TP5/10 OB2.5, 15430 bars)
+  long: n= 103 WR48.5% Net=$+609 PF1.43 DD$368
+  short: n= 104 WR31.7% Net=$-156 PF0.91 DD$1012
+  BOTH: n= 207 WR40.1% Net=$+453 PF1.14 DD$1197
+
+H6 (config: SL1.0 TP2/4 OB2.0, 5423 bars)
+  long: n=  84 WR47.6% Net=$+671 PF1.62 DD$307
+  short: n=  66 WR40.9% Net=$-525 PF0.64 DD$1071
+  BOTH: n= 150 WR44.7% Net=$+146 PF1.06 DD$1168
+
+H8 (config: SL1.0 TP2/4 OB2.0, 4135 bars)
+  long: n=  79 WR55.7% Net=$+810 PF1.75 DD$315
+  short: n=  48 WR35.4% Net=$-410 PF0.66 DD$797
+  BOTH: n= 127 WR48.0% Net=$+400 PF1.18 DD$954
+
+H12 (config: SL1.0 TP2/4 OB2.0, 2845 bars)
+  long: n=  55 WR60.0% Net=$+1133 PF2.26 DD$158
+  short: n=  26 WR26.9% Net=$-734 PF0.26 DD$726
+  BOTH: n=  81 WR49.4% Net=$+400 PF1.21 DD$892
+
+D1 (config: SL1.0 TP2/4 OB2.0, 1555 bars)
+  long: n=  31 WR64.5% Net=$+1175 PF3.02 DD$182
+  short: n=  11 WR45.5% Net=$+79 PF1.33 DD$108
+  BOTH: n=  42 WR59.5% Net=$+1254 PF2.53 DD$182
+
+======================================================================================================================================================
+COMBINACIONS DE FILTRES (NY + slope + LONG, etc.):
+======================================================================================================================================================
+
+--- M15 (SL1.5 TP3/6 OB2.5) ---
+  baseline                         L:n=1011 WR40.9% Net=$+991 PF1.24 DD$373                  S:n=1029 WR38.3% Net=$-13 PF1.00 DD$574
+  LONG_only                        L:n=1011 WR40.9% Net=$+991 PF1.24 DD$373                  (LONG only)
+  NY_LONG                          L:n= 257 WR44.4% Net=$+700 PF1.70 DD$93                   (LONG only)
+  OVERLAP+NY_LONG                  L:n= 601 WR44.4% Net=$+1197 PF1.51 DD$157                 (LONG only)
+  NY+slope0.5_LONG                 L:n=  77 WR50.6% Net=$+178 PF1.51 DD$57                   (LONG only)
+  NY+slope1.0_LONG                 L:n=  23 WR47.8% Net=$+66 PF1.69 DD$28                    (LONG only)
+  ATR_HIGH_BOTH                    L:n= 672 WR44.0% Net=$+1042 PF1.38 DD$225                 S:n= 726 WR39.3% Net=$+167 PF1.04 DD$469
+  ATR_HIGH+slope0.5_LONG           L:n= 242 WR50.8% Net=$+565 PF1.52 DD$254                  (LONG only)
+  LDN+OVL+NY+slope0.5_LONG         L:n= 329 WR44.4% Net=$+411 PF1.32 DD$151                  (LONG only)
+  NY+ATR_HIGH+slope0.5_LONG        L:n=  63 WR50.8% Net=$+61 PF1.19 DD$81                    (LONG only)
+
+--- M30 (SL1.0 TP3/6 OB2.0) ---
+  baseline                         L:n= 784 WR42.1% Net=$+1345 PF1.31 DD$358                 S:n= 750 WR37.1% Net=$+531 PF1.12 DD$442
+  LONG_only                        L:n= 784 WR42.1% Net=$+1345 PF1.31 DD$358                 (LONG only)
+  NY_LONG                          L:n= 333 WR42.6% Net=$+958 PF1.56 DD$197                  (LONG only)
+  OVERLAP+NY_LONG                  L:n= 573 WR44.5% Net=$+995 PF1.31 DD$247                  (LONG only)
+  NY+slope0.5_LONG                 L:n= 131 WR38.9% Net=$+340 PF1.44 DD$170                  (LONG only)
+  NY+slope1.0_LONG                 L:n=  39 WR53.8% Net=$+304 PF2.63 DD$61                   (LONG only)
+  ATR_HIGH_BOTH                    L:n= 543 WR42.9% Net=$+789 PF1.26 DD$253                  S:n= 508 WR37.0% Net=$+277 PF1.09 DD$421
+  ATR_HIGH+slope0.5_LONG           L:n= 229 WR40.6% Net=$+118 PF1.08 DD$155                  (LONG only)
+  LDN+OVL+NY+slope0.5_LONG         L:n= 343 WR41.1% Net=$+600 PF1.33 DD$161                  (LONG only)
+  NY+ATR_HIGH+slope0.5_LONG        L:n=  96 WR42.7% Net=$+304 PF1.59 DD$112                  (LONG only)
+
+--- H1 (SL2.0 TP5/10 OB2.5) ---
+  baseline                         L:n= 214 WR37.9% Net=$+358 PF1.15 DD$314                  S:n= 198 WR37.9% Net=$+457 PF1.19 DD$315
+  LONG_only                        L:n= 214 WR37.9% Net=$+358 PF1.15 DD$314                  (LONG only)
+  NY_LONG                          L:n= 108 WR37.0% Net=$+392 PF1.32 DD$235                  (LONG only)
+  OVERLAP+NY_LONG                  L:n= 171 WR39.8% Net=$+479 PF1.26 DD$234                  (LONG only)
+  NY+slope0.5_LONG                 L:n=  43 WR39.5% Net=$+297 PF1.90 DD$65                   (LONG only)
+  NY+slope1.0_LONG                 L:n=  17 WR35.3% Net=$+105 PF1.69 DD$46                   (LONG only)
+  ATR_HIGH_BOTH                    L:n= 158 WR44.3% Net=$+732 PF1.47 DD$223                  S:n= 152 WR40.1% Net=$+607 PF1.33 DD$212
+  ATR_HIGH+slope0.5_LONG           L:n=  70 WR45.7% Net=$+323 PF1.49 DD$147                  (LONG only)
+  LDN+OVL+NY+slope0.5_LONG         L:n=  92 WR42.4% Net=$+276 PF1.31 DD$285                  (LONG only)
+  NY+ATR_HIGH+slope0.5_LONG        L:n=  35 WR40.0% Net=$+225 PF1.80 DD$65                   (LONG only)
+
+--- H2 (SL2.0 TP5/10 OB2.5) ---
+  baseline                         L:n= 103 WR48.5% Net=$+609 PF1.43 DD$368                  S:n= 104 WR31.7% Net=$-156 PF0.91 DD$1012
+  LONG_only                        L:n= 103 WR48.5% Net=$+609 PF1.43 DD$368                  (LONG only)
+  NY_LONG                          L:n=  53 WR52.8% Net=$+579 PF1.70 DD$418                  (LONG only)
+  OVERLAP+NY_LONG                  L:n=  66 WR53.0% Net=$+657 PF1.67 DD$368                  (LONG only)
+  NY+slope0.5_LONG                 L:n=  28 WR53.6% Net=$+171 PF1.29 DD$368                  (LONG only)
+  NY+slope1.0_LONG                 L:n=  14 WR28.6% Net=$-189 PF0.64 DD$368                  (LONG only)
+  ATR_HIGH_BOTH                    L:n=  70 WR41.4% Net=$+190 PF1.17 DD$368                  S:n=  72 WR30.6% Net=$+118 PF1.09 DD$793
+  ATR_HIGH+slope0.5_LONG           L:n=  44 WR43.2% Net=$+56 PF1.06 DD$368                   (LONG only)
+  LDN+OVL+NY+slope0.5_LONG         L:n=  54 WR48.1% Net=$+190 PF1.20 DD$368                  (LONG only)
+  NY+ATR_HIGH+slope0.5_LONG        L:n=  21 WR47.6% Net=$+65 PF1.12 DD$368                   (LONG only)
+
+--- H4 (SL1.0 TP2/4 OB2.0) ---
+  baseline                         L:n= 129 WR45.7% Net=$+711 PF1.53 DD$161                  S:n= 103 WR43.7% Net=$+56 PF1.04 DD$579
+  LONG_only                        L:n= 129 WR45.7% Net=$+711 PF1.53 DD$161                  (LONG only)
+  NY_LONG                          L:n=  83 WR49.4% Net=$+629 PF1.85 DD$104                  (LONG only)
+  OVERLAP+NY_LONG                  L:n=  83 WR49.4% Net=$+629 PF1.85 DD$104                  (LONG only)
+  NY+slope0.5_LONG                 L:n=  52 WR44.2% Net=$+432 PF1.97 DD$108                  (LONG only)
+  NY+slope1.0_LONG                 L:n=  27 WR37.0% Net=$+207 PF1.76 DD$169                  (LONG only)
+  ATR_HIGH_BOTH                    L:n=  75 WR40.0% Net=$+221 PF1.25 DD$240                  S:n=  50 WR52.0% Net=$+226 PF1.28 DD$346
+  ATR_HIGH+slope0.5_LONG           L:n=  51 WR39.2% Net=$+220 PF1.38 DD$170                  (LONG only)
+  LDN+OVL+NY+slope0.5_LONG         L:n=  71 WR38.0% Net=$+343 PF1.46 DD$220                  (LONG only)
+  NY+ATR_HIGH+slope0.5_LONG        L:n=  33 WR39.4% Net=$+211 PF1.67 DD$147                  (LONG only)
+
+--- H6 (SL1.0 TP2/4 OB2.0) ---
+  baseline                         L:n=  84 WR47.6% Net=$+671 PF1.62 DD$307                  S:n=  66 WR40.9% Net=$-525 PF0.64 DD$1071
+  LONG_only                        L:n=  84 WR47.6% Net=$+671 PF1.62 DD$307                  (LONG only)
+  NY_LONG                          L:n=  44 WR40.9% Net=$+34 PF1.05 DD$296                   (LONG only)
+  OVERLAP+NY_LONG                  L:n=  44 WR40.9% Net=$+34 PF1.05 DD$296                   (LONG only)
+  NY+slope0.5_LONG                 L:n=  22 WR54.5% Net=$+281 PF3.29 DD$44                   (LONG only)
+  NY+slope1.0_LONG                 L:n=  12 WR50.0% Net=$+176 PF3.80 DD$42                   (LONG only)
+  ATR_HIGH_BOTH                    L:n=  49 WR53.1% Net=$+778 PF2.72 DD$86                   S:n=  29 WR44.8% Net=$-329 PF0.66 DD$801
+  ATR_HIGH+slope0.5_LONG           L:n=  31 WR58.1% Net=$+521 PF3.43 DD$57                   (LONG only)
+  LDN+OVL+NY+slope0.5_LONG         L:n=  39 WR61.5% Net=$+867 PF6.09 DD$34                   (LONG only)
+  NY+ATR_HIGH+slope0.5_LONG        L:n=  16 WR56.2% Net=$+237 PF3.53 DD$41                   (LONG only)
+
+--- H8 (SL1.0 TP2/4 OB2.0) ---
+  baseline                         L:n=  79 WR55.7% Net=$+810 PF1.75 DD$315                  S:n=  48 WR35.4% Net=$-410 PF0.66 DD$797
+  LONG_only                        L:n=  79 WR55.7% Net=$+810 PF1.75 DD$315                  (LONG only)
+  NY_LONG                          L:n=  48 WR56.2% Net=$+121 PF1.12 DD$562                  (LONG only)
+  OVERLAP+NY_LONG                  L:n=  48 WR56.2% Net=$+121 PF1.12 DD$562                  (LONG only)
+  NY+slope0.5_LONG                 L:n=  27 WR63.0% Net=$+245 PF1.49 DD$238                  (LONG only)
+  NY+slope1.0_LONG                 L:n=  16 WR62.5% Net=$+178 PF1.47 DD$238                  (LONG only)
+  ATR_HIGH_BOTH                    L:n=  43 WR51.2% Net=$+253 PF1.32 DD$315                  S:n=  26 WR38.5% Net=$-106 PF0.85 DD$467
+  ATR_HIGH+slope0.5_LONG           L:n=  28 WR57.1% Net=$+214 PF1.34 DD$274                  (LONG only)
+  LDN+OVL+NY+slope0.5_LONG         L:n=  42 WR61.9% Net=$+461 PF1.67 DD$238                  (LONG only)
+  NY+ATR_HIGH+slope0.5_LONG        L:n=  20 WR55.0% Net=$+146 PF1.31 DD$238                  (LONG only)
+
+--- H12 (SL1.0 TP2/4 OB2.0) ---
+  baseline                         L:n=  55 WR60.0% Net=$+1133 PF2.26 DD$158                 S:n=  26 WR26.9% Net=$-734 PF0.26 DD$726
+  LONG_only                        L:n=  55 WR60.0% Net=$+1133 PF2.26 DD$158                 (LONG only)
+  NY_LONG                         
+  OVERLAP+NY_LONG                 
+  NY+slope0.5_LONG                
+  NY+slope1.0_LONG                
+  ATR_HIGH_BOTH                    L:n=  33 WR60.6% Net=$+840 PF2.28 DD$158                  S:n=  15 WR26.7% Net=$-569 PF0.23 DD$538
+  ATR_HIGH+slope0.5_LONG           L:n=  21 WR61.9% Net=$+553 PF2.65 DD$132                  (LONG only)
+  LDN+OVL+NY+slope0.5_LONG         L:n=  24 WR58.3% Net=$+812 PF3.48 DD$124                  (LONG only)
+  NY+ATR_HIGH+slope0.5_LONG       
+
+--- D1 (SL1.0 TP2/4 OB2.0) ---
+  baseline                         L:n=  31 WR64.5% Net=$+1175 PF3.02 DD$182                 S:n=  11 WR45.5% Net=$+79 PF1.33 DD$108
+  LONG_only                        L:n=  31 WR64.5% Net=$+1175 PF3.02 DD$182                 (LONG only)
+  NY_LONG                         
+  OVERLAP+NY_LONG                 
+  NY+slope0.5_LONG                
+  NY+slope1.0_LONG                
+  ATR_HIGH_BOTH                    L:n=  18 WR66.7% Net=$+1051 PF5.06 DD$141                 S:n=7 (insuf)
+  ATR_HIGH+slope0.5_LONG           L:n=  16 WR68.8% Net=$+1048 PF6.38 DD$141                 (LONG only)
+  LDN+OVL+NY+slope0.5_LONG        
+  NY+ATR_HIGH+slope0.5_LONG       
+
+======================================================================================================================================================
+MULTI-TF CONFIRMATION (entry TF aligned with higher TF EMA):
+======================================================================================================================================================
+  M15+H1  BOTH: n=1520 WR44.1% Net=$+2214 PF1.34 DD$312 | L: n= 796 WR45.4% Net=$+1433 PF1.48 DD$195 | S: n= 724 WR42.7% Net=$+781 PF1.22 DD$312
+  M15+H1  NY_LONG only: n= 207 WR44.9% Net=$+504 PF1.59 DD$78
+  M15+H4  BOTH: n=1280 WR46.0% Net=$+2379 PF1.45 DD$298 | L: n= 727 WR46.9% Net=$+1601 PF1.61 DD$168 | S: n= 553 WR44.8% Net=$+778 PF1.29 DD$298
+  M15+H4  NY_LONG only: n= 180 WR48.3% Net=$+568 PF1.89 DD$78
+  M30+H4  BOTH: n=1032 WR45.8% Net=$+2601 PF1.49 DD$335 | L: n= 612 WR46.2% Net=$+1467 PF1.44 DD$335 | S: n= 420 WR45.2% Net=$+1135 PF1.57 DD$170
+  M30+H4  NY_LONG only: n= 249 WR44.2% Net=$+891 PF1.71 DD$107
+  M30+D1  BOTH: n= 870 WR44.7% Net=$+1926 PF1.45 DD$132 | L: n= 572 WR45.5% Net=$+1392 PF1.44 DD$132 | S: n= 298 WR43.3% Net=$+533 PF1.50 DD$99
+  M30+D1  NY_LONG only: n= 236 WR41.9% Net=$+566 PF1.42 DD$181
+  H1+H4  BOTH: n= 297 WR42.4% Net=$+1026 PF1.29 DD$499 | L: n= 169 WR41.4% Net=$+380 PF1.20 DD$466 | S: n= 128 WR43.8% Net=$+646 PF1.42 DD$209
+  H1+H4  NY_LONG only: n=  87 WR44.8% Net=$+732 PF1.83 DD$235
+  H1+D1  BOTH: n= 244 WR41.4% Net=$+256 PF1.09 DD$533 | L: n= 156 WR41.0% Net=$+323 PF1.17 DD$466 | S: n=  88 WR42.0% Net=$-67 PF0.93 DD$285
+  H1+D1  NY_LONG only: n=  80 WR40.0% Net=$+477 PF1.50 DD$235
+  H4+D1  BOTH: n= 172 WR51.7% Net=$+1403 PF2.00 DD$126 | L: n= 112 WR51.8% Net=$+925 PF1.86 DD$126 | S: n=  60 WR51.7% Net=$+478 PF2.42 DD$60
+  H4+D1  NY_LONG only: n=  69 WR52.2% Net=$+621 PF1.96 DD$104
+
+======================================================================================================================================================
+TIME-STOP (close after N bars):
+======================================================================================================================================================
+
+M30:
+  TS10     BOTH: n=2471 WR43.2% Net=$+441 PF1.05 DD$736
+  TS20     BOTH: n=2221 WR42.9% Net=$+1327 PF1.13 DD$646
+  TS30     BOTH: n=2045 WR42.8% Net=$+1692 PF1.17 DD$476
+  TS50     BOTH: n=1796 WR42.0% Net=$+1756 PF1.18 DD$580
+  no_TS    BOTH: n=1534 WR39.6% Net=$+1876 PF1.22 DD$442
+
+H1:
+  TS10     BOTH: n= 725 WR44.7% Net=$+270 PF1.07 DD$763
+  TS20     BOTH: n= 676 WR45.4% Net=$+577 PF1.12 DD$722
+  TS30     BOTH: n= 624 WR42.8% Net=$+221 PF1.04 DD$708
+  TS50     BOTH: n= 549 WR40.3% Net=$+308 PF1.06 DD$552
+  no_TS    BOTH: n= 412 WR37.9% Net=$+815 PF1.17 DD$386
+
+H4:
+  TS10     BOTH: n= 313 WR49.2% Net=$+1225 PF1.53 DD$273
+  TS20     BOTH: n= 281 WR48.8% Net=$+1225 PF1.48 DD$338
+  TS30     BOTH: n= 260 WR48.8% Net=$+1075 PF1.42 DD$466
+  TS50     BOTH: n= 245 WR46.5% Net=$+836 PF1.31 DD$520
+  no_TS    BOTH: n= 232 WR44.8% Net=$+767 PF1.29 DD$579
+
+======================================================================================================================================================
+TOP COMBINED CONFIGS (ranking per PF, n>=30):
+======================================================================================================================================================
+  H6    LDN+OVL+NY+slope0.5_LONG            n=  39 WR61.5% Net=$+867 PF6.09 DD$34
+  H6    ATR_HIGH+slope0.5_LONG              n=  31 WR58.1% Net=$+521 PF3.43 DD$57
+  D1    LONG_only                           n=  31 WR64.5% Net=$+1175 PF3.02 DD$182
+  M30   NY+slope1.0_LONG                    n=  39 WR53.8% Net=$+304 PF2.63 DD$61
+  D1    baseline                            n=  42 WR59.5% Net=$+1254 PF2.53 DD$182
+  H12   LONG_only                           n=  55 WR60.0% Net=$+1133 PF2.26 DD$158
+  H4    NY+slope0.5_LONG                    n=  52 WR44.2% Net=$+432 PF1.97 DD$108
+  H1    NY+slope0.5_LONG                    n=  43 WR39.5% Net=$+297 PF1.90 DD$65
+  H4    NY_LONG                             n=  83 WR49.4% Net=$+629 PF1.85 DD$104
+  H4    OVERLAP+NY_LONG                     n=  83 WR49.4% Net=$+629 PF1.85 DD$104
+  H1    NY+ATR_HIGH+slope0.5_LONG           n=  35 WR40.0% Net=$+225 PF1.80 DD$65
+  H8    LONG_only                           n=  79 WR55.7% Net=$+810 PF1.75 DD$315
+  M15   NY_LONG                             n= 257 WR44.4% Net=$+700 PF1.70 DD$93
+  H2    NY_LONG                             n=  53 WR52.8% Net=$+579 PF1.70 DD$418
+  H8    LDN+OVL+NY+slope0.5_LONG            n=  42 WR61.9% Net=$+461 PF1.67 DD$238
+  H2    OVERLAP+NY_LONG                     n=  66 WR53.0% Net=$+657 PF1.67 DD$368
+  H4    NY+ATR_HIGH+slope0.5_LONG           n=  33 WR39.4% Net=$+211 PF1.67 DD$147
+  H6    LONG_only                           n=  84 WR47.6% Net=$+671 PF1.62 DD$307
+  M30   NY+ATR_HIGH+slope0.5_LONG           n=  96 WR42.7% Net=$+304 PF1.59 DD$112
+  M30   NY_LONG                             n= 333 WR42.6% Net=$+958 PF1.56 DD$197
+  H4    LONG_only                           n= 129 WR45.7% Net=$+711 PF1.53 DD$161
+  M15   ATR_HIGH+slope0.5_LONG              n= 242 WR50.8% Net=$+565 PF1.52 DD$254
+  M15   NY+slope0.5_LONG                    n=  77 WR50.6% Net=$+178 PF1.51 DD$57
+  M15   OVERLAP+NY_LONG                     n= 601 WR44.4% Net=$+1197 PF1.51 DD$157
+  H1    ATR_HIGH+slope0.5_LONG              n=  70 WR45.7% Net=$+323 PF1.49 DD$147
+  H4    LDN+OVL+NY+slope0.5_LONG            n=  71 WR38.0% Net=$+343 PF1.46 DD$220
+  M30   NY+slope0.5_LONG                    n= 131 WR38.9% Net=$+340 PF1.44 DD$170
+  H2    LONG_only                           n= 103 WR48.5% Net=$+609 PF1.43 DD$368
+  H1    ATR_HIGH_BOTH                       n= 310 WR42.3% Net=$+1338 PF1.39 DD$223
+  H4    ATR_HIGH+slope0.5_LONG              n=  51 WR39.2% Net=$+220 PF1.38 DD$170
+
+DONE

@@ -1,0 +1,75 @@
+Testing NZDCAD, USDCAD, AUDCAD...
+
+--- NZDCAD ---
+  Hurst per TF:
+    M15: 0.480
+    H1: 0.468
+    H4: 0.483
+    D1: 0.430
+
+--- USDCAD ---
+  Hurst per TF:
+    M15: 0.490
+    H1: 0.473
+    H4: 0.465
+    D1: 0.413
+
+--- AUDCAD ---
+  Hurst per TF:
+    M15: 0.477
+    H1: 0.453
+    H4: 0.437
+    D1: 0.422
+
+Total valid: 471
+
+TOP 30 (per Net):
+  AUDCAD  H4  long  SMA50   levels=-0.5/-1.0/-1.5/-2.0    stop=-4.0 | n= 195 WR83.6% Net=$ +3,020 PF 1.85 y+=6/6
+  AUDCAD  H4  long  SMA200  levels=-1.0/-1.5/-2.0/-2.5    stop=-4.0 | n=  51 WR78.4% Net=$ +2,983 PF 4.36 y+=6/6
+  AUDCAD  H4  long  SMA200  levels=-0.5/-1.0/-1.5/-2.0    stop=-4.0 | n=  74 WR81.1% Net=$ +2,980 PF 3.25 y+=6/6
+  AUDCAD  H4  long  SMA50   levels=-1.0/-1.5/-2.0/-2.5    stop=-4.0 | n= 144 WR85.4% Net=$ +2,947 PF 2.10 y+=6/6
+  AUDCAD  H1  short SMA100  levels=-1.0/-1.5/-2.0/-2.5    stop=-5.0 | n= 320 WR83.8% Net=$ +2,923 PF 1.61 y+=6/6
+  AUDCAD  H1  short SMA100  levels=-1.0/-1.5/-2.0/-2.5    stop=-4.0 | n= 334 WR81.7% Net=$ +2,881 PF 1.52 y+=5/6
+  AUDCAD  M15 short SMA400  levels=-1.0/-1.5/-2.0/-2.5    stop=-5.0 | n= 394 WR84.0% Net=$ +2,837 PF 1.47 y+=5/6
+  AUDCAD  H4  long  SMA200  levels=-1.0/-1.5/-2.0/-2.5    stop=-5.0 | n=  48 WR83.3% Net=$ +2,814 PF 3.74 y+=6/6
+  AUDCAD  H4  long  SMA200  levels=-0.5/-1.0/-1.5/-2.0    stop=-5.0 | n=  71 WR84.5% Net=$ +2,811 PF 2.92 y+=6/6
+  USDCAD  H4  long  SMA200  levels=-0.5/-1.0/-1.5/-2.0    stop=-3.0 | n=  75 WR76.0% Net=$ +2,780 PF 2.58 y+=5/6
+  AUDCAD  H1  long  SMA150  levels=-1.0/-1.5/-2.0/-2.5    stop=-4.0 | n= 239 WR77.8% Net=$ +2,772 PF 1.74 y+=6/6
+  AUDCAD  M15 long  SMA200  levels=-1.0/-1.5/-2.0/-2.5    stop=-5.0 | n= 692 WR82.4% Net=$ +2,771 PF 1.32 y+=6/6
+  AUDCAD  H1  short SMA100  levels=-0.5/-1.0/-1.5/-2.0    stop=-5.0 | n= 458 WR85.2% Net=$ +2,763 PF 1.43 y+=5/6
+  AUDCAD  H1  short SMA100  levels=-0.5/-1.0/-1.5/-2.0    stop=-4.0 | n= 472 WR83.7% Net=$ +2,706 PF 1.38 y+=5/6
+  AUDCAD  H1  long  SMA300  levels=-0.5/-1.0/-1.5/-2.0    stop=-4.0 | n= 188 WR81.9% Net=$ +2,687 PF 1.83 y+=5/6
+  AUDCAD  H4  long  SMA50   levels=-0.5/-1.0/-1.5/-2.0    stop=-5.0 | n= 190 WR84.2% Net=$ +2,673 PF 1.80 y+=6/6
+  AUDCAD  H4  long  SMA50   levels=-1.0/-1.5/-2.0/-2.5    stop=-5.0 | n= 139 WR86.3% Net=$ +2,659 PF 2.08 y+=6/6
+  AUDCAD  H1  long  SMA150  levels=-0.5/-1.0/-1.5/-2.0    stop=-4.0 | n= 344 WR81.4% Net=$ +2,658 PF 1.53 y+=6/6
+  AUDCAD  M15 long  SMA1600 levels=-1.0/-1.5/-2.0/-2.5    stop=-4.0 | n= 210 WR61.9% Net=$ +2,641 PF 1.62 y+=5/6
+  USDCAD  H4  long  SMA200  levels=-0.5/-1.0/-1.5/-2.0    stop=-4.0 | n=  59 WR89.8% Net=$ +2,620 PF 3.28 y+=5/6
+  USDCAD  H4  long  SMA200  levels=-0.5/-1.0/-1.5/-2.0    stop=-5.0 | n=  59 WR89.8% Net=$ +2,620 PF 3.28 y+=5/6
+  AUDCAD  H1  long  SMA300  levels=-0.5/-1.0/-1.5/-2.0    stop=-5.0 | n= 176 WR84.1% Net=$ +2,589 PF 1.80 y+=5/6
+  AUDCAD  H1  long  SMA300  levels=-1.0/-1.5/-2.0/-2.5    stop=-4.0 | n= 125 WR76.8% Net=$ +2,568 PF 2.07 y+=6/6
+  AUDCAD  M15 short SMA400  levels=-0.5/-1.0/-1.5/-2.0    stop=-5.0 | n= 628 WR88.2% Net=$ +2,562 PF 1.33 y+=5/6
+  AUDCAD  H1  long  SMA150  levels=-1.0/-1.5/-2.0/-2.5    stop=-5.0 | n= 224 WR82.1% Net=$ +2,504 PF 1.68 y+=6/6
+  USDCAD  H4  long  SMA200  levels=-1.0/-1.5/-2.0/-2.5    stop=-3.0 | n=  51 WR68.6% Net=$ +2,485 PF 3.02 y+=5/6
+  USDCAD  H4  short SMA300  levels=-1.0/-1.5/-2.0/-2.5    stop=-5.0 | n=  33 WR93.9% Net=$ +2,475 PF 2.19 y+=6/6
+  AUDCAD  H1  long  SMA800  levels=-0.5/-1.0/-1.5/-2.0    stop=-4.0 | n= 114 WR79.8% Net=$ +2,464 PF 1.88 y+=5/6
+  AUDCAD  H1  long  SMA300  levels=-1.0/-1.5/-2.0/-2.5    stop=-5.0 | n= 113 WR79.6% Net=$ +2,463 PF 2.04 y+=6/6
+  USDCAD  H4  short SMA300  levels=-1.0/-1.5/-2.0/-2.5    stop=-4.0 | n=  34 WR91.2% Net=$ +2,434 PF 2.03 y+=6/6
+
+ROBUST (5/6 anys+):
+  AUDCAD  H4  long  SMA50   levels=-0.5/-1.0/-1.5/-2.0    stop=-4.0 | n= 195 WR83.6% Net=$ +3,020 PF 1.85 y+=6/6
+  AUDCAD  H4  long  SMA200  levels=-1.0/-1.5/-2.0/-2.5    stop=-4.0 | n=  51 WR78.4% Net=$ +2,983 PF 4.36 y+=6/6
+  AUDCAD  H4  long  SMA200  levels=-0.5/-1.0/-1.5/-2.0    stop=-4.0 | n=  74 WR81.1% Net=$ +2,980 PF 3.25 y+=6/6
+  AUDCAD  H4  long  SMA50   levels=-1.0/-1.5/-2.0/-2.5    stop=-4.0 | n= 144 WR85.4% Net=$ +2,947 PF 2.10 y+=6/6
+  AUDCAD  H1  short SMA100  levels=-1.0/-1.5/-2.0/-2.5    stop=-5.0 | n= 320 WR83.8% Net=$ +2,923 PF 1.61 y+=6/6
+  AUDCAD  H1  short SMA100  levels=-1.0/-1.5/-2.0/-2.5    stop=-4.0 | n= 334 WR81.7% Net=$ +2,881 PF 1.52 y+=5/6
+  AUDCAD  M15 short SMA400  levels=-1.0/-1.5/-2.0/-2.5    stop=-5.0 | n= 394 WR84.0% Net=$ +2,837 PF 1.47 y+=5/6
+  AUDCAD  H4  long  SMA200  levels=-1.0/-1.5/-2.0/-2.5    stop=-5.0 | n=  48 WR83.3% Net=$ +2,814 PF 3.74 y+=6/6
+  AUDCAD  H4  long  SMA200  levels=-0.5/-1.0/-1.5/-2.0    stop=-5.0 | n=  71 WR84.5% Net=$ +2,811 PF 2.92 y+=6/6
+  USDCAD  H4  long  SMA200  levels=-0.5/-1.0/-1.5/-2.0    stop=-3.0 | n=  75 WR76.0% Net=$ +2,780 PF 2.58 y+=5/6
+  AUDCAD  H1  long  SMA150  levels=-1.0/-1.5/-2.0/-2.5    stop=-4.0 | n= 239 WR77.8% Net=$ +2,772 PF 1.74 y+=6/6
+  AUDCAD  M15 long  SMA200  levels=-1.0/-1.5/-2.0/-2.5    stop=-5.0 | n= 692 WR82.4% Net=$ +2,771 PF 1.32 y+=6/6
+  AUDCAD  H1  short SMA100  levels=-0.5/-1.0/-1.5/-2.0    stop=-5.0 | n= 458 WR85.2% Net=$ +2,763 PF 1.43 y+=5/6
+  AUDCAD  H1  short SMA100  levels=-0.5/-1.0/-1.5/-2.0    stop=-4.0 | n= 472 WR83.7% Net=$ +2,706 PF 1.38 y+=5/6
+  AUDCAD  H1  long  SMA300  levels=-0.5/-1.0/-1.5/-2.0    stop=-4.0 | n= 188 WR81.9% Net=$ +2,687 PF 1.83 y+=5/6
+
+DONE

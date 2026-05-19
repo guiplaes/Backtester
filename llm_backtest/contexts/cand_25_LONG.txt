@@ -1,0 +1,54 @@
+XAUUSD M5 — Setup detection
+Date/Time UTC: 2026-05-11T06:40:00.000Z
+Hour UTC: 6:40
+Setup direction (mechanical filter triggered): LONG
+Entry price (current bar close): 4674.13
+
+LAST 20 M5 BARS (oldest → current):
+  05:05 O=4675.73 H=4676.02 L=4670.82 C=4672.39 V=1499
+  05:10 O=4672.39 H=4673.78 L=4671.22 C=4673.47 V=1692
+  05:15 O=4673.47 H=4674.33 L=4672.02 C=4673.65 V=1206
+  05:20 O=4673.65 H=4675.20 L=4672.61 C=4675.06 V=1464
+  05:25 O=4675.06 H=4675.12 L=4670.54 C=4670.54 V=1273
+  05:30 O=4670.54 H=4679.11 L=4670.54 C=4678.71 V=4369
+  05:35 O=4678.71 H=4680.30 L=4672.68 C=4674.03 V=2994
+  05:40 O=4674.03 H=4674.52 L=4662.17 C=4663.75 V=4045
+  05:45 O=4663.75 H=4663.96 L=4658.47 C=4660.75 V=4740
+  05:50 O=4660.75 H=4661.51 L=4652.68 C=4654.27 V=5352
+  05:55 O=4654.27 H=4655.05 L=4647.67 C=4652.15 V=6559
+  06:00 O=4652.15 H=4659.71 L=4649.22 C=4659.57 V=5516
+  06:05 O=4659.57 H=4664.88 L=4657.13 C=4662.56 V=3832
+  06:10 O=4662.56 H=4666.99 L=4662.34 C=4665.16 V=3353
+  06:15 O=4665.16 H=4670.44 L=4665.13 C=4670.37 V=3099
+  06:20 O=4670.37 H=4670.54 L=4664.81 C=4667.03 V=4133
+  06:25 O=4667.03 H=4668.56 L=4664.54 C=4667.35 V=3923
+  06:30 O=4667.35 H=4672.02 L=4667.35 C=4669.63 V=3209
+  06:35 O=4669.63 H=4674.19 L=4668.64 C=4672.80 V=2095
+  06:40 O=4672.80 H=4675.50 L=4670.08 C=4674.13 V=2537
+
+LAST 5 M15 CANDLES (oldest → current):
+  1: O=4670.54 H=4680.30 L=4662.17 C=4663.75 DN
+  2: O=4663.75 H=4663.96 L=4647.67 C=4652.15 DN
+  3: O=4652.15 H=4666.99 L=4649.22 C=4665.16 UP
+  4: O=4665.16 H=4670.54 L=4664.54 C=4667.35 UP
+  5: O=4667.35 H=4675.50 L=4667.35 C=4674.13 UP
+
+INDICATORS NOW:
+  EMA21: 4669.18 (slope vs 5 bars ago: 0.85)
+  ATR(14): 5.74
+  RSI(14): 54.7
+  Last 30-bar swing HIGH: 4680.30 (dist 6.17 above entry)
+  Last 30-bar swing LOW: 4647.67 (dist 26.46 below entry)
+
+MECHANICAL TRADE PARAMETERS (already locked):
+  SL: 1.5×ATR = 8.61
+  TP: 3.0×ATR = 17.22 (R:R = 2:1)
+  Timeout: 12 bars (1 hour)
+
+YOUR TASK:
+Given ONLY the data above (NO future information), evaluate if this is a HIGH-QUALITY setup worth taking.
+Consider: trend quality, structure (HH/HL or LH/LL), distance to extremes, volatility regime, time of day, candle quality, multi-TF alignment.
+
+REPLY FORMAT (strict, one line only):
+DECISION: ACT | SKIP
+REASON: (one short sentence, max 20 words)

@@ -1,0 +1,8 @@
+{
+  "period_days": 7,
+  "n_trades": 0,
+  "warning": "No post-mortems in window. Sample size 0.",
+  "verdict_counts": {},
+  "top_patterns": [],
+  "top_lessons": []
+}

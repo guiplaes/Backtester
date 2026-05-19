@@ -1,0 +1,91 @@
+"""
+daily_snapshot.py — Captura 1 fila per bot/dia a daily_snapshots de Neon.
+
+Executar cada nit (cron 23:55 UTC). Idempotent (UPSERT).
+
+Calcula:
+  - gross_grid_profit: gridProfit Pionex (lifetime, sense reset)
+  - cum_lifetime_profit: el nostre comptador acumulat (capital_events delta + corrent)
+  - current_value = quote + base * preu
+"""
+from __future__ import annotations
+
+import logging
+import sys
+from datetime import date, datetime, timezone
+from pathlib import Path
+
+# Force user-site (per a Task Scheduler que no l'inclou per defecte)
+_USER_SITE = r"C:\Users\Administrator\AppData\Roaming\Python\Python312\site-packages"
+if _USER_SITE not in sys.path:
+    sys.path.insert(0, _USER_SITE)
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from cloud.db_cloud import upsert_daily_snapshot, conn
+from config import BOTS
+from pionex_client import get_bot_range
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s")
+log = logging.getLogger("daily_snapshot")
+
+
+def _calc_lifetime_profit(bot_id: str, current_grid_profit: float) -> float:
+    """Lifetime profit = SUM of all reinvest_profit events + current grid_profit.
+    Simplification: si no hem fet cap reinvest, lifetime = current_grid_profit (Pionex).
+    Quan reinvertim (event 'reinvest_profit'), guardem el snapshot a lifetime_profit_calc.
+    """
+    with conn() as c, c.cursor() as cur:
+        cur.execute("""
+            SELECT COALESCE(MAX(lifetime_profit_calc), 0)
+            FROM capital_events
+            WHERE bot_id = %s AND event_type = 'reinvest_profit'
+        """, (bot_id,))
+        prev_lifetime = float(cur.fetchone()[0] or 0)
+    return prev_lifetime + current_grid_profit
+
+
+def main():
+    today = date.today()
+    log.info(f"Daily snapshot per a {today} ({len(BOTS)} bots actius)")
+    saved = 0
+    for name, cfg in BOTS.items():
+        try:
+            s = get_bot_range(cfg["id"], symbol=cfg["symbol"])
+            top = float(s.get("top") or 0)
+            bottom = float(s.get("bottom") or 0)
+            if top <= 0 or bottom <= 0 or top <= bottom:
+                log.warning(f"[{name}] estat invàlid, skip snapshot")
+                continue
+
+            gross_gp = float(s.get("grid_profit", 0))
+            lifetime = _calc_lifetime_profit(cfg["id"], gross_gp)
+            quote_v = float(s.get("quote_in_bot", 0))
+            base_amt = float(s.get("base_in_bot", 0))
+            price = float(s.get("price", 0))
+            base_v = base_amt * price
+            invested = float(s.get("usdt_investment", 0))
+
+            upsert_daily_snapshot(
+                date_=today,
+                bot_id=cfg["id"], bot_name=name,
+                gross_grid_profit=gross_gp,
+                cum_lifetime_profit=lifetime,
+                invested_capital=invested,
+                base_amount=base_amt,
+                base_value_usdt=base_v,
+                quote_value_usdt=quote_v,
+                current_value_total=quote_v + base_v,
+                cycles_completed_today=0,  # TODO: delta vs ahir
+                cycles_total=int(s.get("paired_cycles", 0)),
+                price_close=price, top=top, bottom=bottom,
+            )
+            saved += 1
+            log.info(f"[{name}] snapshot OK: value={quote_v+base_v:.2f} lifetime={lifetime:.4f}")
+        except Exception as e:
+            log.error(f"[{name}] snapshot failed: {e}")
+    log.info(f"Saved {saved}/{len(BOTS)} snapshots")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,74 @@
+//@version=6
+strategy("Mean-Rev Averaging XAU H4", overlay=true,
+     initial_capital=10000, default_qty_type=strategy.fixed, default_qty_value=1,
+     pyramiding=3, commission_type=strategy.commission.cash_per_order, commission_value=0.40,
+     slippage=0)
+
+// === INPUTS ===
+ma_period = input.int(200, "SMA period")
+level1 = input.float(-1.0, "Entry Level 1 (z-score)")
+level2 = input.float(-2.0, "Entry Level 2")
+level3 = input.float(-3.0, "Entry Level 3")
+stop_z = input.float(-5.0, "Stop loss (z-score)")
+max_bars = input.int(500, "Max bars hold")
+
+// === COMPUTATION ===
+sma = ta.sma(close, ma_period)
+std = ta.stdev(close, ma_period)
+z = (close - sma) / std
+
+// === PLOTS ===
+plot(sma, "SMA", color=color.yellow, linewidth=2)
+plot(sma + std * level1, "L1", color=color.new(color.green, 30))
+plot(sma + std * level2, "L2", color=color.new(color.green, 20))
+plot(sma + std * level3, "L3", color=color.new(color.green, 10))
+plot(sma + std * stop_z, "STOP", color=color.red, linewidth=2)
+
+// === ENTRY/EXIT LOGIC (LONG-ONLY) ===
+// Track which levels we've already used
+var bool entry1 = false
+var bool entry2 = false
+var bool entry3 = false
+
+// Entry conditions
+in_pos = strategy.position_size > 0
+
+if not in_pos
+    if z <= level1 and not entry1
+        strategy.entry("L1", strategy.long, qty=1, comment=str.tostring(z, "0.00") + "z")
+        entry1 := true
+        entry2 := false
+        entry3 := false
+else
+    if z <= level2 and entry1 and not entry2
+        strategy.entry("L2", strategy.long, qty=1, comment="Add L2 z=" + str.tostring(z,"0.00"))
+        entry2 := true
+    if z <= level3 and entry2 and not entry3
+        strategy.entry("L3", strategy.long, qty=1, comment="Add L3 z=" + str.tostring(z,"0.00"))
+        entry3 := true
+
+// Exit conditions
+exit_target = in_pos and close >= sma
+exit_stop = in_pos and z <= stop_z
+exit_time = in_pos and (bar_index - strategy.opentrades.entry_bar_index(0)) >= max_bars
+
+if exit_target
+    strategy.close_all(comment="TARGET (back to SMA)")
+    entry1 := false
+    entry2 := false
+    entry3 := false
+if exit_stop
+    strategy.close_all(comment="STOP (z<" + str.tostring(stop_z,"0.0") + ")")
+    entry1 := false
+    entry2 := false
+    entry3 := false
+if exit_time
+    strategy.close_all(comment="TIME OUT")
+    entry1 := false
+    entry2 := false
+    entry3 := false
+
+// Visual entry markers
+plotshape(z <= level1 and not in_pos, "L1 trigger", shape.triangleup, location.belowbar, color.green, size=size.small)
+plotshape(z <= level2 and in_pos and not entry2, "L2 trigger", shape.triangleup, location.belowbar, color.green, size=size.small)
+plotshape(z <= level3 and in_pos and not entry3, "L3 trigger", shape.triangleup, location.belowbar, color.green, size=size.small)

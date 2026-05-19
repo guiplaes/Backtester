@@ -1,0 +1,2 @@
+ts_ms,target_bot,amount_usdt,deviation_pct,fee_total,partial,sources
+1768206720000,BTC_USDT,46.53564905329498,-5.005294578889669,0.023267824526647492,False,"[{""from"": ""RESERVE"", ""amount"": 46.53564905329498}]"

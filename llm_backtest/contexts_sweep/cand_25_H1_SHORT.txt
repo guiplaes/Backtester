@@ -1,0 +1,45 @@
+XAUUSD H1 — LIQUIDITY SWEEP setup
+Date/Time UTC: 2026-04-14T07:00:00.000Z
+Direction: SHORT
+Entry (close): 4777.16
+Swept level (swing HIGH): 4782.97
+Wick size: 13.66 (0.71×ATR)
+ATR(14): 19.24
+RSI(14): 59.8
+
+LAST 20 BARS (oldest → current):
+  13 11:00 O=4722.14 H=4729.23 L=4703.38 C=4707.14
+  13 12:00 O=4707.14 H=4725.35 L=4703.90 C=4723.48
+  13 13:00 O=4723.43 H=4744.64 L=4721.13 C=4730.80
+  13 14:00 O=4730.52 H=4731.37 L=4708.88 C=4719.38
+  13 15:00 O=4719.36 H=4720.15 L=4700.56 C=4714.45
+  13 16:00 O=4714.47 H=4746.27 L=4709.55 C=4733.22
+  13 17:00 O=4733.23 H=4750.20 L=4725.60 C=4730.11
+  13 18:00 O=4730.12 H=4740.73 L=4723.54 C=4738.45
+  13 19:00 O=4738.44 H=4747.58 L=4730.85 C=4741.28
+  13 20:00 O=4741.35 H=4744.30 L=4738.40 C=4740.34
+  13 22:00 O=4746.92 H=4759.80 L=4745.84 C=4758.14
+  13 23:00 O=4758.12 H=4765.81 L=4754.54 C=4757.90
+  14 00:00 O=4758.02 H=4776.07 L=4751.77 C=4769.98
+  14 01:00 O=4769.94 H=4777.39 L=4761.79 C=4765.06
+  14 02:00 O=4765.07 H=4777.31 L=4762.15 C=4775.23
+  14 03:00 O=4775.22 H=4775.68 L=4765.65 C=4768.25
+  14 04:00 O=4768.22 H=4777.09 L=4767.10 C=4774.24
+  14 05:00 O=4774.24 H=4774.32 L=4757.85 C=4759.98
+  14 06:00 O=4760.02 H=4782.97 L=4760.02 C=4782.09
+  14 07:00 O=4782.10 H=4796.63 L=4767.85 C=4777.16
+
+THESIS: This is a potential liquidity sweep — price wicked beyond a recent swing extreme (high) then closed back inside, suggesting a stop hunt followed by reversal.
+
+YOUR TASK:
+Evaluate ONLY whether this is a CLEAN, HIGH-QUALITY liquidity sweep with reversal potential. Consider:
+- Was the sweep aggressive/fast (single bar wick) or slow erosion?
+- Did the bar close FAR enough back inside (rejection strength)?
+- Is there context support (RSI extreme, momentum exhaustion before sweep)?
+- Or is this likely the START of a continuation (trend, momentum, no exhaustion)?
+
+Use ONLY data above. NO future info. NO other tools.
+
+Reply EXACTLY 2 lines:
+SCORE: <1-10> (10 = textbook clean sweep, 1 = likely continuation)
+REASON: <one sentence, max 25 words>

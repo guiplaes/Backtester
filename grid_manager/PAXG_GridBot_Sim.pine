@@ -1,0 +1,165 @@
+//@version=6
+// PAXG Spot Grid Bot — exact Pionex simulation
+// Configures the same grid as the live Pionex bot 5e9e92b0... and counts every fill
+// across the chart's history. Walks high/low intra-bar like the real bot.
+indicator("PAXG Spot Grid Sim", overlay = true, max_lines_count = 100, max_labels_count = 500)
+
+// ─── Inputs ─────────────────────────────────────────────────────────
+botBottom   = input.float(4600.0, "Range Bottom ($)", group = "Bot")
+botTop      = input.float(4850.0, "Range Top ($)",    group = "Bot")
+gridRows    = input.int  (12,     "Grid Rows",        group = "Bot", minval = 2, maxval = 100)
+capitalUSDT = input.float(400.0,  "Capital (USDT)",   group = "Bot")
+feeRate     = input.float(0.0005, "Fee per trade",    group = "Bot", step = 0.0001, tooltip = "0.0005 = 0.05% (Pionex spot maker/taker)")
+
+showLevels  = input.bool(true,  "Draw grid lines",       group = "Display")
+showTrades  = input.bool(true,  "Mark every fill",       group = "Display")
+showStats   = input.bool(true,  "Show stats table",      group = "Display")
+
+// ─── Derived ────────────────────────────────────────────────────────
+gridStep      = (botTop - botBottom) / gridRows
+capPerGrid    = capitalUSDT / gridRows
+avgPrice      = (botTop + botBottom) / 2
+grossPerCycle = (gridStep / avgPrice) * capPerGrid
+feesPerCycle  = 2 * feeRate * capPerGrid
+netPerCycle   = grossPerCycle - feesPerCycle
+
+// ─── State ──────────────────────────────────────────────────────────
+// pending[i]: 0 = none, 1 = BUY pending, 2 = SELL pending
+var array<int>   pending     = array.new<int>(gridRows + 1, 0)
+var array<float> levels      = array.new<float>(gridRows + 1, na)
+var bool         inited      = false
+var int          sellsFired  = 0
+var int          buysFired   = 0
+var int          cycles      = 0
+var float        grossProfit = 0.0
+var float        feesPaid    = 0.0
+
+// ─── One-time init on first bar ─────────────────────────────────────
+if not inited and not na(close)
+    for i = 0 to gridRows
+        L = botBottom + i * gridStep
+        array.set(levels, i, L)
+        if L < close
+            array.set(pending, i, 1) // BUY
+        else if L > close
+            array.set(pending, i, 2) // SELL
+        else
+            array.set(pending, i, 0)
+    inited := true
+    if showLevels
+        for i = 0 to gridRows
+            L = array.get(levels, i)
+            isEdge = i == 0 or i == gridRows
+            col = isEdge ? color.new(color.aqua, 0) : color.new(color.gray, 50)
+            w   = isEdge ? 2 : 1
+            line.new(bar_index, L, bar_index + 1, L, extend = extend.right,
+                     color = col, width = w,
+                     style = isEdge ? line.style_solid : line.style_dashed)
+
+// ─── Index helper ───────────────────────────────────────────────────
+levelIndex(price) =>
+    int idx = -1
+    for i = 0 to gridRows
+        if math.abs(array.get(levels, i) - price) < 0.001
+            idx := i
+            break
+    idx
+
+// ─── Fire helpers ───────────────────────────────────────────────────
+fireUp(float pFrom, float pTo) =>
+    // Walk levels in ascending order; any SELL pending between pFrom (excl) and pTo (incl) fires
+    for i = 0 to gridRows
+        L = array.get(levels, i)
+        if L > pFrom and L <= pTo and array.get(pending, i) == 2
+            // SELL fires at L
+            sellsFired += 1
+            array.set(pending, i, 0)
+            // place BUY at level below
+            if i > 0
+                array.set(pending, i - 1, 1)
+            if showTrades
+                label.new(bar_index, L, "S", style = label.style_label_down,
+                          color = color.new(color.red, 0), textcolor = color.white, size = size.tiny)
+
+fireDown(float pFrom, float pTo) =>
+    // Descending — any BUY pending between pTo (incl) and pFrom (excl)
+    for i = gridRows to 0
+        L = array.get(levels, i)
+        if L < pFrom and L >= pTo and array.get(pending, i) == 1
+            // BUY fires at L
+            buysFired += 1
+            array.set(pending, i, 0)
+            // place SELL at level above
+            if i < gridRows
+                array.set(pending, i + 1, 2)
+            if showTrades
+                label.new(bar_index, L, "B", style = label.style_label_up,
+                          color = color.new(color.green, 0), textcolor = color.white, size = size.tiny)
+
+// ─── Walk this bar's path (open → first extreme → other extreme → close) ─
+if inited
+    // pick path order
+    var float prevSells = 0.0
+    var float prevBuys = 0.0
+
+    // path: if close >= open, go open → low → high → close. else open → high → low → close.
+    p1 = open
+    p2 = close >= open ? low  : high
+    p3 = close >= open ? high : low
+    p4 = close
+
+    // segment 1
+    if p2 > p1
+        fireUp(p1, p2)
+    else if p2 < p1
+        fireDown(p1, p2)
+    // segment 2
+    if p3 > p2
+        fireUp(p2, p3)
+    else if p3 < p2
+        fireDown(p2, p3)
+    // segment 3
+    if p4 > p3
+        fireUp(p3, p4)
+    else if p4 < p3
+        fireDown(p3, p4)
+
+// ─── Cycles & profit ────────────────────────────────────────────────
+// Each matched pair (one BUY at L, one SELL at L+step) = 1 cycle of "gross"
+// Easiest accounting: cycles = min(sellsFired, buysFired) at each step's end.
+cycles      := math.min(sellsFired, buysFired)
+grossProfit := cycles * grossPerCycle
+feesPaid    := (sellsFired + buysFired) * feeRate * capPerGrid
+netProfit   = grossProfit - feesPaid
+
+// ─── Plot cumulative net profit on a sub-pane ───────────────────────
+plot(netProfit, "Net Profit ($)", color = color.aqua, linewidth = 2, display = display.pane)
+plot(cycles,    "Cycles",         color = color.yellow, display = display.pane)
+
+// ─── Stats table ────────────────────────────────────────────────────
+if showStats and barstate.islast
+    var table tbl = table.new(position.top_right, 2, 12, frame_color = color.gray, border_width = 1)
+    table.cell(tbl, 0, 0,  "PAXG GRID SIM", text_color = color.yellow, bgcolor = color.new(color.black, 0))
+    table.cell(tbl, 1, 0,  "", bgcolor = color.new(color.black, 0))
+    table.cell(tbl, 0, 1,  "Range",          text_color = color.white)
+    table.cell(tbl, 1, 1,  str.format("${0,number,#} - ${1,number,#}", botBottom, botTop), text_color = color.white)
+    table.cell(tbl, 0, 2,  "Grid rows",      text_color = color.white)
+    table.cell(tbl, 1, 2,  str.tostring(gridRows), text_color = color.white)
+    table.cell(tbl, 0, 3,  "Grid step",      text_color = color.white)
+    table.cell(tbl, 1, 3,  str.format("${0,number,#.##}", gridStep), text_color = color.white)
+    table.cell(tbl, 0, 4,  "Capital",        text_color = color.white)
+    table.cell(tbl, 1, 4,  str.format("${0,number,#.##}", capitalUSDT), text_color = color.white)
+    table.cell(tbl, 0, 5,  "Net per cycle",  text_color = color.white)
+    table.cell(tbl, 1, 5,  str.format("${0,number,#.####}", netPerCycle), text_color = color.white)
+    table.cell(tbl, 0, 6,  "SELLs fired",    text_color = color.red)
+    table.cell(tbl, 1, 6,  str.tostring(sellsFired), text_color = color.red)
+    table.cell(tbl, 0, 7,  "BUYs fired",     text_color = color.green)
+    table.cell(tbl, 1, 7,  str.tostring(buysFired), text_color = color.green)
+    table.cell(tbl, 0, 8,  "Cycles paired",  text_color = color.yellow)
+    table.cell(tbl, 1, 8,  str.tostring(cycles), text_color = color.yellow)
+    table.cell(tbl, 0, 9,  "Gross profit",   text_color = color.white)
+    table.cell(tbl, 1, 9,  str.format("${0,number,#.##}", grossProfit), text_color = color.white)
+    table.cell(tbl, 0, 10, "Fees paid",      text_color = color.orange)
+    table.cell(tbl, 1, 10, str.format("${0,number,#.##}", feesPaid), text_color = color.orange)
+    table.cell(tbl, 0, 11, "NET profit",     text_color = color.aqua)
+    table.cell(tbl, 1, 11, str.format("${0,number,#.##}", netProfit), text_color = color.aqua)

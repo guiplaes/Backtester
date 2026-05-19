@@ -1,0 +1,610 @@
+Total missatges en 7 dies: 607
+================================================================================
+[2026-05-06 09:51 UTC] 🟢 **APERTURA** | 🕐 2026.05.06 12:51:00 | 📊 XAUUSD-VIP  |  SELL  |  0.30 lotes | 💲 Precio: `4698.31000` | 🎫 Ticket: `382318995`
+[2026-05-06 09:51 UTC] 🟢 **APERTURA** | 🕐 2026.05.06 12:51:03 | 📊 XAUUSD-VIP  |  SELL  |  0.05 lotes | 💲 Precio: `4698.51000` | 🎯 TP: `4694.31000` | 🎫 Ticket: `382319126`
+[2026-05-06 09:51 UTC] 🟢 **APERTURA** | 🕐 2026.05.06 12:51:03 | 📊 XAUUSD-VIP  |  SELL  |  0.05 lotes | 💲 Precio: `4698.60000` | 🎯 TP: `4694.31000` | 🎫 Ticket: `382319128`
+[2026-05-06 11:57 UTC] 🔴 **CIERRE** | 🕐 2026.05.06 14:57:03 | 📊 XAUUSD-VIP  |  BUY  |  0.05 lotes | 💲 Precio: `4694.31000` | 💰 Resultado: `+21.00 USD` | 🎫 Ticket: `382319126`
+[2026-05-06 11:57 UTC] 🔴 **CIERRE** | 🕐 2026.05.06 14:57:03 | 📊 XAUUSD-VIP  |  BUY  |  0.05 lotes | 💲 Precio: `4694.31000` | 💰 Resultado: `+21.45 USD` | 🎫 Ticket: `382319128`
+[2026-05-06 12:11 UTC] 🔴 **CIERRE** | 🕐 2026.05.06 15:11:20 | 📊 XAUUSD-VIP  |  BUY  |  0.30 lotes | 💲 Precio: `4679.88000` | 💰 Resultado: `+552.90 USD` | 🎫 Ticket: `382318995`
+[2026-05-06 12:11 UTC] 🔴 **CIERRE** | 🕐 2026.05.06 15:11:21 | 📊 XAUUSD-VIP  |  BUY  |  0.05 lotes | 💲 Precio: `4679.88000` | 📉 Resultado: `-76.15 USD` | 🎫 Ticket: `382030941`
+[2026-05-06 12:11 UTC] 🔴 **CIERRE** | 🕐 2026.05.06 15:11:21 | 📊 XAUUSD-VIP  |  BUY  |  0.05 lotes | 💲 Precio: `4679.87000` | 📉 Resultado: `-71.85 USD` | 🎫 Ticket: `382030883`
+[2026-05-06 12:11 UTC] 🔴 **CIERRE** | 🕐 2026.05.06 15:11:21 | 📊 XAUUSD-VIP  |  BUY  |  0.20 lotes | 💲 Precio: `4679.88000` | 📉 Resultado: `-297.20 USD` | 🎫 Ticket: `382030817`
+[2026-05-06 12:11 UTC] 🔴 **CIERRE** | 🕐 2026.05.06 15:11:21 | 📊 XAUUSD-VIP  |  BUY  |  0.20 lotes | 💲 Precio: `4679.84000` | 📉 Resultado: `-377.60 USD` | 🎫 Ticket: `382014704`
+[2026-05-06 12:11 UTC] 🔴 **CIERRE** | 🕐 2026.05.06 15:11:21 | 📊 XAUUSD-VIP  |  BUY  |  0.01 lotes | 💲 Precio: `4679.83000` | 📉 Resultado: `-18.78 USD` | 🎫 Ticket: `382014623`
+[2026-05-06 12:11 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.06 15:11:21 | ACCOUNT | 0
+[2026-05-06 12:24 UTC] 🟢 **APERTURA** | 🕐 2026.05.06 15:24:40 | 📊 XAUUSD-VIP  |  SELL  |  0.01 lotes | 💲 Precio: `4683.47000` | 🎫 Ticket: `382625344`
+[2026-05-06 12:24 UTC] 🟢 **APERTURA** | 🕐 2026.05.06 15:24:43 | 📊 XAUUSD-VIP  |  SELL  |  0.20 lotes | 💲 Precio: `4683.29000` | 🎫 Ticket: `382625475`
+[2026-05-06 12:28 UTC] 🟢 **APERTURA** | 🕐 2026.05.06 15:28:15 | 📊 XAUUSD-VIP  |  SELL  |  0.20 lotes | 💲 Precio: `4687.23000` | 🎫 Ticket: `382633305`
+[2026-05-06 12:28 UTC] 🟢 **APERTURA** | 🕐 2026.05.06 15:28:15 | 📊 XAUUSD-VIP  |  SELL  |  0.05 lotes | 💲 Precio: `4687.20000` | 🎯 TP: `4683.47000` | 🎫 Ticket: `382633321`
+[2026-05-06 12:28 UTC] 🟢 **APERTURA** | 🕐 2026.05.06 15:28:15 | 📊 XAUUSD-VIP  |  SELL  |  0.05 lotes | 💲 Precio: `4687.15000` | 🎯 TP: `4683.47000` | 🎫 Ticket: `382633341`
+[2026-05-06 12:29 UTC] 🔴 **CIERRE** | 🕐 2026.05.06 15:29:32 | 📊 XAUUSD-VIP  |  BUY  |  0.05 lotes | 💲 Precio: `4683.47000` | 💰 Resultado: `+18.65 USD` | 🎫 Ticket: `382633321`
+[2026-05-06 12:29 UTC] 🔴 **CIERRE** | 🕐 2026.05.06 15:29:32 | 📊 XAUUSD-VIP  |  BUY  |  0.05 lotes | 💲 Precio: `4683.47000` | 💰 Resultado: `+18.40 USD` | 🎫 Ticket: `382633341`
+[2026-05-06 12:55 UTC] ✏️ **MODIFICACIÓN** | 🕐 2026.05.06 15:55:01 | 📊 XAUUSD-VIP  |  SELL | 🔻 SL: `4683.24000` | 🎯 TP: sin límite | 🎫 Ticket: `382633305`
+[2026-05-06 12:55 UTC] ✏️ **MODIFICACIÓN** | 🕐 2026.05.06 15:55:01 | 📊 XAUUSD-VIP  |  SELL | 🔻 SL: `4683.24000` | 🎯 TP: sin límite | 🎫 Ticket: `382625475`
+[2026-05-06 12:55 UTC] ✏️ **MODIFICACIÓN** | 🕐 2026.05.06 15:55:01 | 📊 XAUUSD-VIP  |  SELL | 🔻 SL: `4683.24000` | 🎯 TP: sin límite | 🎫 Ticket: `382625344`
+[2026-05-06 12:59 UTC] 🔴 **CIERRE** | 🕐 2026.05.06 15:59:26 | 📊 XAUUSD-VIP  |  BUY  |  0.01 lotes | 💲 Precio: `4683.24000` | 💰 Resultado: `+0.23 USD` | 🎫 Ticket: `382625344`
+[2026-05-06 12:59 UTC] 🔴 **CIERRE** | 🕐 2026.05.06 15:59:26 | 📊 XAUUSD-VIP  |  BUY  |  0.20 lotes | 💲 Precio: `4683.24000` | 💰 Resultado: `+1.00 USD` | 🎫 Ticket: `382625475`
+[2026-05-06 12:59 UTC] 🔴 **CIERRE** | 🕐 2026.05.06 15:59:26 | 📊 XAUUSD-VIP  |  BUY  |  0.20 lotes | 💲 Precio: `4683.24000` | 💰 Resultado: `+79.80 USD` | 🎫 Ticket: `382633305`
+[2026-05-06 12:59 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.06 15:59:26 | ACCOUNT | 0
+[2026-05-06 13:15 UTC] 🟢 **APERTURA** | 🕐 2026.05.06 16:15:46 | 📊 XAUUSD-VIP  |  SELL  |  0.01 lotes | 💲 Precio: `4690.52000` | 🎫 Ticket: `382738907`
+[2026-05-06 13:15 UTC] 🟢 **APERTURA** | 🕐 2026.05.06 16:15:49 | 📊 XAUUSD-VIP  |  SELL  |  0.20 lotes | 💲 Precio: `4689.51000` | 🎫 Ticket: `382739084`
+[2026-05-06 13:31 UTC] 🔴 **CIERRE** | 🕐 2026.05.06 16:31:57 | 📊 XAUUSD-VIP  |  BUY  |  0.20 lotes | 💲 Precio: `4687.84000` | 💰 Resultado: `+33.40 USD` | 🎫 Ticket: `382739084`
+[2026-05-06 13:31 UTC] 🔴 **CIERRE** | 🕐 2026.05.06 16:31:57 | 📊 XAUUSD-VIP  |  BUY  |  0.01 lotes | 💲 Precio: `4687.84000` | 💰 Resultado: `+2.68 USD` | 🎫 Ticket: `382738907`
+[2026-05-06 13:32 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.06 16:31:57 | ACCOUNT | 0
+[2026-05-06 13:36 UTC] 🟢 **APERTURA** | 🕐 2026.05.06 16:35:59 | 📊 XAUUSD-VIP  |  SELL  |  0.01 lotes | 💲 Precio: `4696.07000` | 🎫 Ticket: `382790506`
+[2026-05-06 13:36 UTC] 🟢 **APERTURA** | 🕐 2026.05.06 16:36:01 | 📊 XAUUSD-VIP  |  SELL  |  0.20 lotes | 💲 Precio: `4696.50000` | 🎫 Ticket: `382790658`
+[2026-05-06 13:47 UTC] 🔴 **CIERRE** | 🕐 2026.05.06 16:47:47 | 📊 XAUUSD-VIP  |  BUY  |  0.20 lotes | 💲 Precio: `4694.87000` | 💰 Resultado: `+32.60 USD` | 🎫 Ticket: `382790658`
+[2026-05-06 13:47 UTC] 🔴 **CIERRE** | 🕐 2026.05.06 16:47:47 | 📊 XAUUSD-VIP  |  BUY  |  0.01 lotes | 💲 Precio: `4694.86000` | 💰 Resultado: `+1.21 USD` | 🎫 Ticket: `382790506`
+[2026-05-06 13:47 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.06 16:47:47 | ACCOUNT | 0
+[2026-05-06 14:29 UTC] 🟢 **APERTURA** | 🕐 2026.05.06 17:29:13 | 📊 XAUUSD-VIP  |  SELL  |  0.03 lotes | 💲 Precio: `4708.00000` | 🎫 Ticket: `382908660`
+[2026-05-06 14:29 UTC] 🔴 **CIERRE** | 🕐 2026.05.06 17:29:50 | 📊 XAUUSD-VIP  |  BUY  |  0.03 lotes | 💲 Precio: `4706.30000` | 💰 Resultado: `+5.10 USD` | 🎫 Ticket: `382908660`
+[2026-05-06 14:29 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.06 17:29:50 | ACCOUNT | 0
+[2026-05-07 07:03 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 10:03:08 | 📊 XAUUSD-VIP  |  SELL  |  0.01 lotes | 💲 Precio: `4736.15000` | 🎫 Ticket: `383892599`
+[2026-05-07 07:03 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 10:03:11 | 📊 XAUUSD-VIP  |  SELL  |  0.20 lotes | 💲 Precio: `4736.34000` | 🎫 Ticket: `383892684`
+[2026-05-07 07:07 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 10:07:43 | 📊 XAUUSD-VIP  |  SELL  |  0.20 lotes | 💲 Precio: `4740.51000` | 🎫 Ticket: `383906497`
+[2026-05-07 07:07 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 10:07:44 | 📊 XAUUSD-VIP  |  SELL  |  0.05 lotes | 💲 Precio: `4740.58000` | 🎯 TP: `4736.51000` | 🎫 Ticket: `383906588`
+[2026-05-07 07:07 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 10:07:44 | 📊 XAUUSD-VIP  |  SELL  |  0.05 lotes | 💲 Precio: `4741.02000` | 🎯 TP: `4736.51000` | 🎫 Ticket: `383906716`
+[2026-05-07 07:49 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 10:49:24 | 📊 XAUUSD-VIP  |  BUY  |  0.05 lotes | 💲 Precio: `4737.54000` | 💰 Resultado: `+17.40 USD` | 🎫 Ticket: `383906716`
+[2026-05-07 07:49 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 10:49:24 | 📊 XAUUSD-VIP  |  BUY  |  0.05 lotes | 💲 Precio: `4737.52000` | 💰 Resultado: `+15.30 USD` | 🎫 Ticket: `383906588`
+[2026-05-07 07:49 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 10:49:24 | 📊 XAUUSD-VIP  |  BUY  |  0.20 lotes | 💲 Precio: `4737.52000` | 💰 Resultado: `+59.80 USD` | 🎫 Ticket: `383906497`
+[2026-05-07 07:49 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 10:49:24 | 📊 XAUUSD-VIP  |  BUY  |  0.20 lotes | 💲 Precio: `4737.70000` | 📉 Resultado: `-27.20 USD` | 🎫 Ticket: `383892684`
+[2026-05-07 07:49 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 10:49:24 | 📊 XAUUSD-VIP  |  BUY  |  0.01 lotes | 💲 Precio: `4737.69000` | 📉 Resultado: `-1.54 USD` | 🎫 Ticket: `383892599`
+[2026-05-07 07:49 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.07 10:49:24 | ACCOUNT | 0
+[2026-05-07 07:50 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 10:50:18 | 📊 XAUUSD-VIP  |  SELL  |  0.01 lotes | 💲 Precio: `4738.86000` | 🎫 Ticket: `383981071`
+[2026-05-07 07:50 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 10:50:21 | 📊 XAUUSD-VIP  |  SELL  |  0.20 lotes | 💲 Precio: `4738.86000` | 🎫 Ticket: `383981094`
+[2026-05-07 07:51 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 10:51:57 | 📊 XAUUSD-VIP  |  SELL  |  0.20 lotes | 💲 Precio: `4742.36000` | 🎫 Ticket: `383983729`
+[2026-05-07 07:51 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 10:51:57 | 📊 XAUUSD-VIP  |  SELL  |  0.05 lotes | 💲 Precio: `4742.35000` | 🎯 TP: `4738.86000` | 🎫 Ticket: `383983744`
+[2026-05-07 07:52 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 10:51:57 | 📊 XAUUSD-VIP  |  SELL  |  0.05 lotes | 💲 Precio: `4742.36000` | 🎯 TP: `4738.86000` | 🎫 Ticket: `383983758`
+[2026-05-07 08:15 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 11:15:29 | 📊 XAUUSD-VIP  |  BUY  |  0.05 lotes | 💲 Precio: `4738.86000` | 💰 Resultado: `+17.45 USD` | 🎫 Ticket: `383983744`
+[2026-05-07 08:15 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 11:15:29 | 📊 XAUUSD-VIP  |  BUY  |  0.05 lotes | 💲 Precio: `4738.86000` | 💰 Resultado: `+17.50 USD` | 🎫 Ticket: `383983758`
+[2026-05-07 08:15 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 11:15:36 | 📊 XAUUSD-VIP  |  BUY  |  0.20 lotes | 💲 Precio: `4739.86000` | 💰 Resultado: `+50.00 USD` | 🎫 Ticket: `383983729`
+[2026-05-07 08:15 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 11:15:36 | 📊 XAUUSD-VIP  |  BUY  |  0.20 lotes | 💲 Precio: `4739.86000` | 📉 Resultado: `-20.00 USD` | 🎫 Ticket: `383981094`
+[2026-05-07 08:15 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 11:15:36 | 📊 XAUUSD-VIP  |  BUY  |  0.01 lotes | 💲 Precio: `4739.95000` | 📉 Resultado: `-1.09 USD` | 🎫 Ticket: `383981071`
+[2026-05-07 08:15 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.07 11:15:36 | ACCOUNT | 0
+[2026-05-07 08:26 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 11:26:55 | 📊 XAUUSD-VIP  |  SELL  |  0.01 lotes | 💲 Precio: `4738.13000` | 🎫 Ticket: `384055962`
+[2026-05-07 08:26 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 11:26:58 | 📊 XAUUSD-VIP  |  SELL  |  0.20 lotes | 💲 Precio: `4737.91000` | 🎫 Ticket: `384055982`
+[2026-05-07 08:28 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 11:28:49 | 📊 XAUUSD-VIP  |  SELL  |  0.20 lotes | 💲 Precio: `4742.15000` | 🎫 Ticket: `384058835`
+[2026-05-07 08:28 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 11:28:50 | 📊 XAUUSD-VIP  |  SELL  |  0.05 lotes | 💲 Precio: `4742.10000` | 🎯 TP: `4738.15000` | 🎫 Ticket: `384058863`
+[2026-05-07 08:28 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 11:28:50 | 📊 XAUUSD-VIP  |  SELL  |  0.05 lotes | 💲 Precio: `4742.15000` | 🎯 TP: `4738.15000` | 🎫 Ticket: `384058887`
+[2026-05-07 08:30 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 11:30:27 | 📊 XAUUSD-VIP  |  BUY  |  0.01 lotes | 💲 Precio: `4741.17000` | 📉 Resultado: `-3.04 USD` | 🎫 Ticket: `384055962`
+[2026-05-07 08:30 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 11:30:27 | 📊 XAUUSD-VIP  |  BUY  |  0.20 lotes | 💲 Precio: `4741.17000` | 📉 Resultado: `-65.20 USD` | 🎫 Ticket: `384055982`
+[2026-05-07 08:30 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 11:30:27 | 📊 XAUUSD-VIP  |  BUY  |  0.20 lotes | 💲 Precio: `4741.17000` | 💰 Resultado: `+19.60 USD` | 🎫 Ticket: `384058835`
+[2026-05-07 08:30 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 11:30:27 | 📊 XAUUSD-VIP  |  BUY  |  0.05 lotes | 💲 Precio: `4741.17000` | 💰 Resultado: `+4.65 USD` | 🎫 Ticket: `384058863`
+[2026-05-07 08:30 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 11:30:27 | 📊 XAUUSD-VIP  |  BUY  |  0.05 lotes | 💲 Precio: `4741.17000` | 💰 Resultado: `+4.90 USD` | 🎫 Ticket: `384058887`
+[2026-05-07 08:30 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.07 11:30:27 | ACCOUNT | 0
+[2026-05-07 08:30 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 11:30:30 | 📊 XAUUSD-VIP  |  SELL  |  0.01 lotes | 💲 Precio: `4740.81000` | 🎫 Ticket: `384061246`
+[2026-05-07 08:30 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 11:30:34 | 📊 XAUUSD-VIP  |  SELL  |  0.20 lotes | 💲 Precio: `4741.14000` | 🎫 Ticket: `384061297`
+[2026-05-07 08:31 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 11:31:09 | 📊 XAUUSD-VIP  |  BUY  |  0.01 lotes | 💲 Precio: `4740.69000` | 💰 Resultado: `+0.12 USD` | 🎫 Ticket: `384061246`
+[2026-05-07 08:31 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 11:31:15 | 📊 XAUUSD-VIP  |  BUY  |  0.20 lotes | 💲 Precio: `4741.19000` | 📉 Resultado: `-1.00 USD` | 🎫 Ticket: `384061297`
+[2026-05-07 08:31 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.07 11:31:15 | ACCOUNT | 0
+[2026-05-07 08:34 UTC] 📊 **MT5 Arrancado** | 🕐 2026.05.07 11:34:51 | 💵 0|Balance: 290224.64 USD  Equity: 290224.32 USD
+[2026-05-07 08:38 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 11:38:03 | 📊 XAUUSD-VIP  |  BUY  |  0.03 lotes | 💲 Precio: `4734.34000` | 💰 Resultado: `+8.64 USD` | 🎫 Ticket: `384066005`
+[2026-05-07 08:40 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 11:40:08 | 📊 XAUUSD-VIP  |  SELL  |  0.03 lotes | 💲 Precio: `4737.57000` | 🎫 Ticket: `384073243`
+[2026-05-07 08:47 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 11:47:24 | 📊 XAUUSD-VIP  |  BUY  |  0.03 lotes | 💲 Precio: `4734.83000` | 💰 Resultado: `+8.22 USD` | 🎫 Ticket: `384073243`
+[2026-05-07 09:05 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 12:05:44 | 📊 XAUUSD-VIP  |  BUY  |  0.01 lotes | 💲 Precio: `4726.99000` | 💰 Resultado: `+10.52 USD` | 🎫 Ticket: `384065823`
+[2026-05-07 09:05 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 12:05:44 | 📊 XAUUSD-VIP  |  BUY  |  0.02 lotes | 💲 Precio: `4726.99000` | 💰 Resultado: `+20.46 USD` | 🎫 Ticket: `384066000`
+[2026-05-07 09:05 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.07 12:05:44 | ACCOUNT | 0
+[2026-05-07 09:11 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 12:11:26 | 📊 XAUUSD-VIP  |  SELL  |  0.01 lotes | 💲 Precio: `4736.12000` | 🎫 Ticket: `384125670`
+[2026-05-07 09:14 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 12:14:38 | 📊 XAUUSD-VIP  |  BUY  |  0.01 lotes | 💲 Precio: `4733.74000` | 💰 Resultado: `+2.38 USD` | 🎫 Ticket: `384125670`
+[2026-05-07 09:14 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.07 12:14:38 | ACCOUNT | 0
+[2026-05-07 09:17 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 12:17:31 | 📊 XAUUSD-VIP  |  SELL  |  0.01 lotes | 💲 Precio: `4736.54000` | 🎫 Ticket: `384134636`
+[2026-05-07 09:24 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 12:24:39 | 📊 XAUUSD-VIP  |  SELL  |  0.03 lotes | 💲 Precio: `4737.16000` | 🎫 Ticket: `384141052`
+[2026-05-07 09:28 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 12:28:57 | 📊 XAUUSD-VIP  |  BUY  |  0.03 lotes | 💲 Precio: `4734.56000` | 💰 Resultado: `+7.80 USD` | 🎫 Ticket: `384141052`
+[2026-05-07 09:40 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 12:40:58 | 📊 XAUUSD-VIP  |  SELL  |  0.03 lotes | 💲 Precio: `4737.52000` | 🎫 Ticket: `384160344`
+[2026-05-07 09:50 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 12:50:39 | 📊 XAUUSD-VIP  |  BUY  |  0.03 lotes | 💲 Precio: `4734.81000` | 💰 Resultado: `+8.13 USD` | 🎫 Ticket: `384160344`
+[2026-05-07 10:09 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 13:09:10 | 📊 XAUUSD-VIP  |  BUY  |  0.01 lotes | 💲 Precio: `4733.24000` | 💰 Resultado: `+3.30 USD` | 🎫 Ticket: `384134636`
+[2026-05-07 10:09 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.07 13:09:10 | ACCOUNT | 0
+[2026-05-07 10:12 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 13:12:55 | 📊 XAUUSD-VIP  |  SELL  |  0.01 lotes | 💲 Precio: `4734.42000` | 🎫 Ticket: `384204253`
+[2026-05-07 10:38 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 13:38:52 | 📊 XAUUSD-VIP  |  SELL  |  0.03 lotes | 💲 Precio: `4737.54000` | 🎫 Ticket: `384235261`
+[2026-05-07 11:05 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 14:05:25 | 📊 XAUUSD-VIP  |  BUY  |  0.03 lotes | 💲 Precio: `4734.80000` | 💰 Resultado: `+8.22 USD` | 🎫 Ticket: `384235261`
+[2026-05-07 11:05 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 14:05:44 | 📊 XAUUSD-VIP  |  BUY  |  0.01 lotes | 💲 Precio: `4734.14000` | 💰 Resultado: `+0.28 USD` | 🎫 Ticket: `384204253`
+[2026-05-07 11:05 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.07 14:05:44 | ACCOUNT | 0
+[2026-05-07 11:44 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 14:44:24 | 📊 XAUUSD-VIP  |  SELL  |  0.03 lotes | 💲 Precio: `4737.65000` | 🎫 Ticket: `384307565`
+[2026-05-07 11:50 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 14:50:44 | 📊 XAUUSD-VIP  |  BUY  |  0.03 lotes | 💲 Precio: `4734.44000` | 💰 Resultado: `+9.63 USD` | 🎫 Ticket: `384307565`
+[2026-05-07 11:50 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.07 14:50:44 | ACCOUNT | 0
+[2026-05-07 11:51 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 14:51:26 | 📊 XAUUSD-VIP  |  SELL  |  0.03 lotes | 💲 Precio: `4737.53000` | 🎫 Ticket: `384319354`
+[2026-05-07 11:57 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 14:57:30 | 📊 XAUUSD-VIP  |  SELL  |  0.03 lotes | 💲 Precio: `4743.13000` | 🎫 Ticket: `384329809`
+[2026-05-07 11:57 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 14:57:30 | 📊 XAUUSD-VIP  |  SELL  |  0.03 lotes | 💲 Precio: `4743.18000` | 🎫 Ticket: `384330054`
+[2026-05-07 12:05 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 15:05:43 | 📊 XAUUSD-VIP  |  BUY  |  0.03 lotes | 💲 Precio: `4740.84000` | 💰 Resultado: `+7.02 USD` | 🎫 Ticket: `384330054`
+[2026-05-07 12:05 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 15:05:43 | 📊 XAUUSD-VIP  |  BUY  |  0.03 lotes | 💲 Precio: `4740.87000` | 💰 Resultado: `+6.78 USD` | 🎫 Ticket: `384329809`
+[2026-05-07 12:05 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 15:05:44 | 📊 XAUUSD-VIP  |  BUY  |  0.03 lotes | 💲 Precio: `4740.88000` | 📉 Resultado: `-10.05 USD` | 🎫 Ticket: `384319354`
+[2026-05-07 12:05 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.07 15:05:44 | ACCOUNT | 0
+[2026-05-07 12:23 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 15:23:45 | 📊 XAUUSD-VIP  |  SELL  |  0.03 lotes | 💲 Precio: `4737.58000` | 🎫 Ticket: `384378869`
+[2026-05-07 12:25 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 15:25:05 | 📊 XAUUSD-VIP  |  BUY  |  0.03 lotes | 💲 Precio: `4734.96000` | 💰 Resultado: `+7.86 USD` | 🎫 Ticket: `384378869`
+[2026-05-07 12:25 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.07 15:25:05 | ACCOUNT | 0
+[2026-05-07 12:26 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 15:26:16 | 📊 XAUUSD-VIP  |  SELL  |  0.03 lotes | 💲 Precio: `4737.90000` | 🎫 Ticket: `384384864`
+[2026-05-07 12:30 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 15:30:51 | 📊 XAUUSD-VIP  |  SELL  |  0.03 lotes | 💲 Precio: `4742.61000` | 🎫 Ticket: `384392140`
+[2026-05-07 12:38 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 15:38:39 | 📊 XAUUSD-VIP  |  SELL  |  0.03 lotes | 💲 Precio: `4749.42000` | 🎫 Ticket: `384414405`
+[2026-05-07 12:38 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 15:38:39 | 📊 XAUUSD-VIP  |  SELL  |  0.03 lotes | 💲 Precio: `4749.62000` | 🎫 Ticket: `384414465`
+[2026-05-07 13:00 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 16:00:28 | 📊 XAUUSD-VIP  |  BUY  |  0.03 lotes | 💲 Precio: `4742.63000` | 💰 Resultado: `+20.97 USD` | 🎫 Ticket: `384414465`
+[2026-05-07 13:01 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 16:01:41 | 📊 XAUUSD-VIP  |  BUY  |  0.03 lotes | 💲 Precio: `4740.66000` | 📉 Resultado: `-8.28 USD` | 🎫 Ticket: `384384864`
+[2026-05-07 13:01 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 16:01:41 | 📊 XAUUSD-VIP  |  BUY  |  0.03 lotes | 💲 Precio: `4740.66000` | 💰 Resultado: `+5.85 USD` | 🎫 Ticket: `384392140`
+[2026-05-07 13:01 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 16:01:41 | 📊 XAUUSD-VIP  |  BUY  |  0.03 lotes | 💲 Precio: `4740.66000` | 💰 Resultado: `+26.28 USD` | 🎫 Ticket: `384414405`
+[2026-05-07 13:01 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.07 16:01:41 | ACCOUNT | 0
+[2026-05-07 13:16 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 16:16:31 | 📊 XAUUSD-VIP  |  SELL  |  0.03 lotes | 💲 Precio: `4737.64000` | 🎫 Ticket: `384493199`
+[2026-05-07 13:17 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 16:17:45 | 📊 XAUUSD-VIP  |  BUY  |  0.03 lotes | 💲 Precio: `4739.83000` | 📉 Resultado: `-6.57 USD` | 🎫 Ticket: `384493199`
+[2026-05-07 13:17 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.07 16:17:45 | ACCOUNT | 0
+[2026-05-07 16:31 UTC] 📊 **MT5 Arrancado** | 🕐 2026.05.07 19:31:43 | 💵 0|Balance: 50000.00 USC  Equity: 50000.00 USC
+[2026-05-07 16:31 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.07 19:31:48 | ACCOUNT | 0
+[2026-05-07 19:31 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 22:31:00 | 📊 XAUUSD-VIPc  |  SELL  |  0.01 lotes | 💲 Precio: `4705.27000` | 🎫 Ticket: `840897265`
+[2026-05-07 19:31 UTC] 🟢 **APERTURA** | 🕐 2026.05.07 22:31:11 | 📊 XAUUSD-VIPc  |  SELL  |  0.01 lotes | 💲 Precio: `4706.13000` | 🎫 Ticket: `840897370`
+[2026-05-07 19:32 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 22:31:59 | 📊 XAUUSD-VIPc  |  BUY  |  0.01 lotes | 💲 Precio: `4704.93000` | 💰 Resultado: `+0.34 USD` | 🎫 Ticket: `840897265`
+[2026-05-07 19:32 UTC] 🔴 **CIERRE** | 🕐 2026.05.07 22:31:59 | 📊 XAUUSD-VIPc  |  BUY  |  0.01 lotes | 💲 Precio: `4704.93000` | 💰 Resultado: `+1.20 USD` | 🎫 Ticket: `840897370`
+[2026-05-07 19:32 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.07 22:31:59 | ACCOUNT | 0
+[2026-05-08 06:43 UTC] 🟢 **APERTURA** | 🕐 2026.05.08 09:43:53 | 📊 XAUUSD-VIP  |  SELL  |  0.01 lotes | 💲 Precio: `4731.42000` | 🎫 Ticket: `386138909`
+[2026-05-08 06:43 UTC] 🟢 **APERTURA** | 🕐 2026.05.08 09:43:53 | 📊 XAUUSD-VIP  |  SELL  |  0.02 lotes | 💲 Precio: `4731.49000` | 🎫 Ticket: `386138913`
+[2026-05-08 06:43 UTC] 🟢 **APERTURA** | 🕐 2026.05.08 09:43:53 | 📊 XAUUSD-VIP  |  SELL  |  0.03 lotes | 💲 Precio: `4731.43000` | 🎫 Ticket: `386138916`
+[2026-05-08 06:45 UTC] 🔴 **CIERRE** | 🕐 2026.05.08 09:45:05 | 📊 XAUUSD-VIP  |  BUY  |  0.03 lotes | 💲 Precio: `4728.51000` | 💰 Resultado: `+8.76 USD` | 🎫 Ticket: `386138916`
+[2026-05-08 06:48 UTC] ✏️ **MODIFICACIÓN** | 🕐 2026.05.08 09:48:04 | 📊 XAUUSD-VIP  |  SELL | 🔻 SL: `4731.37000` | 🎯 TP: sin límite | 🎫 Ticket: `386138913`
+[2026-05-08 06:48 UTC] ✏️ **MODIFICACIÓN** | 🕐 2026.05.08 09:48:04 | 📊 XAUUSD-VIP  |  SELL | 🔻 SL: `4731.37000` | 🎯 TP: sin límite | 🎫 Ticket: `386138909`
+[2026-05-08 07:25 UTC] 🔴 **CIERRE** | 🕐 2026.05.08 10:25:58 | 📊 XAUUSD-VIP  |  BUY  |  0.02 lotes | 💲 Precio: `4700.31000` | 💰 Resultado: `+62.36 USD` | 🎫 Ticket: `386138913`
+[2026-05-08 07:25 UTC] 🔴 **CIERRE** | 🕐 2026.05.08 10:25:58 | 📊 XAUUSD-VIP  |  BUY  |  0.01 lotes | 💲 Precio: `4700.31000` | 💰 Resultado: `+31.11 USD` | 🎫 Ticket: `386138909`
+[2026-05-08 07:26 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.08 10:25:58 | ACCOUNT | 0
+[2026-05-08 07:40 UTC] 📊 **MT5 Arrancado** | 🕐 2026.05.08 10:40:44 | 💵 0|Balance: 50001.54 USC  Equity: 50001.54 USC
+[2026-05-08 07:40 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.08 10:40:49 | ACCOUNT | 0
+[2026-05-08 09:05 UTC] 🟢 **APERTURA** | 🕐 2026.05.08 12:05:19 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4718.60000` | 🎫 Ticket: `842852126`
+[2026-05-08 09:05 UTC] 🟢 **APERTURA** | 🕐 2026.05.08 12:05:19 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4718.62000` | 🎫 Ticket: `842852132`
+[2026-05-08 09:07 UTC] 🟢 **APERTURA** | 🕐 2026.05.08 12:07:34 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4720.02000` | 🎫 Ticket: `842853254`
+[2026-05-08 09:09 UTC] 🔴 **CIERRE** | 🕐 2026.05.08 12:09:04 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4717.86000` | 💰 Resultado: `+3.70 USD` | 🎫 Ticket: `842852126`
+[2026-05-08 09:09 UTC] 🔴 **CIERRE** | 🕐 2026.05.08 12:09:07 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4717.96000` | 💰 Resultado: `+3.30 USD` | 🎫 Ticket: `842852132`
+[2026-05-08 09:09 UTC] 🔴 **CIERRE** | 🕐 2026.05.08 12:09:37 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4716.45000` | 💰 Resultado: `+17.85 USD` | 🎫 Ticket: `842853254`
+[2026-05-08 09:09 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.08 12:09:37 | ACCOUNT | 0
+[2026-05-08 09:19 UTC] 🟢 **APERTURA** | 🕐 2026.05.08 12:19:53 | 📊 XAUUSD-VIPc  |  SELL  |  0.10 lotes | 💲 Precio: `4719.66000` | 🎫 Ticket: `842882899`
+[2026-05-08 09:19 UTC] 🟢 **APERTURA** | 🕐 2026.05.08 12:19:53 | 📊 XAUUSD-VIPc  |  SELL  |  0.10 lotes | 💲 Precio: `4719.66000` | 🎫 Ticket: `842882905`
+[2026-05-08 09:32 UTC] 🔴 **CIERRE** | 🕐 2026.05.08 12:32:17 | 📊 XAUUSD-VIPc  |  BUY  |  0.10 lotes | 💲 Precio: `4713.60000` | 💰 Resultado: `+60.60 USD` | 🎫 Ticket: `842882905`
+[2026-05-08 09:32 UTC] 🔴 **CIERRE** | 🕐 2026.05.08 12:32:17 | 📊 XAUUSD-VIPc  |  BUY  |  0.10 lotes | 💲 Precio: `4713.61000` | 💰 Resultado: `+60.50 USD` | 🎫 Ticket: `842882899`
+[2026-05-08 09:32 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.08 12:32:17 | ACCOUNT | 0
+[2026-05-08 10:24 UTC] 🟢 **APERTURA** | 🕐 2026.05.08 13:24:33 | 📊 XAUUSD-VIPc  |  SELL  |  0.10 lotes | 💲 Precio: `4721.85000` | 🎫 Ticket: `843039539`
+[2026-05-08 10:24 UTC] 🟢 **APERTURA** | 🕐 2026.05.08 13:24:33 | 📊 XAUUSD-VIPc  |  SELL  |  0.10 lotes | 💲 Precio: `4721.85000` | 🎫 Ticket: `843039547`
+[2026-05-08 10:24 UTC] ✏️ **MODIFICACIÓN** | 🕐 2026.05.08 13:24:42 | 📊 XAUUSD-VIPc  |  SELL | 🔻 SL: sin stop | 🎯 TP: `4720.00000` | 🎫 Ticket: `843039539`
+[2026-05-08 10:24 UTC] ✏️ **MODIFICACIÓN** | 🕐 2026.05.08 13:24:48 | 📊 XAUUSD-VIPc  |  SELL | 🔻 SL: sin stop | 🎯 TP: `4718.00000` | 🎫 Ticket: `843039547`
+[2026-05-08 10:37 UTC] 🟢 **APERTURA** | 🕐 2026.05.08 13:37:08 | 📊 XAUUSD-VIPc  |  SELL  |  0.10 lotes | 💲 Precio: `4725.12000` | 🎫 Ticket: `843040050`
+[2026-05-08 10:48 UTC] 🔴 **CIERRE** | 🕐 2026.05.08 13:48:53 | 📊 XAUUSD-VIPc  |  BUY  |  0.10 lotes | 💲 Precio: `4722.25000` | 📉 Resultado: `-4.00 USD` | 🎫 Ticket: `843039547`
+[2026-05-08 10:48 UTC] 🔴 **CIERRE** | 🕐 2026.05.08 13:48:53 | 📊 XAUUSD-VIPc  |  BUY  |  0.10 lotes | 💲 Precio: `4722.25000` | 💰 Resultado: `+28.70 USD` | 🎫 Ticket: `843040050`
+[2026-05-08 10:48 UTC] 🔴 **CIERRE** | 🕐 2026.05.08 13:48:53 | 📊 XAUUSD-VIPc  |  BUY  |  0.10 lotes | 💲 Precio: `4722.25000` | 📉 Resultado: `-4.00 USD` | 🎫 Ticket: `843039539`
+[2026-05-08 10:48 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.08 13:48:53 | ACCOUNT | 0
+[2026-05-08 11:07 UTC] 🟢 **APERTURA** | 🕐 2026.05.08 14:07:43 | 📊 XAUUSD-VIPc  |  SELL  |  0.10 lotes | 💲 Precio: `4726.23000` | 🎫 Ticket: `843155605`
+[2026-05-08 11:07 UTC] 🟢 **APERTURA** | 🕐 2026.05.08 14:07:43 | 📊 XAUUSD-VIPc  |  SELL  |  0.10 lotes | 💲 Precio: `4726.22000` | 🎫 Ticket: `843155606`
+[2026-05-08 11:07 UTC] 🟢 **APERTURA** | 🕐 2026.05.08 14:07:43 | 📊 XAUUSD-VIPc  |  SELL  |  0.10 lotes | 💲 Precio: `4726.22000` | 🎫 Ticket: `843155607`
+[2026-05-08 11:07 UTC] 🟢 **APERTURA** | 🕐 2026.05.08 14:07:43 | 📊 XAUUSD-VIPc  |  SELL  |  0.10 lotes | 💲 Precio: `4726.22000` | 🎫 Ticket: `843155611`
+[2026-05-08 11:10 UTC] 🔴 **CIERRE** | 🕐 2026.05.08 14:10:39 | 📊 XAUUSD-VIPc  |  BUY  |  0.10 lotes | 💲 Precio: `4724.40000` | 💰 Resultado: `+18.20 USD` | 🎫 Ticket: `843155611`
+[2026-05-08 11:10 UTC] 🔴 **CIERRE** | 🕐 2026.05.08 14:10:43 | 📊 XAUUSD-VIPc  |  BUY  |  0.10 lotes | 💲 Precio: `4722.62000` | 💰 Resultado: `+36.00 USD` | 🎫 Ticket: `843155607`
+[2026-05-08 11:11 UTC] 🔴 **CIERRE** | 🕐 2026.05.08 14:10:59 | 📊 XAUUSD-VIPc  |  BUY  |  0.10 lotes | 💲 Precio: `4721.57000` | 💰 Resultado: `+46.50 USD` | 🎫 Ticket: `843155606`
+[2026-05-08 11:11 UTC] 🔴 **CIERRE** | 🕐 2026.05.08 14:11:02 | 📊 XAUUSD-VIPc  |  BUY  |  0.10 lotes | 💲 Precio: `4721.97000` | 💰 Resultado: `+42.60 USD` | 🎫 Ticket: `843155605`
+[2026-05-08 11:11 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.08 14:11:02 | ACCOUNT | 0
+[2026-05-10 19:40 UTC] 📊 **MT5 Arrancado** | 🕐 2026.05.08 23:56:58 | 💵 0|Balance: 221248.87 USC  Equity: 221248.87 USC
+[2026-05-10 19:40 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.08 23:56:58 | ACCOUNT | 0
+[2026-05-10 22:02 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:02:23 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4689.70000` | 🎫 Ticket: `197487405`
+[2026-05-10 22:02 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:02:24 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4689.99000` | 🎫 Ticket: `197487407`
+[2026-05-10 22:02 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:02:24 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4690.02000` | 🎫 Ticket: `197487415`
+[2026-05-10 22:03 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:03:01 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4689.99000` | 🎫 Ticket: `197487407`
+[2026-05-10 22:03 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:03:01 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4687.53000` | 💰 Resultado: `+10.85 USD` | 🎫 Ticket: `197487405`
+[2026-05-10 22:03 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:03:01 | 📊   |    |  0.00 lotes | 💲 Precio: `0.00000` | 💰 Resultado: `+0.00 USD` | 🎫 Ticket: `0`
+[2026-05-10 22:03 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:03:05 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4685.90000` | 💰 Resultado: `+20.45 USD` | 🎫 Ticket: `197487407`
+[2026-05-10 22:03 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:03:10 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4687.17000` | 💰 Resultado: `+14.25 USD` | 🎫 Ticket: `197487415`
+[2026-05-10 22:03 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.11 01:03:10 | ACCOUNT | 0
+[2026-05-10 22:06 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:06:02 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4682.03000` | 🎫 Ticket: `197490541`
+[2026-05-10 22:06 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:06:02 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4682.07000` | 🎫 Ticket: `197490545`
+[2026-05-10 22:06 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:06:02 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4682.07000` | 🎫 Ticket: `197490547`
+[2026-05-10 22:06 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:06:39 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4680.68000` | 💰 Resultado: `+6.95 USD` | 🎫 Ticket: `197490547`
+[2026-05-10 22:06 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:06:43 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4680.46000` | 💰 Resultado: `+8.05 USD` | 🎫 Ticket: `197490545`
+[2026-05-10 22:07 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:07:17 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4681.43000` | 💰 Resultado: `+3.00 USD` | 🎫 Ticket: `197490541`
+[2026-05-10 22:07 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.11 01:07:17 | ACCOUNT | 0
+[2026-05-10 22:08 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:08:11 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4684.70000` | 🎫 Ticket: `197490622`
+[2026-05-10 22:08 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:08:32 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4687.22000` | 🎫 Ticket: `197490665`
+[2026-05-10 22:10 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:10:24 | 📊 XAUUSD-VIPc  |  SELL  |  0.10 lotes | 💲 Precio: `4689.79000` | 🎫 Ticket: `197488705`
+[2026-05-10 22:13 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:13:02 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4691.24000` | 🎫 Ticket: `197494923`
+[2026-05-10 22:14 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:14:14 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4687.75000` | 📉 Resultado: `-2.65 USD` | 🎫 Ticket: `197490665`
+[2026-05-10 22:14 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:14:14 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4687.75000` | 📉 Resultado: `-15.25 USD` | 🎫 Ticket: `197490622`
+[2026-05-10 22:14 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:14:14 | 📊 XAUUSD-VIPc  |  BUY  |  0.10 lotes | 💲 Precio: `4687.75000` | 💰 Resultado: `+20.40 USD` | 🎫 Ticket: `197488705`
+[2026-05-10 22:14 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:14:14 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4687.75000` | 💰 Resultado: `+17.45 USD` | 🎫 Ticket: `197494923`
+[2026-05-10 22:14 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.11 01:14:14 | ACCOUNT | 0
+[2026-05-10 22:14 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:14:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4686.69000` | 🎫 Ticket: `197495373`
+[2026-05-10 22:14 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:14:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4686.68000` | 🎫 Ticket: `197495381`
+[2026-05-10 22:15 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:15:42 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4685.64000` | 💰 Resultado: `+5.25 USD` | 🎫 Ticket: `197495373`
+[2026-05-10 22:15 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:15:42 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4685.60000` | 💰 Resultado: `+5.40 USD` | 🎫 Ticket: `197495381`
+[2026-05-10 22:15 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.11 01:15:42 | ACCOUNT | 0
+[2026-05-10 22:18 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:18:28 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4686.28000` | 🎫 Ticket: `197497088`
+[2026-05-10 22:18 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:18:29 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4686.32000` | 🎫 Ticket: `197497092`
+[2026-05-10 22:18 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:18:29 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4686.32000` | 🎫 Ticket: `197497093`
+[2026-05-10 22:18 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:18:29 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4686.31000` | 🎫 Ticket: `197497095`
+[2026-05-10 22:18 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:18:32 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4686.10000` | 🎫 Ticket: `197497107`
+[2026-05-10 22:18 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:18:32 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4686.09000` | 🎫 Ticket: `197497108`
+[2026-05-10 22:18 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:18:32 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4685.48000` | 🎫 Ticket: `197497109`
+[2026-05-10 22:18 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:18:43 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4684.36000` | 🎫 Ticket: `197497183`
+[2026-05-10 22:18 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:18:43 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4684.42000` | 🎫 Ticket: `197497184`
+[2026-05-10 22:18 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:18:49 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4682.74000` | 🎫 Ticket: `197497260`
+[2026-05-10 22:18 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:18:49 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4682.76000` | 🎫 Ticket: `197497263`
+[2026-05-10 22:19 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:19:52 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4686.87000` | 💰 Resultado: `+11.20 USD` | 🎫 Ticket: `197497095`
+[2026-05-10 22:19 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:19:55 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4684.36000` | 🎫 Ticket: `197497183`
+[2026-05-10 22:19 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:19:55 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4687.07000` | 💰 Resultado: `+15.00 USD` | 🎫 Ticket: `197497093`
+[2026-05-10 22:19 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:19:55 | 📊   |    |  0.00 lotes | 💲 Precio: `0.00000` | 💰 Resultado: `+0.00 USD` | 🎫 Ticket: `0`
+[2026-05-10 22:20 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:20:00 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4687.11000` | 💰 Resultado: `+5.05 USD` | 🎫 Ticket: `197497107`
+[2026-05-10 22:20 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:20:03 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4687.28000` | 💰 Resultado: `+19.20 USD` | 🎫 Ticket: `197497092`
+[2026-05-10 22:20 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:20:05 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4687.09000` | 💰 Resultado: `+16.20 USD` | 🎫 Ticket: `197497088`
+[2026-05-10 22:20 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:20:07 | 📊 XAUUSD-VIPc  |  BUY  |  0.05 lotes | 💲 Precio: `4684.36000` | 🎫 Ticket: `197497183`
+[2026-05-10 22:20 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:20:07 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4687.04000` | 💰 Resultado: `+4.75 USD` | 🎫 Ticket: `197497108`
+[2026-05-10 22:20 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:20:07 | 📊   |    |  0.00 lotes | 💲 Precio: `0.00000` | 💰 Resultado: `+0.00 USD` | 🎫 Ticket: `0`
+[2026-05-10 22:20 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:20:08 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4687.02000` | 💰 Resultado: `+7.70 USD` | 🎫 Ticket: `197497109`
+[2026-05-10 22:20 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:20:09 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4685.93000` | 💰 Resultado: `+7.85 USD` | 🎫 Ticket: `197497183`
+[2026-05-10 22:20 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:20:12 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4686.20000` | 💰 Resultado: `+17.30 USD` | 🎫 Ticket: `197497260`
+[2026-05-10 22:20 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:20:21 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4686.67000` | 🎫 Ticket: `197497869`
+[2026-05-10 22:20 UTC] ✏️ **MODIFICACIÓN** | 🕐 2026.05.11 01:20:34 | 📊 XAUUSD-VIPc  |  BUY | 🔻 SL: sin stop | 🎯 TP: `4690.00000` | 🎫 Ticket: `197497869`
+[2026-05-10 22:20 UTC] ✏️ **MODIFICACIÓN** | 🕐 2026.05.11 01:20:40 | 📊 XAUUSD-VIPc  |  BUY | 🔻 SL: sin stop | 🎯 TP: `4692.00000` | 🎫 Ticket: `197497263`
+[2026-05-10 22:20 UTC] ✏️ **MODIFICACIÓN** | 🕐 2026.05.11 01:20:45 | 📊 XAUUSD-VIPc  |  BUY | 🔻 SL: sin stop | 🎯 TP: `4695.00000` | 🎫 Ticket: `197497184`
+[2026-05-10 22:20 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:20:50 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4688.46000` | 💰 Resultado: `+20.20 USD` | 🎫 Ticket: `197497184`
+[2026-05-10 22:20 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:20:50 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4688.47000` | 💰 Resultado: `+36.00 USD` | 🎫 Ticket: `197497869`
+[2026-05-10 22:20 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:20:50 | 📊 XAUUSD-VIPc  |  SELL  |  0.05 lotes | 💲 Precio: `4688.47000` | 💰 Resultado: `+28.55 USD` | 🎫 Ticket: `197497263`
+[2026-05-10 22:20 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.11 01:20:50 | ACCOUNT | 0
+[2026-05-10 22:26 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:26:17 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4691.39000` | 🎫 Ticket: `197499120`
+[2026-05-10 22:26 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:26:17 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4691.38000` | 🎫 Ticket: `197499123`
+[2026-05-10 22:26 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:26:17 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4691.41000` | 🎫 Ticket: `197499125`
+[2026-05-10 22:27 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:27:50 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4693.09000` | 💰 Resultado: `+33.60 USD` | 🎫 Ticket: `197499125`
+[2026-05-10 22:27 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:27:53 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4693.32000` | 💰 Resultado: `+38.80 USD` | 🎫 Ticket: `197499123`
+[2026-05-10 22:28 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:28:18 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4694.44000` | 💰 Resultado: `+61.00 USD` | 🎫 Ticket: `197499120`
+[2026-05-10 22:28 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.11 01:28:18 | ACCOUNT | 0
+[2026-05-10 22:37 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:37:18 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4690.09000` | 🎫 Ticket: `197503799`
+[2026-05-10 22:37 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:37:18 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4690.09000` | 🎫 Ticket: `197503798`
+[2026-05-10 22:37 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 01:37:19 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4690.13000` | 🎫 Ticket: `197503800`
+[2026-05-10 22:47 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:47:12 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4692.03000` | 💰 Resultado: `+38.80 USD` | 🎫 Ticket: `197503799`
+[2026-05-10 22:47 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:47:12 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4692.03000` | 💰 Resultado: `+38.00 USD` | 🎫 Ticket: `197503800`
+[2026-05-10 22:47 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 01:47:12 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4692.03000` | 💰 Resultado: `+38.80 USD` | 🎫 Ticket: `197503798`
+[2026-05-10 22:47 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.11 01:47:12 | ACCOUNT | 0
+[2026-05-11 00:00 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 03:00:28 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4687.41000` | 🎫 Ticket: `197520445`
+[2026-05-11 00:00 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 03:00:28 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4687.41000` | 🎫 Ticket: `197520444`
+[2026-05-11 00:00 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 03:00:28 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4687.21000` | 🎫 Ticket: `197520448`
+[2026-05-11 00:00 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 03:00:28 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4686.62000` | 🎫 Ticket: `197520449`
+[2026-05-11 00:00 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 03:00:29 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4686.52000` | 🎫 Ticket: `197520459`
+[2026-05-11 00:00 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 03:00:32 | 📊 XAUUSD-VIPc  |  BUY  |  0.10 lotes | 💲 Precio: `4686.16000` | 🎫 Ticket: `197520493`
+[2026-05-11 00:11 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 03:11:30 | 📊 XAUUSD-VIPc  |  BUY  |  0.10 lotes | 💲 Precio: `4683.85000` | 🎫 Ticket: `197523952`
+[2026-05-11 00:11 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 03:11:31 | 📊 XAUUSD-VIPc  |  BUY  |  0.10 lotes | 💲 Precio: `4683.96000` | 🎫 Ticket: `197523958`
+[2026-05-11 07:23 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 10:23:16 | 📊 XAUUSD-VIPc  |  BUY  |  0.10 lotes | 💲 Precio: `4674.61000` | 🎫 Ticket: `197648192`
+[2026-05-11 07:27 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 10:27:37 | 📊 XAUUSD-VIPc  |  SELL  |  0.10 lotes | 💲 Precio: `4677.54000` | 💰 Resultado: `+29.30 USD` | 🎫 Ticket: `197648192`
+[2026-05-11 07:27 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 10:27:44 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4677.18000` | 🎫 Ticket: `197649665`
+[2026-05-11 07:27 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 10:27:44 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4677.18000` | 🎫 Ticket: `197649667`
+[2026-05-11 07:27 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 10:27:44 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4677.18000` | 🎫 Ticket: `197649668`
+[2026-05-11 07:27 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 10:27:49 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4677.00000` | 🎫 Ticket: `197649691`
+[2026-05-11 07:27 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 10:27:49 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4677.00000` | 🎫 Ticket: `197649693`
+[2026-05-11 07:31 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 10:31:28 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4676.22000` | 💰 Resultado: `+19.20 USD` | 🎫 Ticket: `197649665`
+[2026-05-11 07:34 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 10:34:55 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4674.73000` | 💰 Resultado: `+49.00 USD` | 🎫 Ticket: `197649667`
+[2026-05-11 07:35 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 10:34:58 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4674.63000` | 💰 Resultado: `+51.00 USD` | 🎫 Ticket: `197649668`
+[2026-05-11 07:35 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 10:35:07 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4674.11000` | 💰 Resultado: `+57.80 USD` | 🎫 Ticket: `197649691`
+[2026-05-11 07:42 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 10:42:38 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4673.73000` | 💰 Resultado: `+65.40 USD` | 🎫 Ticket: `197649693`
+[2026-05-11 07:45 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 10:45:07 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4672.82000` | 🎫 Ticket: `197654197`
+[2026-05-11 07:45 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 10:45:07 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4672.82000` | 🎫 Ticket: `197654201`
+[2026-05-11 07:48 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 10:48:42 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4668.47000` | 🎫 Ticket: `197656577`
+[2026-05-11 07:48 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 10:48:42 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4668.37000` | 🎫 Ticket: `197656579`
+[2026-05-11 07:48 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 10:48:48 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4669.12000` | 🎫 Ticket: `197656647`
+[2026-05-11 07:53 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 10:53:10 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4665.07000` | 🎫 Ticket: `197658418`
+[2026-05-11 07:53 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 10:53:11 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4665.05000` | 🎫 Ticket: `197658422`
+[2026-05-11 07:53 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 10:53:11 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4664.81000` | 🎫 Ticket: `197658424`
+[2026-05-11 07:53 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 10:53:16 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4665.70000` | 🎫 Ticket: `197658494`
+[2026-05-11 07:53 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 10:53:16 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4665.76000` | 🎫 Ticket: `197658495`
+[2026-05-11 07:58 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 10:58:46 | 📊 XAUUSD-VIPc  |  BUY  |  0.40 lotes | 💲 Precio: `4666.10000` | 🎫 Ticket: `197660661`
+[2026-05-11 08:03 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 11:03:48 | 📊 XAUUSD-VIPc  |  BUY  |  0.40 lotes | 💲 Precio: `4666.02000` | 🎫 Ticket: `197662580`
+[2026-05-11 08:07 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:07:09 | 📊 XAUUSD-VIPc  |  SELL  |  0.40 lotes | 💲 Precio: `4669.21000` | 💰 Resultado: `+124.40 USD` | 🎫 Ticket: `197660658`
+[2026-05-11 08:09 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 11:09:48 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4665.40000` | 🎫 Ticket: `197665512`
+[2026-05-11 08:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:12:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.10 lotes | 💲 Precio: `4672.74000` | 📉 Resultado: `-134.20 USD` | 🎫 Ticket: `197520493`
+[2026-05-11 08:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:12:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4672.74000` | 💰 Resultado: `+87.40 USD` | 🎫 Ticket: `197656579`
+[2026-05-11 08:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:12:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4672.74000` | 📉 Resultado: `-1.60 USD` | 🎫 Ticket: `197654199`
+[2026-05-11 08:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:12:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4672.74000` | 💰 Resultado: `+72.40 USD` | 🎫 Ticket: `197656646`
+[2026-05-11 08:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:12:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4672.77000` | 📉 Resultado: `-1.00 USD` | 🎫 Ticket: `197654197`
+[2026-05-11 08:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:12:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4672.77000` | 💰 Resultado: `+73.00 USD` | 🎫 Ticket: `197656647`
+[2026-05-11 08:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:12:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4672.77000` | 💰 Resultado: `+154.00 USD` | 🎫 Ticket: `197658418`
+[2026-05-11 08:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:12:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4672.77000` | 💰 Resultado: `+140.20 USD` | 🎫 Ticket: `197658495`
+[2026-05-11 08:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:12:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4672.77000` | 📉 Resultado: `-275.00 USD` | 🎫 Ticket: `197520459`
+[2026-05-11 08:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:12:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4672.77000` | 📉 Resultado: `-1.00 USD` | 🎫 Ticket: `197654201`
+[2026-05-11 08:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:12:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4672.77000` | 📉 Resultado: `-277.00 USD` | 🎫 Ticket: `197520449`
+[2026-05-11 08:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:12:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4672.77000` | 💰 Resultado: `+154.40 USD` | 🎫 Ticket: `197658422`
+[2026-05-11 08:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:12:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.40 lotes | 💲 Precio: `4672.77000` | 💰 Resultado: `+266.80 USD` | 🎫 Ticket: `197660661`
+[2026-05-11 08:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:12:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4672.77000` | 💰 Resultado: `+86.00 USD` | 🎫 Ticket: `197656577`
+[2026-05-11 08:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:12:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.40 lotes | 💲 Precio: `4672.78000` | 💰 Resultado: `+270.40 USD` | 🎫 Ticket: `197662580`
+[2026-05-11 08:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:12:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.40 lotes | 💲 Precio: `4672.78000` | 💰 Resultado: `+266.80 USD` | 🎫 Ticket: `197660669`
+[2026-05-11 08:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:12:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4672.78000` | 💰 Resultado: `+147.60 USD` | 🎫 Ticket: `197665512`
+[2026-05-11 08:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:12:18 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4672.76000` | 💰 Resultado: `+144.80 USD` | 🎫 Ticket: `197665513`
+[2026-05-11 08:12 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.11 11:12:18 | ACCOUNT | 0
+[2026-05-11 08:27 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 11:27:14 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4675.32000` | 🎫 Ticket: `197673748`
+[2026-05-11 08:27 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 11:27:14 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4675.31000` | 🎫 Ticket: `197673749`
+[2026-05-11 08:27 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 11:27:20 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4675.06000` | 🎫 Ticket: `197673761`
+[2026-05-11 08:30 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:30:04 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4670.74000` | 💰 Resultado: `+91.40 USD` | 🎫 Ticket: `197673749`
+[2026-05-11 08:30 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:30:08 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4671.25000` | 💰 Resultado: `+81.40 USD` | 🎫 Ticket: `197673748`
+[2026-05-11 08:30 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 11:30:12 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4670.85000` | 💰 Resultado: `+84.20 USD` | 🎫 Ticket: `197673761`
+[2026-05-11 08:30 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.11 11:30:12 | ACCOUNT | 0
+[2026-05-11 09:12 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 12:12:16 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4666.99000` | 🎫 Ticket: `197686915`
+[2026-05-11 09:12 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 12:12:17 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4666.98000` | 🎫 Ticket: `197686916`
+[2026-05-11 09:25 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 12:25:36 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4660.46000` | 🎫 Ticket: `197692761`
+[2026-05-11 09:43 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 12:43:57 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4661.69000` | 🎫 Ticket: `197703242`
+[2026-05-11 09:43 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 12:43:57 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4661.96000` | 🎫 Ticket: `197703244`
+[2026-05-11 09:44 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 12:43:57 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4662.02000` | 🎫 Ticket: `197703258`
+[2026-05-11 09:44 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 12:43:59 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4661.84000` | 🎫 Ticket: `197703282`
+[2026-05-11 09:44 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 12:44:05 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4661.77000` | 💰 Resultado: `+26.20 USD` | 🎫 Ticket: `197692761`
+[2026-05-11 09:44 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 12:44:09 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4661.82000` | 📉 Resultado: `-103.20 USD` | 🎫 Ticket: `197686916`
+[2026-05-11 09:44 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 12:44:13 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4661.85000` | 📉 Resultado: `-102.80 USD` | 🎫 Ticket: `197686915`
+[2026-05-11 09:44 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 12:44:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4661.86000` | 🎫 Ticket: `197703435`
+[2026-05-11 09:44 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 12:44:17 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4661.87000` | 🎫 Ticket: `197703437`
+[2026-05-11 09:45 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 12:45:39 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4663.27000` | 🎫 Ticket: `197704175`
+[2026-05-11 09:45 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 12:45:39 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4663.27000` | 🎫 Ticket: `197704178`
+[2026-05-11 09:49 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 12:49:41 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4661.71000` | 💰 Resultado: `+31.20 USD` | 🎫 Ticket: `197704178`
+[2026-05-11 09:55 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 12:55:43 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4659.76000` | 💰 Resultado: `+38.60 USD` | 🎫 Ticket: `197703242`
+[2026-05-11 09:55 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 12:55:46 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4659.91000` | 💰 Resultado: `+39.20 USD` | 🎫 Ticket: `197703437`
+[2026-05-11 09:55 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 12:55:49 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4660.11000` | 💰 Resultado: `+37.00 USD` | 🎫 Ticket: `197703244`
+[2026-05-11 09:55 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 12:55:53 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4660.04000` | 💰 Resultado: `+36.40 USD` | 🎫 Ticket: `197703435`
+[2026-05-11 09:55 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 12:55:56 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4659.62000` | 💰 Resultado: `+44.40 USD` | 🎫 Ticket: `197703282`
+[2026-05-11 09:57 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 12:57:26 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4659.14000` | 💰 Resultado: `+57.60 USD` | 🎫 Ticket: `197703258`
+[2026-05-11 09:57 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 12:57:47 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4658.46000` | 💰 Resultado: `+96.20 USD` | 🎫 Ticket: `197704175`
+[2026-05-11 09:57 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.11 12:57:47 | ACCOUNT | 0
+[2026-05-11 10:17 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 13:17:32 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4660.86000` | 🎫 Ticket: `197715553`
+[2026-05-11 10:17 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 13:17:32 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4660.86000` | 🎫 Ticket: `197715555`
+[2026-05-11 10:17 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 13:17:33 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4660.88000` | 🎫 Ticket: `197715556`
+[2026-05-11 10:17 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 13:17:33 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4660.87000` | 🎫 Ticket: `197715559`
+[2026-05-11 10:21 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 13:21:50 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4661.74000` | 🎫 Ticket: `197716493`
+[2026-05-11 10:21 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 13:21:50 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4661.76000` | 🎫 Ticket: `197716495`
+[2026-05-11 10:31 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 13:31:36 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4665.48000` | 🎫 Ticket: `197720423`
+[2026-05-11 10:31 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 13:31:36 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4665.44000` | 🎫 Ticket: `197720426`
+[2026-05-11 10:31 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 13:31:36 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4665.44000` | 🎫 Ticket: `197720428`
+[2026-05-11 10:31 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 13:31:38 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4665.85000` | 🎫 Ticket: `197720435`
+[2026-05-11 10:31 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 13:31:38 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4665.93000` | 🎫 Ticket: `197720437`
+[2026-05-11 10:31 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 13:31:40 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4665.94000` | 🎫 Ticket: `197720462`
+[2026-05-11 10:39 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 13:39:31 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4661.78000` | 📉 Resultado: `-0.80 USD` | 🎫 Ticket: `197716493`
+[2026-05-11 10:39 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 13:39:35 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4661.60000` | 💰 Resultado: `+76.80 USD` | 🎫 Ticket: `197720426`
+[2026-05-11 10:51 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 13:51:33 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4664.67000` | 🎫 Ticket: `197726822`
+[2026-05-11 10:51 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 13:51:33 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4664.67000` | 🎫 Ticket: `197726823`
+[2026-05-11 10:51 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 13:51:33 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4664.67000` | 🎫 Ticket: `197726824`
+[2026-05-11 11:02 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 14:02:41 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4667.83000` | 🎫 Ticket: `197730688`
+[2026-05-11 11:29 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 14:29:39 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4670.94000` | 🎫 Ticket: `197739629`
+[2026-05-11 11:29 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 14:29:39 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4670.94000` | 🎫 Ticket: `197739630`
+[2026-05-11 11:44 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 14:44:24 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4675.23000` | 🎫 Ticket: `197746256`
+[2026-05-11 12:06 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 15:06:52 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4671.13000` | 📉 Resultado: `-205.40 USD` | 🎫 Ticket: `197715553`
+[2026-05-11 12:06 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 15:06:56 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4670.99000` | 💰 Resultado: `+84.80 USD` | 🎫 Ticket: `197746256`
+[2026-05-11 12:07 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 15:07:02 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4671.46000` | 💰 Resultado: `+75.40 USD` | 🎫 Ticket: `197746251`
+[2026-05-11 12:07 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 15:07:26 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4670.49000` | 🎫 Ticket: `197754463`
+[2026-05-11 12:11 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 15:11:46 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4669.08000` | 💰 Resultado: `+31.60 USD` | 🎫 Ticket: `197754458`
+[2026-05-11 12:11 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 15:11:50 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4668.93000` | 💰 Resultado: `+31.20 USD` | 🎫 Ticket: `197754463`
+[2026-05-11 12:11 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 15:11:54 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4668.99000` | 💰 Resultado: `+39.00 USD` | 🎫 Ticket: `197739629`
+[2026-05-11 12:11 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 15:11:58 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4669.16000` | 📉 Resultado: `-165.60 USD` | 🎫 Ticket: `197715556`
+[2026-05-11 12:12 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 15:12:03 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4668.70000` | 💰 Resultado: `+44.80 USD` | 🎫 Ticket: `197739630`
+[2026-05-11 12:12 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 15:12:15 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4668.08000` | 🎫 Ticket: `197756028`
+[2026-05-11 12:12 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 15:12:16 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4668.09000` | 🎫 Ticket: `197756030`
+[2026-05-11 12:23 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 15:23:54 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4692.24000` | 🎫 Ticket: `197765861`
+[2026-05-11 12:23 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 15:23:55 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4692.10000` | 🎫 Ticket: `197765875`
+[2026-05-11 12:24 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 15:23:59 | 📊 XAUUSD-VIPc  |  SELL  |  0.70 lotes | 💲 Precio: `4691.45000` | 🎫 Ticket: `197765999`
+[2026-05-11 12:26 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 15:26:44 | 📊 XAUUSD-VIPc  |  BUY  |  0.70 lotes | 💲 Precio: `4688.72000` | 💰 Resultado: `+197.40 USD` | 🎫 Ticket: `197765990`
+[2026-05-11 12:26 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 15:26:50 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4689.26000` | 💰 Resultado: `+62.20 USD` | 🎫 Ticket: `197765859`
+[2026-05-11 12:26 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 15:26:53 | 📊 XAUUSD-VIPc  |  BUY  |  0.70 lotes | 💲 Precio: `4688.45000` | 💰 Resultado: `+210.00 USD` | 🎫 Ticket: `197765996`
+[2026-05-11 12:27 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 15:26:59 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4688.58000` | 💰 Resultado: `+73.20 USD` | 🎫 Ticket: `197765861`
+[2026-05-11 12:27 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 15:27:02 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4688.92000` | 💰 Resultado: `+64.60 USD` | 🎫 Ticket: `197765863`
+[2026-05-11 12:28 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 15:28:08 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4691.48000` | 🎫 Ticket: `197771524`
+[2026-05-11 12:31 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 15:31:04 | 📊 XAUUSD-VIPc  |  SELL  |  0.70 lotes | 💲 Precio: `4692.32000` | 🎫 Ticket: `197773388`
+[2026-05-11 12:31 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 15:31:07 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4693.32000` | 🎫 Ticket: `197773492`
+[2026-05-11 12:31 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 15:31:07 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4693.45000` | 🎫 Ticket: `197773526`
+[2026-05-11 12:31 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 15:31:12 | 📊 XAUUSD-VIPc  |  SELL  |  0.70 lotes | 💲 Precio: `4693.42000` | 🎫 Ticket: `197773652`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:15 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4707.45000` | 📉 Resultado: `-931.60 USD` | 🎫 Ticket: `197715559`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:15 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4707.45000` | 📉 Resultado: `-913.80 USD` | 🎫 Ticket: `197716495`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:15 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4707.45000` | 📉 Resultado: `-787.20 USD` | 🎫 Ticket: `197756030`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:15 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4707.45000` | 📉 Resultado: `-793.20 USD` | 🎫 Ticket: `197730684`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:15 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4707.45000` | 📉 Resultado: `-787.40 USD` | 🎫 Ticket: `197756028`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:15 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4707.45000` | 📉 Resultado: `-830.20 USD` | 🎫 Ticket: `197720462`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:15 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4707.48000` | 📉 Resultado: `-793.00 USD` | 🎫 Ticket: `197730688`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:15 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4707.48000` | 📉 Resultado: `-787.80 USD` | 🎫 Ticket: `197756031`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:15 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4707.48000` | 📉 Resultado: `-856.20 USD` | 🎫 Ticket: `197726823`
+[2026-05-11 13:04 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 16:04:15 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4693.32000` | 🎫 Ticket: `197773517`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:15 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4707.48000` | 📉 Resultado: `-793.20 USD` | 🎫 Ticket: `197730691`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:15 | 📊   |    |  0.00 lotes | 💲 Precio: `0.00000` | 💰 Resultado: `+0.00 USD` | 🎫 Ticket: `0`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:15 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4707.48000` | 📉 Resultado: `-831.00 USD` | 🎫 Ticket: `197720463`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:15 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4707.48000` | 📉 Resultado: `-831.00 USD` | 🎫 Ticket: `197720437`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:15 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4707.48000` | 📉 Resultado: `-730.80 USD` | 🎫 Ticket: `197739631`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:15 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4707.48000` | 📉 Resultado: `-645.00 USD` | 🎫 Ticket: `197746258`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:16 | 📊 XAUUSD-VIPc  |  BUY  |  0.70 lotes | 💲 Precio: `4707.37000` | 📉 Resultado: `-1056.30 USD` | 🎫 Ticket: `197773396`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:16 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4707.37000` | 📉 Resultado: `-305.40 USD` | 🎫 Ticket: `197765875`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:16 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4707.37000` | 📉 Resultado: `-281.00 USD` | 🎫 Ticket: `197773492`
+[2026-05-11 13:04 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:04:16 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4707.37000` | 📉 Resultado: `-281.00 USD` | 🎫 Ticket: `197773517`
+[2026-05-11 13:05 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 16:05:21 | 📊 XAUUSD-VIPc  |  SELL  |  0.30 lotes | 💲 Precio: `4709.42000` | 🎫 Ticket: `197796800`
+[2026-05-11 13:05 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 16:05:22 | 📊 XAUUSD-VIPc  |  SELL  |  0.30 lotes | 💲 Precio: `4709.31000` | 🎫 Ticket: `197796812`
+[2026-05-11 13:05 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 16:05:24 | 📊 XAUUSD-VIPc  |  SELL  |  0.30 lotes | 💲 Precio: `4708.65000` | 🎫 Ticket: `197796844`
+[2026-05-11 13:05 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 16:05:26 | 📊 XAUUSD-VIPc  |  SELL  |  0.30 lotes | 💲 Precio: `4709.43000` | 🎫 Ticket: `197796863`
+[2026-05-11 13:05 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:05:58 | 📊 XAUUSD-VIPc  |  BUY  |  0.30 lotes | 💲 Precio: `4711.72000` | 📉 Resultado: `-69.00 USD` | 🎫 Ticket: `197796800`
+[2026-05-11 13:05 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:05:58 | 📊 XAUUSD-VIPc  |  BUY  |  0.30 lotes | 💲 Precio: `4711.72000` | 📉 Resultado: `-92.10 USD` | 🎫 Ticket: `197796844`
+[2026-05-11 13:06 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:05:58 | 📊 XAUUSD-VIPc  |  BUY  |  0.30 lotes | 💲 Precio: `4711.72000` | 📉 Resultado: `-68.70 USD` | 🎫 Ticket: `197796863`
+[2026-05-11 13:06 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:05:58 | 📊 XAUUSD-VIPc  |  BUY  |  0.30 lotes | 💲 Precio: `4711.72000` | 📉 Resultado: `-72.30 USD` | 🎫 Ticket: `197796812`
+[2026-05-11 13:06 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.11 16:05:58 | ACCOUNT | 0
+[2026-05-11 13:48 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 16:48:31 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4738.63000` | 🎫 Ticket: `197841373`
+[2026-05-11 13:48 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 16:48:31 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4738.68000` | 🎫 Ticket: `197841375`
+[2026-05-11 13:49 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:49:08 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4738.40000` | 💰 Resultado: `+5.60 USD` | 🎫 Ticket: `197841375`
+[2026-05-11 13:49 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 16:49:55 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4738.74000` | 📉 Resultado: `-2.20 USD` | 🎫 Ticket: `197841373`
+[2026-05-11 13:49 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.11 16:49:55 | ACCOUNT | 0
+[2026-05-11 13:54 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 16:54:55 | 📊 XAUUSD-VIPc  |  SELL  |  0.50 lotes | 💲 Precio: `4740.40000` | 🎫 Ticket: `197845116`
+[2026-05-11 13:54 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 16:54:55 | 📊 XAUUSD-VIPc  |  SELL  |  0.50 lotes | 💲 Precio: `4740.40000` | 🎫 Ticket: `197845118`
+[2026-05-11 13:54 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 16:54:55 | 📊 XAUUSD-VIPc  |  SELL  |  0.50 lotes | 💲 Precio: `4740.40000` | 🎫 Ticket: `197845119`
+[2026-05-11 13:54 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 16:54:56 | 📊 XAUUSD-VIPc  |  SELL  |  0.50 lotes | 💲 Precio: `4740.16000` | 🎫 Ticket: `197845122`
+[2026-05-11 13:56 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 16:56:42 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4742.73000` | 🎫 Ticket: `197846162`
+[2026-05-11 13:56 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 16:56:42 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4742.75000` | 🎫 Ticket: `197846163`
+[2026-05-11 13:56 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 16:56:42 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4742.76000` | 🎫 Ticket: `197846164`
+[2026-05-11 14:02 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 17:02:20 | 📊 XAUUSD-VIPc  |  BUY  |  0.50 lotes | 💲 Precio: `4732.97000` | 💰 Resultado: `+371.50 USD` | 🎫 Ticket: `197845119`
+[2026-05-11 14:02 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 17:02:23 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4733.13000` | 💰 Resultado: `+192.60 USD` | 🎫 Ticket: `197846164`
+[2026-05-11 14:02 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 17:02:27 | 📊 XAUUSD-VIPc  |  BUY  |  0.50 lotes | 💲 Precio: `4733.12000` | 💰 Resultado: `+364.00 USD` | 🎫 Ticket: `197845116`
+[2026-05-11 14:02 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 17:02:30 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4733.29000` | 💰 Resultado: `+188.80 USD` | 🎫 Ticket: `197846162`
+[2026-05-11 14:02 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 17:02:33 | 📊 XAUUSD-VIPc  |  BUY  |  0.50 lotes | 💲 Precio: `4734.10000` | 💰 Resultado: `+303.00 USD` | 🎫 Ticket: `197845122`
+[2026-05-11 14:02 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 17:02:36 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4732.74000` | 💰 Resultado: `+200.20 USD` | 🎫 Ticket: `197846163`
+[2026-05-11 14:02 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 17:02:45 | 📊 XAUUSD-VIPc  |  BUY  |  0.50 lotes | 💲 Precio: `4731.96000` | 💰 Resultado: `+422.00 USD` | 🎫 Ticket: `197845118`
+[2026-05-11 14:02 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.11 17:02:45 | ACCOUNT | 0
+[2026-05-11 14:26 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 17:26:22 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4727.01000` | 🎫 Ticket: `197866217`
+[2026-05-11 14:26 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 17:26:22 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4727.06000` | 🎫 Ticket: `197866219`
+[2026-05-11 14:26 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 17:26:23 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4726.94000` | 🎫 Ticket: `197866237`
+[2026-05-11 14:33 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 17:33:24 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4718.27000` | 💰 Resultado: `+173.60 USD` | 🎫 Ticket: `197866226`
+[2026-05-11 14:33 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 17:33:24 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4718.27000` | 💰 Resultado: `+174.80 USD` | 🎫 Ticket: `197866217`
+[2026-05-11 14:33 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 17:33:24 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4718.27000` | 💰 Resultado: `+175.80 USD` | 🎫 Ticket: `197866219`
+[2026-05-11 14:33 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 17:33:24 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4718.27000` | 💰 Resultado: `+173.40 USD` | 🎫 Ticket: `197866237`
+[2026-05-11 14:33 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.11 17:33:24 | ACCOUNT | 0
+[2026-05-11 14:41 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 17:41:47 | 📊 XAUUSD-VIPc  |  SELL  |  0.50 lotes | 💲 Precio: `4730.02000` | 🎫 Ticket: `197866301`
+[2026-05-11 14:45 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 17:45:11 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4733.12000` | 🎫 Ticket: `197877261`
+[2026-05-11 14:45 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 17:45:11 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4733.16000` | 🎫 Ticket: `197877264`
+[2026-05-11 14:47 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 17:47:22 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4728.78000` | 💰 Resultado: `+86.80 USD` | 🎫 Ticket: `197877261`
+[2026-05-11 14:57 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 17:57:54 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4724.96000` | 💰 Resultado: `+164.00 USD` | 🎫 Ticket: `197877264`
+[2026-05-11 14:57 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 17:57:54 | 📊 XAUUSD-VIPc  |  BUY  |  0.50 lotes | 💲 Precio: `4724.96000` | 💰 Resultado: `+253.00 USD` | 🎫 Ticket: `197866301`
+[2026-05-11 14:57 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.11 17:57:54 | ACCOUNT | 0
+[2026-05-11 15:07 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 18:07:32 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4727.79000` | 🎫 Ticket: `197886442`
+[2026-05-11 15:07 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 18:07:32 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4728.07000` | 🎫 Ticket: `197886446`
+[2026-05-11 15:22 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 18:22:38 | 📊 XAUUSD-VIPc  |  SELL  |  0.50 lotes | 💲 Precio: `4735.12000` | 🎫 Ticket: `197866336`
+[2026-05-11 16:01 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 19:01:02 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4732.62000` | 🎫 Ticket: `197907116`
+[2026-05-11 16:01 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 19:01:02 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4732.70000` | 🎫 Ticket: `197907118`
+[2026-05-11 17:09 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 20:09:29 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4718.34000` | 💰 Resultado: `+285.60 USD` | 🎫 Ticket: `197907116`
+[2026-05-11 17:09 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 20:09:29 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4718.34000` | 💰 Resultado: `+194.60 USD` | 🎫 Ticket: `197886446`
+[2026-05-11 17:09 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 20:09:29 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4718.34000` | 💰 Resultado: `+287.20 USD` | 🎫 Ticket: `197907118`
+[2026-05-11 17:09 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 20:09:29 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4718.34000` | 💰 Resultado: `+189.00 USD` | 🎫 Ticket: `197886442`
+[2026-05-11 17:09 UTC] 🔴 **CIERRE** | 🕐 2026.05.11 20:09:29 | 📊 XAUUSD-VIPc  |  BUY  |  0.50 lotes | 💲 Precio: `4718.34000` | 💰 Resultado: `+839.00 USD` | 🎫 Ticket: `197866336`
+[2026-05-11 17:09 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.11 20:09:29 | ACCOUNT | 0
+[2026-05-11 17:49 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 20:49:12 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4722.55000` | 🎫 Ticket: `197946889`
+[2026-05-11 17:49 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 20:49:12 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4722.55000` | 🎫 Ticket: `197946890`
+[2026-05-11 18:30 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 21:30:43 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4726.66000` | 🎫 Ticket: `197956376`
+[2026-05-11 18:30 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 21:30:44 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4726.73000` | 🎫 Ticket: `197956408`
+[2026-05-11 20:23 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 23:23:22 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4734.17000` | 🎫 Ticket: `197982696`
+[2026-05-11 20:23 UTC] 🟢 **APERTURA** | 🕐 2026.05.11 23:23:22 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4734.16000` | 🎫 Ticket: `197982697`
+[2026-05-11 22:02 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 01:02:46 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4742.47000` | 🎫 Ticket: `197990514`
+[2026-05-11 22:02 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 01:02:48 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4742.44000` | 🎫 Ticket: `197990528`
+[2026-05-11 23:04 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 02:04:51 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4751.26000` | 🎫 Ticket: `198002862`
+[2026-05-11 23:04 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 02:04:52 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4751.26000` | 🎫 Ticket: `198002863`
+[2026-05-11 23:04 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 02:04:53 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4751.26000` | 🎫 Ticket: `198002869`
+[2026-05-12 00:22 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 03:22:55 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4764.27000` | 🎫 Ticket: `198022943`
+[2026-05-12 07:06 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 10:06:03 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4692.00000` | 💰 Resultado: `+699.33 USD` | 🎫 Ticket: `197956376`
+[2026-05-12 07:06 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 10:06:03 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4692.00000` | 💰 Resultado: `+1446.00 USD` | 🎫 Ticket: `198022974`
+[2026-05-12 07:06 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 10:06:03 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4692.00000` | 💰 Resultado: `+1446.00 USD` | 🎫 Ticket: `198022964`
+[2026-05-12 07:06 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 10:06:03 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4692.00000` | 💰 Resultado: `+617.13 USD` | 🎫 Ticket: `197946889`
+[2026-05-12 07:06 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 10:06:03 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4692.00000` | 💰 Resultado: `+1185.20 USD` | 🎫 Ticket: `198002862`
+[2026-05-12 07:06 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 10:06:03 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4692.00000` | 💰 Resultado: `+849.53 USD` | 🎫 Ticket: `197982696`
+[2026-05-12 07:06 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 10:06:03 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4692.00000` | 💰 Resultado: `+1185.20 USD` | 🎫 Ticket: `198002863`
+[2026-05-12 07:06 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 10:06:03 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4692.00000` | 💰 Resultado: `+1185.20 USD` | 🎫 Ticket: `198002869`
+[2026-05-12 07:06 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.12 10:06:03 | ACCOUNT | 0
+[2026-05-12 07:27 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 10:27:08 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4697.59000` | 🎫 Ticket: `198129873`
+[2026-05-12 07:27 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 10:27:08 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4697.60000` | 🎫 Ticket: `198129874`
+[2026-05-12 07:48 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 10:48:39 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4698.54000` | 🎫 Ticket: `198135290`
+[2026-05-12 08:05 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 11:05:29 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4705.44000` | 🎫 Ticket: `198142120`
+[2026-05-12 08:05 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 11:05:29 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4705.42000` | 🎫 Ticket: `198142124`
+[2026-05-12 08:05 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 11:05:30 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4705.41000` | 🎫 Ticket: `198142128`
+[2026-05-12 08:15 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 11:15:46 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4698.24000` | 💰 Resultado: `+6.00 USD` | 🎫 Ticket: `198135290`
+[2026-05-12 08:15 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 11:15:54 | 📊   |    |  0.00 lotes | 💲 Precio: `0.00000` | 💰 Resultado: `+0.00 USD` | 🎫 Ticket: `0`
+[2026-05-12 08:15 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 11:15:54 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4698.83000` | 💰 Resultado: `+132.20 USD` | 🎫 Ticket: `198142120`
+[2026-05-12 08:15 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 11:15:54 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4698.83000` | 💰 Resultado: `+131.80 USD` | 🎫 Ticket: `198142124`
+[2026-05-12 08:15 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 11:15:54 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4698.83000` | 💰 Resultado: `+131.60 USD` | 🎫 Ticket: `198142128`
+[2026-05-12 08:15 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 11:15:54 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4698.83000` | 📉 Resultado: `-24.80 USD` | 🎫 Ticket: `198129873`
+[2026-05-12 08:16 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.12 11:15:54 | ACCOUNT | 0
+[2026-05-12 08:22 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 11:22:49 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4703.06000` | 🎫 Ticket: `198149588`
+[2026-05-12 08:22 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 11:22:49 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4703.01000` | 🎫 Ticket: `198149589`
+[2026-05-12 08:22 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 11:22:49 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4703.01000` | 🎫 Ticket: `198149591`
+[2026-05-12 08:22 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 11:22:51 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4703.03000` | 🎫 Ticket: `198149598`
+[2026-05-12 08:22 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 11:22:51 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4703.03000` | 🎫 Ticket: `198149599`
+[2026-05-12 08:39 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 11:39:13 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4699.51000` | 💰 Resultado: `+71.00 USD` | 🎫 Ticket: `198149588`
+[2026-05-12 08:39 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 11:39:16 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4699.77000` | 💰 Resultado: `+65.20 USD` | 🎫 Ticket: `198149599`
+[2026-05-12 08:39 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 11:39:19 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4700.28000` | 💰 Resultado: `+54.60 USD` | 🎫 Ticket: `198149589`
+[2026-05-12 08:39 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 11:39:22 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4700.47000` | 💰 Resultado: `+50.80 USD` | 🎫 Ticket: `198149591`
+[2026-05-12 08:39 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 11:39:25 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4700.59000` | 💰 Resultado: `+48.80 USD` | 🎫 Ticket: `198149598`
+[2026-05-12 08:39 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.12 11:39:25 | ACCOUNT | 0
+[2026-05-12 08:53 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 11:53:34 | 📊 XAUUSD-VIPc  |  SELL  |  0.30 lotes | 💲 Precio: `4702.97000` | 🎫 Ticket: `198158208`
+[2026-05-12 08:53 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 11:53:34 | 📊 XAUUSD-VIPc  |  SELL  |  0.30 lotes | 💲 Precio: `4702.97000` | 🎫 Ticket: `198158209`
+[2026-05-12 08:53 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 11:53:34 | 📊 XAUUSD-VIPc  |  SELL  |  0.30 lotes | 💲 Precio: `4702.97000` | 🎫 Ticket: `198158210`
+[2026-05-12 08:53 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 11:53:40 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4702.91000` | 🎫 Ticket: `198158236`
+[2026-05-12 09:02 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 12:02:03 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4700.84000` | 💰 Resultado: `+41.40 USD` | 🎫 Ticket: `198158236`
+[2026-05-12 09:02 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 12:02:13 | 📊 XAUUSD-VIPc  |  BUY  |  0.30 lotes | 💲 Precio: `4700.52000` | 💰 Resultado: `+73.50 USD` | 🎫 Ticket: `198158209`
+[2026-05-12 09:02 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 12:02:16 | 📊 XAUUSD-VIPc  |  BUY  |  0.30 lotes | 💲 Precio: `4700.54000` | 💰 Resultado: `+72.90 USD` | 🎫 Ticket: `198158210`
+[2026-05-12 09:02 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 12:02:34 | 📊 XAUUSD-VIPc  |  BUY  |  0.30 lotes | 💲 Precio: `4700.36000` | 💰 Resultado: `+78.30 USD` | 🎫 Ticket: `198158208`
+[2026-05-12 09:02 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.12 12:02:34 | ACCOUNT | 0
+[2026-05-12 09:39 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 12:39:47 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4700.11000` | 🎫 Ticket: `198170124`
+[2026-05-12 09:39 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 12:39:47 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4700.11000` | 🎫 Ticket: `198170125`
+[2026-05-12 09:39 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 12:39:48 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4700.13000` | 🎫 Ticket: `198170126`
+[2026-05-12 09:45 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 12:45:31 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4695.04000` | 💰 Resultado: `+101.40 USD` | 🎫 Ticket: `198170124`
+[2026-05-12 09:45 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 12:45:31 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4695.04000` | 💰 Resultado: `+101.80 USD` | 🎫 Ticket: `198170126`
+[2026-05-12 09:45 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 12:45:31 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4695.04000` | 💰 Resultado: `+101.40 USD` | 🎫 Ticket: `198170125`
+[2026-05-12 09:45 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.12 12:45:31 | ACCOUNT | 0
+[2026-05-12 09:50 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 12:50:12 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4700.77000` | 🎫 Ticket: `198174945`
+[2026-05-12 09:50 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 12:50:12 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4700.77000` | 🎫 Ticket: `198174948`
+[2026-05-12 09:50 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 12:50:12 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4700.77000` | 🎫 Ticket: `198174950`
+[2026-05-12 09:50 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 12:50:22 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4701.26000` | 🎫 Ticket: `198175001`
+[2026-05-12 09:50 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 12:50:24 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4701.21000` | 🎫 Ticket: `198175014`
+[2026-05-12 09:50 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 12:50:28 | 📊 XAUUSD-VIPc  |  SELL  |  0.01 lotes | 💲 Precio: `4701.19000` | 🎫 Ticket: `198175020`
+[2026-05-12 09:50 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 12:50:28 | 📊 XAUUSD-VIPc  |  SELL  |  0.01 lotes | 💲 Precio: `4701.19000` | 🎫 Ticket: `198175022`
+[2026-05-12 09:55 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 12:55:23 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4697.33000` | 💰 Resultado: `+68.80 USD` | 🎫 Ticket: `198174945`
+[2026-05-12 09:55 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 12:55:23 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4697.33000` | 💰 Resultado: `+68.80 USD` | 🎫 Ticket: `198174948`
+[2026-05-12 09:55 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 12:55:23 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4697.33000` | 💰 Resultado: `+77.60 USD` | 🎫 Ticket: `198175014`
+[2026-05-12 09:55 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 12:55:23 | 📊 XAUUSD-VIPc  |  BUY  |  0.01 lotes | 💲 Precio: `4697.33000` | 💰 Resultado: `+3.86 USD` | 🎫 Ticket: `198175022`
+[2026-05-12 09:55 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 12:55:23 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4697.33000` | 💰 Resultado: `+68.80 USD` | 🎫 Ticket: `198174950`
+[2026-05-12 09:55 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 12:55:23 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4697.34000` | 💰 Resultado: `+78.40 USD` | 🎫 Ticket: `198175001`
+[2026-05-12 09:55 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 12:55:23 | 📊 XAUUSD-VIPc  |  BUY  |  0.01 lotes | 💲 Precio: `4697.34000` | 💰 Resultado: `+3.85 USD` | 🎫 Ticket: `198175020`
+[2026-05-12 09:55 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.12 12:55:23 | ACCOUNT | 0
+[2026-05-12 10:07 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 13:07:00 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4702.52000` | 🎫 Ticket: `198179478`
+[2026-05-12 10:07 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 13:07:01 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4702.58000` | 🎫 Ticket: `198179479`
+[2026-05-12 10:07 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 13:07:01 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4702.60000` | 🎫 Ticket: `198179483`
+[2026-05-12 10:12 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 13:12:38 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4705.96000` | 🎫 Ticket: `198182053`
+[2026-05-12 10:12 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 13:12:38 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4705.96000` | 🎫 Ticket: `198182054`
+[2026-05-12 10:12 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 13:12:38 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4705.96000` | 🎫 Ticket: `198182055`
+[2026-05-12 10:12 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 13:12:39 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4705.96000` | 🎫 Ticket: `198182067`
+[2026-05-12 10:17 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 13:17:13 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4700.87000` | 💰 Resultado: `+33.00 USD` | 🎫 Ticket: `198179478`
+[2026-05-12 10:17 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 13:17:13 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4700.87000` | 💰 Resultado: `+101.80 USD` | 🎫 Ticket: `198182053`
+[2026-05-12 10:17 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 13:17:13 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4700.87000` | 💰 Resultado: `+101.80 USD` | 🎫 Ticket: `198182067`
+[2026-05-12 10:17 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 13:17:13 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4700.87000` | 💰 Resultado: `+34.20 USD` | 🎫 Ticket: `198179479`
+[2026-05-12 10:17 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.12 13:17:13 | ACCOUNT | 0
+[2026-05-12 11:38 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 14:38:31 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4700.62000` | 🎫 Ticket: `198218769`
+[2026-05-12 11:38 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 14:38:31 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4700.65000` | 🎫 Ticket: `198218770`
+[2026-05-12 11:38 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 14:38:32 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4700.67000` | 🎫 Ticket: `198218771`
+[2026-05-12 11:51 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 14:51:16 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4707.11000` | 🎫 Ticket: `198223390`
+[2026-05-12 11:51 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 14:51:21 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4707.54000` | 🎫 Ticket: `198223486`
+[2026-05-12 11:55 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 14:55:48 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4707.46000` | 🎫 Ticket: `198224927`
+[2026-05-12 11:55 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 14:55:50 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4707.30000` | 🎫 Ticket: `198224941`
+[2026-05-12 12:01 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:01:43 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4705.90000` | 💰 Resultado: `+31.20 USD` | 🎫 Ticket: `198224927`
+[2026-05-12 12:01 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:01:47 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4705.90000` | 💰 Resultado: `+28.00 USD` | 🎫 Ticket: `198224941`
+[2026-05-12 12:05 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:05:11 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4703.40000` | 📉 Resultado: `-55.60 USD` | 🎫 Ticket: `198218769`
+[2026-05-12 12:05 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:05:11 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4703.40000` | 📉 Resultado: `-55.00 USD` | 🎫 Ticket: `198218770`
+[2026-05-12 12:05 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:05:11 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4703.39000` | 💰 Resultado: `+74.40 USD` | 🎫 Ticket: `198223390`
+[2026-05-12 12:05 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:05:11 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4703.39000` | 💰 Resultado: `+83.00 USD` | 🎫 Ticket: `198223486`
+[2026-05-12 12:05 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:05:11 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4703.39000` | 📉 Resultado: `-54.40 USD` | 🎫 Ticket: `198218771`
+[2026-05-12 12:05 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.12 15:05:11 | ACCOUNT | 0
+[2026-05-12 12:14 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 15:14:46 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4705.63000` | 🎫 Ticket: `198233426`
+[2026-05-12 12:14 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 15:14:46 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4705.63000` | 🎫 Ticket: `198233428`
+[2026-05-12 12:14 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 15:14:46 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4705.63000` | 🎫 Ticket: `198233430`
+[2026-05-12 12:14 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 15:14:46 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4705.62000` | 🎫 Ticket: `198233432`
+[2026-05-12 12:14 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 15:14:47 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4705.63000` | 🎫 Ticket: `198233434`
+[2026-05-12 12:14 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 15:14:47 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4705.56000` | 🎫 Ticket: `198233436`
+[2026-05-12 12:18 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:17:59 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4702.93000` | 💰 Resultado: `+54.00 USD` | 🎫 Ticket: `198233434`
+[2026-05-12 12:18 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:18:02 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4703.16000` | 💰 Resultado: `+49.40 USD` | 🎫 Ticket: `198233426`
+[2026-05-12 12:27 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:27:40 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4697.66000` | 💰 Resultado: `+159.40 USD` | 🎫 Ticket: `198233430`
+[2026-05-12 12:27 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:27:43 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4696.77000` | 💰 Resultado: `+175.80 USD` | 🎫 Ticket: `198233436`
+[2026-05-12 12:27 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:27:47 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4696.91000` | 💰 Resultado: `+174.20 USD` | 🎫 Ticket: `198233432`
+[2026-05-12 12:27 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:27:53 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4696.60000` | 💰 Resultado: `+180.60 USD` | 🎫 Ticket: `198233428`
+[2026-05-12 12:27 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.12 15:27:53 | ACCOUNT | 0
+[2026-05-12 12:46 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 15:46:36 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4710.42000` | 🎫 Ticket: `198252953`
+[2026-05-12 12:46 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 15:46:36 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4710.42000` | 🎫 Ticket: `198252956`
+[2026-05-12 12:46 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 15:46:36 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4710.42000` | 🎫 Ticket: `198252957`
+[2026-05-12 12:46 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 15:46:36 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4710.42000` | 🎫 Ticket: `198252962`
+[2026-05-12 12:46 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 15:46:40 | 📊 XAUUSD-VIPc  |  SELL  |  0.01 lotes | 💲 Precio: `4709.92000` | 🎫 Ticket: `198253019`
+[2026-05-12 12:46 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 15:46:40 | 📊 XAUUSD-VIPc  |  SELL  |  0.01 lotes | 💲 Precio: `4709.92000` | 🎫 Ticket: `198253021`
+[2026-05-12 12:46 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 15:46:40 | 📊 XAUUSD-VIPc  |  SELL  |  0.01 lotes | 💲 Precio: `4709.99000` | 🎫 Ticket: `198253026`
+[2026-05-12 12:53 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:53:52 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4709.28000` | 💰 Resultado: `+22.80 USD` | 🎫 Ticket: `198252962`
+[2026-05-12 12:53 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:53:55 | 📊 XAUUSD-VIPc  |  BUY  |  0.01 lotes | 💲 Precio: `4709.08000` | 💰 Resultado: `+0.84 USD` | 🎫 Ticket: `198253021`
+[2026-05-12 12:56 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:56:14 | 📊 XAUUSD-VIPc  |  BUY  |  0.01 lotes | 💲 Precio: `4705.78000` | 💰 Resultado: `+4.14 USD` | 🎫 Ticket: `198253019`
+[2026-05-12 12:56 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:56:17 | 📊   |    |  0.00 lotes | 💲 Precio: `0.00000` | 💰 Resultado: `+0.00 USD` | 🎫 Ticket: `0`
+[2026-05-12 12:56 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:56:20 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4704.94000` | 💰 Resultado: `+109.60 USD` | 🎫 Ticket: `198252957`
+[2026-05-12 12:56 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:56:24 | 📊 XAUUSD-VIPc  |  BUY  |  0.01 lotes | 💲 Precio: `4705.01000` | 💰 Resultado: `+4.98 USD` | 🎫 Ticket: `198253026`
+[2026-05-12 12:56 UTC] 🔴 **CIERRE** | 🕐 2026.05.12 15:56:43 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4702.92000` | 💰 Resultado: `+150.00 USD` | 🎫 Ticket: `198252953`
+[2026-05-12 12:56 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.12 15:56:43 | ACCOUNT | 0
+[2026-05-12 19:44 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 22:44:35 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4708.77000` | 🎫 Ticket: `198452017`
+[2026-05-12 19:44 UTC] 🟢 **APERTURA** | 🕐 2026.05.12 22:44:35 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4708.79000` | 🎫 Ticket: `198452018`
+[2026-05-12 22:08 UTC] 🟢 **APERTURA** | 🕐 2026.05.13 01:08:48 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4714.97000` | 🎫 Ticket: `198477301`
+[2026-05-12 22:08 UTC] 🟢 **APERTURA** | 🕐 2026.05.13 01:08:48 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4714.85000` | 🎫 Ticket: `198477303`
+[2026-05-12 22:08 UTC] 🟢 **APERTURA** | 🕐 2026.05.13 01:08:48 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4714.85000` | 🎫 Ticket: `198477306`
+[2026-05-12 23:28 UTC] 🟢 **APERTURA** | 🕐 2026.05.13 02:28:27 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4720.55000` | 🎫 Ticket: `198497411`
+[2026-05-12 23:28 UTC] 🟢 **APERTURA** | 🕐 2026.05.13 02:28:27 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4720.55000` | 🎫 Ticket: `198497412`
+[2026-05-13 05:50 UTC] 🔴 **CIERRE** | 🕐 2026.05.13 08:50:25 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4698.93000` | 💰 Resultado: `+202.82 USD` | 🎫 Ticket: `198452017`
+[2026-05-13 05:50 UTC] 🔴 **CIERRE** | 🕐 2026.05.13 08:50:25 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4698.93000` | 💰 Resultado: `+318.40 USD` | 🎫 Ticket: `198477306`
+[2026-05-13 05:50 UTC] 🔴 **CIERRE** | 🕐 2026.05.13 08:50:26 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4698.92000` | 💰 Resultado: `+203.42 USD` | 🎫 Ticket: `198452018`
+[2026-05-13 05:50 UTC] 🔴 **CIERRE** | 🕐 2026.05.13 08:50:26 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4698.92000` | 💰 Resultado: `+432.60 USD` | 🎫 Ticket: `198497412`
+[2026-05-13 05:50 UTC] 🔴 **CIERRE** | 🕐 2026.05.13 08:50:26 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4698.92000` | 💰 Resultado: `+321.00 USD` | 🎫 Ticket: `198477301`
+[2026-05-13 05:50 UTC] 🔴 **CIERRE** | 🕐 2026.05.13 08:50:26 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4698.92000` | 💰 Resultado: `+432.60 USD` | 🎫 Ticket: `198497411`
+[2026-05-13 05:50 UTC] 🔴 **CIERRE** | 🕐 2026.05.13 08:50:26 | 📊 XAUUSD-VIPc  |  BUY  |  0.20 lotes | 💲 Precio: `4698.92000` | 💰 Resultado: `+318.60 USD` | 🎫 Ticket: `198477303`
+[2026-05-13 05:50 UTC] ⚪ **NO_POSITIONS** | 🕐 2026.05.13 08:50:26 | ACCOUNT | 0
+[2026-05-13 07:04 UTC] 🟢 **APERTURA** | 🕐 2026.05.13 10:04:56 | 📊 XAUUSD-VIPc  |  SELL  |  0.30 lotes | 💲 Precio: `4701.07000` | 🎫 Ticket: `198590035`
+[2026-05-13 07:04 UTC] 🟢 **APERTURA** | 🕐 2026.05.13 10:04:56 | 📊 XAUUSD-VIPc  |  SELL  |  0.30 lotes | 💲 Precio: `4701.07000` | 🎫 Ticket: `198590036`
+[2026-05-13 07:05 UTC] 🟢 **APERTURA** | 🕐 2026.05.13 10:05:00 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4700.80000` | 🎫 Ticket: `198590052`
+[2026-05-13 07:09 UTC] 🔴 **CIERRE** | 🕐 2026.05.13 10:09:06 | 📊 XAUUSD-VIPc  |  BUY  |  0.30 lotes | 💲 Precio: `4698.29000` | 💰 Resultado: `+83.40 USD` | 🎫 Ticket: `198590036`
+[2026-05-13 07:13 UTC] 🟢 **APERTURA** | 🕐 2026.05.13 10:13:20 | 📊 XAUUSD-VIPc  |  SELL  |  0.30 lotes | 💲 Precio: `4701.69000` | 🎫 Ticket: `198593668`
+[2026-05-13 07:13 UTC] 🟢 **APERTURA** | 🕐 2026.05.13 10:13:22 | 📊 XAUUSD-VIPc  |  SELL  |  0.30 lotes | 💲 Precio: `4701.55000` | 🎫 Ticket: `198593677`
+[2026-05-13 07:17 UTC] 🟢 **APERTURA** | 🕐 2026.05.13 10:17:50 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4704.12000` | 🎫 Ticket: `198595760`
+[2026-05-13 07:17 UTC] 🟢 **APERTURA** | 🕐 2026.05.13 10:17:50 | 📊 XAUUSD-VIPc  |  SELL  |  0.20 lotes | 💲 Precio: `4704.18000` | 🎫 Ticket: `198595762`
+================================================================================

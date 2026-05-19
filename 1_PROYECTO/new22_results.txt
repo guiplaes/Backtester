@@ -1,0 +1,94 @@
+Testing 8 new pairs...
+
+--- AUDUSD ---
+  Hurst:
+    M15: 0.493
+    H1: 0.471
+    H4: 0.461
+    D1: 0.423
+
+--- EURAUD ---
+  Hurst:
+    M15: 0.495
+    H1: 0.474
+    H4: 0.471
+    D1: 0.453
+
+--- EURCAD ---
+  Hurst:
+    M15: 0.482
+    H1: 0.473
+    H4: 0.481
+    D1: 0.476
+
+--- EURNZD ---
+  Hurst:
+    M15: 0.488
+    H1: 0.470
+    H4: 0.480
+    D1: 0.378
+
+--- GBPAUD ---
+  Hurst:
+    M15: 0.487
+    H1: 0.469
+    H4: 0.471
+    D1: 0.463
+
+--- GBPNZD ---
+  Hurst:
+    M15: 0.479
+    H1: 0.456
+    H4: 0.466
+    D1: 0.380
+
+--- GBPUSD ---
+  Hurst:
+    M15: 0.494
+    H1: 0.490
+    H4: 0.473
+    D1: 0.496
+
+--- NZDUSD ---
+  Hurst:
+    M15: 0.490
+    H1: 0.477
+    H4: 0.491
+    D1: 0.437
+
+========================================================================================================================
+MILLOR PER PAIR (5+ anys positius, n>=20):
+========================================================================================================================
+  GBPNZD  H1  long  SMA50    levels=-0.5/-1.0/-1.5/-2.0    stop=-5.0 | n= 727 WR85.1% Net=$ +7,688 PF1.38 y+=5/6
+  EURNZD  H4  long  SMA50    levels=-0.5/-1.0/-1.5/-2.0    stop=-4.0 | n= 195 WR88.2% Net=$ +5,872 PF1.69 y+=6/6
+  EURAUD  H1  long  SMA100   levels=-1.0/-1.5/-2.0/-2.5    stop=-5.0 | n= 286 WR80.4% Net=$ +4,511 PF1.45 y+=5/6
+  GBPAUD  H4  long  SMA200   levels=-1.0/-1.5/-2.0/-2.5    stop=-3.0 | n=  87 WR56.3% Net=$ +3,566 PF1.64 y+=5/6
+  AUDUSD  H1  short SMA500   levels=-1.0/-1.5/-2.0/-2.5    stop=-3.0 | n= 160 WR47.5% Net=$ +2,949 PF2.09 y+=5/6
+  NZDUSD  D1  short SMA50    levels=-0.5/-1.0/-1.5/-2.0    stop=-3.0 | n=  41 WR80.5% Net=$ +2,044 PF2.71 y+=5/6
+  EURCAD  H4  short SMA200   levels=-1.0/-1.5/-2.0/-2.5    stop=-5.0 | n=  42 WR81.0% Net=$ +1,661 PF1.54 y+=5/6
+
+========================================================================================================================
+TOP 20 GLOBAL:
+========================================================================================================================
+  GBPNZD  H1  long  SMA50    levels=-0.5/-1.0/-1.5/-2.0    stop=-5.0 | n= 727 WR85.1% Net=$ +7,688 PF1.38 y+=5/6
+  GBPNZD  H4  long  SMA50    levels=-0.5/-1.0/-1.5/-2.0    stop=-5.0 | n= 192 WR87.5% Net=$ +7,604 PF1.84 y+=5/6
+  GBPNZD  H1  long  SMA50    levels=-0.5/-1.0/-1.5/-2.0    stop=-4.0 | n= 737 WR84.4% Net=$ +7,595 PF1.34 y+=5/6
+  GBPNZD  H1  long  SMA100   levels=-0.5/-1.0/-1.5/-2.0    stop=-5.0 | n= 438 WR88.4% Net=$ +7,315 PF1.47 y+=6/6
+  GBPNZD  H1  long  SMA100   levels=-0.5/-1.0/-1.5/-2.0    stop=-4.0 | n= 447 WR86.4% Net=$ +6,915 PF1.43 y+=6/6
+  GBPNZD  H1  long  SMA200   levels=-0.5/-1.0/-1.5/-2.0    stop=-5.0 | n= 271 WR88.9% Net=$ +6,728 PF1.55 y+=5/6
+  GBPNZD  H1  long  SMA500   levels=-0.5/-1.0/-1.5/-2.0    stop=-5.0 | n= 134 WR92.5% Net=$ +6,637 PF1.79 y+=5/6
+  GBPNZD  H1  long  SMA200   levels=-0.5/-1.0/-1.5/-2.0    stop=-4.0 | n= 279 WR86.7% Net=$ +6,593 PF1.51 y+=5/6
+  GBPNZD  H1  short SMA100   levels=-0.5/-1.0/-1.5/-2.0    stop=-5.0 | n= 466 WR85.6% Net=$ +6,557 PF1.37 y+=5/6
+  GBPNZD  H1  long  SMA50    levels=-1.0/-1.5/-2.0/-2.5    stop=-5.0 | n= 506 WR82.0% Net=$ +6,532 PF1.42 y+=5/6
+  GBPNZD  H4  long  SMA100   levels=-0.5/-1.0/-1.5/-2.0    stop=-5.0 | n= 132 WR92.4% Net=$ +6,459 PF1.92 y+=5/6
+  GBPNZD  H4  long  SMA50    levels=-0.5/-1.0/-1.5/-2.0    stop=-4.0 | n= 193 WR87.0% Net=$ +6,443 PF1.63 y+=5/6
+  GBPNZD  H4  long  SMA50    levels=-0.5/-1.0/-1.5/-2.0    stop=-3.0 | n= 209 WR81.3% Net=$ +6,329 PF1.56 y+=5/6
+  GBPNZD  H1  short SMA100   levels=-1.0/-1.5/-2.0/-2.5    stop=-5.0 | n= 312 WR82.7% Net=$ +6,181 PF1.43 y+=5/6
+  GBPNZD  H1  long  SMA50    levels=-1.0/-1.5/-2.0/-2.5    stop=-4.0 | n= 516 WR81.0% Net=$ +6,144 PF1.36 y+=5/6
+  GBPNZD  H4  long  SMA50    levels=-1.0/-1.5/-2.0/-2.5    stop=-5.0 | n= 128 WR85.2% Net=$ +6,144 PF1.89 y+=5/6
+  GBPNZD  H1  long  SMA300   levels=-0.5/-1.0/-1.5/-2.0    stop=-5.0 | n= 204 WR90.2% Net=$ +6,125 PF1.62 y+=5/6
+  EURNZD  H4  long  SMA50    levels=-0.5/-1.0/-1.5/-2.0    stop=-4.0 | n= 195 WR88.2% Net=$ +5,872 PF1.69 y+=6/6
+  GBPNZD  H1  short SMA100   levels=-1.0/-1.5/-2.0/-2.5    stop=-4.0 | n= 338 WR77.8% Net=$ +5,833 PF1.38 y+=5/6
+  EURNZD  H4  long  SMA50    levels=-0.5/-1.0/-1.5/-2.0    stop=-5.0 | n= 194 WR88.7% Net=$ +5,831 PF1.68 y+=6/6
+
+DONE

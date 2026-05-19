@@ -1,0 +1,184 @@
+Loading + aggregating...
+  EURCHF: M15=124550 M30=62292 H1=31152 H4=8055 D1=1564
+  EURGBP: M15=124613 M30=62310 H1=31157 H4=8055 D1=1564
+  AUDNZD: M15=124533 M30=62282 H1=31151 H4=8055 D1=1564
+  USDCHF: M15=124542 M30=62287 H1=31150 H4=8054 D1=1564
+  EURJPY: M15=124585 M30=62302 H1=31157 H4=8055 D1=1564
+
+Rendiments anuals per parell:
+  EURCHF : 2021:-5.5%  2022:-4.5%  2023:-5.8%  2024:+1.4%  2025:-0.7%  2026:-1.4%  
+  EURGBP : 2021:-3.2%  2022:+5.4%  2023:-1.9%  2024:-4.6%  2025:+5.5%  2026:-0.9%  
+  AUDNZD : 2021:-1.5%  2022:+1.3%  2023:+0.6%  2024:+2.7%  2025:+5.0%  2026:+5.1%  
+  USDCHF : 2021:+0.3%  2022:+1.4%  2023:-9.2%  2024:+8.1%  2025:-12.5%  2026:-1.6%  
+  EURJPY : 2021:-0.7%  2022:+7.3%  2023:+11.2%  2024:+4.6%  2025:+13.1%  2026:-0.2%  
+
+Running sweep...
+
+--- EURCHF ---
+
+--- EURGBP ---
+
+--- AUDNZD ---
+
+--- USDCHF ---
+
+--- EURJPY ---
+
+Done in 4172s. 3279 valid configs.
+
+======================================================================================================================================================
+TOP 30 GLOBAL:
+======================================================================================================================================================
+  EURGBP  H4  SMA300  short levels=-2.0/-3.0                stop=-5.0 | n=   20 WR90.0% Net=$   +159 PF67.28 DD$    2 u=1.4
+  EURGBP  H4  SMA300  short levels=-2.0/-3.0                stop=-6.0 | n=   20 WR90.0% Net=$   +159 PF67.28 DD$    2 u=1.4
+  EURGBP  D1  SMA100  long  levels=-0.5/-1.5/-2.5           stop=-4.0 | n=   28 WR92.9% Net=$   +260 PF27.68 DD$    7 u=1.7
+  EURGBP  D1  SMA100  long  levels=-0.5/-1.5/-2.5           stop=-5.0 | n=   28 WR92.9% Net=$   +260 PF27.68 DD$    7 u=1.7
+  EURGBP  D1  SMA100  long  levels=-0.5/-1.5/-2.5           stop=-6.0 | n=   28 WR92.9% Net=$   +260 PF27.68 DD$    7 u=1.7
+  EURCHF  D1  SMA100  short levels=-0.5/-1.5/-2.5           stop=-5.0 | n=   21 WR95.2% Net=$   +244 PF21.00 DD$   12 u=1.5
+  EURCHF  D1  SMA100  short levels=-0.5/-1.5/-2.5           stop=-6.0 | n=   21 WR95.2% Net=$   +244 PF21.00 DD$   12 u=1.5
+  EURCHF  H4  SMA150  short levels=-1.5/-2.5/-3.5           stop=-6.0 | n=   36 WR91.7% Net=$   +316 PF18.53 DD$   17 u=1.6
+  EURGBP  D1  SMA100  long  levels=-0.5/-1.0/-1.5/-2.0      stop=-4.0 | n=   28 WR92.9% Net=$   +375 PF17.54 DD$   22 u=2.4
+  EURGBP  D1  SMA100  long  levels=-0.5/-1.0/-1.5/-2.0      stop=-5.0 | n=   28 WR92.9% Net=$   +375 PF17.54 DD$   22 u=2.4
+  EURGBP  D1  SMA100  long  levels=-0.5/-1.0/-1.5/-2.0      stop=-6.0 | n=   28 WR92.9% Net=$   +375 PF17.54 DD$   22 u=2.4
+  EURCHF  H4  SMA200  short levels=-1.5/-2.5/-3.5           stop=-6.0 | n=   27 WR96.3% Net=$   +281 PF17.49 DD$   17 u=1.7
+  EURCHF  D1  SMA30   short levels=-1.5/-2.5                stop=-4.0 | n=   26 WR88.5% Net=$   +253 PF16.76 DD$   13 u=1.3
+  EURCHF  D1  SMA30   short levels=-1.5/-2.5                stop=-5.0 | n=   26 WR88.5% Net=$   +253 PF16.76 DD$   13 u=1.3
+  EURCHF  D1  SMA30   short levels=-1.5/-2.5                stop=-6.0 | n=   26 WR88.5% Net=$   +253 PF16.76 DD$   13 u=1.3
+  EURCHF  D1  SMA30   short levels=-1.5/-2.5/-3.5           stop=-4.0 | n=   26 WR88.5% Net=$   +253 PF16.76 DD$   13 u=1.3
+  EURCHF  D1  SMA30   short levels=-1.5/-2.5/-3.5           stop=-5.0 | n=   26 WR88.5% Net=$   +253 PF16.76 DD$   13 u=1.3
+  EURCHF  D1  SMA30   short levels=-1.5/-2.5/-3.5           stop=-6.0 | n=   26 WR88.5% Net=$   +253 PF16.76 DD$   13 u=1.3
+  EURCHF  H4  SMA200  short levels=-1.5/-2.5                stop=-6.0 | n=   27 WR96.3% Net=$   +237 PF14.88 DD$   17 u=1.5
+  EURCHF  D1  SMA100  short levels=-0.5/-1.0/-1.5/-2.0      stop=-5.0 | n=   21 WR95.2% Net=$   +341 PF13.92 DD$   26 u=2.1
+  EURCHF  D1  SMA100  short levels=-0.5/-1.0/-1.5/-2.0      stop=-6.0 | n=   21 WR95.2% Net=$   +341 PF13.92 DD$   26 u=2.1
+  EURGBP  H4  SMA300  short levels=-2.0                     stop=-5.0 | n=   20 WR85.0% Net=$    +83 PF13.88 DD$    3 u=1.0
+  EURGBP  H4  SMA300  short levels=-2.0                     stop=-6.0 | n=   20 WR85.0% Net=$    +83 PF13.88 DD$    3 u=1.0
+  EURGBP  H4  SMA300  short levels=-1.5/-2.5/-3.5           stop=-5.0 | n=   25 WR88.0% Net=$   +235 PF12.65 DD$   14 u=1.6
+  EURGBP  H4  SMA300  short levels=-1.5/-2.5/-3.5           stop=-6.0 | n=   25 WR88.0% Net=$   +235 PF12.65 DD$   14 u=1.6
+  EURCHF  H4  SMA150  short levels=-1.5/-2.5                stop=-6.0 | n=   36 WR88.9% Net=$   +264 PF12.39 DD$   22 u=1.4
+  EURCHF  D1  SMA30   short levels=-1.5/-2.5                stop=-3.5 | n=   27 WR85.2% Net=$   +232 PF12.04 DD$   13 u=1.3
+  EURGBP  H4  SMA200  long  levels=-1.5/-2.5/-3.5           stop=-5.0 | n=   36 WR97.2% Net=$   +211 PF11.84 DD$   19 u=1.3
+  EURGBP  H4  SMA200  long  levels=-1.5/-2.5/-3.5           stop=-6.0 | n=   36 WR97.2% Net=$   +211 PF11.84 DD$   19 u=1.3
+  EURGBP  H4  SMA200  long  levels=-1.5/-2.5                stop=-5.0 | n=   36 WR97.2% Net=$   +203 PF11.41 DD$   19 u=1.2
+
+======================================================================================================================================================
+MILLOR PER PAIR + TF:
+======================================================================================================================================================
+  EURGBP  H4  SMA300  short levels=-2.0/-3.0                stop=-5.0 | n=   20 WR90.0% Net=$   +159 PF67.28 DD$    2 u=1.4
+  EURGBP  D1  SMA100  long  levels=-0.5/-1.5/-2.5           stop=-4.0 | n=   28 WR92.9% Net=$   +260 PF27.68 DD$    7 u=1.7
+  EURCHF  D1  SMA100  short levels=-0.5/-1.5/-2.5           stop=-5.0 | n=   21 WR95.2% Net=$   +244 PF21.00 DD$   12 u=1.5
+  EURCHF  H4  SMA150  short levels=-1.5/-2.5/-3.5           stop=-6.0 | n=   36 WR91.7% Net=$   +316 PF18.53 DD$   17 u=1.6
+  EURCHF  H1  SMA800  short levels=-2.0/-3.0                stop=-6.0 | n=   22 WR86.4% Net=$   +157 PF 7.83 DD$   11 u=1.4
+  EURGBP  H1  SMA800  long  levels=-2.0                     stop=-5.0 | n=   28 WR85.7% Net=$   +127 PF 6.98 DD$   12 u=1.0
+  EURJPY  D1  SMA50   long  levels=-0.5/-1.5/-2.5           stop=-3.5 | n=   31 WR96.8% Net=$  +7560 PF 5.85 DD$ 1560 u=1.6
+  EURJPY  H1  SMA800  long  levels=-1.5/-2.5/-3.5           stop=-5.0 | n=   26 WR88.5% Net=$  +6093 PF 5.40 DD$  746 u=1.7
+  USDCHF  D1  SMA150  short levels=-0.5/-1.0/-1.5/-2.0      stop=-3.5 | n=   28 WR64.3% Net=$   +553 PF 5.03 DD$  137 u=1.9
+  EURCHF  M30 SMA1200 short levels=-2.0/-3.0                stop=-6.0 | n=   29 WR75.9% Net=$   +143 PF 4.78 DD$   14 u=1.4
+  EURJPY  H4  SMA300  long  levels=-0.5/-1.5/-2.5           stop=-5.0 | n=   37 WR97.3% Net=$  +6668 PF 4.63 DD$ 1835 u=1.6
+  AUDNZD  D1  SMA100  long  levels=-0.5/-1.5/-2.5           stop=-3.5 | n=   20 WR90.0% Net=$   +190 PF 4.16 DD$   60 u=1.7
+  EURGBP  M30 SMA1200 long  levels=-2.0/-3.0                stop=-4.0 | n=   37 WR73.0% Net=$   +152 PF 4.04 DD$   17 u=1.2
+  EURJPY  M30 SMA1200 long  levels=-2.0/-3.0                stop=-5.0 | n=   29 WR79.3% Net=$  +4723 PF 2.58 DD$ 1484 u=1.6
+  EURGBP  M15 SMA1600 long  levels=-2.0                     stop=-6.0 | n=   66 WR65.2% Net=$   +114 PF 2.49 DD$   22 u=1.0
+  EURJPY  M15 SMA1600 long  levels=-1.5/-2.5/-3.5           stop=-6.0 | n=   89 WR73.0% Net=$  +7623 PF 2.11 DD$ 3655 u=1.7
+  USDCHF  H4  SMA200  short levels=-1.5/-2.5                stop=-4.0 | n=   25 WR72.0% Net=$   +146 PF 2.07 DD$   78 u=1.6
+  EURCHF  M15 SMA1600 short levels=-2.0/-3.0                stop=-6.0 | n=   51 WR72.5% Net=$    +82 PF 1.74 DD$   22 u=1.4
+  AUDNZD  H4  SMA300  long  levels=-0.5/-1.5/-2.5           stop=-4.0 | n=   39 WR92.3% Net=$   +110 PF 1.70 DD$   78 u=1.5
+  AUDNZD  M30 SMA200  long  levels=-2.0/-3.0                stop=-6.0 | n=  165 WR75.2% Net=$   +183 PF 1.61 DD$   75 u=1.4
+  AUDNZD  H1  SMA100  long  levels=-2.0/-3.0                stop=-6.0 | n=  148 WR73.6% Net=$   +146 PF 1.53 DD$   80 u=1.4
+  AUDNZD  M15 SMA400  long  levels=-2.0                     stop=-6.0 | n=  183 WR71.0% Net=$   +109 PF 1.46 DD$   56 u=1.0
+  USDCHF  H1  SMA200  short levels=-0.5/-1.5/-2.5           stop=-5.0 | n=  245 WR85.7% Net=$   +234 PF 1.31 DD$  283 u=1.7
+
+======================================================================================================================================================
+ANY-PER-ANY top 10 (robustesa):
+======================================================================================================================================================
+
+EURGBP H4 SMA300 short levels=-2.0/-3.0 stop=-5.0 | TOTAL n=   20 WR90.0% Net=$   +159 PF67.28 DD$    2 u=1.4
+  Anys positius: 6/6
+  + 2021: n=   3 WR100.0% Net=$    +26
+  + 2022: n=   4 WR 75.0% Net=$    +47
+  + 2023: n=   2 WR 50.0% Net=$     +7
+  + 2024: n=   5 WR100.0% Net=$    +40
+  + 2025: n=   5 WR100.0% Net=$    +33
+  + 2026: n=   1 WR100.0% Net=$     +7
+
+EURGBP H4 SMA300 short levels=-2.0/-3.0 stop=-6.0 | TOTAL n=   20 WR90.0% Net=$   +159 PF67.28 DD$    2 u=1.4
+  Anys positius: 6/6
+  + 2021: n=   3 WR100.0% Net=$    +26
+  + 2022: n=   4 WR 75.0% Net=$    +47
+  + 2023: n=   2 WR 50.0% Net=$     +7
+  + 2024: n=   5 WR100.0% Net=$    +40
+  + 2025: n=   5 WR100.0% Net=$    +33
+  + 2026: n=   1 WR100.0% Net=$     +7
+
+EURGBP D1 SMA100 long levels=-0.5/-1.5/-2.5 stop=-4.0 | TOTAL n=   28 WR92.9% Net=$   +260 PF27.68 DD$    7 u=1.7
+  Anys positius: 6/6
+  + 2021: n=   5 WR100.0% Net=$    +80
+  + 2022: n=   5 WR100.0% Net=$    +76
+  + 2023: n=   6 WR 83.3% Net=$    +24
+  + 2024: n=   7 WR 85.7% Net=$    +31
+  + 2025: n=   3 WR100.0% Net=$    +30
+  + 2026: n=   2 WR100.0% Net=$    +18
+
+EURGBP D1 SMA100 long levels=-0.5/-1.5/-2.5 stop=-5.0 | TOTAL n=   28 WR92.9% Net=$   +260 PF27.68 DD$    7 u=1.7
+  Anys positius: 6/6
+  + 2021: n=   5 WR100.0% Net=$    +80
+  + 2022: n=   5 WR100.0% Net=$    +76
+  + 2023: n=   6 WR 83.3% Net=$    +24
+  + 2024: n=   7 WR 85.7% Net=$    +31
+  + 2025: n=   3 WR100.0% Net=$    +30
+  + 2026: n=   2 WR100.0% Net=$    +18
+
+EURGBP D1 SMA100 long levels=-0.5/-1.5/-2.5 stop=-6.0 | TOTAL n=   28 WR92.9% Net=$   +260 PF27.68 DD$    7 u=1.7
+  Anys positius: 6/6
+  + 2021: n=   5 WR100.0% Net=$    +80
+  + 2022: n=   5 WR100.0% Net=$    +76
+  + 2023: n=   6 WR 83.3% Net=$    +24
+  + 2024: n=   7 WR 85.7% Net=$    +31
+  + 2025: n=   3 WR100.0% Net=$    +30
+  + 2026: n=   2 WR100.0% Net=$    +18
+
+EURCHF D1 SMA100 short levels=-0.5/-1.5/-2.5 stop=-5.0 | TOTAL n=   21 WR95.2% Net=$   +244 PF21.00 DD$   12 u=1.5
+  Anys positius: 5/6
+  + 2021: n=   1 WR100.0% Net=$     +8
+  + 2022: n=   5 WR100.0% Net=$    +83
+  + 2023: n=   5 WR100.0% Net=$    +57
+  - 2024: n=   2 WR 50.0% Net=$     -9
+  + 2025: n=   5 WR100.0% Net=$    +87
+  + 2026: n=   3 WR100.0% Net=$    +19
+
+EURCHF D1 SMA100 short levels=-0.5/-1.5/-2.5 stop=-6.0 | TOTAL n=   21 WR95.2% Net=$   +244 PF21.00 DD$   12 u=1.5
+  Anys positius: 5/6
+  + 2021: n=   1 WR100.0% Net=$     +8
+  + 2022: n=   5 WR100.0% Net=$    +83
+  + 2023: n=   5 WR100.0% Net=$    +57
+  - 2024: n=   2 WR 50.0% Net=$     -9
+  + 2025: n=   5 WR100.0% Net=$    +87
+  + 2026: n=   3 WR100.0% Net=$    +19
+
+EURCHF H4 SMA150 short levels=-1.5/-2.5/-3.5 stop=-6.0 | TOTAL n=   36 WR91.7% Net=$   +316 PF18.53 DD$   17 u=1.6
+  Anys positius: 5/6
+  - 2021: n=   1 WR  0.0% Net=$     -1
+  + 2022: n=   9 WR 88.9% Net=$   +114
+  + 2023: n=   8 WR100.0% Net=$    +77
+  + 2024: n=  10 WR 90.0% Net=$    +63
+  + 2025: n=   7 WR100.0% Net=$    +56
+  + 2026: n=   1 WR100.0% Net=$     +6
+
+EURGBP D1 SMA100 long levels=-0.5/-1.0/-1.5/-2.0 stop=-4.0 | TOTAL n=   28 WR92.9% Net=$   +375 PF17.54 DD$   22 u=2.4
+  Anys positius: 6/6
+  + 2021: n=   5 WR100.0% Net=$   +100
+  + 2022: n=   5 WR100.0% Net=$   +122
+  + 2023: n=   6 WR 83.3% Net=$    +30
+  + 2024: n=   7 WR 85.7% Net=$    +42
+  + 2025: n=   3 WR100.0% Net=$    +40
+  + 2026: n=   2 WR100.0% Net=$    +41
+
+EURGBP D1 SMA100 long levels=-0.5/-1.0/-1.5/-2.0 stop=-5.0 | TOTAL n=   28 WR92.9% Net=$   +375 PF17.54 DD$   22 u=2.4
+  Anys positius: 6/6
+  + 2021: n=   5 WR100.0% Net=$   +100
+  + 2022: n=   5 WR100.0% Net=$   +122
+  + 2023: n=   6 WR 83.3% Net=$    +30
+  + 2024: n=   7 WR 85.7% Net=$    +42
+  + 2025: n=   3 WR100.0% Net=$    +40
+  + 2026: n=   2 WR100.0% Net=$    +41
+
+DONE

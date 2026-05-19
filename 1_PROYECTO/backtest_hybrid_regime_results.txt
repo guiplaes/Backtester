@@ -1,0 +1,163 @@
+Loading...
+Aggregating + indicators...
+Running hybrid backtests...
+
+
+########################################################################################################################
+# XAUUSD HYBRID (regime-based)
+########################################################################################################################
+
+XAUUSD entry=M30 regime_tf=H4
+  Regime distribution: BULL=19750 BEAR=7878 LATERAL=18620 NEUTRAL=12852
+  donch_lb=10 donch_sl=1.5 mr_sl=2.0 | n= 442 WR36.9% Net=$+1413 PF1.23 DD$506
+  donch_lb=10 donch_sl=1.5 mr_sl=3.0 | n= 438 WR38.6% Net=$+1352 PF1.22 DD$506
+  donch_lb=10 donch_sl=2.0 mr_sl=2.0 | n= 422 WR38.6% Net=$+1532 PF1.25 DD$520
+  donch_lb=10 donch_sl=2.0 mr_sl=3.0 | n= 418 WR40.4% Net=$+1475 PF1.24 DD$520
+  donch_lb=20 donch_sl=1.5 mr_sl=2.0 | n= 374 WR43.0% Net=$+943 PF1.17 DD$713
+  donch_lb=20 donch_sl=1.5 mr_sl=3.0 | n= 370 WR44.9% Net=$+888 PF1.16 DD$713
+  donch_lb=20 donch_sl=2.0 mr_sl=2.0 | n= 365 WR43.8% Net=$+987 PF1.18 DD$742
+  donch_lb=20 donch_sl=2.0 mr_sl=3.0 | n= 361 WR45.7% Net=$+932 PF1.16 DD$742
+
+XAUUSD entry=M30 regime_tf=D1
+  Regime distribution: BULL=21006 BEAR=5094 LATERAL=22543 NEUTRAL=10457
+  donch_lb=10 donch_sl=1.5 mr_sl=2.0 | n= 436 WR42.9% Net=$+1679 PF1.35 DD$505
+  donch_lb=10 donch_sl=1.5 mr_sl=3.0 | n= 430 WR44.7% Net=$+1493 PF1.30 DD$505
+  donch_lb=10 donch_sl=2.0 mr_sl=2.0 | n= 428 WR43.7% Net=$+1665 PF1.35 DD$520
+  donch_lb=10 donch_sl=2.0 mr_sl=3.0 | n= 422 WR45.5% Net=$+1479 PF1.30 DD$520
+  donch_lb=20 donch_sl=1.5 mr_sl=2.0 | n= 393 WR47.1% Net=$+1240 PF1.28 DD$521
+  donch_lb=20 donch_sl=1.5 mr_sl=3.0 | n= 387 WR49.1% Net=$+1155 PF1.26 DD$521
+  donch_lb=20 donch_sl=2.0 mr_sl=2.0 | n= 391 WR47.1% Net=$+1128 PF1.25 DD$536
+  donch_lb=20 donch_sl=2.0 mr_sl=3.0 | n= 385 WR49.1% Net=$+1043 PF1.23 DD$536
+
+XAUUSD entry=H1 regime_tf=H4
+  Regime distribution: BULL=9879 BEAR=3939 LATERAL=9316 NEUTRAL=6431
+  donch_lb=10 donch_sl=1.5 mr_sl=2.0 | n= 260 WR41.2% Net=$+1325 PF1.26 DD$762
+  donch_lb=10 donch_sl=1.5 mr_sl=3.0 | n= 259 WR41.7% Net=$+1146 PF1.22 DD$762
+  donch_lb=10 donch_sl=2.0 mr_sl=2.0 | n= 256 WR41.8% Net=$+1301 PF1.26 DD$805
+  donch_lb=10 donch_sl=2.0 mr_sl=3.0 | n= 255 WR42.4% Net=$+1121 PF1.21 DD$805
+  donch_lb=20 donch_sl=1.5 mr_sl=2.0 | n= 216 WR48.6% Net=$+1741 PF1.36 DD$656
+  donch_lb=20 donch_sl=1.5 mr_sl=3.0 | n= 214 WR49.5% Net=$+1578 PF1.32 DD$659
+  donch_lb=20 donch_sl=2.0 mr_sl=2.0 | n= 215 WR48.8% Net=$+1729 PF1.36 DD$676
+  donch_lb=20 donch_sl=2.0 mr_sl=3.0 | n= 213 WR49.8% Net=$+1565 PF1.32 DD$699
+
+XAUUSD entry=H1 regime_tf=D1
+  Regime distribution: BULL=10506 BEAR=2548 LATERAL=11278 NEUTRAL=5233
+  donch_lb=10 donch_sl=1.5 mr_sl=2.0 | n= 241 WR46.9% Net=$+1584 PF1.44 DD$587
+  donch_lb=10 donch_sl=1.5 mr_sl=3.0 | n= 241 WR48.1% Net=$+1483 PF1.40 DD$587
+  donch_lb=10 donch_sl=2.0 mr_sl=2.0 | n= 239 WR47.3% Net=$+1507 PF1.41 DD$607
+  donch_lb=10 donch_sl=2.0 mr_sl=3.0 | n= 239 WR48.5% Net=$+1406 PF1.37 DD$607
+  donch_lb=20 donch_sl=1.5 mr_sl=2.0 | n= 208 WR52.4% Net=$+1434 PF1.39 DD$656
+  donch_lb=20 donch_sl=1.5 mr_sl=3.0 | n= 208 WR53.4% Net=$+1317 PF1.35 DD$656
+  donch_lb=20 donch_sl=2.0 mr_sl=2.0 | n= 207 WR52.7% Net=$+1392 PF1.37 DD$676
+  donch_lb=20 donch_sl=2.0 mr_sl=3.0 | n= 207 WR53.6% Net=$+1274 PF1.33 DD$676
+
+XAUUSD entry=H4 regime_tf=D1
+  Regime distribution: BULL=2838 BEAR=689 LATERAL=3049 NEUTRAL=1420
+  donch_lb=10 donch_sl=1.5 mr_sl=2.0 | n=  72 WR45.8% Net=$+1024 PF1.36 DD$1075
+  donch_lb=10 donch_sl=1.5 mr_sl=3.0 | n=  72 WR48.6% Net=$+1042 PF1.36 DD$1075
+  donch_lb=10 donch_sl=2.0 mr_sl=2.0 | n=  71 WR46.5% Net=$+968 PF1.33 DD$1107
+  donch_lb=10 donch_sl=2.0 mr_sl=3.0 | n=  71 WR49.3% Net=$+985 PF1.34 DD$1107
+  donch_lb=20 donch_sl=1.5 mr_sl=2.0 | n=  66 WR47.0% Net=$+338 PF1.11 DD$789
+  donch_lb=20 donch_sl=1.5 mr_sl=3.0 | n=  66 WR50.0% Net=$+355 PF1.12 DD$789
+
+########################################################################################################################
+# EURUSD HYBRID (regime-based)
+########################################################################################################################
+
+EURUSD entry=M30 regime_tf=H4
+  Regime distribution: BULL=13891 BEAR=13312 LATERAL=21268 NEUTRAL=13888
+
+EURUSD entry=M30 regime_tf=D1
+  Regime distribution: BULL=16399 BEAR=12990 LATERAL=20100 NEUTRAL=12870
+
+EURUSD entry=H1 regime_tf=H4
+  Regime distribution: BULL=6946 BEAR=6656 LATERAL=10634 NEUTRAL=6944
+
+EURUSD entry=H1 regime_tf=D1
+  Regime distribution: BULL=8200 BEAR=6495 LATERAL=10050 NEUTRAL=6435
+
+EURUSD entry=H4 regime_tf=D1
+  Regime distribution: BULL=2122 BEAR=1680 LATERAL=2597 NEUTRAL=1660
+
+======================================================================================================================================================
+TOP HYBRID CONFIGS:
+======================================================================================================================================================
+  XAUUSD  H1  /D1  donch=10/1.5 mr=2.0 | n= 241 WR46.9% Net=$+1584 PF1.44 DD$587
+  XAUUSD  H1  /D1  donch=10/2.0 mr=2.0 | n= 239 WR47.3% Net=$+1507 PF1.41 DD$607
+  XAUUSD  H1  /D1  donch=10/1.5 mr=3.0 | n= 241 WR48.1% Net=$+1483 PF1.40 DD$587
+  XAUUSD  H1  /D1  donch=20/1.5 mr=2.0 | n= 208 WR52.4% Net=$+1434 PF1.39 DD$656
+  XAUUSD  H1  /D1  donch=20/2.0 mr=2.0 | n= 207 WR52.7% Net=$+1392 PF1.37 DD$676
+  XAUUSD  H1  /D1  donch=10/2.0 mr=3.0 | n= 239 WR48.5% Net=$+1406 PF1.37 DD$607
+  XAUUSD  H1  /H4  donch=20/1.5 mr=2.0 | n= 216 WR48.6% Net=$+1741 PF1.36 DD$656
+  XAUUSD  H4  /D1  donch=10/1.5 mr=3.0 | n=  72 WR48.6% Net=$+1042 PF1.36 DD$1075
+  XAUUSD  H1  /H4  donch=20/2.0 mr=2.0 | n= 215 WR48.8% Net=$+1729 PF1.36 DD$676
+  XAUUSD  H4  /D1  donch=10/1.5 mr=2.0 | n=  72 WR45.8% Net=$+1024 PF1.36 DD$1075
+  XAUUSD  M30 /D1  donch=10/1.5 mr=2.0 | n= 436 WR42.9% Net=$+1679 PF1.35 DD$505
+  XAUUSD  M30 /D1  donch=10/2.0 mr=2.0 | n= 428 WR43.7% Net=$+1665 PF1.35 DD$520
+  XAUUSD  H1  /D1  donch=20/1.5 mr=3.0 | n= 208 WR53.4% Net=$+1317 PF1.35 DD$656
+  XAUUSD  H4  /D1  donch=10/2.0 mr=3.0 | n=  71 WR49.3% Net=$+985 PF1.34 DD$1107
+  XAUUSD  H1  /D1  donch=20/2.0 mr=3.0 | n= 207 WR53.6% Net=$+1274 PF1.33 DD$676
+  XAUUSD  H4  /D1  donch=10/2.0 mr=2.0 | n=  71 WR46.5% Net=$+968 PF1.33 DD$1107
+  XAUUSD  H1  /H4  donch=20/1.5 mr=3.0 | n= 214 WR49.5% Net=$+1578 PF1.32 DD$659
+  XAUUSD  H1  /H4  donch=20/2.0 mr=3.0 | n= 213 WR49.8% Net=$+1565 PF1.32 DD$699
+  XAUUSD  M30 /D1  donch=10/1.5 mr=3.0 | n= 430 WR44.7% Net=$+1493 PF1.30 DD$505
+  XAUUSD  M30 /D1  donch=10/2.0 mr=3.0 | n= 422 WR45.5% Net=$+1479 PF1.30 DD$520
+
+======================================================================================================================================================
+BREAKDOWN PER TYPE (top 5):
+======================================================================================================================================================
+
+XAUUSD H1/D1 donch=10/1.5 mr=2.0
+  TOTAL: n= 241 WR46.9% Net=$+1584 PF1.44 DD$587
+    donchian: n=137 WR 35.0% Net=$  +1496 PF1.47
+    meanrev: n=104 WR 62.5% Net=$    +88 PF1.20
+
+XAUUSD H1/D1 donch=10/2.0 mr=2.0
+  TOTAL: n= 239 WR47.3% Net=$+1507 PF1.41 DD$607
+    donchian: n=135 WR 35.6% Net=$  +1420 PF1.44
+    meanrev: n=104 WR 62.5% Net=$    +88 PF1.20
+
+XAUUSD H1/D1 donch=10/1.5 mr=3.0
+  TOTAL: n= 241 WR48.1% Net=$+1483 PF1.40 DD$587
+    donchian: n=137 WR 35.0% Net=$  +1496 PF1.47
+    meanrev: n=104 WR 65.4% Net=$    -13 PF0.98
+
+XAUUSD H1/D1 donch=20/1.5 mr=2.0
+  TOTAL: n= 208 WR52.4% Net=$+1434 PF1.39 DD$656
+    donchian: n=108 WR 43.5% Net=$  +1344 PF1.42
+    meanrev: n=100 WR 62.0% Net=$    +90 PF1.21
+
+XAUUSD H1/D1 donch=20/2.0 mr=2.0
+  TOTAL: n= 207 WR52.7% Net=$+1392 PF1.37 DD$676
+    donchian: n=107 WR 43.9% Net=$  +1302 PF1.40
+    meanrev: n=100 WR 62.0% Net=$    +90 PF1.21
+
+======================================================================================================================================================
+ANY-PER-ANY top 3:
+======================================================================================================================================================
+
+XAUUSD H1/D1 donch=10/1.5 mr=2.0
+  2021: n= 34 WR 35.3% Net=$   -139 (donch:13 meanrev:21)
+  2022: n= 36 WR 36.1% Net=$    -32 (donch:24 meanrev:12)
+  2023: n= 48 WR 50.0% Net=$    +42 (donch:31 meanrev:17)
+  2024: n= 58 WR 46.6% Net=$    +43 (donch:25 meanrev:33)
+  2025: n= 58 WR 55.2% Net=$  +1123 (donch:37 meanrev:21)
+  2026: n=  7 WR 71.4% Net=$   +548 (donch:7 meanrev:0)
+
+XAUUSD H1/D1 donch=10/2.0 mr=2.0
+  2021: n= 34 WR 35.3% Net=$   -141 (donch:13 meanrev:21)
+  2022: n= 35 WR 37.1% Net=$    -26 (donch:23 meanrev:12)
+  2023: n= 48 WR 50.0% Net=$    +26 (donch:31 meanrev:17)
+  2024: n= 57 WR 47.4% Net=$    +40 (donch:24 meanrev:33)
+  2025: n= 58 WR 55.2% Net=$  +1081 (donch:37 meanrev:21)
+  2026: n=  7 WR 71.4% Net=$   +528 (donch:7 meanrev:0)
+
+XAUUSD H1/D1 donch=10/1.5 mr=3.0
+  2021: n= 34 WR 41.2% Net=$   -118 (donch:13 meanrev:21)
+  2022: n= 36 WR 36.1% Net=$    -37 (donch:24 meanrev:12)
+  2023: n= 48 WR 50.0% Net=$    +29 (donch:31 meanrev:17)
+  2024: n= 58 WR 48.3% Net=$     -6 (donch:25 meanrev:33)
+  2025: n= 58 WR 55.2% Net=$  +1067 (donch:37 meanrev:21)
+  2026: n=  7 WR 71.4% Net=$   +548 (donch:7 meanrev:0)
+
+DONE

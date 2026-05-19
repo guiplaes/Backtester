@@ -1,0 +1,943 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<title>Trader Brain · Flow</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #05070d;
+    --surface: rgba(255,255,255,0.025);
+    --surface-hi: rgba(255,255,255,0.055);
+    --border: #1a2334;
+    --border-hi: #2a3a55;
+    --fg: #e8edf5;
+    --fg-mute: #8a95ad;
+    --fg-dim: #515c77;
+    --cyan: #38bdf8;
+    --violet: #a78bfa;
+    --amber: #fbbf24;
+    --emerald: #34d399;
+    --rose: #fb7185;
+    --slate: #64748b;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    background:
+      radial-gradient(ellipse 100% 70% at 50% 0%, #0b1730 0%, var(--bg) 60%, #000 100%),
+      var(--bg);
+    color: var(--fg);
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow: hidden;
+  }
+  body { display: flex; flex-direction: column; }
+
+  /* HEADER */
+  header {
+    display: flex; align-items: center; gap: 28px;
+    padding: 12px 24px;
+    background: rgba(5,7,13,0.88);
+    backdrop-filter: blur(16px) saturate(150%);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 700; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  }
+  .brand .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--emerald); box-shadow: 0 0 14px var(--emerald);
+    animation: brandPulse 2.5s ease-in-out infinite;
+  }
+  @keyframes brandPulse { 0%,100%{ opacity:1 } 50% { opacity:0.4 } }
+  .brand .sub { font-size: 10px; font-weight: 400; color: var(--fg-mute); letter-spacing: 0.04em; text-transform: none; }
+
+  .kpis { display: flex; gap: 26px; margin-left: auto; align-items: center; }
+  .kpi { display: flex; flex-direction: column; min-width: 60px; }
+  .kpi .lbl { font-size: 9px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--fg-dim); font-weight: 600; }
+  .kpi .val { font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; margin-top: 2px; line-height: 1.1; }
+  .kpi .sub { font-size: 10px; color: var(--fg-mute); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+  .kpi.c-cyan .val { color: var(--cyan); }
+  .kpi.c-violet .val { color: var(--violet); }
+  .kpi.c-emerald .val { color: var(--emerald); }
+  .kpi.c-amber .val { color: var(--amber); }
+  .kpi.c-rose .val { color: var(--rose); }
+
+  .conn {
+    padding: 5px 12px; border-radius: 999px; font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(5,7,13,0.7); border: 1px solid var(--border);
+    letter-spacing: 0.03em;
+  }
+  .conn.ok { border-color: var(--emerald); color: var(--emerald); }
+  .conn.bad { border-color: var(--rose); color: var(--rose); }
+
+  /* CANVAS */
+  main {
+    flex: 1; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    padding: 12px;
+    background:
+      radial-gradient(circle 600px at 22% 35%, rgba(167,139,250,0.04) 0%, transparent 60%),
+      radial-gradient(circle 800px at 82% 55%, rgba(56,189,248,0.04) 0%, transparent 60%);
+  }
+  svg#canvas { width: 100%; height: 100%; display: block; }
+
+  /* ROW LABELS (background) */
+  .row-label {
+    fill: var(--fg-dim); font-size: 10px; letter-spacing: 0.22em;
+    text-transform: uppercase; font-weight: 600;
+    font-family: 'Inter', sans-serif;
+  }
+  .row-divider {
+    stroke: var(--border); stroke-width: 1; stroke-dasharray: 2 6;
+    opacity: 0.3;
+  }
+
+  /* NODES */
+  .node rect.bg {
+    fill: var(--surface);
+    stroke: var(--border);
+    stroke-width: 1;
+    rx: 14; ry: 14;
+    transition: all 0.5s cubic-bezier(.22,.61,.36,1);
+  }
+  .node.idle rect.bg { opacity: 0.92; }
+  .node.monitoring rect.bg {
+    stroke: color-mix(in srgb, var(--node-color) 35%, var(--border));
+    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--node-color) 18%, transparent));
+    animation: monitoringBreath 4s ease-in-out infinite;
+  }
+  @keyframes monitoringBreath {
+    0%,100% { filter: drop-shadow(0 0 8px color-mix(in srgb, var(--node-color) 15%, transparent)); }
+    50% { filter: drop-shadow(0 0 18px color-mix(in srgb, var(--node-color) 30%, transparent)); }
+  }
+  .node.recently-active rect.bg {
+    stroke: color-mix(in srgb, var(--node-color) 55%, var(--border));
+    filter: drop-shadow(0 0 14px color-mix(in srgb, var(--node-color) 32%, transparent));
+  }
+  .node.active rect.bg {
+    fill: var(--surface-hi);
+    stroke: var(--node-color);
+    stroke-width: 1.8;
+    filter:
+      drop-shadow(0 0 24px var(--node-color))
+      drop-shadow(0 0 55px color-mix(in srgb, var(--node-color) 55%, transparent));
+    animation: activeBreath 1.6s ease-in-out infinite;
+  }
+  @keyframes activeBreath {
+    0%,100% { filter: drop-shadow(0 0 22px var(--node-color)) drop-shadow(0 0 50px color-mix(in srgb, var(--node-color) 50%, transparent)); }
+    50% { filter: drop-shadow(0 0 40px var(--node-color)) drop-shadow(0 0 80px color-mix(in srgb, var(--node-color) 65%, transparent)); }
+  }
+  .node.flash rect.bg { animation: flashBg 1.3s ease-out; }
+  @keyframes flashBg {
+    0% { fill: var(--node-color); stroke: var(--node-color); filter: drop-shadow(0 0 40px var(--node-color)); }
+    100% { fill: var(--surface); stroke: var(--border); filter: none; }
+  }
+
+  .node rect.accent { rx: 3; ry: 3; transition: all 0.3s; opacity: 0.55; }
+  .node.monitoring rect.accent { opacity: 0.85; filter: drop-shadow(0 0 5px var(--node-color)); }
+  .node.active rect.accent { opacity: 1; filter: drop-shadow(0 0 12px var(--node-color)); }
+
+  .node text.title { fill: var(--fg); font-size: 14px; font-weight: 600; letter-spacing: 0.06em; pointer-events: none; }
+  .node text.sub { fill: var(--fg-mute); font-size: 11.5px; pointer-events: none; }
+  .node text.val { fill: var(--fg); font-size: 12px; font-family: 'JetBrains Mono', monospace; pointer-events: none; }
+  .node text.val.accent { fill: var(--node-color); font-weight: 500; }
+  .node text.val.mute { fill: var(--fg-mute); }
+  .node text.val.big { font-size: 18px; font-weight: 600; }
+  .node text.status-line { fill: var(--fg-dim); font-size: 10.5px; font-family: 'JetBrains Mono', monospace; pointer-events: none; }
+  .node.active text.status-line { fill: var(--node-color); }
+
+  .node circle.dot { r: 4.5; fill: var(--fg-dim); transition: all 0.3s; }
+  .node.monitoring circle.dot { fill: var(--node-color); box-shadow: 0 0 6px var(--node-color); }
+  .node.active circle.dot { fill: var(--node-color); filter: drop-shadow(0 0 8px var(--node-color)); animation: dotPulse 1.3s infinite; }
+  @keyframes dotPulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+  /* EDGES */
+  .edge { fill: none; stroke: #2d3b54; stroke-width: 1.4; transition: all 0.4s; }
+  .edge.dashed { stroke-dasharray: 4 5; opacity: 0.5; }
+  .edge.active { stroke: var(--cyan); stroke-width: 2.2; filter: drop-shadow(0 0 8px var(--cyan)); opacity: 1; }
+  .edge.reject { stroke: var(--rose); stroke-width: 2.2; filter: drop-shadow(0 0 8px var(--rose)); }
+  .pulse-particle { filter: drop-shadow(0 0 10px currentColor); }
+
+  .edge-label-bg {
+    fill: rgba(5,7,13,0.88); stroke: var(--border);
+    stroke-width: 0.5; rx: 5; ry: 5;
+  }
+  .edge-label {
+    font-size: 10.5px; font-family: 'JetBrains Mono', monospace;
+    fill: var(--fg-mute); pointer-events: none;
+  }
+
+  /* FOOTER */
+  footer {
+    flex-shrink: 0;
+    background: rgba(5,7,13,0.95);
+    border-top: 1px solid var(--border);
+    padding: 10px 24px;
+    max-height: 130px; overflow-y: auto;
+    font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+    color: var(--fg-mute);
+  }
+  footer .hdr {
+    color: var(--fg-dim); font-size: 9px; text-transform: uppercase;
+    letter-spacing: 0.16em; margin-bottom: 6px; font-weight: 600;
+    font-family: 'Inter', sans-serif;
+  }
+  footer .line { padding: 2px 0 2px 10px; border-left: 2px solid transparent; margin-left: -2px; line-height: 1.5; }
+  footer .line.new { border-left-color: var(--cyan); animation: lineFade 2.2s; }
+  @keyframes lineFade { 0%{background:rgba(56,189,248,0.1);border-left-color:var(--cyan)} 100%{background:transparent;border-left-color:transparent} }
+  footer .line .ts { color: var(--fg-dim); margin-right: 12px; }
+
+  footer::-webkit-scrollbar { width: 6px; }
+  footer::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 3px; }
+  footer::-webkit-scrollbar-track { background: transparent; }
+
+  .legend {
+    position: absolute; right: 18px; top: 18px;
+    padding: 10px 14px; border-radius: 10px;
+    background: rgba(5,7,13,0.85); border: 1px solid var(--border);
+    backdrop-filter: blur(8px); font-size: 10.5px;
+    z-index: 10;
+  }
+  .legend .row { display: flex; align-items: center; gap: 8px; margin: 3px 0; }
+  .legend .sw { width: 10px; height: 10px; border-radius: 3px; box-shadow: 0 0 6px currentColor; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <span class="dot"></span>
+    Trader&nbsp;Brain
+    <span class="sub">v3 · XAUUSD · Real-time flow</span>
+  </div>
+  <div class="kpis">
+    <div class="kpi c-amber"><span class="lbl">Price</span><span class="val" id="kpi-price">—</span></div>
+    <div class="kpi c-violet"><span class="lbl">Regime</span><span class="val" id="kpi-regime">—</span></div>
+    <div class="kpi c-cyan"><span class="lbl">Zones</span><span class="val" id="kpi-zones">—</span></div>
+    <div class="kpi c-emerald"><span class="lbl">Equity</span><span class="val" id="kpi-equity">—</span><span class="sub" id="kpi-balance"></span></div>
+    <div class="kpi c-rose"><span class="lbl">DD</span><span class="val" id="kpi-dd">—</span></div>
+    <div class="kpi"><span class="lbl">Positions</span><span class="val" id="kpi-pos">—</span></div>
+    <div class="kpi"><span class="lbl">Signal</span><span class="val" id="kpi-signal">—</span><span class="sub" id="kpi-signal-sub"></span></div>
+    <span class="conn" id="conn">● connecting</span>
+    <span style="display:flex;gap:4px;margin-left:10px;">
+      <a href="/" style="padding:4px 10px;background:#131823;border:1px solid #1e2634;border-radius:5px;color:#6b7789;text-decoration:none;font-size:12px;">Dashboard</a>
+      <a href="/trades" style="padding:4px 10px;background:#131823;border:1px solid #1e2634;border-radius:5px;color:#6b7789;text-decoration:none;font-size:12px;">📚 Trades</a>
+      <a href="/narratives" style="padding:4px 10px;background:#131823;border:1px solid #1e2634;border-radius:5px;color:#6b7789;text-decoration:none;font-size:12px;">📖 Narratives</a>
+      <a href="/flow" style="padding:4px 10px;background:rgba(74,158,255,0.1);border:1px solid #4a9eff;border-radius:5px;color:#e8edf5;text-decoration:none;font-size:12px;">Flow</a>
+    </span>
+  </div>
+</header>
+
+<main>
+  <div class="legend">
+    <div class="row"><span class="sw" style="background:var(--cyan);color:var(--cyan)"></span>Inputs</div>
+    <div class="row"><span class="sw" style="background:var(--amber);color:var(--amber)"></span>Intake</div>
+    <div class="row"><span class="sw" style="background:var(--violet);color:var(--violet)"></span>LLM brains</div>
+    <div class="row"><span class="sw" style="background:var(--slate);color:var(--slate)"></span>State hub</div>
+    <div class="row"><span class="sw" style="background:var(--rose);color:var(--rose)"></span>Guard</div>
+    <div class="row"><span class="sw" style="background:var(--emerald);color:var(--emerald)"></span>Execution</div>
+    <div class="row" style="margin-top:6px;border-top:1px solid var(--border);padding-top:6px;">
+      <span style="color:var(--fg-dim); font-family:'JetBrains Mono',monospace; font-size:9.5px;">solid · main flow</span>
+    </div>
+    <div class="row">
+      <span style="color:var(--fg-dim); font-family:'JetBrains Mono',monospace; font-size:9.5px;">dashed · read access</span>
+    </div>
+  </div>
+
+  <svg id="canvas" viewBox="0 0 1660 780" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0 0 L10 5 L0 10 z" fill="#3a4a68"/>
+      </marker>
+    </defs>
+
+    <!-- Row dividers -->
+    <g>
+      <line class="row-divider" x1="30" y1="210" x2="1630" y2="210"/>
+      <line class="row-divider" x1="30" y1="430" x2="1630" y2="430"/>
+      <text class="row-label" x="40" y="204" text-anchor="start">INPUTS</text>
+      <text class="row-label" x="40" y="224" text-anchor="start">DECISION PATH</text>
+      <text class="row-label" x="40" y="446" text-anchor="start">KNOWLEDGE PATH</text>
+    </g>
+
+    <!-- ═══════ EDGES (main flow + cross-reads) ═══════ -->
+    <g id="edges">
+      <!-- Row 1: TG -> SIGNAL (routed over top to avoid crossing TRADINGVIEW) -->
+      <path id="e-telegram-signal_state" class="edge" d="M 160 60 L 160 35 L 680 35 L 680 60" marker-end="url(#arr)"/>
+
+      <!-- Row 1 -> Row 2: SIGNAL -> EVENT_DETECTOR -->
+      <path id="e-signal_state-event_detector" class="edge" d="M 680 180 L 680 195 L 170 195 L 170 245" marker-end="url(#arr)"/>
+      <!-- TV -> EVENT_DETECTOR -->
+      <path id="e-tradingview-event_detector" class="edge" d="M 400 180 L 400 200 L 170 200 L 170 245" marker-end="url(#arr)"/>
+
+      <!-- Row 1 -> Row 3: TV -> ZONE_LIFECYCLE -->
+      <path id="e-tradingview-zone_lifecycle" class="edge dashed" d="M 320 180 L 320 220 L 30 220 L 30 530 L 40 530" marker-end="url(#arr)"/>
+      <!-- TV -> INDICATOR (bars for prompt) -->
+      <path id="e-tradingview-indicator" class="edge dashed" d="M 410 180 L 420 215 L 420 460" marker-end="url(#arr)"/>
+
+      <!-- Row 2: EVENT_DET -> EXECUTOR -->
+      <path id="e-event_detector-executor" class="edge" d="M 310 325 L 350 325" marker-end="url(#arr)"/>
+      <!-- EXECUTOR -> VALIDATOR -->
+      <path id="e-executor-validator" class="edge" d="M 650 325 L 690 325" marker-end="url(#arr)"/>
+      <!-- VALIDATOR -> FAST_ENGINE -->
+      <path id="e-validator-fast_engine" class="edge" d="M 880 335 L 920 335" marker-end="url(#arr)"/>
+      <!-- VALIDATOR -> EA (direct close/move_SL) routes above fast_engine -->
+      <path id="e-validator-ea_mt5" class="edge" d="M 870 245 L 870 225 L 1150 225 L 1150 245" marker-end="url(#arr)"/>
+      <!-- FAST_ENGINE -> EA -->
+      <path id="e-fast_engine-ea_mt5" class="edge" d="M 1100 335 L 1140 335" marker-end="url(#arr)"/>
+
+      <!-- Row 3 -> ZONE_STATE -->
+      <path id="e-zone_lifecycle-zone_state" class="edge" d="M 310 530 L 960 530 L 960 540" marker-end="url(#arr)"/>
+      <path id="e-indicator-reviewer" class="edge" d="M 580 530 L 620 530" marker-end="url(#arr)"/>
+      <path id="e-reviewer-zone_state" class="edge" d="M 900 530 L 930 530" marker-end="url(#arr)"/>
+
+      <!-- ZONE_STATE -> TRADINGVIEW (draw shapes back) -->
+      <path id="e-zone_state-tradingview" class="edge dashed" d="M 980 450 L 980 45 L 320 45 L 320 65" marker-end="url(#arr)"/>
+
+      <!-- Row 3 -> Row 2: ZONE_STATE -> EXECUTOR (big cross-read, important) -->
+      <path id="e-zone_state-executor" class="edge" d="M 1060 450 L 1060 400 L 500 400 L 500 385" marker-end="url(#arr)"/>
+
+      <!-- Cross-reads (dashed, subtle) -->
+      <!-- ZONE_STATE -> EVENT_DETECTOR (reads zones for approaching) -->
+      <path id="e-zone_state-event_detector" class="edge dashed" d="M 1100 450 L 1100 420 L 200 420 L 200 405" marker-end="url(#arr)"/>
+      <!-- SIG_STATE -> EXECUTOR (reads direction, BE) -->
+      <path id="e-signal_state-executor" class="edge dashed" d="M 620 180 L 620 190 L 520 190 L 520 245" marker-end="url(#arr)"/>
+      <!-- SIG_STATE -> VALIDATOR (reads BE, closing) -->
+      <path id="e-signal_state-validator" class="edge dashed" d="M 680 180 L 780 180 L 780 245" marker-end="url(#arr)"/>
+    </g>
+
+    <!-- ═══════ EDGE LABELS ═══════ -->
+    <g>
+      <g transform="translate(420,27)"><rect class="edge-label-bg" x="-50" y="-8" width="100" height="16"/><text class="edge-label" x="0" y="4" text-anchor="middle">signal · cerramos</text></g>
+      <g transform="translate(330,330)"><rect class="edge-label-bg" x="-22" y="-8" width="44" height="16"/><text class="edge-label" x="0" y="4" text-anchor="middle">trigger</text></g>
+      <g transform="translate(670,330)"><rect class="edge-label-bg" x="-22" y="-8" width="44" height="16"/><text class="edge-label" x="0" y="4" text-anchor="middle">action</text></g>
+      <g transform="translate(1010,221)"><rect class="edge-label-bg" x="-45" y="-8" width="90" height="16"/><text class="edge-label" x="0" y="4" text-anchor="middle">close · move SL</text></g>
+      <g transform="translate(1120,331)"><rect class="edge-label-bg" x="-22" y="-8" width="44" height="16"/><text class="edge-label" x="0" y="4" text-anchor="middle">market</text></g>
+      <g transform="translate(160,430)"><rect class="edge-label-bg" x="-48" y="-8" width="96" height="16"/><text class="edge-label" x="0" y="4" text-anchor="middle">touch · invalidate</text></g>
+      <g transform="translate(500,408)"><rect class="edge-label-bg" x="-58" y="-8" width="116" height="16"/><text class="edge-label" x="0" y="4" text-anchor="middle">zones · regime · coverage</text></g>
+      <g transform="translate(650,35)"><rect class="edge-label-bg" x="-42" y="-8" width="84" height="16"/><text class="edge-label" x="0" y="4" text-anchor="middle">draw shapes</text></g>
+    </g>
+
+    <!-- ═══════ NODES ═══════ -->
+    <g id="nodes">
+
+      <!-- ROW 1: INPUTS -->
+      <g class="node idle" id="n-telegram" data-color="cyan">
+        <rect class="bg" x="40" y="60" width="240" height="120"/>
+        <rect class="accent" x="40" y="60" width="4" height="120" fill="var(--cyan)"/>
+        <text class="title" x="60" y="92">TELEGRAM</text>
+        <text class="sub" x="60" y="112">TrueTrading · FXMarkets news</text>
+        <text class="val mute" x="60" y="138" id="v-telegram-last">waiting…</text>
+        <text class="status-line" x="60" y="168" id="st-telegram">○ idle</text>
+        <circle class="dot" cx="262" cy="76"/>
+      </g>
+
+      <g class="node idle" id="n-tradingview" data-color="cyan">
+        <rect class="bg" x="300" y="60" width="240" height="120"/>
+        <rect class="accent" x="300" y="60" width="4" height="120" fill="var(--cyan)"/>
+        <text class="title" x="320" y="92">TRADINGVIEW</text>
+        <text class="sub" x="320" y="112">CDP 9223 · OHLCV M5</text>
+        <text class="val accent big" x="320" y="146" id="v-tv-price">—</text>
+        <text class="status-line" x="320" y="168" id="st-tradingview">○ idle</text>
+        <circle class="dot" cx="522" cy="76"/>
+      </g>
+
+      <g class="node idle" id="n-signal_state" data-color="amber">
+        <rect class="bg" x="560" y="60" width="240" height="120"/>
+        <rect class="accent" x="560" y="60" width="4" height="120" fill="var(--amber)"/>
+        <text class="title" x="580" y="92">SIGNAL STATE</text>
+        <text class="sub" x="580" y="112">direction · BE · closing</text>
+        <text class="val accent big" x="580" y="144" id="v-sig-dir">—</text>
+        <text class="val mute" x="580" y="162" id="v-sig-flags"></text>
+        <text class="status-line" x="580" y="176" id="st-signal_state">○ idle</text>
+        <circle class="dot" cx="782" cy="76"/>
+      </g>
+
+      <!-- SYSTEM PULSE split: left = external market context, right = system pulse -->
+      <g class="node idle" id="n-external" data-color="cyan">
+        <rect class="bg" x="820" y="60" width="400" height="120"/>
+        <rect class="accent" x="820" y="60" width="4" height="120" fill="var(--cyan)"/>
+        <text class="title" x="840" y="92">EXTERNAL</text>
+        <text class="sub" x="840" y="112">DXY · 10Y · D1 · sessió</text>
+        <text class="val" x="840" y="136" id="v-ext-dxy">DXY —</text>
+        <text class="val mute" x="840" y="152" id="v-ext-yield">10Y —</text>
+        <text class="val mute" x="840" y="168" id="v-ext-d1">D1 —</text>
+      </g>
+
+      <g class="node idle" id="n-active-cycle" data-color="slate">
+        <rect class="bg" x="1240" y="60" width="380" height="120"/>
+        <rect class="accent" x="1240" y="60" width="4" height="120" fill="var(--slate)"/>
+        <text class="title" x="1260" y="92">SYSTEM PULSE</text>
+        <text class="sub" x="1260" y="112">sessió · ATR% · BOS</text>
+        <text class="val" x="1260" y="138" id="v-pulse-main">—</text>
+        <text class="val mute" x="1260" y="156" id="v-pulse-last">—</text>
+        <text class="val mute" x="1260" y="172" id="v-pulse-gate">—</text>
+      </g>
+
+      <!-- ROW 2: DECISION PATH -->
+      <g class="node idle" id="n-event_detector" data-color="amber">
+        <rect class="bg" x="40" y="245" width="270" height="160"/>
+        <rect class="accent" x="40" y="245" width="4" height="160" fill="var(--amber)"/>
+        <text class="title" x="60" y="277">EVENT DETECTOR</text>
+        <text class="sub" x="60" y="297">queue · cooldown · heartbeat</text>
+        <text class="val" x="60" y="324" id="v-event-queue">queue 0 / 50</text>
+        <text class="val mute" x="60" y="342" id="v-event-last">last: —</text>
+        <text class="val mute" x="60" y="360" id="v-event-age"></text>
+        <text class="val mute" x="60" y="378" id="v-event-throttle">cooldown 60s · hb 300s</text>
+        <text class="status-line" x="60" y="395" id="st-event_detector">● monitoring</text>
+        <circle class="dot" cx="292" cy="261"/>
+      </g>
+
+      <g class="node idle" id="n-executor" data-color="violet">
+        <rect class="bg" x="350" y="245" width="300" height="140"/>
+        <rect class="accent" x="350" y="245" width="4" height="140" fill="var(--violet)"/>
+        <text class="title" x="370" y="277">EXECUTOR</text>
+        <text class="sub" x="370" y="297">event-driven · DeepSeek reasoner</text>
+        <text class="val accent big" x="370" y="328" id="v-exec-action">—</text>
+        <text class="val" x="370" y="348" id="v-exec-conf">conf —</text>
+        <text class="val mute" x="370" y="365" id="v-exec-mental">mental · —</text>
+        <text class="val accent" x="370" y="378" id="v-exec-mult"></text>
+        <text class="status-line" x="370" y="395" id="st-executor">○ idle</text>
+        <circle class="dot" cx="632" cy="261"/>
+      </g>
+
+      <g class="node idle" id="n-validator" data-color="rose">
+        <rect class="bg" x="690" y="245" width="190" height="140"/>
+        <rect class="accent" x="690" y="245" width="4" height="140" fill="var(--rose)"/>
+        <text class="title" x="710" y="277">VALIDATOR</text>
+        <text class="sub" x="710" y="297">anti-bug + soft DD</text>
+        <text class="val mute" x="710" y="322">dir · mult · BE</text>
+        <text class="val mute" x="710" y="338" id="v-validator-dd">DD soft —</text>
+        <text class="val accent" x="710" y="358" id="v-validator-last">ok</text>
+        <text class="status-line" x="710" y="378" id="st-validator">○ idle</text>
+        <circle class="dot" cx="862" cy="261"/>
+      </g>
+
+      <g class="node idle" id="n-fast_engine" data-color="emerald">
+        <rect class="bg" x="920" y="245" width="180" height="160"/>
+        <rect class="accent" x="920" y="245" width="4" height="160" fill="var(--emerald)"/>
+        <text class="title" x="940" y="277">FAST ENGINE</text>
+        <text class="sub" x="940" y="297">reflex 1× · pure code</text>
+        <text class="val mute" x="940" y="324" id="v-fast-base">base —</text>
+        <text class="val mute" x="940" y="342" id="v-fast-mults">S/M/W —</text>
+        <text class="val mute" x="940" y="360" id="v-fast-avg">avg —</text>
+        <text class="status-line" x="940" y="395" id="st-fast_engine">○ idle</text>
+        <circle class="dot" cx="1082" cy="261"/>
+      </g>
+
+      <g class="node idle" id="n-ea_mt5" data-color="emerald">
+        <rect class="bg" x="1140" y="245" width="480" height="160"/>
+        <rect class="accent" x="1140" y="245" width="4" height="160" fill="var(--emerald)"/>
+        <text class="title" x="1160" y="277">EA MT5 · BROKER</text>
+        <text class="sub" x="1160" y="297">ClaudeBrainEA_v1 · OANDA</text>
+        <text class="val accent big" x="1160" y="326" id="v-ea-equity">—</text>
+        <text class="val" x="1160" y="345" id="v-ea-balance">bal —</text>
+        <text class="val" x="1160" y="361" id="v-ea-dd">DD —</text>
+        <text class="val" x="1160" y="377" id="v-ea-pos">— positions · float —</text>
+        <text class="status-line" x="1160" y="395" id="st-ea_mt5">○ idle</text>
+        <circle class="dot" cx="1602" cy="261"/>
+        <!-- Equity/DD progress bar -->
+        <rect x="1430" y="340" width="170" height="6" fill="rgba(255,255,255,0.06)" rx="3"/>
+        <rect id="v-ea-dd-fill" x="1430" y="340" width="0" height="6" fill="url(#ddGrad)" rx="3"/>
+      </g>
+      <defs>
+        <linearGradient id="ddGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#34d399"/>
+          <stop offset="60%" stop-color="#fbbf24"/>
+          <stop offset="100%" stop-color="#fb7185"/>
+        </linearGradient>
+      </defs>
+
+      <!-- ROW 3: KNOWLEDGE PATH -->
+      <g class="node idle" id="n-zone_lifecycle" data-color="amber">
+        <rect class="bg" x="40" y="465" width="270" height="255"/>
+        <rect class="accent" x="40" y="465" width="4" height="255" fill="var(--amber)"/>
+        <text class="title" x="60" y="497">ZONE LIFECYCLE</text>
+        <text class="sub" x="60" y="517">touches · rejects · stale</text>
+        <text class="val mute" x="60" y="542">pure code · no LLM</text>
+        <text class="val mute" x="60" y="560" id="v-zl-last"></text>
+        <text class="status-line" x="60" y="710" id="st-zone_lifecycle">● monitoring</text>
+        <circle class="dot" cx="292" cy="481"/>
+      </g>
+
+      <g class="node idle" id="n-indicator" data-color="violet">
+        <rect class="bg" x="350" y="465" width="230" height="255"/>
+        <rect class="accent" x="350" y="465" width="4" height="255" fill="var(--violet)"/>
+        <text class="title" x="370" y="497">INDICATOR</text>
+        <text class="sub" x="370" y="517">cada 15 min · gate</text>
+        <text class="val accent" x="370" y="542" id="v-ind-regime">—</text>
+        <text class="val mute" x="370" y="560" id="v-ind-gate"></text>
+        <text class="val mute" x="370" y="576" id="v-ind-age"></text>
+        <text class="status-line" x="370" y="710" id="st-indicator">○ idle</text>
+        <circle class="dot" cx="562" cy="481"/>
+      </g>
+
+      <g class="node idle" id="n-reviewer" data-color="violet">
+        <rect class="bg" x="620" y="465" width="280" height="255"/>
+        <rect class="accent" x="620" y="465" width="4" height="255" fill="var(--violet)"/>
+        <text class="title" x="640" y="497">ZONE REVIEWER</text>
+        <text class="sub" x="640" y="517">estabilitat / tabula rasa</text>
+        <text class="val accent" x="640" y="542" id="v-rev-bias">—</text>
+        <text class="val mute" x="640" y="560" id="v-rev-status"></text>
+        <text class="val mute" x="640" y="576" id="v-rev-age"></text>
+        <text class="status-line" x="640" y="710" id="st-reviewer">○ idle</text>
+        <circle class="dot" cx="882" cy="481"/>
+      </g>
+
+      <g class="node idle" id="n-zone_state" data-color="slate">
+        <rect class="bg" x="930" y="440" width="690" height="280"/>
+        <rect class="accent" x="930" y="440" width="4" height="280" fill="var(--slate)"/>
+        <text class="title" x="950" y="472">ZONE STATE · knowledge hub</text>
+        <text class="sub" x="950" y="492">brain_zone_state.json · read by 5 components</text>
+
+        <!-- Zone state details: regime, bias, coverage + zones list -->
+        <g id="zs-content">
+          <text class="val" x="950" y="518" id="v-zs-meta">— · bias — · — zones</text>
+          <text class="val mute" x="950" y="536" id="v-zs-coverage">coverage: —</text>
+          <text class="val mute" x="950" y="554" id="v-zs-gap"></text>
+          <!-- Zones list (dynamic) -->
+          <g id="v-zs-zones"></g>
+        </g>
+        <text class="status-line" x="950" y="710" id="st-zone_state">● monitoring</text>
+        <circle class="dot" cx="1602" cy="456"/>
+      </g>
+
+    </g>
+  </svg>
+</main>
+
+<!-- NEW 2026-05-04: Live monitoring panels (asymmetric risk + approach states + level monitor) -->
+<div id="live-panels" style="
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin: 12px;
+  padding: 12px;
+  background: var(--bg, #0e1422);
+  border: 1px solid var(--border, #1f2a40);
+  border-radius: 8px;
+">
+  <div>
+    <h3 style="margin:0 0 8px;font-size:12px;color:#ffaa00">⚠ ASYMMETRIC RISK</h3>
+    <div id="ar-primary" style="font-size:14px;font-weight:bold;color:#ffaa00;margin-bottom:4px">—</div>
+    <div style="font-size:11px;color:#aaa;margin-bottom:4px">
+      Bull squeeze: <span id="ar-bull">—</span> · Bear continuation: <span id="ar-bear">—</span>
+    </div>
+    <div id="ar-reasoning" style="font-size:10px;color:#888;line-height:1.3">—</div>
+  </div>
+  <div>
+    <h3 style="margin:0 0 8px;font-size:12px;color:#22cc55">🎯 APPROACH STATES (live institucional)</h3>
+    <div id="approach-list" style="font-size:11px;font-family:monospace;color:#aaa">—</div>
+  </div>
+  <div>
+    <h3 style="margin:0 0 8px;font-size:12px;color:#cc2255">🔥 LEVEL MONITOR (FastEngine)</h3>
+    <div id="level-list" style="font-size:10px;font-family:monospace;color:#aaa;max-height:120px;overflow-y:auto">—</div>
+  </div>
+</div>
+
+<footer id="log">
+  <div class="hdr">Activity stream</div>
+</footer>
+
+<script>
+(() => {
+  const NS = 'http://www.w3.org/2000/svg';
+  const COLORS = { cyan: '#38bdf8', violet: '#a78bfa', amber: '#fbbf24', emerald: '#34d399', rose: '#fb7185', slate: '#64748b' };
+
+  document.querySelectorAll('.node').forEach(g => {
+    const c = g.dataset.color || 'cyan';
+    g.style.setProperty('--node-color', COLORS[c]);
+  });
+
+  const tsNow = () => Date.now();
+  const lastActive = {};
+  const workingSince = {};
+  const activeTimers = {};
+  const recentTimers = {};
+  const monitoringSet = new Set();
+
+  function ageFmt(s) {
+    if (s == null || isNaN(s)) return '—';
+    if (s < 5) return 'now';
+    if (s < 60) return Math.floor(s) + 's';
+    if (s < 3600) return Math.floor(s/60) + 'm';
+    return Math.floor(s/3600) + 'h';
+  }
+  function num(n, d=2) {
+    if (n == null || isNaN(n)) return '—';
+    return Number(n).toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+  }
+  function txt(id, v, mark='—') {
+    const el = document.getElementById(id);
+    if (el) el.textContent = (v == null || v === '') ? mark : v;
+  }
+
+  function refreshStatus(id) {
+    const el = document.getElementById('st-' + id);
+    if (!el) return;
+    if (workingSince[id]) {
+      el.textContent = '● working · ' + Math.floor((tsNow() - workingSince[id]) / 1000) + 's';
+    } else if (lastActive[id]) {
+      const age = tsNow() - lastActive[id];
+      if (age < 3000) el.textContent = '● active';
+      else el.textContent = '○ ' + ageFmt(age/1000) + ' ago';
+    } else {
+      el.textContent = monitoringSet.has(id) ? '● monitoring' : '○ idle';
+    }
+  }
+  setInterval(() => {
+    ['telegram','tradingview','signal_state','event_detector','zone_lifecycle','indicator','reviewer','validator','fast_engine','executor','zone_state','ea_mt5'].forEach(refreshStatus);
+  }, 1000);
+
+  function setMonitoring(id, on) {
+    const g = document.getElementById('n-' + id);
+    if (!g) return;
+    if (on) { monitoringSet.add(id); g.classList.add('monitoring'); }
+    else { monitoringSet.delete(id); g.classList.remove('monitoring'); }
+    refreshStatus(id);
+  }
+
+  function setComponent(id, state, replay) {
+    const g = document.getElementById('n-' + id);
+    if (!g) return;
+    if (state === 'working' || state === 'connected') {
+      if (!replay) {
+        g.classList.remove('idle'); g.classList.remove('recently-active'); g.classList.add('active');
+        clearTimeout(activeTimers[id]);
+        activeTimers[id] = setTimeout(() => {
+          g.classList.remove('active'); g.classList.add('recently-active');
+          clearTimeout(recentTimers[id]);
+          recentTimers[id] = setTimeout(() => g.classList.remove('recently-active'), 15000);
+        }, 45000);
+      }
+      workingSince[id] = tsNow();
+    } else if (state === 'done') {
+      lastActive[id] = tsNow();
+      workingSince[id] = null;
+      if (!replay) {
+        clearTimeout(activeTimers[id]);
+        activeTimers[id] = setTimeout(() => {
+          g.classList.remove('active'); g.classList.add('recently-active');
+          clearTimeout(recentTimers[id]);
+          recentTimers[id] = setTimeout(() => g.classList.remove('recently-active'), 15000);
+        }, 1400);
+      }
+    } else if (state === 'idle') {
+      workingSince[id] = null;
+      if (!replay) { clearTimeout(activeTimers[id]); g.classList.remove('active'); }
+    }
+    refreshStatus(id);
+  }
+
+  function flashComponent(id, kind, replay) {
+    lastActive[id] = tsNow();
+    refreshStatus(id);
+    if (replay) return;
+    const g = document.getElementById('n-' + id);
+    if (!g) return;
+    g.classList.add('flash');
+    setTimeout(() => g.classList.remove('flash'), 1300);
+  }
+
+  function pulseEdge(from, to, kind, replay) {
+    const id = 'e-' + from + '-' + to;
+    const path = document.getElementById(id);
+    if (!path) return;
+    if (replay) return;
+    const cls = kind === 'reject' ? 'reject' : 'active';
+    path.classList.add(cls);
+    setTimeout(() => path.classList.remove(cls), 1400);
+
+    const c = document.createElementNS(NS, 'circle');
+    c.setAttribute('r', 4);
+    c.setAttribute('class', 'pulse-particle');
+    c.setAttribute('fill', kind === 'reject' ? COLORS.rose : COLORS.cyan);
+    c.style.color = kind === 'reject' ? COLORS.rose : COLORS.cyan;
+    const animate = document.createElementNS(NS, 'animateMotion');
+    animate.setAttribute('dur', '1.3s');
+    animate.setAttribute('repeatCount', '1');
+    animate.setAttribute('rotate', 'auto');
+    const mpath = document.createElementNS(NS, 'mpath');
+    mpath.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#' + id);
+    animate.appendChild(mpath);
+    c.appendChild(animate);
+    document.getElementById('edges').appendChild(c);
+    animate.beginElement();
+    setTimeout(() => c.remove(), 1400);
+  }
+
+  function applyState(data) {
+    const z = data.zones || {};
+    const s = data.signal || {};
+    const ea = data.ea || {};
+    const ex = data.executor_last || {};
+    const el = data.event_last || {};
+
+    // KPIs
+    txt('kpi-regime', z.regime);
+    txt('kpi-zones', z.count);
+
+    // NEW 2026-05-04: Live monitoring panels
+    // — Asymmetric Risk
+    const ar = z.asymmetric_risk;
+    if (ar) {
+      const colorMap = {BULL_SQUEEZE: '#22cc55', BEAR_CONTINUATION: '#cc2255', BOTH: '#ffaa00', NEITHER: '#888'};
+      const pc = ar.primary_concern || '?';
+      const arEl = document.getElementById('ar-primary');
+      if (arEl) {
+        arEl.textContent = pc;
+        arEl.style.color = colorMap[pc] || '#ffaa00';
+      }
+      txt('ar-bull', ar.bull_squeeze_risk || '—');
+      txt('ar-bear', ar.bear_continuation_risk || '—');
+      txt('ar-reasoning', (ar.reasoning || '').substring(0, 280));
+    } else {
+      txt('ar-primary', '—');
+      txt('ar-bull', '—');
+      txt('ar-bear', '—');
+      txt('ar-reasoning', '(esperant indicador)');
+    }
+    // — Approach States (live institutional)
+    const ap = data.approach_states;
+    const apList = document.getElementById('approach-list');
+    if (apList) {
+      if (ap && Object.keys(ap).length > 0) {
+        const lines = [];
+        for (const [zid, st] of Object.entries(ap)) {
+          const sigma = (st.signal_strength || 0).toFixed(2);
+          const sigmaColor = st.signal_strength > 1.5 ? '#22cc55' : (st.signal_strength < -1.5 ? '#cc2255' : '#aaa');
+          const delta = (st.delta_acc || 0).toFixed(0);
+          const dColor = st.delta_acc > 0 ? '#22cc55' : (st.delta_acc < 0 ? '#cc2255' : '#aaa');
+          lines.push(`<div>
+            <b>${st.state} ${st.zone_price} ${st.zone_type ? st.zone_type[0] : '?'}</b>
+            · ${st.bars_acc}b vol=${(st.vol_acc||0).toFixed(0)}
+            <span style="color:${dColor}">Δ=${delta}</span>
+            <span style="color:${sigmaColor}">σ=${sigma}</span>
+          </div>`);
+        }
+        apList.innerHTML = lines.join('');
+      } else {
+        apList.innerHTML = '<div style="color:#666">cap zona en APPROACH/AT_ZONE</div>';
+      }
+    }
+    // — Level Monitor (last lines from log)
+    const lm = data.level_monitor || [];
+    const lmEl = document.getElementById('level-list');
+    if (lmEl) {
+      if (lm.length > 0) {
+        lmEl.innerHTML = lm.map(line => {
+          const verdict = line.includes('🔥 FIRE') ? '#22cc55' : (line.includes('CLOSE') ? '#ffaa00' : '#888');
+          // Strip timestamp
+          const txt = line.replace(/^[^\[]*\[LEVEL\]/, '[LEVEL]');
+          // simple HTML escape inline
+          const safe = txt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+          return `<div style="color:${verdict};margin-bottom:2px">${safe}</div>`;
+        }).join('');
+        lmEl.scrollTop = lmEl.scrollHeight;
+      } else {
+        lmEl.innerHTML = '<div style="color:#666">cap setup armat o preu lluny de la zona</div>';
+      }
+    }
+    if (ea.price != null) { txt('kpi-price', num(ea.price, 2)); txt('v-tv-price', num(ea.price, 2)); }
+    if (ea.equity != null) {
+      txt('kpi-equity', '$' + num(ea.equity, 0));
+      txt('kpi-balance', 'bal $' + num(ea.balance, 0));
+      txt('kpi-dd', ea.dd_pct != null ? num(ea.dd_pct, 2) + '%' : '—');
+      txt('kpi-pos', ea.positions);
+    }
+    if (s.direction) {
+      txt('kpi-signal', s.direction);
+      txt('kpi-signal-sub', s.breakeven_set ? 'BE' : (s.closing ? 'closing' : 'open'));
+      txt('v-sig-dir', s.direction);
+      const flags = [];
+      if (s.breakeven_set) flags.push('BE');
+      if (s.closing) flags.push('CLOSING');
+      if (s.avg_count) flags.push('avg ' + s.avg_count);
+      txt('v-sig-flags', flags.join(' · '));
+      setMonitoring('signal_state', true);
+      setMonitoring('executor', true);
+    } else {
+      txt('kpi-signal', '—'); txt('kpi-signal-sub', 'no signal');
+      txt('v-sig-dir', '—'); txt('v-sig-flags', '');
+      setMonitoring('signal_state', false);
+      setMonitoring('executor', false);
+    }
+
+    const sz = data.sizing || {};
+
+    // EXECUTOR node
+    if (ex.action) {
+      txt('v-exec-action', ex.action);
+      txt('v-exec-conf', 'conf ' + Math.round((ex.confidence||0)*100) + '%');
+      txt('v-exec-mental', 'mental · ' + (ex.mental_state || '—'));
+      // v3.2: show multiplier if the last action was AVERAGE
+      if (ex.multiplier != null && ex.action === 'AVERAGE') {
+        const lot = sz.base_lot ? (sz.base_lot * ex.multiplier).toFixed(2) : '—';
+        txt('v-exec-mult', `×${ex.multiplier} → ${lot} lot`);
+      } else {
+        txt('v-exec-mult', '');
+      }
+    }
+
+    // FAST ENGINE node — sizing from config
+    if (sz.base_lot != null) {
+      txt('v-fast-base', `base ${sz.base_lot.toFixed(2)} · init ×${sz.initial_multiplier||2}`);
+      const fm = sz.fast_engine_multipliers || {};
+      txt('v-fast-mults', `S×${fm.STRONG||'?'} M×${fm.MODERATE||'?'} W×${fm.WEAK||'?'}`);
+    }
+    if (s.avg_count != null) {
+      txt('v-fast-avg', `avg count · ${s.avg_count}`);
+    }
+
+    // EVENT DETECTOR
+    if (el.type) {
+      txt('v-event-last', 'last: ' + el.type);
+      txt('v-event-age', el.ts_age_s != null ? ageFmt(el.ts_age_s) + ' ago' : '');
+    }
+
+    // INDICATOR + REVIEWER (from zone state updated_at)
+    txt('v-ind-regime', z.regime);
+    txt('v-rev-bias', z.bias);
+    if (z.updated_age_s != null) {
+      txt('v-ind-age', 'last ' + ageFmt(z.updated_age_s) + ' ago');
+      txt('v-rev-age', 'last ' + ageFmt(z.updated_age_s) + ' ago');
+    }
+
+    // ZONE STATE hub
+    const meta = (z.regime || '—') + ' · bias ' + (z.bias || '—') + ' · ' + (z.count || 0) + ' zones';
+    txt('v-zs-meta', meta);
+    if (z.coverage) {
+      const c = z.coverage;
+      txt('v-zs-coverage', 'coverage · ' + (c.close?'●':'○') + ' close · ' + (c.mid?'●':'○') + ' mid · ' + (c.far?'●':'○') + ' far');
+    }
+    txt('v-zs-gap', z.coverage_gap ? '⚠ coverage_gap: ' + z.coverage_gap : '');
+
+    // Zones list
+    const zgEl = document.getElementById('v-zs-zones');
+    if (zgEl) {
+      zgEl.innerHTML = '';
+      (z.zones_preview || []).slice(0, 6).forEach((p, i) => {
+        const y = 568 + i * 11;
+        const color = p.type === 'SUPPORT' ? '#34d399' : '#fb7185';
+        const t = document.createElementNS(NS, 'text');
+        t.setAttribute('class', 'val');
+        t.setAttribute('x', '950');
+        t.setAttribute('y', y);
+        t.setAttribute('font-size', '11');
+        t.style.fontFamily = "'JetBrains Mono', monospace";
+        t.innerHTML = `<tspan fill="${color}">■</tspan> <tspan fill="#e8edf5">${(p.type||'?')[0]}${Number(p.price||0).toFixed(1)}</tspan> <tspan fill="#8a95ad">[${p.strength||'?'}]${p.region?' · '+p.region:''} · ${p.touches||0} touches</tspan>`;
+        zgEl.appendChild(t);
+      });
+    }
+    // Hide zone rows below actual count
+    // (not strictly needed since innerHTML resets)
+
+    // EA
+    if (ea.equity != null) {
+      txt('v-ea-equity', '$' + num(ea.equity, 0));
+      txt('v-ea-balance', 'bal $' + num(ea.balance, 0));
+      txt('v-ea-dd', 'DD ' + num(ea.dd_pct || 0, 2) + '%');
+      txt('v-ea-pos', (ea.positions||0) + ' pos · float ' + (ea.floating!=null ? '$'+num(ea.floating, 0) : '—'));
+      const ddFill = document.getElementById('v-ea-dd-fill');
+      if (ddFill) ddFill.setAttribute('width', Math.min(170, (ea.dd_pct||0) / 4 * 170));
+    }
+
+    // EXTERNAL node (DXY + yield + D1 levels)
+    const ext = data.external || {};
+    const htf = data.htf || {};
+    if (ext.dxy) {
+      const brk = ext.dxy.last_break && ext.dxy.last_break !== 'none' ? ' · break ' + ext.dxy.last_break : '';
+      txt('v-ext-dxy', 'DXY ' + ext.dxy.price + ' · M5 ' + ext.dxy.trend_m5 + ' · H1 ' + ext.dxy.trend_h1 + brk);
+    } else {
+      txt('v-ext-dxy', 'DXY —');
+    }
+    if (ext.yield_10y) {
+      txt('v-ext-yield', '10Y ' + ext.yield_10y.price + ' · ' + ext.yield_10y.trend_m15);
+    } else {
+      txt('v-ext-yield', '10Y —');
+    }
+    if (htf && htf.d1_high != null) {
+      txt('v-ext-d1', 'D1 H=' + htf.d1_high + ' L=' + htf.d1_low + ' · wk ' + (htf.weekly_open||'—'));
+    }
+
+    // SYSTEM PULSE (row 1 right) — now repurposed for session + volatility + structure
+    const ms = data.market_state || {};
+    const sess = ms.session || {};
+    const vol = ms.volatility || {};
+    const bos = (ms.structure||{}).last_bos;
+    if (sess.name) {
+      const vtxt = sess.vwap ? ' · VWAP ' + sess.vwap + ' (' + (sess.distance_from_vwap_usd>=0?'+':'') + sess.distance_from_vwap_usd + ')' : '';
+      txt('v-pulse-main', sess.name + ' · min ' + (sess.minutes_since_open||0) + vtxt);
+    } else {
+      txt('v-pulse-main', 'regime: ' + (z.regime||'—') + ' · ' + (z.count||0) + ' zones');
+    }
+    if (vol.percentile_20d != null) {
+      txt('v-pulse-last', 'ATR ' + vol.atr_current + ' · p' + vol.percentile_20d + (vol.is_anomalous ? ' ⚠ anòmal' : ''));
+    } else if (ex.action) {
+      txt('v-pulse-last', 'last Executor: ' + ex.action + ' @ ' + (ex.confidence ? Math.round(ex.confidence*100)+'%' : '—'));
+    }
+    if (bos) {
+      txt('v-pulse-gate', 'BOS ' + bos.type + ' @ ' + bos.price + ' (' + bos.age_bars + 'b)');
+    } else if (z.updated_age_s != null) {
+      txt('v-pulse-gate', 'last Indicator: ' + ageFmt(z.updated_age_s) + ' ago');
+    }
+
+    // Monitoring dynamics
+    setMonitoring('event_detector', true);
+    setMonitoring('zone_lifecycle', true);
+    setMonitoring('tradingview', ea.price != null);
+    setMonitoring('ea_mt5', ea.age_s != null && ea.age_s < 10);
+    setMonitoring('zone_state', (z.count||0) > 0);
+    if (lastActive['telegram'] && (tsNow()-lastActive['telegram']) < 600000) setMonitoring('telegram', true);
+
+    if (ex.validator_rejection) {
+      flashComponent('validator', 'reject');
+      txt('v-validator-last', 'REJECT · ' + (ex.validator_rejection.code || ''));
+    }
+    if (sz.dd_soft_pct != null && sz.dd_hard_pct != null) {
+      txt('v-validator-dd', `DD soft ${sz.dd_soft_pct}% / hard ${sz.dd_hard_pct}%`);
+    }
+  }
+
+  // Activity log
+  const logEl = document.getElementById('log');
+  const MAX_LOG = 100;
+  function appendLog(ts, line) {
+    const d = document.createElement('div');
+    d.className = 'line new';
+    d.innerHTML = '<span class="ts">' + (ts||'').padStart(8) + '</span>' + esc(line);
+    logEl.appendChild(d);
+    while (logEl.children.length > MAX_LOG + 1) logEl.removeChild(logEl.children[1]);
+    logEl.scrollTop = logEl.scrollHeight;
+    setTimeout(() => d.classList.remove('new'), 2200);
+  }
+  function esc(s) { return (s||'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+  const conn = document.getElementById('conn');
+  function connect() {
+    conn.className = 'conn'; conn.textContent = '● connecting';
+    const es = new EventSource('/stream');
+    es.onopen = () => { conn.className = 'conn ok'; conn.textContent = '● live'; };
+    es.onerror = () => { conn.className = 'conn bad'; conn.textContent = '● reconnecting'; };
+    es.onmessage = (e) => { let ev; try { ev = JSON.parse(e.data); } catch { return; } handle(ev); };
+  }
+  function handle(ev) {
+    const replay = !!ev.replay;
+    switch (ev.type) {
+      case 'component': setComponent(ev.id, ev.state, replay); break;
+      case 'flash': flashComponent(ev.id, ev.kind, replay); break;
+      case 'edge': pulseEdge(ev.from, ev.to, ev.kind, replay); break;
+      case 'state': applyState(ev.data || {}); break;
+      case 'log': if (!replay) appendLog(ev.ts, ev.line); break;
+      case 'executor_action': txt('v-exec-action', ev.action); break;
+    }
+  }
+  connect();
+})();
+</script>
+</body>
+</html>

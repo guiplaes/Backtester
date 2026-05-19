@@ -1,0 +1,138 @@
+//@version=5
+// =============================================================================
+//  Break & Bounce Scalper — ProRealAlgos style
+//  Multi-timeframe: Daily box (PDH/PDL) -> M15 breakout -> M5 reversal entry
+//  Author: backtest scaffold built per video rules
+// =============================================================================
+strategy("Break & Bounce Scalper",
+         overlay              = true,
+         initial_capital      = 10000,
+         default_qty_type     = strategy.percent_of_equity,
+         default_qty_value    = 10,
+         commission_type      = strategy.commission.percent,
+         commission_value     = 0.02,
+         slippage             = 2,
+         pyramiding           = 0,
+         calc_on_every_tick   = false,
+         process_orders_on_close = true)
+
+// ============================ INPUTS ========================================
+grp_rr      = "Risk / Reward"
+rr_ratio    = input.float(2.0, "Take Profit (R multiple)", minval=1.0, step=0.1, group=grp_rr)
+sl_buffer   = input.float(0.0, "SL buffer (ticks)", minval=0, group=grp_rr) * syminfo.mintick
+
+grp_sess    = "Session window (first 2.5h of cash open)"
+sess_str    = input.session("0930-1200", "Session", group=grp_sess)
+tz          = input.string("America/New_York", "Timezone", group=grp_sess,
+                  options=["America/New_York","Europe/London","Europe/Madrid","UTC","exchange"])
+one_per_day = input.bool(true, "Max 1 trade per direction per day", group=grp_sess)
+
+grp_pat     = "Reversal patterns at level"
+use_hammer  = input.bool(true,  "Hammer / Inverted Hammer", group=grp_pat)
+use_engulf  = input.bool(true,  "Bullish / Bearish Engulfing", group=grp_pat)
+wick_ratio  = input.float(2.0,  "Hammer wick/body ratio", minval=1.0, step=0.1, group=grp_pat)
+max_dist_atr= input.float(0.40, "Max distance to level (xATR)", minval=0.05, step=0.05, group=grp_pat)
+
+grp_brk     = "Breakout confirmation"
+htf_break   = input.timeframe("15", "Breakout TF", group=grp_brk)
+brk_buf_atr = input.float(0.0,  "Breakout buffer (xATR)", minval=0, step=0.05, group=grp_brk)
+
+grp_vis     = "Visuals"
+show_box    = input.bool(true, "Show PDH/PDL box", group=grp_vis)
+show_dbg    = input.bool(true, "Show debug markers", group=grp_vis)
+
+// ============================ DATA: PDH / PDL ==============================
+// Previous day's high/low — confirmed, no repaint
+prev_high = request.security(syminfo.tickerid, "D", high[1], lookahead=barmerge.lookahead_on)
+prev_low  = request.security(syminfo.tickerid, "D", low[1],  lookahead=barmerge.lookahead_on)
+
+// ATR for distance filter
+atr = ta.atr(14)
+
+// ============================ M15 BREAKOUT TRACKING ========================
+// Closed M15 candle close
+htf_close = request.security(syminfo.tickerid, htf_break, close[1], lookahead=barmerge.lookahead_on)
+
+var bool brk_up      = false
+var bool brk_dn      = false
+var bool taken_long  = false
+var bool taken_short = false
+
+new_day = ta.change(time("D")) != 0
+if new_day
+    brk_up      := false
+    brk_dn      := false
+    taken_long  := false
+    taken_short := false
+
+if not na(htf_close)
+    if htf_close > prev_high + atr * brk_buf_atr
+        brk_up := true
+    if htf_close < prev_low  - atr * brk_buf_atr
+        brk_dn := true
+
+// ============================ REVERSAL PATTERNS (M5) =======================
+body        = math.abs(close - open)
+upper_wick  = high - math.max(close, open)
+lower_wick  = math.min(close, open) - low
+rng         = high - low
+non_doji    = body > rng * 0.05  // ignore extreme dojis
+
+hammer      = non_doji and lower_wick >= body * wick_ratio and upper_wick <= body
+inv_hammer  = non_doji and upper_wick >= body * wick_ratio and lower_wick <= body
+
+bull_engulf = close > open and close[1] < open[1] and close >= open[1] and open <= close[1]
+bear_engulf = close < open and close[1] > open[1] and close <= open[1] and open >= close[1]
+
+bull_pattern = (use_hammer and hammer) or (use_engulf and bull_engulf)
+bear_pattern = (use_hammer and inv_hammer) or (use_engulf and bear_engulf)
+
+// ============================ DISTANCE TO LEVEL ============================
+near_pdh = math.abs(low  - prev_high) <= atr * max_dist_atr or
+           math.abs(close- prev_high) <= atr * max_dist_atr
+near_pdl = math.abs(high - prev_low)  <= atr * max_dist_atr or
+           math.abs(close- prev_low)  <= atr * max_dist_atr
+
+// ============================ SESSION FILTER ===============================
+in_session = not na(time(timeframe.period, sess_str, tz))
+
+// ============================ SIGNALS ======================================
+long_signal  = in_session and brk_up and near_pdh and bull_pattern and (not one_per_day or not taken_long)
+short_signal = in_session and brk_dn and near_pdl and bear_pattern and (not one_per_day or not taken_short)
+
+// ============================ ORDERS =======================================
+if long_signal
+    sl  = low  - sl_buffer
+    risk = close - sl
+    if risk > 0
+        tp = close + risk * rr_ratio
+        strategy.entry("L", strategy.long)
+        strategy.exit("L_exit", "L", stop=sl, limit=tp)
+        taken_long := true
+
+if short_signal
+    sl  = high + sl_buffer
+    risk = sl - close
+    if risk > 0
+        tp = close - risk * rr_ratio
+        strategy.entry("S", strategy.short)
+        strategy.exit("S_exit", "S", stop=sl, limit=tp)
+        taken_short := true
+
+// Force-flat at end of session (optional — comment out to let trades run)
+if not in_session and (strategy.position_size != 0)
+    strategy.close_all(comment="Session end")
+
+// ============================ VISUALS ======================================
+plot(show_box ? prev_high : na, "PDH", color=color.new(color.blue, 0), style=plot.style_linebr, linewidth=2)
+plot(show_box ? prev_low  : na, "PDL", color=color.new(color.red,  0), style=plot.style_linebr, linewidth=2)
+bgcolor(in_session ? color.new(color.gray, 92) : na, title="Session bg")
+bgcolor(brk_up and in_session ? color.new(color.green, 95) : na, title="Long armed")
+bgcolor(brk_dn and in_session ? color.new(color.red,   95) : na, title="Short armed")
+
+plotshape(show_dbg and long_signal,  title="L sig", style=shape.triangleup,   location=location.belowbar, color=color.green, size=size.tiny)
+plotshape(show_dbg and short_signal, title="S sig", style=shape.triangledown, location=location.abovebar, color=color.red,   size=size.tiny)
+
+// ============================ ALERTS =======================================
+alertcondition(long_signal,  "Break & Bounce LONG",  "B&B LONG {{ticker}} @ {{close}}")
+alertcondition(short_signal, "Break & Bounce SHORT", "B&B SHORT {{ticker}} @ {{close}}")

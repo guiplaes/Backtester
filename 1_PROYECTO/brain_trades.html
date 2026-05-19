@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<title>Trader Brain · Biblioteca de trades</title>
+<style>
+  :root {
+    --bg: #0a0e17;
+    --card: #131823;
+    --border: #1e2634;
+    --fg: #d4dce8;
+    --fg-mute: #6b7789;
+    --accent: #4a9eff;
+    --green: #3fd47e;
+    --red: #ff5a5f;
+    --amber: #f0b429;
+    --violet: #a78bfa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--fg); font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 14px; padding: 16px; }
+  .header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 16px; }
+  .header h1 { font-size: 18px; font-weight: 700; }
+  .nav { display: flex; gap: 8px; }
+  .nav a { padding: 6px 12px; background: var(--bg); color: var(--fg-mute); text-decoration: none; border-radius: 6px; font-size: 13px; border: 1px solid var(--border); }
+  .nav a:hover { color: var(--fg); border-color: var(--accent); }
+  .summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 10px; }
+  .summary.secondary { grid-template-columns: repeat(5, 1fr); margin-bottom: 16px; }
+  .metric-sub { color: var(--fg-mute); font-size: 11px; margin-top: 2px; }
+  .metric-pct { font-size: 13px; color: var(--fg-mute); font-weight: 500; }
+  .recon-note { background: rgba(240,180,41,0.08); border: 1px solid var(--amber); color: var(--amber); border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; font-size: 12px; }
+  .metric { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 12px; text-align: center; }
+  .metric-label { color: var(--fg-mute); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .metric-value { font-size: 22px; font-weight: 700; margin-top: 4px; }
+  .metric-value.pos { color: var(--green); }
+  .metric-value.neg { color: var(--red); }
+  .tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+  .tab { padding: 8px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--fg-mute); }
+  .tab.active { color: var(--fg); border-color: var(--accent); background: #1a2333; }
+  .trade-list { display: flex; flex-direction: column; gap: 8px; }
+  .trade-row { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 14px; cursor: pointer; transition: all 0.15s; }
+  .trade-row:hover { border-color: var(--accent); }
+  .trade-row.expanded { border-color: var(--accent); }
+  .trade-header { display: grid; grid-template-columns: 80px 80px 120px 100px 1fr 100px 100px; gap: 12px; align-items: center; font-size: 13px; }
+  .dir-badge { display: inline-block; padding: 3px 10px; border-radius: 4px; font-weight: 700; font-size: 12px; }
+  .dir-badge.BUY { background: rgba(63,212,126,0.15); color: var(--green); }
+  .dir-badge.SELL { background: rgba(255,90,95,0.15); color: var(--red); }
+  .pnl { font-weight: 700; font-family: 'SF Mono', Monaco, monospace; }
+  .pnl.pos { color: var(--green); }
+  .pnl.neg { color: var(--red); }
+  .pnl.zero { color: var(--fg-mute); }
+  .trade-detail { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); display: none; }
+  .trade-detail.show { display: block; }
+  .detail-section { margin-bottom: 12px; }
+  .detail-section h4 { font-size: 11px; color: var(--fg-mute); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .event-item { padding: 4px 10px; background: var(--bg); border-left: 3px solid var(--border); margin-bottom: 3px; font-size: 12px; font-family: 'SF Mono', monospace; }
+  .event-item.OPEN { border-left-color: var(--green); }
+  .event-item.AVERAGE { border-left-color: var(--amber); }
+  .event-item.PARTIAL_CLOSE { border-left-color: var(--violet); }
+  .event-item.FULL_CLOSE, .event-item.SIGNAL_CLOSE { border-left-color: var(--red); }
+  .event-meta { color: var(--fg-mute); font-size: 11px; margin-top: 2px; }
+  .empty { text-align: center; padding: 40px; color: var(--fg-mute); }
+  .reason-text { color: var(--fg); font-size: 12px; font-style: italic; padding: 6px 10px; background: var(--bg); border-radius: 4px; margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📚 Biblioteca de Trades</h1>
+  <div class="nav">
+    <a href="/">Dashboard</a>
+    <a href="/flow">Flow</a>
+    <a href="/trades">Trades</a>
+    <a href="/narratives">📖 Narratives</a>
+  </div>
+</div>
+
+<div id="summary-bar" class="summary"></div>
+<div id="summary-bar-2" class="summary secondary"></div>
+<div id="recon-note"></div>
+
+<div class="tabs">
+  <div class="tab active" data-view="today" onclick="setView('today')">Avui</div>
+  <div class="tab" data-view="week" onclick="setView('week')">Setmana</div>
+  <div class="tab" data-view="all" onclick="setView('all')">Tots (30d)</div>
+</div>
+
+<div class="trade-list" id="trade-list">
+  <div class="empty">Carregant…</div>
+</div>
+
+<script>
+let currentView = 'today';
+
+function fmt(n, d=2) { return (n==null||isNaN(n))?'—':Number(n).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d}); }
+function esc(s) { return (s||'').toString().replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function fmtTime(iso) {
+  if (!iso) return '—';
+  return iso.slice(11, 16);
+}
+function fmtDate(iso) {
+  if (!iso) return '—';
+  return iso.slice(0, 10);
+}
+
+function setView(view) {
+  currentView = view;
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.view === view));
+  load();
+}
+
+async function load() {
+  const list = document.getElementById('trade-list');
+  list.innerHTML = '<div class="empty">Carregant…</div>';
+
+  try {
+    // Always fetch the ledger in parallel — source of truth for day P&L + accumulated %
+    const ledgerPromise = fetch('/api/ledger?days=30').then(r => r.json()).catch(() => null);
+
+    let data, trades, summary;
+    if (currentView === 'today') {
+      data = await fetch('/api/trades?view=today').then(r => r.json());
+      trades = data.trades || [];
+      summary = data;
+    } else if (currentView === 'week') {
+      data = await fetch('/api/trades?view=week').then(r => r.json());
+      trades = (data.days || []).flatMap(d => d.trades || []);
+      trades.sort((a, b) => (b.started_ts || 0) - (a.started_ts || 0));
+      summary = data;
+    } else {
+      const res = await fetch('/api/trades?days=30&limit=100').then(r => r.json());
+      trades = res.trades || [];
+      const wins = trades.filter(t => t.pnl_usd > 0).length;
+      const total_pnl = trades.reduce((s, t) => s + (t.pnl_usd || 0), 0);
+      summary = {
+        total_trades: trades.length,
+        wins,
+        losses: trades.filter(t => t.pnl_usd < 0).length,
+        winrate: trades.length ? Math.round(wins / trades.length * 1000) / 10 : 0,
+        total_pnl_usd: total_pnl,
+        total_avgs: trades.reduce((s, t) => s + (t.avgs_count || 0), 0),
+        total_partials: trades.reduce((s, t) => s + (t.partials_count || 0), 0),
+      };
+    }
+
+    const ledger = await ledgerPromise;
+    renderSummary(summary, ledger);
+    renderTrades(trades);
+  } catch (e) {
+    list.innerHTML = `<div class="empty">Error: ${esc(e.message)}</div>`;
+  }
+}
+
+function pnlClass(v) { return v > 0 ? 'pos' : (v < 0 ? 'neg' : ''); }
+function pnlStr(v, d=2) { return (v >= 0 ? '+$' : '-$') + fmt(Math.abs(v), d); }
+
+function renderSummary(s, ledger) {
+  // --- PRIMARY BAR: veritat fiable del ledger (balance delta + acumulat) ---
+  const sb = document.getElementById('summary-bar');
+  const acc = ledger && ledger.accumulated || {};
+  const rec = ledger && ledger.today_reconcile || {};
+  const accPnl = acc.accumulated_pnl_usd || 0;
+  const accPct = acc.accumulated_pnl_pct || 0;
+  const dayPnl = rec.balance_delta_usd || 0;
+  const dayPct = rec.balance_delta_pct || 0;
+  const projStart = acc.project_start_balance || 0;
+  const totalDays = acc.total_days || 0;
+
+  sb.innerHTML = `
+    <div class="metric">
+      <div class="metric-label">P&L Avui (balance)</div>
+      <div class="metric-value ${pnlClass(dayPnl)}">${pnlStr(dayPnl)}</div>
+      <div class="metric-pct ${pnlClass(dayPnl)}">${dayPct >= 0 ? '+' : ''}${fmt(dayPct, 3)}%</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Acumulat Total</div>
+      <div class="metric-value ${pnlClass(accPnl)}">${pnlStr(accPnl)}</div>
+      <div class="metric-pct ${pnlClass(accPnl)}">${accPct >= 0 ? '+' : ''}${fmt(accPct, 3)}%</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Balance inicial</div>
+      <div class="metric-value">$${fmt(projStart, 0)}</div>
+      <div class="metric-sub">${acc.project_start_date || '—'} · ${totalDays}d</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Winrate</div>
+      <div class="metric-value">${fmt(s.winrate || 0, 1)}%</div>
+      <div class="metric-sub">${s.wins || 0}W / ${s.losses || 0}L</div>
+    </div>
+  `;
+
+  // --- SECONDARY BAR: trade stats detail ---
+  const sb2 = document.getElementById('summary-bar-2');
+  const tradesPnl = s.total_pnl_usd || 0;
+  sb2.innerHTML = `
+    <div class="metric"><div class="metric-label">Trades</div><div class="metric-value">${s.total_trades || 0}</div></div>
+    <div class="metric"><div class="metric-label">Wins</div><div class="metric-value" style="color:var(--green)">${s.wins || 0}</div></div>
+    <div class="metric"><div class="metric-label">Losses</div><div class="metric-value" style="color:var(--red)">${s.losses || 0}</div></div>
+    <div class="metric">
+      <div class="metric-label">P&L trades</div>
+      <div class="metric-value ${pnlClass(tradesPnl)}">${pnlStr(tradesPnl)}</div>
+    </div>
+    <div class="metric"><div class="metric-label">Avgs / Partials</div><div class="metric-value">${s.total_avgs || 0} / ${s.total_partials || 0}</div></div>
+  `;
+
+  // --- Discrepancy note when balance delta != trades sum ---
+  const notesEl = document.getElementById('recon-note');
+  const disc = rec.discrepancy_usd;
+  if (disc != null && Math.abs(disc) >= 0.5 && currentView === 'today') {
+    notesEl.innerHTML = `⚠ Discrepància: balance delta ${pnlStr(dayPnl)} vs suma de trades ${pnlStr(tradesPnl)} = ${pnlStr(disc)}. Events del trade log duplicats o perduts (tancaments abans d'arrencar el ledger, o detecció DETECTED+EXECUTOR del mateix ticket).`;
+    notesEl.className = 'recon-note';
+  } else {
+    notesEl.innerHTML = '';
+    notesEl.className = '';
+  }
+}
+
+function renderTrades(trades) {
+  const list = document.getElementById('trade-list');
+  if (!trades.length) {
+    list.innerHTML = '<div class="empty">Cap trade en aquest període</div>';
+    return;
+  }
+  list.innerHTML = trades.map((t, i) => {
+    const pnl = t.pnl_usd || 0;
+    const pnlCls = pnl > 0 ? 'pos' : (pnl < 0 ? 'neg' : 'zero');
+    const pnlStr = (pnl >= 0 ? '+$' : '-$') + fmt(Math.abs(pnl), 2);
+    return `
+      <div class="trade-row" data-idx="${i}" onclick="toggleDetail(${i})">
+        <div class="trade-header">
+          <div class="dir-badge ${t.direction || ''}">${t.direction || '?'}</div>
+          <div>${fmtTime(t.started_utc)} UTC</div>
+          <div>entry ${fmt(t.entry_price || 0, 2)}</div>
+          <div>blend ${fmt(t.blend_price || 0, 2)}</div>
+          <div style="color:var(--fg-mute);font-size:12px;">${t.avgs_count||0} avgs · ${t.partials_count||0} partials · ${fmt(t.duration_min||0, 1)}min${t.had_breakeven ? ' · 🔒BE' : ''}</div>
+          <div style="color:var(--fg-mute);font-size:11px;">${esc(t.source_close || '?')}</div>
+          <div class="pnl ${pnlCls}">${pnlStr}</div>
+        </div>
+        <div class="trade-detail" id="detail-${i}">
+          <div class="detail-section">
+            <h4>Motiu de tancament</h4>
+            <div class="reason-text">${esc(t.close_reason || '(sense motiu registrat)')}</div>
+          </div>
+          <div class="detail-section">
+            <h4>Cronologia d'events (${t.event_count || 0})</h4>
+            <div id="events-${i}">Carregant…</div>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+async function toggleDetail(idx) {
+  const row = document.querySelector(`.trade-row[data-idx="${idx}"]`);
+  const detail = document.getElementById(`detail-${idx}`);
+  if (detail.classList.contains('show')) {
+    detail.classList.remove('show');
+    row.classList.remove('expanded');
+    return;
+  }
+  detail.classList.add('show');
+  row.classList.add('expanded');
+  // Fetch full detail
+  try {
+    const res = await fetch(`/api/trades?view=detail&idx=${idx}`).then(r => r.json());
+    const events = res.events || [];
+    const evDiv = document.getElementById(`events-${idx}`);
+    if (!events.length) {
+      evDiv.innerHTML = '<div class="empty">Cap event detallat</div>';
+      return;
+    }
+    evDiv.innerHTML = events.map(e => {
+      const t = fmtTime(e.utc);
+      const pnl = e.pnl_delta ? ` · <span class="pnl ${e.pnl_delta>0?'pos':(e.pnl_delta<0?'neg':'zero')}">${e.pnl_delta>=0?'+':''}$${fmt(e.pnl_delta,2)}</span>` : '';
+      const lot = e.lot ? ` lot ${fmt(e.lot, 2)}` : '';
+      const price = e.price ? ` @ ${fmt(e.price, 2)}` : '';
+      const src = e.source ? ` <span style="color:var(--fg-mute);">[${esc(e.source)}]</span>` : '';
+      const reason = (e.reason || e.reasoning) ? `<div class="event-meta">${esc((e.reason || e.reasoning || '').slice(0, 200))}</div>` : '';
+      return `
+        <div class="event-item ${e.type || ''}">
+          <strong>${t}</strong> <span style="color:var(--accent)">${esc(e.type || '?')}</span>${lot}${price}${pnl}${src}
+          ${reason}
+        </div>`;
+    }).join('');
+  } catch (e) {
+    document.getElementById(`events-${idx}`).innerHTML = `<div class="empty">Error: ${esc(e.message)}</div>`;
+  }
+}
+
+load();
+setInterval(load, 30000);  // refresh every 30s
+</script>
+</body>
+</html>

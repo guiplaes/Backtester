@@ -1,0 +1,50 @@
+Testing 3 exit mechanisms vs SIMPLE baseline...
+
+--- EURGBP D1 LONG ---
+  SIMPLE    : n=  28 WR 89.3% Net=$  +1,804 PF15.40
+  PARTIAL   : n=  45 WR 84.4% Net=$  +1,742 PF 9.92
+  BE_MOVE   : n=  32 WR 78.1% Net=$  +1,859 PF11.30
+
+--- EURGBP H4 LONG ---
+  SIMPLE    : n=  37 WR 91.9% Net=$  +1,796 PF 7.43
+  PARTIAL   : n=  62 WR 85.5% Net=$  +1,577 PF 6.97
+  BE_MOVE   : n=  47 WR 63.8% Net=$  +1,403 PF 4.43
+
+--- EURGBP H4 SHORT ---
+  SIMPLE    : n=  35 WR 85.7% Net=$  +1,525 PF 6.57
+  PARTIAL   : n=  60 WR 85.0% Net=$  +1,319 PF 4.83
+  BE_MOVE   : n=  54 WR 57.4% Net=$  +1,753 PF10.69
+
+--- EURJPY H4 LONG ---
+  SIMPLE    : n=  37 WR 97.3% Net=$ +35,773 PF 4.57
+  PARTIAL   : n=  52 WR 92.3% Net=$ +33,749 PF 4.14
+  BE_MOVE   : n=  57 WR 63.2% Net=$ +34,858 PF 3.42
+
+--- EURCHF H4 SHORT ---
+  SIMPLE    : n=  36 WR 91.7% Net=$  +1,645 PF18.27
+  PARTIAL   : n=  52 WR 78.8% Net=$  +1,290 PF 5.08
+  BE_MOVE   : n=  45 WR 68.9% Net=$  +1,445 PF 8.03
+
+--- CHFJPY H4 LONG ---
+  SIMPLE    : n=  36 WR 94.4% Net=$ +39,722 PF53.10
+  PARTIAL   : n=  49 WR 91.8% Net=$ +35,901 PF 8.49
+  BE_MOVE   : n=  48 WR 70.8% Net=$ +45,229 PF19.56
+
+========================================================================================================================
+RESUM CONJUNT:
+========================================================================================================================
+exit              BE_MOVE   PARTIAL    SIMPLE
+cfg                                          
+CHFJPY H4 LONG   45229.50  35901.50  39722.50
+EURCHF H4 SHORT   1445.05   1289.80   1644.55
+EURGBP D1 LONG    1859.15   1742.15   1804.05
+EURGBP H4 LONG    1403.35   1576.65   1795.65
+EURGBP H4 SHORT   1752.75   1318.70   1525.05
+EURJPY H4 LONG   34858.50  33749.50  35773.50
+
+Total per exit:
+  SIMPLE    : Total Net=$+82,265
+  PARTIAL   : Total Net=$+75,578
+  BE_MOVE   : Total Net=$+86,548
+
+DONE

@@ -1,0 +1,45 @@
+XAUUSD M15 — LIQUIDITY SWEEP setup
+Date/Time UTC: 2026-05-05T09:00:00.000Z
+Direction: SHORT
+Entry (close): 4557.67
+Swept level (swing HIGH): 4559.46
+Wick size: 0.97 (0.12×ATR)
+ATR(14): 7.85
+RSI(14): 63.3
+
+LAST 20 BARS (oldest → current):
+  05 04:15 O=4533.04 H=4534.01 L=4529.26 C=4529.50
+  05 04:30 O=4529.50 H=4533.75 L=4527.82 C=4531.60
+  05 04:45 O=4531.60 H=4536.48 L=4531.17 C=4533.63
+  05 05:00 O=4533.63 H=4545.55 L=4531.09 C=4540.18
+  05 05:15 O=4540.18 H=4540.54 L=4535.69 C=4539.90
+  05 05:30 O=4539.90 H=4551.73 L=4539.64 C=4545.73
+  05 05:45 O=4545.73 H=4548.83 L=4543.46 C=4545.75
+  05 06:00 O=4545.75 H=4551.87 L=4541.25 C=4543.61
+  05 06:15 O=4543.61 H=4544.84 L=4533.59 C=4536.77
+  05 06:30 O=4536.77 H=4549.39 L=4536.10 C=4546.13
+  05 06:45 O=4546.13 H=4550.92 L=4545.25 C=4548.08
+  05 07:00 O=4548.08 H=4555.16 L=4547.41 C=4553.94
+  05 07:15 O=4553.94 H=4555.61 L=4548.44 C=4548.94
+  05 07:30 O=4548.94 H=4558.30 L=4548.82 C=4551.32
+  05 07:45 O=4551.32 H=4551.97 L=4543.32 C=4545.62
+  05 08:00 O=4545.62 H=4553.46 L=4545.41 C=4551.00
+  05 08:15 O=4551.00 H=4554.78 L=4549.03 C=4550.96
+  05 08:30 O=4550.96 H=4553.22 L=4547.78 C=4549.76
+  05 08:45 O=4549.76 H=4559.46 L=4548.19 C=4558.33
+  05 09:00 O=4558.33 H=4560.43 L=4553.45 C=4557.67
+
+THESIS: This is a potential liquidity sweep — price wicked beyond a recent swing extreme (high) then closed back inside, suggesting a stop hunt followed by reversal.
+
+YOUR TASK:
+Evaluate ONLY whether this is a CLEAN, HIGH-QUALITY liquidity sweep with reversal potential. Consider:
+- Was the sweep aggressive/fast (single bar wick) or slow erosion?
+- Did the bar close FAR enough back inside (rejection strength)?
+- Is there context support (RSI extreme, momentum exhaustion before sweep)?
+- Or is this likely the START of a continuation (trend, momentum, no exhaustion)?
+
+Use ONLY data above. NO future info. NO other tools.
+
+Reply EXACTLY 2 lines:
+SCORE: <1-10> (10 = textbook clean sweep, 1 = likely continuation)
+REASON: <one sentence, max 25 words>

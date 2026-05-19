@@ -1,0 +1,195 @@
+Loading...
+Aggregating...
+  XAUUSD M30: 59100 bars
+  XAUUSD H1: 29565 bars
+  XAUUSD H4: 7996 bars
+  XAUUSD D1: 1555 bars
+  EURUSD M30: 62359 bars
+  EURUSD H1: 31180 bars
+  EURUSD H4: 8059 bars
+  EURUSD D1: 1564 bars
+Running deep tests...
+
+
+########################################################################################################################
+# XAUUSD
+########################################################################################################################
+
+########################################################################################################################
+# EURUSD
+########################################################################################################################
+
+Total valid configs: 292
+
+======================================================================================================================================================
+TOP 30 CONFIGS:
+======================================================================================================================================================
+  XAUUSD  D1   SMA50  long  levels=-1.0/-2.0/-3.0         stop=-4.0 | n=  18 WR94.4% Net=$  +1077 PF34.87 DD$  32 u=1.5 dur=19
+  XAUUSD  D1   SMA50  long  levels=-1.0/-2.0/-3.0         stop=-5.0 | n=  18 WR94.4% Net=$  +1077 PF34.87 DD$  32 u=1.5 dur=19
+  XAUUSD  D1   SMA50  long  levels=-1.0/-2.0/-3.0         stop=-6.0 | n=  18 WR94.4% Net=$  +1077 PF34.87 DD$  32 u=1.5 dur=19
+  XAUUSD  D1   SMA50  long  levels=-1.0/-2.0              stop=-4.0 | n=  18 WR88.9% Net=$   +940 PF26.88 DD$  36 u=1.4 dur=19
+  XAUUSD  D1   SMA50  long  levels=-1.0/-2.0              stop=-5.0 | n=  18 WR88.9% Net=$   +940 PF26.88 DD$  36 u=1.4 dur=19
+  XAUUSD  D1   SMA50  long  levels=-1.0/-2.0              stop=-6.0 | n=  18 WR88.9% Net=$   +940 PF26.88 DD$  36 u=1.4 dur=19
+  XAUUSD  D1   SMA50  long  levels=-1.0                   stop=-4.0 | n=  18 WR83.3% Net=$   +662 PF13.79 DD$  51 u=1.0 dur=19
+  XAUUSD  D1   SMA50  long  levels=-1.0                   stop=-5.0 | n=  18 WR83.3% Net=$   +662 PF13.79 DD$  51 u=1.0 dur=19
+  XAUUSD  D1   SMA50  long  levels=-1.0                   stop=-6.0 | n=  18 WR83.3% Net=$   +662 PF13.79 DD$  51 u=1.0 dur=19
+  XAUUSD  H4   SMA200 long  levels=-1.5/-2.5/-3.5         stop=-5.0 | n=  21 WR85.7% Net=$  +1430 PF11.79 DD$  78 u=1.6 dur=78
+  XAUUSD  H4   SMA200 long  levels=-1.5/-2.5/-3.5         stop=-6.0 | n=  21 WR85.7% Net=$  +1430 PF11.79 DD$  78 u=1.6 dur=78
+  XAUUSD  H4   SMA200 long  levels=-1.0/-2.0/-3.0         stop=-5.0 | n=  28 WR85.7% Net=$  +1657 PF 9.42 DD$ 148 u=1.6 dur=74
+  XAUUSD  H4   SMA200 long  levels=-1.0/-2.0/-3.0         stop=-6.0 | n=  28 WR85.7% Net=$  +1657 PF 9.42 DD$ 148 u=1.6 dur=74
+  XAUUSD  D1   SMA50  long  levels=-1.5/-2.5              stop=-3.0 | n=  18 WR77.8% Net=$   +853 PF 8.68 DD$  73 u=1.2 dur=15
+  XAUUSD  H4   SMA200 long  levels=-1.5/-2.5              stop=-5.0 | n=  21 WR85.7% Net=$   +990 PF 8.29 DD$  81 u=1.4 dur=78
+  XAUUSD  H4   SMA200 long  levels=-1.5/-2.5              stop=-6.0 | n=  21 WR85.7% Net=$   +990 PF 8.29 DD$  81 u=1.4 dur=78
+  XAUUSD  H4   SMA200 long  levels=-1.0/-2.0              stop=-5.0 | n=  28 WR85.7% Net=$  +1295 PF 7.47 DD$ 151 u=1.4 dur=74
+  XAUUSD  H4   SMA200 long  levels=-1.0/-2.0              stop=-6.0 | n=  28 WR85.7% Net=$  +1295 PF 7.47 DD$ 151 u=1.4 dur=74
+  XAUUSD  H4   SMA300 long  levels=-1.0/-2.0/-3.0         stop=-5.0 | n=  20 WR95.0% Net=$   +984 PF 7.33 DD$ 155 u=1.6 dur=87
+  XAUUSD  H4   SMA300 long  levels=-1.0/-2.0/-3.0         stop=-6.0 | n=  20 WR95.0% Net=$   +984 PF 7.33 DD$ 155 u=1.6 dur=87
+  XAUUSD  H4   SMA150 long  levels=-2.0/-3.0/-4.0         stop=-5.0 | n=  21 WR76.2% Net=$  +1492 PF 6.83 DD$ 129 u=1.6 dur=72
+  XAUUSD  H4   SMA150 long  levels=-2.0/-3.0/-4.0         stop=-6.0 | n=  21 WR76.2% Net=$  +1492 PF 6.83 DD$ 129 u=1.6 dur=72
+  XAUUSD  D1   SMA50  long  levels=-1.5                   stop=-3.0 | n=  18 WR72.2% Net=$   +668 PF 6.81 DD$  60 u=1.0 dur=15
+  XAUUSD  H4   SMA200 long  levels=-1.0                   stop=-5.0 | n=  28 WR85.7% Net=$   +812 PF 6.54 DD$  99 u=1.0 dur=74
+  XAUUSD  H4   SMA200 long  levels=-1.0                   stop=-6.0 | n=  28 WR85.7% Net=$   +812 PF 6.54 DD$  99 u=1.0 dur=74
+  XAUUSD  H4   SMA200 long  levels=-1.5                   stop=-5.0 | n=  21 WR81.0% Net=$   +605 PF 6.44 DD$  57 u=1.0 dur=78
+  XAUUSD  H4   SMA200 long  levels=-1.5                   stop=-6.0 | n=  21 WR81.0% Net=$   +605 PF 6.44 DD$  57 u=1.0 dur=78
+  XAUUSD  D1   SMA50  long  levels=-1.0/-2.0              stop=-3.0 | n=  22 WR81.8% Net=$  +1022 PF 6.35 DD$ 107 u=1.4 dur=15
+  XAUUSD  H4   SMA300 long  levels=-1.0                   stop=-5.0 | n=  20 WR95.0% Net=$   +548 PF 6.34 DD$ 103 u=1.0 dur=87
+  XAUUSD  H4   SMA300 long  levels=-1.0                   stop=-6.0 | n=  20 WR95.0% Net=$   +548 PF 6.34 DD$ 103 u=1.0 dur=87
+
+======================================================================================================================================================
+ANY-PER-ANY top 10 (clau per validar robustesa):
+======================================================================================================================================================
+
+XAUUSD D1 SMA50 long levels=-1.0/-2.0/-3.0 stop=-4.0 | TOTAL n=  18 WR94.4% Net=$  +1077 PF34.87 DD$  32 u=1.5 dur=19
+  Anys positius: 5/5 | negatius: 0/5
+  + 2021: n=  3 WR100.0% Net=$   +200 stops=0
+  + 2022: n=  4 WR 75.0% Net=$   +112 stops=0
+  + 2023: n=  4 WR100.0% Net=$   +257 stops=0
+  + 2024: n=  6 WR100.0% Net=$   +458 stops=0
+  + 2025: n=  1 WR100.0% Net=$    +50 stops=0
+
+XAUUSD D1 SMA50 long levels=-1.0/-2.0/-3.0 stop=-5.0 | TOTAL n=  18 WR94.4% Net=$  +1077 PF34.87 DD$  32 u=1.5 dur=19
+  Anys positius: 5/5 | negatius: 0/5
+  + 2021: n=  3 WR100.0% Net=$   +200 stops=0
+  + 2022: n=  4 WR 75.0% Net=$   +112 stops=0
+  + 2023: n=  4 WR100.0% Net=$   +257 stops=0
+  + 2024: n=  6 WR100.0% Net=$   +458 stops=0
+  + 2025: n=  1 WR100.0% Net=$    +50 stops=0
+
+XAUUSD D1 SMA50 long levels=-1.0/-2.0/-3.0 stop=-6.0 | TOTAL n=  18 WR94.4% Net=$  +1077 PF34.87 DD$  32 u=1.5 dur=19
+  Anys positius: 5/5 | negatius: 0/5
+  + 2021: n=  3 WR100.0% Net=$   +200 stops=0
+  + 2022: n=  4 WR 75.0% Net=$   +112 stops=0
+  + 2023: n=  4 WR100.0% Net=$   +257 stops=0
+  + 2024: n=  6 WR100.0% Net=$   +458 stops=0
+  + 2025: n=  1 WR100.0% Net=$    +50 stops=0
+
+XAUUSD D1 SMA50 long levels=-1.0/-2.0 stop=-4.0 | TOTAL n=  18 WR88.9% Net=$   +940 PF26.88 DD$  36 u=1.4 dur=19
+  Anys positius: 5/5 | negatius: 0/5
+  + 2021: n=  3 WR100.0% Net=$   +200 stops=0
+  + 2022: n=  4 WR 50.0% Net=$    +59 stops=0
+  + 2023: n=  4 WR100.0% Net=$   +173 stops=0
+  + 2024: n=  6 WR100.0% Net=$   +458 stops=0
+  + 2025: n=  1 WR100.0% Net=$    +50 stops=0
+
+XAUUSD D1 SMA50 long levels=-1.0/-2.0 stop=-5.0 | TOTAL n=  18 WR88.9% Net=$   +940 PF26.88 DD$  36 u=1.4 dur=19
+  Anys positius: 5/5 | negatius: 0/5
+  + 2021: n=  3 WR100.0% Net=$   +200 stops=0
+  + 2022: n=  4 WR 50.0% Net=$    +59 stops=0
+  + 2023: n=  4 WR100.0% Net=$   +173 stops=0
+  + 2024: n=  6 WR100.0% Net=$   +458 stops=0
+  + 2025: n=  1 WR100.0% Net=$    +50 stops=0
+
+XAUUSD D1 SMA50 long levels=-1.0/-2.0 stop=-6.0 | TOTAL n=  18 WR88.9% Net=$   +940 PF26.88 DD$  36 u=1.4 dur=19
+  Anys positius: 5/5 | negatius: 0/5
+  + 2021: n=  3 WR100.0% Net=$   +200 stops=0
+  + 2022: n=  4 WR 50.0% Net=$    +59 stops=0
+  + 2023: n=  4 WR100.0% Net=$   +173 stops=0
+  + 2024: n=  6 WR100.0% Net=$   +458 stops=0
+  + 2025: n=  1 WR100.0% Net=$    +50 stops=0
+
+XAUUSD D1 SMA50 long levels=-1.0 stop=-4.0 | TOTAL n=  18 WR83.3% Net=$   +662 PF13.79 DD$  51 u=1.0 dur=19
+  Anys positius: 4/5 | negatius: 1/5
+  + 2021: n=  3 WR100.0% Net=$   +115 stops=0
+  - 2022: n=  4 WR 50.0% Net=$    -18 stops=0
+  + 2023: n=  4 WR 75.0% Net=$   +101 stops=0
+  + 2024: n=  6 WR100.0% Net=$   +415 stops=0
+  + 2025: n=  1 WR100.0% Net=$    +50 stops=0
+
+XAUUSD D1 SMA50 long levels=-1.0 stop=-5.0 | TOTAL n=  18 WR83.3% Net=$   +662 PF13.79 DD$  51 u=1.0 dur=19
+  Anys positius: 4/5 | negatius: 1/5
+  + 2021: n=  3 WR100.0% Net=$   +115 stops=0
+  - 2022: n=  4 WR 50.0% Net=$    -18 stops=0
+  + 2023: n=  4 WR 75.0% Net=$   +101 stops=0
+  + 2024: n=  6 WR100.0% Net=$   +415 stops=0
+  + 2025: n=  1 WR100.0% Net=$    +50 stops=0
+
+XAUUSD D1 SMA50 long levels=-1.0 stop=-6.0 | TOTAL n=  18 WR83.3% Net=$   +662 PF13.79 DD$  51 u=1.0 dur=19
+  Anys positius: 4/5 | negatius: 1/5
+  + 2021: n=  3 WR100.0% Net=$   +115 stops=0
+  - 2022: n=  4 WR 50.0% Net=$    -18 stops=0
+  + 2023: n=  4 WR 75.0% Net=$   +101 stops=0
+  + 2024: n=  6 WR100.0% Net=$   +415 stops=0
+  + 2025: n=  1 WR100.0% Net=$    +50 stops=0
+
+XAUUSD H4 SMA200 long levels=-1.5/-2.5/-3.5 stop=-5.0 | TOTAL n=  21 WR85.7% Net=$  +1430 PF11.79 DD$  78 u=1.6 dur=78
+  Anys positius: 6/6 | negatius: 0/6
+  + 2021: n=  3 WR100.0% Net=$   +366 stops=0
+  + 2022: n=  7 WR 71.4% Net=$    +75 stops=0
+  + 2023: n=  4 WR 75.0% Net=$   +201 stops=0
+  + 2024: n=  4 WR100.0% Net=$   +260 stops=0
+  + 2025: n=  2 WR100.0% Net=$   +114 stops=0
+  + 2026: n=  1 WR100.0% Net=$   +414 stops=0
+
+======================================================================================================================================================
+WALK-FORWARD VALIDATION (in-sample 60% / out-sample 40%):
+======================================================================================================================================================
+
+XAUUSD D1 SMA50 long levels=-1.0/-2.0/-3.0 stop=-4.0
+  IN-SAMPLE  (933/1555): n=  12 WR91.7% Net=$   +629 PF20.78 DD$  32 u=1.8 dur=24
+  OUT-SAMPLE        : n=   6 WR100.0% Net=$   +448 PF 0.00 DD$   0 u=1.0 dur=9
+
+XAUUSD D1 SMA50 long levels=-1.0/-2.0/-3.0 stop=-5.0
+  IN-SAMPLE  (933/1555): n=  12 WR91.7% Net=$   +629 PF20.78 DD$  32 u=1.8 dur=24
+  OUT-SAMPLE        : n=   6 WR100.0% Net=$   +448 PF 0.00 DD$   0 u=1.0 dur=9
+
+XAUUSD D1 SMA50 long levels=-1.0/-2.0/-3.0 stop=-6.0
+  IN-SAMPLE  (933/1555): n=  12 WR91.7% Net=$   +629 PF20.78 DD$  32 u=1.8 dur=24
+  OUT-SAMPLE        : n=   6 WR100.0% Net=$   +448 PF 0.00 DD$   0 u=1.0 dur=9
+
+XAUUSD D1 SMA50 long levels=-1.0/-2.0 stop=-4.0
+  IN-SAMPLE  (933/1555): n=  12 WR83.3% Net=$   +492 PF14.54 DD$  36 u=1.6 dur=24
+  OUT-SAMPLE        : n=   6 WR100.0% Net=$   +448 PF 0.00 DD$   0 u=1.0 dur=9
+
+XAUUSD D1 SMA50 long levels=-1.0/-2.0 stop=-5.0
+  IN-SAMPLE  (933/1555): n=  12 WR83.3% Net=$   +492 PF14.54 DD$  36 u=1.6 dur=24
+  OUT-SAMPLE        : n=   6 WR100.0% Net=$   +448 PF 0.00 DD$   0 u=1.0 dur=9
+
+XAUUSD D1 SMA50 long levels=-1.0/-2.0 stop=-6.0
+  IN-SAMPLE  (933/1555): n=  12 WR83.3% Net=$   +492 PF14.54 DD$  36 u=1.6 dur=24
+  OUT-SAMPLE        : n=   6 WR100.0% Net=$   +448 PF 0.00 DD$   0 u=1.0 dur=9
+
+XAUUSD D1 SMA50 long levels=-1.0 stop=-4.0
+  IN-SAMPLE  (933/1555): n=  12 WR75.0% Net=$   +214 PF 5.14 DD$  51 u=1.0 dur=24
+  OUT-SAMPLE        : n=   6 WR100.0% Net=$   +448 PF 0.00 DD$   0 u=1.0 dur=9
+
+XAUUSD D1 SMA50 long levels=-1.0 stop=-5.0
+  IN-SAMPLE  (933/1555): n=  12 WR75.0% Net=$   +214 PF 5.14 DD$  51 u=1.0 dur=24
+  OUT-SAMPLE        : n=   6 WR100.0% Net=$   +448 PF 0.00 DD$   0 u=1.0 dur=9
+
+XAUUSD D1 SMA50 long levels=-1.0 stop=-6.0
+  IN-SAMPLE  (933/1555): n=  12 WR75.0% Net=$   +214 PF 5.14 DD$  51 u=1.0 dur=24
+  OUT-SAMPLE        : n=   6 WR100.0% Net=$   +448 PF 0.00 DD$   0 u=1.0 dur=9
+
+XAUUSD H4 SMA200 long levels=-1.5/-2.5/-3.5 stop=-5.0
+  IN-SAMPLE  (4797/7996): n=  15 WR80.0% Net=$   +712 PF 6.37 DD$  78 u=1.7 dur=89
+  OUT-SAMPLE        : n=   6 WR100.0% Net=$   +718 PF 0.00 DD$   0 u=1.3 dur=52
+
+======================================================================================================================================================
+MILLOR CONFIG PER ASSET+TF:
+======================================================================================================================================================
+  XAUUSD  D1  : SMA50 long levels=-1.0/-2.0/-3.0 stop=-4.0 | n=  18 WR94.4% Net=$  +1077 PF34.87 DD$  32 u=1.5 dur=19
+  XAUUSD  H4  : SMA200 long levels=-1.5/-2.5/-3.5 stop=-5.0 | n=  21 WR85.7% Net=$  +1430 PF11.79 DD$  78 u=1.6 dur=78
+  XAUUSD  H1  : SMA300 long levels=-1.0 stop=-6.0 | n=  85 WR80.0% Net=$  +1129 PF 1.93 DD$ 423 u=1.0 dur=108
+  XAUUSD  M30 : SMA300 long levels=-2.0/-3.0 stop=-6.0 | n=  87 WR75.9% Net=$  +1211 PF 1.58 DD$ 853 u=1.4 dur=170
+
+DONE

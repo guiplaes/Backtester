@@ -1,0 +1,22 @@
+Loading...
+EURUSD M5: 374028 bars from 2021-05-09 to 2026-05-07
+
+Rendiment EURUSD per any:
+  2021: 1.2160 -> 1.1367 (-6.5%) BEAR
+  2022: 1.1369 -> 1.0703 (-5.9%) BEAR
+  2023: 1.0697 -> 1.1037 (+3.2%) BULL
+  2024: 1.1042 -> 1.0353 (-6.2%) BEAR
+  2025: 1.0351 -> 1.1745 (+13.5%) BULL
+  2026: 1.1741 -> 1.1739 (-0.0%) LATERAL
+
+Aggregating...
+  M5: 374028 bars
+  M15: 124711 bars
+  M30: 62359 bars
+  H1: 31180 bars
+  H4: 8059 bars
+  D1: 1564 bars
+
+Running EURUSD sweep...
+
+--- M5 (374028 bars) ---

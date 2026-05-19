@@ -1,0 +1,49 @@
+V6 HYBRID 10-YEAR test (21 strats)...
+
+Lot 0.05...
+
+Lot 0.1...
+
+Lot 0.15...
+
+========================================================================================================================
+V6 HYBRID 10 ANYS (10.0y reals)
+========================================================================================================================
+  Lot       Annual     DD%  Loss init%  Calmar    Total Net
+  0.05   +12.32% 19.71%     18.67%   0.62 $   +77,558
+  0.1    +24.64% 38.92%     37.34%   0.63 $  +155,116
+  0.15   +36.95% 57.66%     56.01%   0.64 $  +232,674
+
+Millor Calmar: lot 0.15
+
+Per any (lot 0.15):
+  2016: $   -15,152 (-24.05%)
+  2017: $   +21,042 (+33.40%)
+  2018: $    -6,613 (-10.50%)
+  2019: $    +7,035 (+11.17%)
+  2020: $   +37,400 (+59.37%)
+  2021: $   +18,742 (+29.75%)
+  2022: $   +42,906 (+68.10%)
+  2023: $   +51,371 (+81.54%)
+  2024: $   +31,563 (+50.10%)
+  2025: $   +37,200 (+59.05%)
+  2026: $    +7,179 (+11.39%)
+
+Anys positius: 9, negatius: 2
+
+========================================================================================================================
+ANALISI EVENTS CRITICS (DD per dia):
+========================================================================================================================
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\MT4 Claude\1_PROYECTO\backtest_V6_10YEARS.py", line 169, in <module>
+    daily = best['eq'].resample('D').last().dropna()
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Roaming\Python\Python312\site-packages\pandas\core\generic.py", line 9423, in resample
+    return get_resampler(
+           ^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Roaming\Python\Python312\site-packages\pandas\core\resample.py", line 2335, in get_resampler
+    return tg._get_resampler(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Roaming\Python\Python312\site-packages\pandas\core\resample.py", line 2541, in _get_resampler
+    raise TypeError(
+TypeError: Only valid with DatetimeIndex, TimedeltaIndex or PeriodIndex, but got an instance of 'Index'

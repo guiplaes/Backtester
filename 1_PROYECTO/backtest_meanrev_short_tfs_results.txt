@@ -1,0 +1,153 @@
+Loading...
+
+Aggregating + indicators...
+  M5: 354543 bars
+  M15: 118188 bars
+  M30: 59100 bars
+
+Running short-TF sweep...
+
+--- M5 ---
+
+--- M15 ---
+
+--- M30 ---
+
+Done in 1243s. 104 valid configs.
+
+======================================================================================================================================================
+TOP 30 SHORT-TF CONFIGS:
+======================================================================================================================================================
+  M30 SMA800 long  levels=-0.5/-1.0/-1.5/-2.0      stop=-3.0 | n=  441 WR46.0% Net=$  +3639 PF 1.65 DD$ 1805 u=1.6 dur=45
+  M30 SMA800 long  levels=-1.0                     stop=-5.0 | n=   76 WR73.7% Net=$   +761 PF 1.61 DD$  482 u=1.0 dur=220
+  M30 SMA500 long  levels=-1.0                     stop=-4.0 | n=  132 WR66.7% Net=$   +828 PF 1.57 DD$  582 u=1.0 dur=142
+  M30 SMA300 long  levels=-2.0/-3.0                stop=-5.0 | n=   97 WR69.1% Net=$  +1202 PF 1.55 DD$  853 u=1.4 dur=152
+  M30 SMA300 long  levels=-2.0/-3.0                stop=-4.0 | n=  126 WR59.5% Net=$  +1183 PF 1.54 DD$  853 u=1.4 dur=117
+  M30 SMA500 long  levels=-0.5/-1.0/-1.5/-2.0      stop=-4.0 | n=  199 WR79.4% Net=$  +2725 PF 1.52 DD$ 2050 u=2.3 dur=107
+  M30 SMA500 long  levels=-1.5                     stop=-4.0 | n=  106 WR64.2% Net=$   +642 PF 1.52 DD$  487 u=1.0 dur=153
+  M15 SMA300 long  levels=-2.0/-3.0                stop=-5.0 | n=  216 WR68.1% Net=$  +1551 PF 1.50 DD$  589 u=1.5 dur=140
+  M30 SMA800 long  levels=-1.5/-2.5                stop=-3.0 | n=  378 WR37.6% Net=$  +1272 PF 1.50 DD$  840 u=1.2 dur=36
+  M30 SMA300 long  levels=-1.0/-2.0/-3.0           stop=-5.0 | n=  172 WR78.5% Net=$  +1976 PF 1.49 DD$ 1475 u=1.8 dur=116
+  M30 SMA300 long  levels=-1.0/-2.0/-3.0           stop=-4.0 | n=  201 WR71.1% Net=$  +1983 PF 1.49 DD$ 1475 u=1.7 dur=99
+  M30 SMA500 long  levels=-1.0/-2.0                stop=-4.0 | n=  132 WR72.7% Net=$  +1117 PF 1.46 DD$  991 u=1.5 dur=142
+  M30 SMA500 long  levels=-1.0                     stop=-5.0 | n=  108 WR74.1% Net=$   +725 PF 1.46 DD$  628 u=1.0 dur=172
+  M30 SMA500 long  levels=-0.5/-1.0/-1.5/-2.0      stop=-3.0 | n=  401 WR56.1% Net=$  +3342 PF 1.46 DD$ 2269 u=1.9 dur=53
+  M30 SMA800 long  levels=-0.5/-1.0/-1.5/-2.0      stop=-4.0 | n=  163 WR71.2% Net=$  +2522 PF 1.43 DD$ 3310 u=2.1 dur=124
+  M30 SMA800 long  levels=-1.0                     stop=-3.0 | n=  398 WR40.5% Net=$   +897 PF 1.42 DD$  593 u=1.0 dur=42
+  M30 SMA800 long  levels=-0.5/-1.0/-1.5/-2.0      stop=-5.0 | n=  120 WR85.8% Net=$  +1994 PF 1.41 DD$ 2046 u=2.3 dur=170
+  M15 SMA300 long  levels=-1.0/-2.0/-3.0           stop=-5.0 | n=  397 WR79.8% Net=$  +2341 PF 1.41 DD$ 1076 u=1.8 dur=104
+  M30 SMA800 long  levels=-1.0/-2.0                stop=-3.0 | n=  398 WR40.5% Net=$  +1266 PF 1.41 DD$  934 u=1.2 dur=42
+  M30 SMA500 long  levels=-1.5                     stop=-5.0 | n=   80 WR72.5% Net=$   +526 PF 1.40 DD$  516 u=1.0 dur=200
+  M30 SMA300 long  levels=-1.0                     stop=-5.0 | n=  172 WR70.9% Net=$   +790 PF 1.40 DD$  621 u=1.0 dur=116
+  M30 SMA300 long  levels=-1.0/-2.0                stop=-5.0 | n=  172 WR77.3% Net=$  +1330 PF 1.40 DD$ 1230 u=1.5 dur=116
+  M15 SMA300 long  levels=-1.5/-2.5/-3.5           stop=-5.0 | n=  289 WR75.8% Net=$  +1771 PF 1.39 DD$  915 u=1.8 dur=125
+  M30 SMA300 long  levels=-1.0/-2.0                stop=-4.0 | n=  201 WR70.1% Net=$  +1327 PF 1.39 DD$ 1230 u=1.5 dur=99
+  M15 SMA300 long  levels=-1.5/-2.5                stop=-5.0 | n=  289 WR74.7% Net=$  +1516 PF 1.39 DD$  756 u=1.5 dur=125
+  M15 SMA800 long  levels=-1.5                     stop=-5.0 | n=  108 WR72.2% Net=$   +723 PF 1.39 DD$  655 u=1.0 dur=284
+  M30 SMA300 long  levels=-2.0                     stop=-5.0 | n=   97 WR66.0% Net=$   +550 PF 1.38 DD$  609 u=1.0 dur=152
+  M30 SMA300 long  levels=-1.0                     stop=-4.0 | n=  201 WR65.2% Net=$   +771 PF 1.38 DD$  621 u=1.0 dur=99
+  M30 SMA500 long  levels=-1.0/-2.0                stop=-3.0 | n=  335 WR48.1% Net=$  +1401 PF 1.37 DD$ 1154 u=1.3 dur=55
+  M30 SMA300 long  levels=-2.0                     stop=-4.0 | n=  126 WR57.1% Net=$   +535 PF 1.37 DD$  609 u=1.0 dur=117
+
+======================================================================================================================================================
+ANY-PER-ANY top 10 robustesa:
+======================================================================================================================================================
+
+M30 SMA800 long levels=-0.5/-1.0/-1.5/-2.0 stop=-3.0 | TOTAL n=  441 WR46.0% Net=$  +3639 PF 1.65 DD$ 1805 u=1.6 dur=45
+  Anys positius: 4/6
+  - 2021: n= 118 WR 39.0% Net=$   -140
+  - 2022: n=  75 WR 48.0% Net=$   -299
+  + 2023: n= 116 WR 39.7% Net=$   +408
+  + 2024: n=  59 WR 54.2% Net=$   +935
+  + 2025: n=  21 WR100.0% Net=$  +1737
+  + 2026: n=  52 WR 42.3% Net=$   +997
+
+M30 SMA800 long levels=-1.0 stop=-5.0 | TOTAL n=   76 WR73.7% Net=$   +761 PF 1.61 DD$  482 u=1.0 dur=220
+  Anys positius: 4/6
+  - 2021: n=  14 WR 64.3% Net=$    -95
+  - 2022: n=  18 WR 66.7% Net=$    -72
+  + 2023: n=  19 WR 68.4% Net=$    +94
+  + 2024: n=  12 WR 83.3% Net=$   +234
+  + 2025: n=   9 WR100.0% Net=$   +412
+  + 2026: n=   4 WR 75.0% Net=$   +188
+
+M30 SMA500 long levels=-1.0 stop=-4.0 | TOTAL n=  132 WR66.7% Net=$   +828 PF 1.57 DD$  582 u=1.0 dur=142
+  Anys positius: 3/6
+  - 2021: n=  26 WR 53.8% Net=$    -55
+  - 2022: n=  28 WR 67.9% Net=$    -23
+  - 2023: n=  32 WR 59.4% Net=$    -29
+  + 2024: n=  22 WR 72.7% Net=$   +155
+  + 2025: n=  14 WR 92.9% Net=$   +489
+  + 2026: n=  10 WR 70.0% Net=$   +291
+
+M30 SMA300 long levels=-2.0/-3.0 stop=-5.0 | TOTAL n=   97 WR69.1% Net=$  +1202 PF 1.55 DD$  853 u=1.4 dur=152
+  Anys positius: 3/6
+  - 2021: n=  24 WR 45.8% Net=$   -203
+  - 2022: n=  20 WR 75.0% Net=$    -19
+  - 2023: n=  17 WR 58.8% Net=$   -134
+  + 2024: n=  18 WR 88.9% Net=$   +296
+  + 2025: n=  12 WR 91.7% Net=$   +693
+  + 2026: n=   6 WR 66.7% Net=$   +568
+
+M30 SMA300 long levels=-2.0/-3.0 stop=-4.0 | TOTAL n=  126 WR59.5% Net=$  +1183 PF 1.54 DD$  853 u=1.4 dur=117
+  Anys positius: 3/6
+  - 2021: n=  40 WR 42.5% Net=$   -213
+  - 2022: n=  22 WR 68.2% Net=$    -16
+  - 2023: n=  20 WR 55.0% Net=$   -117
+  + 2024: n=  26 WR 65.4% Net=$   +268
+  + 2025: n=  12 WR 91.7% Net=$   +693
+  + 2026: n=   6 WR 66.7% Net=$   +568
+
+M30 SMA500 long levels=-0.5/-1.0/-1.5/-2.0 stop=-4.0 | TOTAL n=  199 WR79.4% Net=$  +2725 PF 1.52 DD$ 2050 u=2.3 dur=107
+  Anys positius: 3/6
+  - 2021: n=  32 WR 65.6% Net=$   -257
+  - 2022: n=  45 WR 82.2% Net=$   -103
+  - 2023: n=  41 WR 70.7% Net=$    -36
+  + 2024: n=  41 WR 85.4% Net=$   +757
+  + 2025: n=  27 WR 96.3% Net=$  +2078
+  + 2026: n=  13 WR 76.9% Net=$   +286
+
+M30 SMA500 long levels=-1.5 stop=-4.0 | TOTAL n=  106 WR64.2% Net=$   +642 PF 1.52 DD$  487 u=1.0 dur=153
+  Anys positius: 4/6
+  - 2021: n=  24 WR 58.3% Net=$    -11
+  - 2022: n=  20 WR 60.0% Net=$    -42
+  + 2023: n=  29 WR 58.6% Net=$    +31
+  + 2024: n=  17 WR 76.5% Net=$   +169
+  + 2025: n=   9 WR 88.9% Net=$   +378
+  + 2026: n=   7 WR 57.1% Net=$   +118
+
+M15 SMA300 long levels=-2.0/-3.0 stop=-5.0 | TOTAL n=  216 WR68.1% Net=$  +1551 PF 1.50 DD$  589 u=1.5 dur=140
+  Anys positius: 3/6
+  - 2021: n=  38 WR 60.5% Net=$   -182
+  - 2022: n=  44 WR 72.7% Net=$    -27
+  - 2023: n=  35 WR 60.0% Net=$    -35
+  + 2024: n=  49 WR 69.4% Net=$   +356
+  + 2025: n=  35 WR 74.3% Net=$   +441
+  + 2026: n=  15 WR 73.3% Net=$   +998
+
+M30 SMA800 long levels=-1.5/-2.5 stop=-3.0 | TOTAL n=  378 WR37.6% Net=$  +1272 PF 1.50 DD$  840 u=1.2 dur=36
+  Anys positius: 4/6
+  - 2021: n= 111 WR 35.1% Net=$   -147
+  - 2022: n=  64 WR 39.1% Net=$   -144
+  + 2023: n= 104 WR 33.7% Net=$   +161
+  + 2024: n=  46 WR 41.3% Net=$   +362
+  + 2025: n=   7 WR100.0% Net=$   +824
+  + 2026: n=  46 WR 37.0% Net=$   +217
+
+M30 SMA300 long levels=-1.0/-2.0/-3.0 stop=-5.0 | TOTAL n=  172 WR78.5% Net=$  +1976 PF 1.49 DD$ 1475 u=1.8 dur=116
+  Anys positius: 3/6
+  - 2021: n=  35 WR 62.9% Net=$   -305
+  - 2022: n=  34 WR 73.5% Net=$    -78
+  - 2023: n=  32 WR 75.0% Net=$   -203
+  + 2024: n=  35 WR 91.4% Net=$   +534
+  + 2025: n=  26 WR 92.3% Net=$  +1304
+  + 2026: n=  10 WR 80.0% Net=$   +724
+
+======================================================================================================================================================
+MILLOR PER TF (focus en VOLUM ALT):
+======================================================================================================================================================
+  M5: cap config amb n>=100 i PF>=1.20
+  M15: SMA300 long levels=-2.0/-3.0 stop=-5.0 | n=  216 WR68.1% Net=$  +1551 PF 1.50 DD$  589 u=1.5 dur=140
+  M30: SMA800 long levels=-0.5/-1.0/-1.5/-2.0 stop=-3.0 | n=  441 WR46.0% Net=$  +3639 PF 1.65 DD$ 1805 u=1.6 dur=45
+
+DONE

@@ -1,0 +1,24 @@
+{
+  "run_id": "smoke_btc_eth_7d",
+  "initial_capital": 500.0,
+  "initial_reserve_pct": 0.05,
+  "snapshot_every_min": 60,
+  "rebalance_every_min": 2,
+  "bots": {
+    "BTC_USDT": {
+      "symbol": "BTC_USDT",
+      "width_pct": 0.0516,
+      "rows": 12
+    },
+    "ETH_USDT": {
+      "symbol": "ETH_USDT",
+      "width_pct": 0.067,
+      "rows": 12
+    }
+  },
+  "weights": {
+    "BTC_USDT": 0.6,
+    "ETH_USDT": 0.4
+  },
+  "started_at": "2026-05-13T18:17:43.981230+00:00"
+}

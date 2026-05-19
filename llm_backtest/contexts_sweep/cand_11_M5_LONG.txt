@@ -1,0 +1,45 @@
+XAUUSD M5 — LIQUIDITY SWEEP setup
+Date/Time UTC: 2026-05-11T07:50:00.000Z
+Direction: LONG
+Entry (close): 4669.09
+Swept level (swing LOW): 4666.52
+Wick size: 2.18 (0.43×ATR)
+ATR(14): 5.08
+RSI(14): 44.8
+
+LAST 20 BARS (oldest → current):
+  11 06:15 O=4665.16 H=4670.44 L=4665.13 C=4670.37
+  11 06:20 O=4670.37 H=4670.54 L=4664.81 C=4667.03
+  11 06:25 O=4667.03 H=4668.56 L=4664.54 C=4667.35
+  11 06:30 O=4667.35 H=4672.02 L=4667.35 C=4669.63
+  11 06:35 O=4669.63 H=4674.19 L=4668.64 C=4672.80
+  11 06:40 O=4672.80 H=4675.50 L=4670.08 C=4674.13
+  11 06:45 O=4674.13 H=4676.97 L=4672.74 C=4673.87
+  11 06:50 O=4673.87 H=4680.43 L=4671.25 C=4678.98
+  11 06:55 O=4678.98 H=4680.05 L=4675.90 C=4678.43
+  11 07:00 O=4678.43 H=4680.33 L=4677.56 C=4678.83
+  11 07:05 O=4678.83 H=4678.83 L=4674.36 C=4674.36
+  11 07:10 O=4674.36 H=4676.66 L=4674.36 C=4675.84
+  11 07:15 O=4675.84 H=4676.59 L=4671.91 C=4673.05
+  11 07:20 O=4673.05 H=4676.77 L=4672.66 C=4675.93
+  11 07:25 O=4675.93 H=4678.05 L=4674.77 C=4675.65
+  11 07:30 O=4675.65 H=4677.72 L=4672.30 C=4674.13
+  11 07:35 O=4674.13 H=4676.35 L=4672.86 C=4674.64
+  11 07:40 O=4674.64 H=4676.39 L=4671.57 C=4671.98
+  11 07:45 O=4671.98 H=4672.72 L=4666.52 C=4667.46
+  11 07:50 O=4667.46 H=4670.46 L=4664.34 C=4669.09
+
+THESIS: This is a potential liquidity sweep — price wicked beyond a recent swing extreme (low) then closed back inside, suggesting a stop hunt followed by reversal.
+
+YOUR TASK:
+Evaluate ONLY whether this is a CLEAN, HIGH-QUALITY liquidity sweep with reversal potential. Consider:
+- Was the sweep aggressive/fast (single bar wick) or slow erosion?
+- Did the bar close FAR enough back inside (rejection strength)?
+- Is there context support (RSI extreme, momentum exhaustion before sweep)?
+- Or is this likely the START of a continuation (trend, momentum, no exhaustion)?
+
+Use ONLY data above. NO future info. NO other tools.
+
+Reply EXACTLY 2 lines:
+SCORE: <1-10> (10 = textbook clean sweep, 1 = likely continuation)
+REASON: <one sentence, max 25 words>

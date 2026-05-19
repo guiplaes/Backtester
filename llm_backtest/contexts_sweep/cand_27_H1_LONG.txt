@@ -1,0 +1,45 @@
+XAUUSD H1 — LIQUIDITY SWEEP setup
+Date/Time UTC: 2026-04-21T13:00:00.000Z
+Direction: LONG
+Entry (close): 4779.47
+Swept level (swing LOW): 4766.55
+Wick size: 6.19 (0.34×ATR)
+ATR(14): 18.00
+RSI(14): 40.2
+
+LAST 20 BARS (oldest → current):
+  20 17:00 O=4805.65 H=4812.27 L=4803.90 C=4806.89
+  20 18:00 O=4806.84 H=4816.52 L=4806.84 C=4814.10
+  20 19:00 O=4814.06 H=4821.43 L=4810.61 C=4814.38
+  20 20:00 O=4814.43 H=4821.98 L=4812.30 C=4820.11
+  20 22:00 O=4825.14 H=4833.40 L=4823.36 C=4827.82
+  20 23:00 O=4827.79 H=4831.94 L=4819.85 C=4822.03
+  21 00:00 O=4822.07 H=4830.90 L=4817.00 C=4823.90
+  21 01:00 O=4823.90 H=4824.54 L=4805.80 C=4810.27
+  21 02:00 O=4810.30 H=4810.56 L=4802.69 C=4806.95
+  21 03:00 O=4807.06 H=4807.86 L=4792.77 C=4797.45
+  21 04:00 O=4797.48 H=4797.81 L=4788.87 C=4789.49
+  21 05:00 O=4789.41 H=4797.15 L=4783.28 C=4784.18
+  21 06:00 O=4784.15 H=4790.86 L=4774.80 C=4778.42
+  21 07:00 O=4778.40 H=4792.83 L=4772.89 C=4786.26
+  21 08:00 O=4786.23 H=4793.22 L=4774.69 C=4786.09
+  21 09:00 O=4786.11 H=4789.79 L=4781.29 C=4783.87
+  21 10:00 O=4783.89 H=4790.67 L=4780.97 C=4789.94
+  21 11:00 O=4789.95 H=4798.03 L=4775.49 C=4794.62
+  21 12:00 O=4794.61 H=4796.99 L=4766.55 C=4778.98
+  21 13:00 O=4778.97 H=4794.52 L=4760.35 C=4779.47
+
+THESIS: This is a potential liquidity sweep — price wicked beyond a recent swing extreme (low) then closed back inside, suggesting a stop hunt followed by reversal.
+
+YOUR TASK:
+Evaluate ONLY whether this is a CLEAN, HIGH-QUALITY liquidity sweep with reversal potential. Consider:
+- Was the sweep aggressive/fast (single bar wick) or slow erosion?
+- Did the bar close FAR enough back inside (rejection strength)?
+- Is there context support (RSI extreme, momentum exhaustion before sweep)?
+- Or is this likely the START of a continuation (trend, momentum, no exhaustion)?
+
+Use ONLY data above. NO future info. NO other tools.
+
+Reply EXACTLY 2 lines:
+SCORE: <1-10> (10 = textbook clean sweep, 1 = likely continuation)
+REASON: <one sentence, max 25 words>

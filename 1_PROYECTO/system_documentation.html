@@ -1,0 +1,1304 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trader Brain — Sistema de Trading Algorítmico XAUUSD</title>
+<style>
+  :root {
+    --bg: #0a0e17;
+    --bg-deep: #060912;
+    --surface: #11161f;
+    --surface-2: #161c28;
+    --surface-hi: #1d2433;
+    --border: #1f2734;
+    --border-hi: #2a3548;
+    --fg: #e8edf5;
+    --fg-mute: #8a95ad;
+    --fg-dim: #515c77;
+    --accent: #4a9eff;
+    --accent-soft: #38bdf8;
+    --green: #34d399;
+    --amber: #fbbf24;
+    --red: #f87171;
+    --violet: #a78bfa;
+    --pink: #ec4899;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.65;
+    font-size: 16px;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 50px 32px 80px; }
+
+  /* Header */
+  header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+  .eyebrow {
+    color: var(--accent-soft);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: 48px; font-weight: 800; margin: 0 0 16px;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    background: linear-gradient(135deg, var(--fg) 0%, var(--accent-soft) 70%, var(--violet) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .subtitle {
+    color: var(--fg-mute); font-size: 19px; max-width: 720px; margin: 0 auto;
+  }
+  .stack-tags {
+    margin-top: 28px;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+  }
+  .stack-tags .tag {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--fg-mute);
+    font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  }
+
+  /* Section */
+  section { margin: 70px 0; }
+  .section-eyebrow {
+    color: var(--accent-soft);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-size: 32px; font-weight: 700; margin: 0 0 20px;
+    letter-spacing: -0.02em;
+  }
+  .section-intro {
+    color: var(--fg-mute);
+    font-size: 17px;
+    max-width: 720px;
+    margin: 0 0 32px;
+  }
+
+  /* Flow diagram */
+  .flow-canvas {
+    background: var(--bg-deep);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px 32px;
+    overflow-x: auto;
+  }
+  .flow-row {
+    display: flex; justify-content: center; align-items: stretch;
+    gap: 16px; flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .flow-arrow-down {
+    text-align: center;
+    color: var(--accent);
+    font-size: 24px;
+    line-height: 1;
+    margin: 4px 0;
+    opacity: 0.6;
+  }
+  .node {
+    background: var(--surface);
+    border: 2px solid var(--border-hi);
+    border-radius: 12px;
+    padding: 18px 22px;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 200px;
+    text-align: center;
+    user-select: none;
+    position: relative;
+  }
+  .node:hover {
+    border-color: var(--accent);
+    background: var(--surface-hi);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(74, 158, 255, 0.15);
+  }
+  .node-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .node-name {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--fg);
+    margin-bottom: 4px;
+  }
+  .node-tag {
+    font-size: 11px;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+  .node[data-color="violet"] { border-color: rgba(167, 139, 250, 0.5); }
+  .node[data-color="violet"]:hover { border-color: var(--violet); box-shadow: 0 6px 20px rgba(167, 139, 250, 0.2); }
+  .node[data-color="amber"] { border-color: rgba(251, 191, 36, 0.5); }
+  .node[data-color="amber"]:hover { border-color: var(--amber); box-shadow: 0 6px 20px rgba(251, 191, 36, 0.2); }
+  .node[data-color="green"] { border-color: rgba(52, 211, 153, 0.5); }
+  .node[data-color="green"]:hover { border-color: var(--green); box-shadow: 0 6px 20px rgba(52, 211, 153, 0.2); }
+  .node[data-color="accent"] { border-color: rgba(74, 158, 255, 0.5); }
+  .node[data-color="accent"]:hover { border-color: var(--accent); }
+  .node[data-color="pink"] { border-color: rgba(236, 72, 153, 0.5); }
+  .node[data-color="pink"]:hover { border-color: var(--pink); box-shadow: 0 6px 20px rgba(236, 72, 153, 0.2); }
+  .node[data-color="red"] { border-color: rgba(248, 113, 113, 0.5); }
+  .node[data-color="red"]:hover { border-color: var(--red); box-shadow: 0 6px 20px rgba(248, 113, 113, 0.2); }
+
+  .node.active {
+    border-color: var(--accent-soft);
+    background: var(--surface-hi);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  }
+
+  /* Detail panel */
+  .detail-panel {
+    background: var(--surface);
+    border: 1px solid var(--border-hi);
+    border-radius: 12px;
+    padding: 32px 36px;
+    margin: 24px 0 0;
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+  .detail-panel.show { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .detail-panel h3 {
+    margin: 0 0 6px;
+    font-size: 22px;
+    color: var(--fg);
+  }
+  .detail-panel .detail-tag {
+    color: var(--accent-soft);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    margin-bottom: 18px;
+    display: block;
+  }
+  .detail-close {
+    position: absolute;
+    top: 18px; right: 22px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--fg-mute);
+    border-radius: 6px;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .detail-close:hover { color: var(--fg); border-color: var(--fg-mute); }
+  .detail-panel { position: relative; }
+
+  /* Detail content */
+  .detail-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 24px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-label {
+    color: var(--accent-soft);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    padding-top: 2px;
+  }
+  .detail-value { color: var(--fg); }
+  .detail-value ul { margin: 4px 0 0; padding-left: 18px; }
+  .detail-value li { margin-bottom: 4px; color: var(--fg-mute); }
+  .detail-value strong { color: var(--fg); }
+  .detail-value code {
+    background: var(--surface-2);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+    font-size: 0.88em;
+    color: var(--accent-soft);
+  }
+
+  /* Components grid */
+  .components-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+  }
+  .comp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 22px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .comp-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .comp-icon { font-size: 24px; margin-bottom: 8px; display: block; }
+  .comp-name { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+  .comp-desc { color: var(--fg-mute); font-size: 13px; line-height: 1.5; }
+
+  /* Pills row (modes, sessions) */
+  .pills-row {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin: 12px 0 4px;
+  }
+  .pill {
+    background: var(--surface-2);
+    border: 1px solid var(--border-hi);
+    color: var(--fg-mute);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .pill.green { background: rgba(52, 211, 153, 0.1); color: var(--green); border-color: rgba(52, 211, 153, 0.3); }
+  .pill.amber { background: rgba(251, 191, 36, 0.1); color: var(--amber); border-color: rgba(251, 191, 36, 0.3); }
+  .pill.red { background: rgba(248, 113, 113, 0.1); color: var(--red); border-color: rgba(248, 113, 113, 0.3); }
+  .pill.violet { background: rgba(167, 139, 250, 0.1); color: var(--violet); border-color: rgba(167, 139, 250, 0.3); }
+
+  /* ── Architecture SVG diagram ── */
+  .arch-canvas {
+    background: var(--bg-deep);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 20px 0;
+    overflow: hidden;
+  }
+  .arch-canvas svg { width: 100%; height: auto; display: block; }
+  .arch-controls {
+    display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+    margin: 0 0 18px;
+  }
+  .demo-btn {
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 700; font-size: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .demo-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(74, 158, 255, 0.4); }
+  .demo-btn.stop { background: var(--red); color: white; }
+  .demo-status {
+    color: var(--fg-mute);
+    font-size: 13px;
+    font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  }
+  .demo-status .step-name { color: var(--accent-soft); font-weight: 600; }
+
+  .legend-arch {
+    display: flex; flex-wrap: wrap; gap: 14px;
+    margin: 0 0 16px;
+    font-size: 12px; color: var(--fg-mute);
+  }
+  .legend-arch .lg-row { display: flex; align-items: center; gap: 6px; }
+  .legend-arch .lg-sw {
+    width: 14px; height: 14px; border-radius: 3px;
+    display: inline-block;
+  }
+
+  .arch-node rect.bg {
+    fill: var(--surface);
+    stroke: var(--border-hi);
+    stroke-width: 1.5;
+    transition: all 0.4s ease;
+  }
+  .arch-node rect.accent {
+    transition: opacity 0.3s ease, filter 0.3s ease;
+    opacity: 0.5;
+  }
+  .arch-node text.title {
+    fill: var(--fg);
+    font-family: -apple-system, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .arch-node text.sub {
+    fill: var(--fg-dim);
+    font-family: 'JetBrains Mono', 'SF Mono', monospace;
+    font-size: 10px;
+  }
+  .arch-edge {
+    fill: none;
+    stroke: #2a3548;
+    stroke-width: 1.5;
+    transition: stroke 0.4s ease, filter 0.4s ease;
+  }
+  .arch-edge.dashed { stroke-dasharray: 4 4; }
+  .arch-edge.lit {
+    stroke: var(--accent);
+    stroke-width: 2.5;
+    filter: drop-shadow(0 0 6px var(--accent));
+  }
+  .arch-node.lit rect.bg {
+    stroke: var(--accent);
+    stroke-width: 2.5;
+    fill: var(--surface-hi);
+    filter: drop-shadow(0 0 12px var(--accent));
+  }
+  .arch-node.lit rect.accent { opacity: 1; }
+  .arch-node.lit text.title { fill: var(--accent-soft); }
+  .arch-node.recently rect.bg { stroke: var(--accent-soft); opacity: 0.85; }
+
+  /* Phase callout */
+  .phase {
+    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+    border: 1px solid var(--border-hi);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 20px 0;
+  }
+  .phase-num {
+    display: inline-block;
+    width: 28px; height: 28px;
+    background: var(--accent);
+    color: var(--bg);
+    border-radius: 50%;
+    text-align: center; line-height: 28px;
+    font-weight: 800; font-size: 14px;
+    margin-right: 12px;
+  }
+  .phase-title {
+    font-size: 18px; font-weight: 700;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .phase-body { margin: 12px 0 0; color: var(--fg-mute); padding-left: 40px; }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding-top: 24px; margin-top: 80px;
+    color: var(--fg-dim); font-size: 13px;
+    text-align: center;
+  }
+
+  @media (max-width: 700px) {
+    .wrap { padding: 32px 16px; }
+    h1 { font-size: 32px; }
+    h2 { font-size: 24px; }
+    .node { min-width: 0; flex: 1 1 calc(50% - 8px); padding: 14px; }
+    .node-icon { font-size: 22px; }
+    .node-name { font-size: 14px; }
+    .detail-panel { padding: 20px 16px; }
+    .detail-row { grid-template-columns: 1fr; gap: 4px; }
+    .detail-close { top: 14px; right: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Trader Brain · Documentación interactiva</div>
+  <h1>Sistema de Trading Algorítmico<br>basado en agentes LLM</h1>
+  <p class="subtitle">
+    Cinco agentes Claude Opus razonan en paralelo, comparten contexto multi-temporal y operan oro (XAUUSD)
+    de forma autónoma. <strong>Click en cualquier nodo del flujo para ver su funcionamiento</strong>.
+  </p>
+  <div class="stack-tags">
+    <span class="tag">MetaTrader 5</span>
+    <span class="tag">Claude Opus 4.6</span>
+    <span class="tag">TradingView CDP</span>
+    <span class="tag">Python 3.12</span>
+    <span class="tag">Cloudflare Tunnel</span>
+    <span class="tag">Telegram MTProto</span>
+  </div>
+</header>
+
+<!-- ==================== FLUJO PRINCIPAL ==================== -->
+<section>
+  <div class="section-eyebrow">Flujo del sistema</div>
+  <h2>Ciclo completo de un trade</h2>
+  <p class="section-intro">
+    Desde la lectura del mercado hasta el cierre de la posición. Cada etapa la ejecuta un agente especializado
+    con contexto propio. Click en cada caja para entender qué hace, qué datos lee y qué decisiones toma.
+  </p>
+
+  <div class="flow-canvas">
+
+    <!-- Phase 1: Data ingestion -->
+    <div class="flow-row">
+      <div class="node" data-color="accent" onclick="showDetail('data-tv')">
+        <span class="node-icon">📊</span>
+        <div class="node-name">TradingView</div>
+        <div class="node-tag">Datos OHLCV multi-TF</div>
+      </div>
+      <div class="node" data-color="accent" onclick="showDetail('data-macro')">
+        <span class="node-icon">🌍</span>
+        <div class="node-name">Cross-asset</div>
+        <div class="node-tag">DXY · US10Y · SPX · Oil</div>
+      </div>
+      <div class="node" data-color="accent" onclick="showDetail('data-tg')">
+        <span class="node-icon">📡</span>
+        <div class="node-name">Telegram</div>
+        <div class="node-tag">Señales canales</div>
+      </div>
+    </div>
+
+    <div class="flow-arrow-down">▼</div>
+
+    <!-- Phase 2: Map building -->
+    <div class="flow-row">
+      <div class="node" data-color="violet" onclick="showDetail('indicator')">
+        <span class="node-icon">🧭</span>
+        <div class="node-name">Indicator</div>
+        <div class="node-tag">Identifica zonas</div>
+      </div>
+      <div class="node" data-color="amber" onclick="showDetail('reviewer')">
+        <span class="node-icon">📋</span>
+        <div class="node-name">Reviewer</div>
+        <div class="node-tag">Estabiliza el mapa</div>
+      </div>
+    </div>
+
+    <div class="flow-arrow-down">▼</div>
+
+    <div class="flow-row">
+      <div class="node" data-color="accent" onclick="showDetail('zone-map')">
+        <span class="node-icon">🗺️</span>
+        <div class="node-name">Mapa de zonas activo</div>
+        <div class="node-tag">Soportes · Resistencias</div>
+      </div>
+    </div>
+
+    <div class="flow-arrow-down">▼</div>
+
+    <!-- Phase 3: Trigger -->
+    <div class="flow-row">
+      <div class="node" data-color="pink" onclick="showDetail('interpreter')">
+        <span class="node-icon">💬</span>
+        <div class="node-name">Interpreter</div>
+        <div class="node-tag">Parser señales TG</div>
+      </div>
+      <div class="node" data-color="accent" onclick="showDetail('executor-staging')">
+        <span class="node-icon">🤖</span>
+        <div class="node-name">Executor IDLE</div>
+        <div class="node-tag">Staging autónomo</div>
+      </div>
+      <div class="node" data-color="green" onclick="showDetail('hunter')">
+        <span class="node-icon">🏹</span>
+        <div class="node-name">Hunter</div>
+        <div class="node-tag">Scalp reversión</div>
+      </div>
+    </div>
+
+    <div class="flow-arrow-down">▼</div>
+
+    <div class="flow-row">
+      <div class="node" data-color="accent" onclick="showDetail('open-trade')">
+        <span class="node-icon">🟢</span>
+        <div class="node-name">Trade abierto</div>
+        <div class="node-tag">Position activa MT5</div>
+      </div>
+    </div>
+
+    <div class="flow-arrow-down">▼</div>
+
+    <!-- Phase 4: Trade management -->
+    <div class="flow-row">
+      <div class="node" data-color="accent" onclick="showDetail('executor')">
+        <span class="node-icon">🎯</span>
+        <div class="node-name">Executor</div>
+        <div class="node-tag">Decisiones · cada 35s</div>
+      </div>
+      <div class="node" data-color="accent" onclick="showDetail('fast-engine')">
+        <span class="node-icon">⚡</span>
+        <div class="node-name">FAST Engine</div>
+        <div class="node-tag">Reflejos · cada 2s</div>
+      </div>
+    </div>
+
+    <div class="flow-arrow-down">▼</div>
+
+    <div class="flow-row">
+      <div class="node" data-color="green" onclick="showDetail('captures')">
+        <span class="node-icon">💰</span>
+        <div class="node-name">Capturas profit</div>
+        <div class="node-tag">5 capas con mutex</div>
+      </div>
+      <div class="node" data-color="amber" onclick="showDetail('averaging')">
+        <span class="node-icon">📉</span>
+        <div class="node-name">Averaging</div>
+        <div class="node-tag">Defensa con confluencia</div>
+      </div>
+      <div class="node" data-color="violet" onclick="showDetail('snipers')">
+        <span class="node-icon">🔫</span>
+        <div class="node-name">Snipers</div>
+        <div class="node-tag">Órdenes pre-colocadas</div>
+      </div>
+    </div>
+
+    <div class="flow-arrow-down">▼</div>
+
+    <!-- Phase 5: Close -->
+    <div class="flow-row">
+      <div class="node" data-color="red" onclick="showDetail('risk')">
+        <span class="node-icon">🛡️</span>
+        <div class="node-name">Gestión de riesgo</div>
+        <div class="node-tag">DD 3.5% · BE · TPs</div>
+      </div>
+      <div class="node" data-color="accent" onclick="showDetail('close')">
+        <span class="node-icon">🔒</span>
+        <div class="node-name">Cierre</div>
+        <div class="node-tag">Target · Cerramos · DD</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail panel injected here -->
+  <div id="detail-panel" class="detail-panel">
+    <button class="detail-close" onclick="hideDetail()">Cerrar ✕</button>
+    <div id="detail-content"></div>
+  </div>
+</section>
+
+<!-- ==================== ARQUITECTURA SVG ==================== -->
+<section>
+  <div class="section-eyebrow">Arquitectura</div>
+  <h2>Mapa real del sistema en funcionamiento</h2>
+  <p class="section-intro">
+    Diagrama exacto del dashboard <code>/flow</code>. Tres carriles: <strong>INPUTS</strong> (datos en bruto),
+    <strong>DECISION PATH</strong> (cómo se decide una acción) y <strong>KNOWLEDGE PATH</strong> (cómo se mantiene
+    el mapa de zonas). Pulsa <em>Run demo</em> para ver el ciclo completo simulado, paso a paso.
+  </p>
+
+  <div class="arch-controls">
+    <button id="demo-btn" class="demo-btn" onclick="toggleDemo()">▶ Run demo</button>
+    <span class="demo-status" id="demo-status">Demo parada — pulsa Run para iniciar el ciclo</span>
+  </div>
+
+  <div class="legend-arch">
+    <span class="lg-row"><span class="lg-sw" style="background:#38bdf8"></span>Inputs</span>
+    <span class="lg-row"><span class="lg-sw" style="background:#fbbf24"></span>Intake / Lifecycle</span>
+    <span class="lg-row"><span class="lg-sw" style="background:#a78bfa"></span>LLM brains</span>
+    <span class="lg-row"><span class="lg-sw" style="background:#64748b"></span>State hub</span>
+    <span class="lg-row"><span class="lg-sw" style="background:#fb7185"></span>Guard</span>
+    <span class="lg-row"><span class="lg-sw" style="background:#34d399"></span>Execution</span>
+  </div>
+
+  <div class="arch-canvas">
+    <svg id="arch-svg" viewBox="0 0 1660 780" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr-doc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0 0 L10 5 L0 10 z" fill="#3a4a68"/>
+        </marker>
+      </defs>
+
+      <!-- Row dividers -->
+      <line x1="30" y1="210" x2="1630" y2="210" stroke="#1f2734" stroke-width="1"/>
+      <line x1="30" y1="430" x2="1630" y2="430" stroke="#1f2734" stroke-width="1"/>
+      <text x="40" y="200" fill="#515c77" font-size="11" font-family="JetBrains Mono, monospace" font-weight="700" letter-spacing="0.15em">INPUTS</text>
+      <text x="40" y="222" fill="#515c77" font-size="11" font-family="JetBrains Mono, monospace" font-weight="700" letter-spacing="0.15em">DECISION PATH</text>
+      <text x="40" y="446" fill="#515c77" font-size="11" font-family="JetBrains Mono, monospace" font-weight="700" letter-spacing="0.15em">KNOWLEDGE PATH</text>
+
+      <!-- ═══════ EDGES ═══════ -->
+      <g id="arch-edges">
+        <path id="ae-tg-sig" class="arch-edge" d="M 160 60 L 160 35 L 680 35 L 680 60" marker-end="url(#arr-doc)"/>
+        <path id="ae-sig-evt" class="arch-edge" d="M 680 180 L 680 195 L 170 195 L 170 245" marker-end="url(#arr-doc)"/>
+        <path id="ae-tv-evt" class="arch-edge" d="M 400 180 L 400 200 L 170 200 L 170 245" marker-end="url(#arr-doc)"/>
+        <path id="ae-tv-zl" class="arch-edge dashed" d="M 320 180 L 320 220 L 30 220 L 30 530 L 40 530" marker-end="url(#arr-doc)"/>
+        <path id="ae-tv-ind" class="arch-edge dashed" d="M 410 180 L 420 215 L 420 460" marker-end="url(#arr-doc)"/>
+        <path id="ae-evt-exec" class="arch-edge" d="M 310 325 L 350 325" marker-end="url(#arr-doc)"/>
+        <path id="ae-exec-val" class="arch-edge" d="M 650 325 L 690 325" marker-end="url(#arr-doc)"/>
+        <path id="ae-val-fast" class="arch-edge" d="M 880 335 L 920 335" marker-end="url(#arr-doc)"/>
+        <path id="ae-val-ea" class="arch-edge" d="M 870 245 L 870 225 L 1150 225 L 1150 245" marker-end="url(#arr-doc)"/>
+        <path id="ae-fast-ea" class="arch-edge" d="M 1100 335 L 1140 335" marker-end="url(#arr-doc)"/>
+        <path id="ae-zl-zs" class="arch-edge" d="M 310 530 L 960 530 L 960 540" marker-end="url(#arr-doc)"/>
+        <path id="ae-ind-rev" class="arch-edge" d="M 580 530 L 620 530" marker-end="url(#arr-doc)"/>
+        <path id="ae-rev-zs" class="arch-edge" d="M 900 530 L 930 530" marker-end="url(#arr-doc)"/>
+        <path id="ae-zs-tv" class="arch-edge dashed" d="M 980 450 L 980 45 L 320 45 L 320 65" marker-end="url(#arr-doc)"/>
+        <path id="ae-zs-exec" class="arch-edge" d="M 1060 450 L 1060 400 L 500 400 L 500 385" marker-end="url(#arr-doc)"/>
+        <path id="ae-zs-evt" class="arch-edge dashed" d="M 1100 450 L 1100 420 L 200 420 L 200 405" marker-end="url(#arr-doc)"/>
+      </g>
+
+      <!-- ═══════ NODES ═══════ -->
+      <g class="arch-node" id="an-tg">
+        <rect class="bg" x="40" y="60" width="240" height="120" rx="8"/>
+        <rect class="accent" x="40" y="60" width="4" height="120" fill="#38bdf8"/>
+        <text class="title" x="60" y="92">TELEGRAM</text>
+        <text class="sub" x="60" y="112">TrueTrading · FXMarkets news</text>
+        <text class="sub" x="60" y="155" fill="#8a95ad">Listener MTProto · regex</text>
+      </g>
+
+      <g class="arch-node" id="an-tv">
+        <rect class="bg" x="300" y="60" width="240" height="120" rx="8"/>
+        <rect class="accent" x="300" y="60" width="4" height="120" fill="#38bdf8"/>
+        <text class="title" x="320" y="92">TRADINGVIEW</text>
+        <text class="sub" x="320" y="112">CDP 9223 · OHLCV multi-TF</text>
+        <text class="sub" x="320" y="155" fill="#8a95ad">M1 · M5 · M15 · H1</text>
+      </g>
+
+      <g class="arch-node" id="an-sig">
+        <rect class="bg" x="560" y="60" width="240" height="120" rx="8"/>
+        <rect class="accent" x="560" y="60" width="4" height="120" fill="#fbbf24"/>
+        <text class="title" x="580" y="92">SIGNAL STATE</text>
+        <text class="sub" x="580" y="112">direction · BE · closing</text>
+        <text class="sub" x="580" y="155" fill="#8a95ad">brain_signal_state.json</text>
+      </g>
+
+      <g class="arch-node" id="an-ext">
+        <rect class="bg" x="820" y="60" width="400" height="120" rx="8"/>
+        <rect class="accent" x="820" y="60" width="4" height="120" fill="#38bdf8"/>
+        <text class="title" x="840" y="92">EXTERNAL CONTEXT</text>
+        <text class="sub" x="840" y="112">DXY · 10Y · SPX · NDX · Oil · sesión · ATR%</text>
+        <text class="sub" x="840" y="155" fill="#8a95ad">cache 15min</text>
+      </g>
+
+      <g class="arch-node" id="an-pulse">
+        <rect class="bg" x="1240" y="60" width="380" height="120" rx="8"/>
+        <rect class="accent" x="1240" y="60" width="4" height="120" fill="#64748b"/>
+        <text class="title" x="1260" y="92">SYSTEM PULSE</text>
+        <text class="sub" x="1260" y="112">heartbeat · sesión · ATR% · BOS</text>
+        <text class="sub" x="1260" y="155" fill="#8a95ad">cada 30 min sin events</text>
+      </g>
+
+      <g class="arch-node" id="an-evt">
+        <rect class="bg" x="40" y="245" width="270" height="160" rx="8"/>
+        <rect class="accent" x="40" y="245" width="4" height="160" fill="#fbbf24"/>
+        <text class="title" x="60" y="277">EVENT DETECTOR</text>
+        <text class="sub" x="60" y="297">queue · cooldown · heartbeat</text>
+        <text class="sub" x="60" y="335" fill="#8a95ad">REJECTION_CANDLE</text>
+        <text class="sub" x="60" y="352" fill="#8a95ad">LIQUIDITY_SWEPT</text>
+        <text class="sub" x="60" y="369" fill="#8a95ad">MOMENTUM_BREAK</text>
+        <text class="sub" x="60" y="386" fill="#8a95ad">DD_THRESHOLD</text>
+      </g>
+
+      <g class="arch-node" id="an-exec">
+        <rect class="bg" x="350" y="245" width="300" height="140" rx="8"/>
+        <rect class="accent" x="350" y="245" width="4" height="140" fill="#a78bfa"/>
+        <text class="title" x="370" y="277">EXECUTOR</text>
+        <text class="sub" x="370" y="297">event-driven · Claude Opus 4.6</text>
+        <text class="sub" x="370" y="328" fill="#a78bfa" font-size="14" font-weight="700">WAIT · AVERAGE · PARTIAL · BE</text>
+        <text class="sub" x="370" y="350" fill="#8a95ad">propone snipers · multiplier 1-5</text>
+        <text class="sub" x="370" y="370" fill="#8a95ad">razonamiento alto · 30-180s</text>
+      </g>
+
+      <g class="arch-node" id="an-val">
+        <rect class="bg" x="690" y="245" width="190" height="140" rx="8"/>
+        <rect class="accent" x="690" y="245" width="4" height="140" fill="#fb7185"/>
+        <text class="title" x="710" y="277">VALIDATOR</text>
+        <text class="sub" x="710" y="297">anti-bug · soft DD</text>
+        <text class="sub" x="710" y="328" fill="#8a95ad">dir · mult · BE</text>
+        <text class="sub" x="710" y="345" fill="#8a95ad">DD soft 3.4%</text>
+        <text class="sub" x="710" y="362" fill="#8a95ad">last-mile gate</text>
+      </g>
+
+      <g class="arch-node" id="an-fast">
+        <rect class="bg" x="920" y="245" width="180" height="160" rx="8"/>
+        <rect class="accent" x="920" y="245" width="4" height="160" fill="#34d399"/>
+        <text class="title" x="940" y="277">FAST ENGINE</text>
+        <text class="sub" x="940" y="297">reflex · pure code · 2s</text>
+        <text class="sub" x="940" y="328" fill="#8a95ad">AVG zona STRONG</text>
+        <text class="sub" x="940" y="345" fill="#8a95ad">capturas proporcionales</text>
+        <text class="sub" x="940" y="362" fill="#8a95ad">snipers trigger</text>
+        <text class="sub" x="940" y="379" fill="#8a95ad">staircase TPs</text>
+      </g>
+
+      <g class="arch-node" id="an-ea">
+        <rect class="bg" x="1140" y="245" width="480" height="160" rx="8"/>
+        <rect class="accent" x="1140" y="245" width="4" height="160" fill="#34d399"/>
+        <text class="title" x="1160" y="277">EA MT5 · BROKER</text>
+        <text class="sub" x="1160" y="297">ClaudeBrainEA_v1 · OANDA</text>
+        <text class="sub" x="1160" y="328" fill="#34d399" font-size="14" font-weight="700">execución MARKET / PARTIAL / SL</text>
+        <text class="sub" x="1160" y="350" fill="#8a95ad">heartbeat cada tick</text>
+        <text class="sub" x="1160" y="370" fill="#8a95ad">DD hard stop 3.5% (hardcoded)</text>
+      </g>
+
+      <g class="arch-node" id="an-zl">
+        <rect class="bg" x="40" y="465" width="270" height="255" rx="8"/>
+        <rect class="accent" x="40" y="465" width="4" height="255" fill="#fbbf24"/>
+        <text class="title" x="60" y="497">ZONE LIFECYCLE</text>
+        <text class="sub" x="60" y="517">touches · rejects · stale</text>
+        <text class="sub" x="60" y="555" fill="#8a95ad">pure code · sin LLM</text>
+        <text class="sub" x="60" y="575" fill="#8a95ad">marca STALE / INVALIDATED</text>
+        <text class="sub" x="60" y="595" fill="#8a95ad">cuando volumen rompe zona</text>
+      </g>
+
+      <g class="arch-node" id="an-ind">
+        <rect class="bg" x="350" y="465" width="230" height="255" rx="8"/>
+        <rect class="accent" x="350" y="465" width="4" height="255" fill="#a78bfa"/>
+        <text class="title" x="370" y="497">INDICATOR</text>
+        <text class="sub" x="370" y="517">cada 75s · gate</text>
+        <text class="sub" x="370" y="555" fill="#a78bfa" font-weight="700">Claude Opus 4.6</text>
+        <text class="sub" x="370" y="580" fill="#8a95ad">identifica zonas</text>
+        <text class="sub" x="370" y="600" fill="#8a95ad">STRONG / MODERATE / WEAK</text>
+        <text class="sub" x="370" y="620" fill="#8a95ad">bias · regime · context</text>
+      </g>
+
+      <g class="arch-node" id="an-rev">
+        <rect class="bg" x="620" y="465" width="280" height="255" rx="8"/>
+        <rect class="accent" x="620" y="465" width="4" height="255" fill="#a78bfa"/>
+        <text class="title" x="640" y="497">ZONE REVIEWER</text>
+        <text class="sub" x="640" y="517">estabilidad · tabula rasa</text>
+        <text class="sub" x="640" y="555" fill="#a78bfa" font-weight="700">Claude Sonnet</text>
+        <text class="sub" x="640" y="580" fill="#8a95ad">decide KEEP / MERGE / REPLACE</text>
+        <text class="sub" x="640" y="600" fill="#8a95ad">cluster suppression</text>
+        <text class="sub" x="640" y="620" fill="#8a95ad">memoria operativa</text>
+      </g>
+
+      <g class="arch-node" id="an-zs">
+        <rect class="bg" x="930" y="440" width="690" height="280" rx="8"/>
+        <rect class="accent" x="930" y="440" width="4" height="280" fill="#64748b"/>
+        <text class="title" x="950" y="472">ZONE STATE · knowledge hub</text>
+        <text class="sub" x="950" y="492">brain_zone_state.json · leído por 5 componentes</text>
+        <text class="sub" x="950" y="540" fill="#8a95ad">SUPPORT / RESISTANCE clasificadas por strength</text>
+        <text class="sub" x="950" y="565" fill="#8a95ad">touches · status · bounce_direction · condition</text>
+        <text class="sub" x="950" y="595" fill="#8a95ad">FAST engine lo lee para AVG y captura</text>
+        <text class="sub" x="950" y="615" fill="#8a95ad">Executor lo recibe como contexto</text>
+        <text class="sub" x="950" y="635" fill="#8a95ad">Hunter lo usa como filtro estructural</text>
+        <text class="sub" x="950" y="655" fill="#8a95ad">Staircase TPs por ticket</text>
+        <text class="sub" x="950" y="675" fill="#8a95ad">Dashboard lo visualiza</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="callout">
+    <strong>Lectura del diagrama:</strong> las flechas <em>continuas</em> son flujo principal de control;
+    las <em>discontinuas</em> son lecturas cruzadas (un componente lee el estado de otro). El sistema funciona
+    en dos carriles paralelos — la decisión inmediata (DECISION PATH) y el mantenimiento del mapa (KNOWLEDGE PATH) —
+    y ZONE STATE es el hub que conecta ambos.
+  </div>
+</section>
+
+<!-- ==================== COMPONENTES TÉCNICOS ==================== -->
+<section>
+  <div class="section-eyebrow">Componentes</div>
+  <h2>Procesos que hacen funcionar el sistema</h2>
+  <p class="section-intro">
+    El sistema corre en cuatro procesos Python simultáneos más el EA de MT5. Click para detalle.
+  </p>
+
+  <div class="components-grid">
+    <div class="comp-card" onclick="showDetail('comp-brain')">
+      <span class="comp-icon">🧠</span>
+      <div class="comp-name">trader_brain.py</div>
+      <div class="comp-desc">Orquestador principal. Loop a 2s. Llama a los LLM, escribe órdenes, gestiona estado.</div>
+    </div>
+    <div class="comp-card" onclick="showDetail('comp-ea')">
+      <span class="comp-icon">⚙️</span>
+      <div class="comp-name">ClaudeBrainEA (MQL5)</div>
+      <div class="comp-desc">Expert Advisor en MetaTrader 5. Ejecuta órdenes en el broker con baja latencia.</div>
+    </div>
+    <div class="comp-card" onclick="showDetail('comp-flow')">
+      <span class="comp-icon">📺</span>
+      <div class="comp-name">brain_flow.py</div>
+      <div class="comp-desc">Servidor web del dashboard. Streaming de eventos vía SSE. Controles manuales.</div>
+    </div>
+    <div class="comp-card" onclick="showDetail('comp-watchdog')">
+      <span class="comp-icon">🐕</span>
+      <div class="comp-name">brain_watchdog.py</div>
+      <div class="comp-desc">Supervisor cada 60s. Reinicia el brain si muere, restaura el chart, limpia ghost states.</div>
+    </div>
+    <div class="comp-card" onclick="showDetail('comp-tunnel')">
+      <span class="comp-icon">🌐</span>
+      <div class="comp-name">Cloudflare Tunnel</div>
+      <div class="comp-desc">Túnel nombrado que expone el dashboard en bot.compteslab.net. Soporta SSE sin buffering.</div>
+    </div>
+    <div class="comp-card" onclick="showDetail('comp-tv-bridge')">
+      <span class="comp-icon">🔗</span>
+      <div class="comp-name">TradingView CDP bridge</div>
+      <div class="comp-desc">tv.js — Node.js CLI que habla con TradingView Desktop por Chrome DevTools Protocol.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FILOSOFÍA ==================== -->
+<section>
+  <div class="section-eyebrow">Filosofía de diseño</div>
+  <h2>Cinco principios que guían cada línea de código</h2>
+
+  <div class="phase">
+    <span class="phase-num">1</span>
+    <span class="phase-title">Razonar como un trader, no como un bot</span>
+    <p class="phase-body">
+      Sin umbrales fijos arbitrarios. Cada decisión es una hipótesis evaluada en contexto completo.
+      El LLM solo cambia de opinión por <strong>eventos estructurales</strong> (BOS, sweep, rebote confirmado),
+      nunca por micro-movimientos dentro del ruido del ATR.
+    </p>
+  </div>
+
+  <div class="phase">
+    <span class="phase-num">2</span>
+    <span class="phase-title">Honestidad estructural</span>
+    <p class="phase-body">
+      Si una zona no tiene evidencia real en los datos, el Indicator no la marca. <em>Saber que no hay red
+      es información tan valiosa como saber dónde está</em>. Nunca se inventan soportes para hacer parecer
+      que el trade está protegido.
+    </p>
+  </div>
+
+  <div class="phase">
+    <span class="phase-num">3</span>
+    <span class="phase-title">Capas redundantes de seguridad</span>
+    <p class="phase-body">
+      DD hard stop al 3.5% en el EA + projected DD al 85% en el brain + BE automático + staircase TPs en
+      el broker + watchdog reinicio + cluster suppression. Si una capa falla, hay otras tres.
+    </p>
+  </div>
+
+  <div class="phase">
+    <span class="phase-num">4</span>
+    <span class="phase-title">Reflejo vs Decisión</span>
+    <p class="phase-body">
+      El FAST engine es <strong>reflejo</strong> (rápido, sin juicio complejo). El Executor es <strong>decisión</strong>
+      (juicio, dimensionamiento). Esta separación evita que el sistema actúe sin razonar cuando debería pensar,
+      y no se paralice cuando hacen falta reacciones inmediatas.
+    </p>
+  </div>
+
+  <div class="phase">
+    <span class="phase-num">5</span>
+    <span class="phase-title">Diagnóstico permanente</span>
+    <p class="phase-body">
+      Cada bug detectado se resuelve con <strong>fix estructural permanente</strong>, nunca con parches
+      temporales. Los problemas conocidos (chart-swap, race conditions, sniper huérfanos, clusters de zonas)
+      tienen todos su mecanismo dedicado en el código.
+    </p>
+  </div>
+</section>
+
+<footer>
+  Trader Brain v3 · 2026-04-27 · Documento interactivo, click en los nodos para más detalle
+</footer>
+
+</div>
+
+<script>
+const DETAILS = {
+  // ==== DATOS DE ENTRADA ====
+  'data-tv': {
+    title: 'TradingView — Fuente principal de precios',
+    tag: 'INPUT · Datos en tiempo real',
+    rows: [
+      { label: 'Cómo conecta', value: 'Chrome DevTools Protocol (CDP) en puerto 9223. Un script Node.js (<code>tv.js</code>) emite comandos a la app de escritorio de TradingView que está logada con tu cuenta.' },
+      { label: 'Qué obtiene', value: '<ul><li><strong>M1 × 300 bars</strong> — 5h de granularidad fina (FAST engine)</li><li><strong>M5 × 288 bars</strong> — 24h (Indicator)</li><li><strong>M15 × 288 bars</strong> — 3 días (estructura intra-día)</li><li><strong>H1 × 168 bars</strong> — 7 días (pivots multi-día)</li></ul>' },
+      { label: 'Frescura', value: 'Bars cacheadas: M1 cada 2s, M5 60s, M15 180s, H1 600s. Cada cache es independiente.' },
+      { label: 'Robustez', value: 'Si cae la conexión, el watchdog detecta el chart desviado y lo restaura. Cache stale-tolerant: si una llamada falla, se sirve la anterior en vez de bloquear.' },
+    ]
+  },
+  'data-macro': {
+    title: 'Cross-asset — Contexto macro',
+    tag: 'INPUT · Correlaciones',
+    rows: [
+      { label: 'Símbolos', value: '<ul><li><strong>TVC:DXY</strong> — Dollar Index (correlación inversa con XAU)</li><li><strong>TVC:US10Y</strong> — bonos 10 años</li><li><strong>SP:SPX, NASDAQ:IXIC</strong> — risk-on/off</li><li><strong>NYMEX:CL1!</strong> — petróleo (commodity beta)</li></ul>' },
+      { label: 'Cache', value: '15 minutos. Estos datos no cambian rápido y reducir frecuencia evita chart-swaps innecesarios.' },
+      { label: 'Cómo se usa', value: 'El Indicator y el Executor leen <code>price · trend_m5 · trend_h1 · last_break</code> de DXY, y correlación rolling 30-bar para SPX/NDX/Oil. La correlación XAU/DXY r≈-0.86 en London es señal fiable.' },
+    ]
+  },
+  'data-tg': {
+    title: 'Telegram — Señales de canales',
+    tag: 'INPUT · Triggers manuales',
+    rows: [
+      { label: 'Canales seguidos', value: '<strong>TrueTrading</strong> (-1002164511324) y <strong>FXMarkets</strong> (datos de sesión + noticias 🚨).' },
+      { label: 'Protocolo', value: 'MTProto vía Telethon — listener persistente que recibe mensajes en tiempo real.' },
+      { label: 'Procesamiento', value: 'Regex local para mensajes claros (<code>buy 4710</code>, <code>cerramos</code>, <code>movemos sl</code>). Si el regex no encuentra patrón, llama al rol <strong>Interpreter</strong>.' },
+      { label: 'Modos', value: '<div class="pills-row"><span class="pill green">tg_follow ON</span><span class="pill red">tg_follow OFF</span></div>Con OFF, el sistema opera 100% autónomo y ignora todos los mensajes TG (solo logging).' },
+    ]
+  },
+
+  // ==== ROLES LLM ====
+  'indicator': {
+    title: 'Indicator — Identifica zonas operativas',
+    tag: 'AGENTE LLM · Claude Opus 4.6',
+    rows: [
+      { label: 'Función', value: 'Lee todo el contexto multi-TF + macro y produce un <strong>mapa de zonas</strong> SUPPORT/RESISTANCE clasificadas como STRONG/MODERATE/WEAK con su dirección de rebote esperada.' },
+      { label: 'Frecuencia', value: 'Cada 75 segundos, o cuando cierra una vela M15.' },
+      { label: 'Input', value: '<ul><li>Bars M1+M5+M15+H1 dedicadas</li><li>Volume profile con 200 bars</li><li>FVG (Fair Value Gaps), pin bars, swings</li><li>BOS multi-TF, ranges</li><li>DXY, US10Y, SPX/NDX/Oil + correlaciones</li><li>Sesión, VWAP, ATR percentil 20d</li><li>Daily H/L últimos 7 días</li></ul>' },
+      { label: 'Output', value: 'JSON con <code>reversal_zones[]</code>, <code>bias</code> (BULLISH/BEARISH/NEUTRAL), <code>regime</code> (RANGE/TREND/BREAKING), <code>context</code> y <code>notes</code>.' },
+      { label: 'Filosofía clave', value: '"Mejor 2 zonas claras que 5 discutibles". Si no ve estructura real, no la marca. Saber que no hay red es información valiosa.' },
+    ]
+  },
+  'reviewer': {
+    title: 'Zone Reviewer — Estabiliza el mapa',
+    tag: 'AGENTE LLM · Claude Sonnet',
+    rows: [
+      { label: 'Función', value: 'Recibe la propuesta del Indicator + el mapa del ciclo anterior. Decide si <strong>fusionar zonas cercanas</strong>, <strong>mantener estables</strong> las que funcionan, <strong>descartar obsoletas</strong>, o <strong>aceptar nuevas</strong>.' },
+      { label: 'Por qué existe', value: 'Sin Reviewer, el mapa "balotearía" entre ciclos: el Indicator es un LLM y cada cycle puede ver matices distintos. El Reviewer aporta memoria operativa.' },
+      { label: 'Input', value: 'Propuesta nueva + estado persistente + ATR M15 + información del trade abierto si lo hay.' },
+      { label: 'Output', value: 'Lista de decisiones por zona: KEEP, MERGE, REPLACE, REMOVE. El sistema persiste el resultado a <code>brain_zone_state.json</code>.' },
+    ]
+  },
+  'executor': {
+    title: 'Executor — Gestor del trade abierto',
+    tag: 'AGENTE LLM · Claude Opus 4.6 · razonamiento alto',
+    rows: [
+      { label: 'Función', value: 'Cada 35 segundos mientras hay trade abierto, decide <strong>WAIT, AVERAGE, PARTIAL_CLOSE, MOVE_SL_BE</strong> o <strong>REDUCE_RISK</strong>. También propone <em>snipers</em> (órdenes latentes para promediar futuros).' },
+      { label: 'Cuándo se invoca', value: 'Por eventos estructurales: <code>REJECTION_CANDLE</code>, <code>LIQUIDITY_SWEPT</code>, <code>MOMENTUM_BREAK</code>, <code>DD_THRESHOLD</code>, <code>SESSION_TRANSITION</code>, heartbeat cada 30 min, o <code>DASHBOARD_FORCE</code>.' },
+      { label: 'Filosofía', value: '<strong>Neutralidad analítica</strong>: si tuviera que abrir el trade <em>ahora</em>, ¿lo abriría en esta dirección? Si la respuesta es no, la tesis ha muerto y la acción primaria es cerrar/reducir, no agregar.' },
+      { label: 'Input', value: 'Histórico del trade · averagings ya hechos · price_extremes_since_open · zonas activas · contexto macro · DD usado · session_r_factor.' },
+      { label: 'Output', value: 'JSON con <code>action</code>, <code>confidence</code>, <code>thesis</code>, <code>reasoning</code>, <code>next_plan</code>, <code>invalidation_condition</code> + opcionalmente <code>order</code> y <code>pre_place_orders[]</code>.' },
+    ]
+  },
+  'executor-staging': {
+    title: 'Executor IDLE — Modo staging autónomo',
+    tag: 'AGENTE LLM · Mode IDLE',
+    rows: [
+      { label: 'Función', value: 'Cuando no hay trade abierto y el modo autónomo está ON, el Executor busca <strong>setups de entrada</strong> con confluencia alta. Propone setups staged que el FAST engine dispara cuando se cumplen las confirmaciones.' },
+      { label: 'Output staged_setups', value: '<ul><li><code>direction</code>: BUY/SELL</li><li><code>zone_price</code>: nivel de entrada</li><li><code>tolerance_atr</code>: tolerancia para disparar</li><li><code>confirmations_needed</code>: vol_ratio, candle pattern, etc.</li><li><code>lot_multiplier</code>: 1-5 según convicción</li><li><code>profit_targets[]</code>, <code>averaging_zones[]</code>, <code>tactical_plan</code></li></ul>' },
+      { label: 'Frecuencia', value: 'Cada 180s mínimo, fallback 900s (15 min) si nada cambia. Throttled para no quemar tokens en mercados quietos.' },
+      { label: 'Filtros', value: 'min_confidence 0.75 · gates de DD diario · sesiones habilitadas (LONDON/OVERLAP/NY por defecto) · news gate (HIGH news bloquea entradas).' },
+    ]
+  },
+  'hunter': {
+    title: 'Hunter — Especialista en scalp de reversión',
+    tag: 'AGENTE LLM · Claude Opus 4.6',
+    rows: [
+      { label: 'Función', value: 'Busca trades de <strong>reversión cortos</strong> ($8-12 de movimiento) con <strong>TP y SL pre-colocados</strong> en el broker. No depende del polling de Python para capturar — el broker ejecuta automáticamente.' },
+      { label: 'Filtro de calidad', value: 'Mínimo 3/5 confluencias en el setup. min_confidence 0.70. Lot conservador (multiplier 1 = 0.04).' },
+      { label: 'Coexistencia', value: 'Coexiste con el Executor IDLE staging. Si ambos proponen el mismo precio + dirección, <strong>Hunter gana</strong> (es especialista).' },
+      { label: 'Frecuencia', value: 'Cada 5 min en idle, cada 10 min con trade activo (alt_hypothesis).' },
+    ]
+  },
+  'interpreter': {
+    title: 'Interpreter — Traduce mensajes Telegram',
+    tag: 'AGENTE LLM · Claude Haiku',
+    rows: [
+      { label: 'Función', value: 'Cuando un mensaje TG no encaja en el regex local (no es "buy", "sell", "cerramos", "movemos SL"), este rol lo interpreta semánticamente.' },
+      { label: 'Ejemplo', value: '<em>"Cerramos rango y reabrimos en sentido contrario"</em> → no hay regex que matchee. El Interpreter lo clasifica: <code>type: CLOSE</code>, <code>confidence: 0.85</code>.' },
+      { label: 'Output', value: 'Tipo (OPEN/CLOSE/MOVE_SL/NEWS/OTHER), dirección, precio, confidence. Si confidence < 0.6, el mensaje se ignora.' },
+      { label: 'Modelo', value: 'Haiku (más barato) — la tarea es clasificación simple, no requiere razonamiento profundo.' },
+    ]
+  },
+
+  // ==== ENGINES ====
+  'fast-engine': {
+    title: 'FAST Engine — Reflejos cada 2 segundos',
+    tag: 'CÓDIGO · Sin LLM',
+    rows: [
+      { label: 'Función', value: 'Loop síncrono que vigila el precio en tiempo real y dispara <strong>acciones reflejas</strong> sin pensamiento complejo: averaging cuando el precio toca una zona STRONG con confirmaciones, partials cuando se cumple un trigger, BE cuando el peak P&L lo merece.' },
+      { label: 'Por qué existe', value: 'El Executor (LLM) tarda 30-60s en responder. Para ciertas situaciones (toque de zona, sweep súbito) hace falta reaccionar en segundos. El FAST engine cubre esa ventana con reglas simples y unificadas.' },
+      { label: 'Reglas FAST', value: '<ul><li>AVG en zona STRONG con 1 confirmación · MODERATE con 2</li><li>Lot fijo: <code>base_lot × 1 = 0.04</code> (uniforme, sin escalar por confluencia)</li><li>Cluster mutex: dentro de 1.5×ATR de una zona ya promediada, skip</li><li>Entry-zone settling: no AVG sobre la zona donde se abrió hasta que el precio se aleje 1.5×ATR</li></ul>' },
+      { label: 'Filosofía', value: '"Cargar fuerte es una <em>decisión</em>, no un reflejo". El FAST nunca multiplica el lot por convicción — solo el Executor puede hacer eso.' },
+    ]
+  },
+  'open-trade': {
+    title: 'Trade abierto — Position activa en MT5',
+    tag: 'STATE',
+    rows: [
+      { label: 'Apertura', value: 'Tres caminos: (a) señal Telegram con tg_follow ON, (b) staged setup del Executor IDLE que se dispara con confirmaciones, (c) Hunter setup que ya tiene TP+SL pre-colocados.' },
+      { label: 'Lot inicial', value: '<code>base_lot × initial_multiplier</code>. Por defecto 0.04 × 2 = <strong>0.08</strong>. El Executor puede pedir lot_multiplier 1-5 según convicción.' },
+      { label: 'Estado persistido', value: '<code>brain_signal_state.json</code> guarda dirección, entry, channel (TG/AUTONOMOUS/HUNTER/ADOPTED), avg_count, breakeven_set, realized_profit.' },
+      { label: 'Adopción en vivo', value: 'Si abres una posición manualmente o cierras y abres en sentido contrario, el sistema lo detecta cada tick (2s) y se adapta automáticamente — actualiza dirección, blend, contexto.' },
+    ]
+  },
+  'zone-map': {
+    title: 'Mapa de zonas activo',
+    tag: 'ESTADO · Compartido',
+    rows: [
+      { label: 'Qué contiene', value: 'Lista de zonas SUPPORT/RESISTANCE cada una con: <code>price</code>, <code>strength</code> (STRONG/MODERATE/WEAK), <code>bounce_direction</code>, <code>condition</code> (texto explicando por qué), <code>touches</code>, <code>status</code> (ACTIVE/STALE/INVALIDATED).' },
+      { label: 'Quién lee este mapa', value: '<ul><li><strong>FAST engine</strong>: para AVG y captura proporcional</li><li><strong>Executor</strong>: como contexto para decisiones</li><li><strong>Hunter</strong>: filtro estructural para snipers</li><li><strong>Staircase TPs</strong>: cada ticket recibe TP en una zona STRONG distinta</li><li><strong>Dashboard</strong>: visualización</li></ul>' },
+      { label: 'Cluster suppression', value: 'Si 2+ STRONG quedan dentro de 1.5×ATR_M5, solo la de más confluencia (touches × longitud condition) se mantiene STRONG. Las otras se degradan a MODERATE para evitar AVG en cascada.' },
+      { label: 'Fichero', value: '<code>brain_zone_state.json</code> en MT5 Common Files. Updated cada 75s por el pipeline Indicator+Reviewer.' },
+    ]
+  },
+
+  // ==== ACCIONES ====
+  'captures': {
+    title: 'Capturas de profit — 5 capas con mutex',
+    tag: 'CÓDIGO · FAST',
+    rows: [
+      { label: 'Por qué 5 capas', value: 'Cada capa cubre un escenario distinto. Con mutex single-fire por tick: solo una dispara por ciclo, evitando double-close.' },
+      { label: 'Capa 1 — Opportunistic close', value: '<strong>FULL close</strong> al llegar a una zona STRONG contraria con momentum confirmado. La tesis se ha jugado.' },
+      { label: 'Capa 2 — Zone proportional', value: 'Toque de zona contraria: STRONG = 50% del lot inicial, MODERATE = 25%. <strong>4 capturas MODERATE = full close neto</strong>. Calculado sobre el lot original del ticket, no el actual.' },
+      { label: 'Capa 3 — Blend ladder', value: 'Independiente de zonas: cada $10 que avanza el blend ponderado en dirección profit, captura 25% proporcional. Útil cuando el precio no toca zonas claras.' },
+      { label: 'Capa 4 — Trailing from peak', value: 'Cuando el peak P&L flotante baja un 30% desde el máximo, captura. Detecta reversiones antes de que se evapore todo el profit.' },
+      { label: 'Capa 5 — Staircase TPs', value: '<strong>Broker-side</strong> (red anti flash crash). Cada ticket tiene TP en zona STRONG distinta. Peor entry → zona más cercana (cierra primero); mejor entry → zona más lejana (corre por máximo profit).' },
+    ]
+  },
+  'averaging': {
+    title: 'Averaging — Defensa con confluencia',
+    tag: 'CÓDIGO + LLM',
+    rows: [
+      { label: 'Filosofía', value: 'Cuando el precio va en contra, promediar en <strong>zonas con confluencia</strong> mejora el blend ponderado. Solo si la zona estructuralmente lo justifica.' },
+      { label: 'FAST engine AVG', value: 'Lot fijo: <code>base_lot × 1 = 0.04</code>. Requiere zona STRONG con 1 confirmación o MODERATE con 2. Confirmaciones: vol_ratio ≥1.5 · candle pattern · RSI extremo.' },
+      { label: 'Executor AVG', value: 'Lot variable: <code>base_lot × multiplier</code> (1-5). El multiplier lo decide el Executor según convicción + DD disponible + sesión.' },
+      { label: 'Anti-cascade', value: 'Cluster mutex: 2+ zonas dentro de 1.5×ATR cuentan como mismo bloque, solo 1 AVG por bloque. Entry-zone settling: 1.5×ATR de distancia mínima desde la entrada antes de poder promediar sobre esa zona.' },
+      { label: 'Limit', value: 'Máximo 10 averagings por signal. Projected DD ceiling 85% bloquea AVG si la proyección lo cruza.' },
+    ]
+  },
+  'snipers': {
+    title: 'Snipers — Órdenes pre-colocadas',
+    tag: 'EXECUTOR PROPONE · FAST DISPARA',
+    rows: [
+      { label: 'Concepto', value: 'El Executor propone niveles latentes: <em>"Si el precio cae a 4709 con rebote por volumen, AVG con multiplier 2"</em>. Quedan armadas hasta TTL 45 min o hasta dispararse.' },
+      { label: 'Persistencia entre cycles', value: 'Si el Executor <strong>no menciona</strong> snipers en su respuesta → se mantienen los activos. Si manda <code>[]</code> explícito → cancela todos. Si manda lista nueva → reemplaza.' },
+      { label: 'Cancelación automática', value: '<ul><li>BE set</li><li>Cerramos del canal TG (mismo channel)</li><li>Trade cierra (manual close, SL, BE-hit)</li><li>Signal IDLE persistente (orphan cleanup cada tick)</li></ul>' },
+      { label: 'Guards estructurales', value: '<ul><li>Sin signal activo → sniper rechazado (no abren contra-tendencia espontáneamente)</li><li>Estructural gate: solo coinciden con zona STRONG del mapa</li><li>Cluster suppression: solo 1 sniper por bloque de 5$, el de más multiplier gana</li></ul>' },
+    ]
+  },
+
+  // ==== RIESGO Y CIERRE ====
+  'risk': {
+    title: 'Gestión de riesgo — 4 capas',
+    tag: 'SAFETY NET',
+    rows: [
+      { label: 'Capa 1 — DD Hard Stop 3.5%', value: 'Si el drawdown del signal supera el 3.5% del balance inicial, el EA cierra todo automáticamente. <strong>Hardcoded en MQL5</strong>, no manipulable por Python. Última línea.' },
+      { label: 'Capa 2 — Projected DD 85%', value: 'El FAST engine no abre AVG si la proyección (lot × ATR × $100) empujaría el DD por encima del 85% del límite. Evita acumulación en cascada antes de que sea catastrófica.' },
+      { label: 'Capa 3 — BE automático', value: 'Cuando el peak P&L cruza umbral configurable, el sistema mueve los SL al breakeven. A partir de ahí: 0 risk, solo upside potential.' },
+      { label: 'Capa 4 — Pre-trade gates', value: '<ul><li>Sessions toggle: ASIA y DEAD off por defecto</li><li>News gate: HIGH news bloquea entradas 15 min pre + 30 min post</li><li>Validator gate: verifica límites antes de enviar a EA</li></ul>' },
+      { label: 'Aislamiento Telegram', value: 'Con <code>tg_follow=OFF</code>, ningún mensaje TG provoca acción. Con ON, ownership rule estricta: un canal solo puede cerrar trades que él mismo abrió.' },
+    ]
+  },
+  'close': {
+    title: 'Cierre del trade',
+    tag: 'TRES CAMINOS',
+    rows: [
+      { label: 'Camino 1 — Target estructural', value: 'El precio llega a la zona contraria STRONG planificada y el Executor decide capturar (FULL o PARTIAL grande). La tesis se ha materializado.' },
+      { label: 'Camino 2 — TG cerramos', value: 'Si tg_follow ON y el canal que abrió manda "cerramos", el sistema cierra el trade. Solo el canal owner — si "cerramos" viene de otro canal, se ignora.' },
+      { label: 'Camino 3 — DD hard stop', value: 'El EA cierra todo automáticamente al cruzar 3.5% DD. Última red de seguridad.' },
+      { label: 'Trail / BE hit', value: 'Si el SL se ha movido a BE y el precio lo toca, cierra al breakeven (0 ganancia/0 pérdida). Trade history registra todo: open, AVGs, parciales, close.' },
+      { label: 'Post-close', value: 'Snipers cancelados, signal_state limpio, brain entra en cooldown 5min antes del siguiente staged fire. Trade narrative se persiste para revisión.' },
+    ]
+  },
+
+  // ==== COMPONENTES ====
+  'comp-brain': {
+    title: 'trader_brain.py — Orquestador',
+    tag: 'PROCESO PRINCIPAL',
+    rows: [
+      { label: 'Loop', value: 'Síncrono cada 2s (FAST_INTERVAL). En cada tick: lee positions, hace re-adoption checks, FAST AVG, captures, snipers cleanup, lanzamientos asíncronos a LLMs.' },
+      { label: 'Threads', value: 'Telegram listener corre en thread separado. LLMs (Indicator/Executor/Hunter) corren como subprocess.run con futures asíncronos para no bloquear el loop principal.' },
+      { label: 'Estado persistido', value: '<code>brain_signal_state.json</code>, <code>brain_zone_state.json</code>, <code>brain_snipers.json</code>, <code>brain_staged_setups.json</code>, <code>brain_trade_history.json</code>.' },
+      { label: 'PID file', value: '<code>logs/trader_brain.pid</code> evita doble instancia. Watchdog lo respeta.' },
+    ]
+  },
+  'comp-ea': {
+    title: 'ClaudeBrainEA — Expert Advisor MT5',
+    tag: 'MQL5 · BAJA LATENCIA',
+    rows: [
+      { label: 'Función', value: 'Lee <code>brain_orders.json</code> en cada OnTick del símbolo. Ejecuta MARKET, MODIFY_TP, MODIFY_SL, PARTIAL_CLOSE_PCT, MOVE_SL_ENTRY, CLOSE_ALL_BRAIN, NO_ACTION.' },
+      { label: 'Heartbeat', value: 'Cada tick escribe <code>brain_ea_heartbeat.json</code> con balance, equity, dd, positions_count, closing_flag. El brain lee esto para detectar EA caído.' },
+      { label: 'DD safety net', value: 'Hardcoded 3.5% DD del balance al inicio del signal. Si se supera, CLOSE_ALL automático. No manipulable por Python.' },
+      { label: 'Display', value: 'OBJ_LABEL en el chart muestra estado en tiempo real: ATR, sesión, news, Brain status.' },
+    ]
+  },
+  'comp-flow': {
+    title: 'brain_flow.py — Dashboard server',
+    tag: 'HTTP + SSE · puerto 5858',
+    rows: [
+      { label: 'Stack', value: 'Python stdlib (http.server). Sin Flask ni Django — todo lo que hace cabe en un fichero. Streaming SSE para eventos en tiempo real.' },
+      { label: 'Endpoints', value: '<ul><li><code>/snapshot</code> — JSON completo del estado actual</li><li><code>/stream</code> — SSE con eventos live</li><li><code>/api/control/*</code> — controles manuales (autotrade, force_*, reduce_risk, llm)</li><li><code>/flow</code> — diagrama interactivo de componentes</li></ul>' },
+      { label: 'Acceso público', value: 'Cloudflare Named Tunnel + logserver.py reverse proxy con basic auth (admin/viewer roles). URL fija <code>bot.compteslab.net</code>.' },
+    ]
+  },
+  'comp-watchdog': {
+    title: 'brain_watchdog.py — Supervisor',
+    tag: 'DAEMON · 60s tick',
+    rows: [
+      { label: 'Checks', value: '<ul><li>trader_brain.py vivo (psutil) — si muere, lo reinicia</li><li>EA heartbeat fresh (<180s)</li><li>TradingView CDP responde en :9223 → si no, llama a <code>diag.py --force-restart</code></li><li>Feed health: si <code>feed.connected=false</code> >60s, restaura el chart a XAUUSD M1</li><li>Ghost signals: signal active + 0 positions >120s → clean</li><li>Múltiples instancias: mata duplicados</li></ul>' },
+      { label: 'Output', value: '<code>brain_watchdog_status.json</code> con resultado de cada check. Dashboard lo muestra.' },
+      { label: 'Auto-recovery', value: 'Cooldown entre intentos de restart. Logs separados <code>brain_watchdog.log</code>.' },
+    ]
+  },
+  'comp-tunnel': {
+    title: 'Cloudflare Named Tunnel',
+    tag: 'INFRAESTRUCTURA',
+    rows: [
+      { label: 'Por qué Named en vez de Quick', value: 'Quick Tunnels (gratis sin cuenta) bufferizan SSE — el dashboard no recibía logs en directo. Named Tunnel con dominio propio (compteslab.net) soporta SSE nativamente vía QUIC.' },
+      { label: 'Configuración', value: '<code>~/.cloudflared/config.yml</code> mapea <code>bot.compteslab.net</code> → <code>http://127.0.0.1:7681</code>. DNS CNAME añadido automáticamente al pipeline de Cloudflare.' },
+      { label: 'Conexiones', value: '4 conexiones QUIC simultáneas a edges Cloudflare (FRA03, FRA15, FRA19) — si una falla, las otras mantienen el servicio.' },
+      { label: 'URL pública', value: '<code>https://bot.compteslab.net</code> (HTTPS automático, certificado Cloudflare). Auth básica admin/viewer en logserver.py.' },
+    ]
+  },
+  'comp-tv-bridge': {
+    title: 'tv.js — Bridge a TradingView',
+    tag: 'Node.js CLI',
+    rows: [
+      { label: 'Función', value: 'CLI que habla con TradingView Desktop por Chrome DevTools Protocol (puerto 9223). Cada comando lanza JS dentro del proceso de TV y devuelve el resultado.' },
+      { label: 'Comandos clave', value: '<ul><li><code>ohlcv N [symbol]</code> — bars del chart actual</li><li><code>ohlcv-sym SYM N</code> — swap a otro símbolo, fetch, restaurar</li><li><code>ohlcv-tf TF N</code> — swap a otro TF, fetch, restaurar</li><li><code>symbol SYM</code>, <code>timeframe TF</code> — change persistente</li><li><code>draw</code>, <code>draw-clear</code> — dibujar zonas</li><li><code>pine-set/compile</code> — inyectar Pine Script</li></ul>' },
+      { label: 'Robustez', value: 'Cada swap intenta restaurar el TF/símbolo original con 3 retries. Si falla, el watchdog detecta el chart desviado y restaura.' },
+    ]
+  },
+};
+
+const panel = document.getElementById('detail-panel');
+const content = document.getElementById('detail-content');
+
+function showDetail(id) {
+  const d = DETAILS[id];
+  if (!d) return;
+  // Mark active node
+  document.querySelectorAll('.node, .comp-card').forEach(n => n.classList.remove('active'));
+  const node = document.querySelector(`[onclick*="'${id}'"]`);
+  if (node) node.classList.add('active');
+  // Build content
+  let html = `<span class="detail-tag">${d.tag}</span>`;
+  html += `<h3>${d.title}</h3>`;
+  for (const row of d.rows) {
+    html += `<div class="detail-row"><div class="detail-label">${row.label}</div><div class="detail-value">${row.value}</div></div>`;
+  }
+  content.innerHTML = html;
+  panel.classList.add('show');
+  // Scroll to panel
+  setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+}
+
+function hideDetail() {
+  panel.classList.remove('show');
+  document.querySelectorAll('.node, .comp-card').forEach(n => n.classList.remove('active'));
+}
+
+// ===== Demo simulada del flujo del sistema =====
+// Recorre las fases del ciclo cada 10s, iluminando nodos + flechas que
+// corresponden a cada paso. NO en tiempo real — es solo visualización
+// del flujo conceptual.
+const DEMO_STEPS = [
+  {
+    name: '1/8 · Nuevo bar M5 + heartbeat sistema',
+    nodes: ['an-tv', 'an-pulse', 'an-ext'],
+    edges: [],
+    desc: 'TradingView entrega un nuevo bar. SystemPulse + ExternalContext refrescan.',
+    duration: 8000,
+  },
+  {
+    name: '2/8 · Zone Lifecycle vigila el toque',
+    nodes: ['an-tv', 'an-zl'],
+    edges: ['ae-tv-zl'],
+    desc: 'Pure code: cuenta touches/rejects, marca STALE si una zona expira.',
+    duration: 8000,
+  },
+  {
+    name: '3/8 · Indicator analiza el mapa',
+    nodes: ['an-tv', 'an-ind', 'an-ext'],
+    edges: ['ae-tv-ind'],
+    desc: 'Cada 75s. Claude Opus lee multi-TF + macro y propone zonas STRONG/MODERATE/WEAK.',
+    duration: 12000,
+  },
+  {
+    name: '4/8 · Reviewer estabiliza',
+    nodes: ['an-ind', 'an-rev', 'an-zs'],
+    edges: ['ae-ind-rev', 'ae-rev-zs', 'ae-zl-zs'],
+    desc: 'Claude Sonnet decide KEEP/MERGE/REPLACE. Persiste a brain_zone_state.json.',
+    duration: 10000,
+  },
+  {
+    name: '5/8 · Mapa actualizado se redibuja en TV',
+    nodes: ['an-zs', 'an-tv'],
+    edges: ['ae-zs-tv'],
+    desc: 'El mapa se dibuja como zonas horizontales en el chart de TradingView.',
+    duration: 8000,
+  },
+  {
+    name: '6/8 · Telegram trigger / Event detected',
+    nodes: ['an-tg', 'an-sig', 'an-evt'],
+    edges: ['ae-tg-sig', 'ae-sig-evt', 'ae-tv-evt', 'ae-zs-evt'],
+    desc: 'Llega señal TG (o el detector ve REJECTION/SWEEP/MOMENTUM). Cola encola un evento.',
+    duration: 9000,
+  },
+  {
+    name: '7/8 · Executor decide con contexto completo',
+    nodes: ['an-evt', 'an-exec', 'an-zs'],
+    edges: ['ae-evt-exec', 'ae-zs-exec'],
+    desc: 'Claude Opus razonamiento alto: WAIT, AVERAGE, PARTIAL_CLOSE o MOVE_SL_BE.',
+    duration: 12000,
+  },
+  {
+    name: '8/8 · Validator → FAST → EA al broker',
+    nodes: ['an-exec', 'an-val', 'an-fast', 'an-ea'],
+    edges: ['ae-exec-val', 'ae-val-fast', 'ae-fast-ea', 'ae-val-ea'],
+    desc: 'Validator gate, FAST ejecuta o el EA recibe la orden directa. Broker la procesa.',
+    duration: 10000,
+  },
+];
+
+let demoRunning = false;
+let demoTimer = null;
+let demoIdx = 0;
+
+function clearDemoHighlights() {
+  document.querySelectorAll('.arch-node').forEach(n => {
+    n.classList.remove('lit');
+    n.classList.remove('recently');
+  });
+  document.querySelectorAll('.arch-edge').forEach(e => e.classList.remove('lit'));
+}
+
+function applyDemoStep(step) {
+  // Mark previously lit nodes as "recently" so they linger softly
+  document.querySelectorAll('.arch-node.lit').forEach(n => {
+    n.classList.remove('lit');
+    n.classList.add('recently');
+  });
+  document.querySelectorAll('.arch-edge.lit').forEach(e => e.classList.remove('lit'));
+
+  // Light up new step
+  for (const id of step.nodes) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.classList.remove('recently');
+      el.classList.add('lit');
+    }
+  }
+  for (const id of step.edges) {
+    const el = document.getElementById(id);
+    if (el) el.classList.add('lit');
+  }
+  // Update status text
+  const status = document.getElementById('demo-status');
+  if (status) {
+    status.innerHTML = `<span class="step-name">${step.name}</span> — ${step.desc}`;
+  }
+}
+
+function advanceDemo() {
+  if (!demoRunning) return;
+  const step = DEMO_STEPS[demoIdx];
+  applyDemoStep(step);
+  demoIdx = (demoIdx + 1) % DEMO_STEPS.length;
+  demoTimer = setTimeout(advanceDemo, step.duration);
+}
+
+function toggleDemo() {
+  const btn = document.getElementById('demo-btn');
+  if (demoRunning) {
+    demoRunning = false;
+    if (demoTimer) clearTimeout(demoTimer);
+    clearDemoHighlights();
+    btn.textContent = '▶ Run demo';
+    btn.classList.remove('stop');
+    document.getElementById('demo-status').textContent = 'Demo parada — pulsa Run para iniciar el ciclo';
+  } else {
+    demoRunning = true;
+    demoIdx = 0;
+    btn.textContent = '⏸ Stop demo';
+    btn.classList.add('stop');
+    advanceDemo();
+  }
+}
+</script>
+</body>
+</html>

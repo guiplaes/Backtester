@@ -1,0 +1,3 @@
+ts_ms,target_bot,amount_usdt,deviation_pct,fee_total,partial,sources
+1769642880000,BTC_USDT,44.21120698593643,-5.002413578700351,0.022105603492968216,False,"[{""from"": ""RESERVE"", ""amount"": 44.21120698593643}]"
+1770221880000,ETH_USDT,39.576873282770705,-5.006017205272931,0.03668247677573892,False,"[{""from"": ""RESERVE"", ""amount"": 5.788793014063572}, {""from"": ""PAXG_USDT"", ""amount"": 33.788080268707134}]"

@@ -1,0 +1,48 @@
+{
+  "timestamp": 1778229765.5725741,
+  "timestamp_human": "2026-05-08 10:42:45",
+  "overall": "PROBLEM",
+  "checks": {
+    "brain": {
+      "ok": false,
+      "detail": "dead → restart (ok)",
+      "pids": [],
+      "action": "restart"
+    },
+    "tradingview_cdp": {
+      "ok": true,
+      "detail": "CDP ready on 9223",
+      "action": null
+    },
+    "feed_health": {
+      "ok": true,
+      "detail": "feed OK (age=0.0s, fails=0)",
+      "action": null
+    },
+    "ea_heartbeat": {
+      "ok": true,
+      "detail": "fresh (1s)",
+      "action": null
+    },
+    "ghost_signal": {
+      "ok": true,
+      "detail": "no active signal",
+      "action": null
+    },
+    "dashboard": {
+      "ok": false,
+      "detail": "dead → restart",
+      "action": "restart_dashboard"
+    },
+    "webconsole": {
+      "ok": true,
+      "detail": "logserver alive PID=8936 · cloudflared alive PID=5596",
+      "action": null
+    },
+    "news_calendar": {
+      "ok": true,
+      "detail": "fresh (179min old)",
+      "action": null
+    }
+  }
+}

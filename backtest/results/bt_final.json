@@ -1,0 +1,67 @@
+{
+  "period_days": 359.99930555555557,
+  "initial_capital": 1000,
+  "final_total_value": 673.5356169187363,
+  "total_pnl": -326.4643830812637,
+  "total_pnl_pct": -32.64643830812637,
+  "grid_alpha_net": 727.0239169232548,
+  "grid_alpha_brut": 789.8090915212175,
+  "reloc_cost": 62.68689971013633,
+  "rebal_fees": 0.09827488782644345,
+  "fees_fills": 264.6371070620616,
+  "mtm_inventory": -27.140477805609216,
+  "reloc_count": 1973,
+  "rebal_count": 3,
+  "ext_deposits": 0,
+  "final_reserve": 0.0,
+  "per_bot": {
+    "PAXG_USDT": {
+      "final_value": 283.4024556724264,
+      "grid_alpha": 168.81000336113465,
+      "cycles": 1047,
+      "fills": 3487,
+      "reloc_count": 397,
+      "base_final": 0.030154356805155873,
+      "quote_final": 142.151608264307,
+      "cost_base_acquired": 83073.56378064529,
+      "base_acquired": 18.401180924805896,
+      "final_price": 4684.26
+    },
+    "BTC_USDT": {
+      "final_value": 201.86084842885705,
+      "grid_alpha": 214.974396188882,
+      "cycles": 2944,
+      "fills": 8132,
+      "reloc_count": 382,
+      "base_final": 0.0016903421512367261,
+      "quote_final": 67.53601761815031,
+      "cost_base_acquired": 77516.60924828389,
+      "base_acquired": 0.9122816742861366,
+      "final_price": 79466.06
+    },
+    "ETH_USDT": {
+      "final_value": 121.28273868178282,
+      "grid_alpha": 282.2731510932413,
+      "cycles": 4080,
+      "fills": 11419,
+      "reloc_count": 547,
+      "base_final": 0.017979582019591843,
+      "quote_final": 80.64870352168505,
+      "cost_base_acquired": 76815.38479959978,
+      "base_acquired": 26.930841829972167,
+      "final_price": 2260.01
+    },
+    "SOL_USDT": {
+      "final_value": 66.98957413567004,
+      "grid_alpha": 123.75154087795954,
+      "cycles": 2104,
+      "fills": 7299,
+      "reloc_count": 647,
+      "base_final": 0.2867694594672886,
+      "quote_final": 40.92509796468817,
+      "cost_base_acquired": 28933.640419933978,
+      "base_acquired": 216.25243918149266,
+      "final_price": 90.89
+    }
+  }
+}

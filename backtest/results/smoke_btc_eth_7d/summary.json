@@ -1,0 +1,21 @@
+{
+  "period_days": 6.96,
+  "initial_capital": 500.0,
+  "final_total_value": 493.76,
+  "total_roi_pct": -1.248,
+  "grid_alpha_net": 1.1647,
+  "grid_alpha_pct": 0.2329,
+  "grid_alpha_apr_extrapolated": 12.22,
+  "mtm_unrealized": -7.58,
+  "max_drawdown_alpha": 2.981,
+  "sharpe": null,
+  "recolocation_count": 5,
+  "recolocation_total_cost": 0.1805,
+  "recolocation_avg_cost": 0.0361,
+  "rebalance_count": 0,
+  "rebalance_total_fees": 0,
+  "per_bot_alpha": {
+    "BTC_USDT": 2.2388,
+    "ETH_USDT": -0.8935
+  }
+}

@@ -1,0 +1,188 @@
+//@version=5
+strategy("Pivot Extension — Hybrid TP (50% pivot + 50% trailing)",
+     overlay=true,
+     initial_capital=10000,
+     default_qty_type=strategy.percent_of_equity,
+     default_qty_value=5,
+     pyramiding=0,
+     commission_type=strategy.commission.percent,
+     commission_value=0,
+     calc_on_every_tick=false,
+     process_orders_on_close=true,
+     close_entries_rule="ANY")
+
+// ═══════════════════════════════════════════════════════════════════════════
+// INPUTS
+// ═══════════════════════════════════════════════════════════════════════════
+grpPivot   = "● PIVOTS"
+pivotTF    = input.string("D", "Pivot Period", options=["D","W","M"], group=grpPivot,
+     tooltip="D=daily pivots (most common), W=weekly, M=monthly")
+
+grpEntry   = "● ENTRY LOGIC"
+entryMode  = input.string("R1/S1 wick", "Entry Trigger",
+     options=["R1/S1 wick","R1/S1 close","PP cross"], group=grpEntry,
+     tooltip="Wick = same as TradingView built-in (sensitive). Close = stricter, fewer false signals.")
+stopReverse = input.bool(true, "Stop & Reverse (like built-in)", group=grpEntry,
+     tooltip="If ON: opposite signal closes current trade and opens reverse. Mirrors TV built-in behavior.")
+
+grpSL      = "● STOP LOSS"
+slType     = input.string("PP", "SL Reference",
+     options=["PP","prev pivot","fixed pts","ATR x"], group=grpSL)
+slFixed    = input.float(8.0, "Fixed SL points", group=grpSL, step=0.5)
+slAtrMult  = input.float(1.5, "ATR multiplier", group=grpSL, step=0.1)
+
+grpTP      = "● TAKE PROFIT — HYBRID"
+useHybrid  = input.bool(true, "Hybrid: 50% at TP1 + 50% trailing", group=grpTP,
+     tooltip="ON = scale-out: close half at first target, ride rest with trailing SL. OFF = exit all at TP1.")
+tp1Type    = input.string("next pivot", "TP1 target (first 50%)",
+     options=["next pivot","fixed R","ATR x"], group=grpTP)
+tp1R       = input.float(1.5, "TP1 R-multiple", group=grpTP, step=0.1)
+tp1AtrMult = input.float(2.0, "TP1 ATR multiplier", group=grpTP, step=0.1)
+
+grpTrail   = "● TRAILING SL (for second 50%)"
+trailType  = input.string("ATR", "Trailing distance type", options=["ATR","points"], group=grpTrail)
+trailAtr   = input.float(1.5, "Trailing ATR multiplier", group=grpTrail, step=0.1)
+trailPts   = input.float(8.0, "Trailing fixed points", group=grpTrail, step=0.5)
+
+grpFilter  = "● FILTERS"
+useSess    = input.bool(false, "Filter by session", group=grpFilter)
+sessStr    = input.session("0700-2100", "Active session (UTC)", group=grpFilter)
+
+grpViz     = "● VISUAL"
+showPivots = input.bool(true, "Show pivot levels", group=grpViz)
+showEntries= input.bool(true, "Show entry markers", group=grpViz)
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PIVOT CALCULATION (classic daily pivots from PRIOR period)
+// ═══════════════════════════════════════════════════════════════════════════
+prevH = request.security(syminfo.tickerid, pivotTF, high[1], lookahead=barmerge.lookahead_on)
+prevL = request.security(syminfo.tickerid, pivotTF, low[1], lookahead=barmerge.lookahead_on)
+prevC = request.security(syminfo.tickerid, pivotTF, close[1], lookahead=barmerge.lookahead_on)
+
+pp = (prevH + prevL + prevC) / 3
+r1 = 2*pp - prevL
+s1 = 2*pp - prevH
+r2 = pp + (prevH - prevL)
+s2 = pp - (prevH - prevL)
+r3 = prevH + 2*(pp - prevL)
+s3 = prevL - 2*(prevH - pp)
+
+atrVal = ta.atr(14)
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PLOTS
+// ═══════════════════════════════════════════════════════════════════════════
+plot(showPivots ? pp : na, "PP",  color=color.new(color.yellow, 30), linewidth=1)
+plot(showPivots ? r1 : na, "R1",  color=color.new(color.red, 30),    linewidth=1)
+plot(showPivots ? s1 : na, "S1",  color=color.new(color.green, 30),  linewidth=1)
+plot(showPivots ? r2 : na, "R2",  color=color.new(color.red, 60),    linewidth=1, style=plot.style_circles)
+plot(showPivots ? s2 : na, "S2",  color=color.new(color.green, 60),  linewidth=1, style=plot.style_circles)
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SESSION FILTER
+// ═══════════════════════════════════════════════════════════════════════════
+inSession = useSess ? not na(time(timeframe.period, sessStr)) : true
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ENTRY SIGNALS
+// ═══════════════════════════════════════════════════════════════════════════
+longSig  = entryMode == "R1/S1 wick"  ? (high > r1 and high[1] <= r1) :
+           entryMode == "R1/S1 close" ? (close > r1 and close[1] <= r1) :
+           ta.crossover(close, pp)
+shortSig = entryMode == "R1/S1 wick"  ? (low < s1 and low[1] >= s1) :
+           entryMode == "R1/S1 close" ? (close < s1 and close[1] >= s1) :
+           ta.crossunder(close, pp)
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SL / TP CALCULATION (snapshot at entry)
+// ═══════════════════════════════════════════════════════════════════════════
+var float entryPrice = na
+var float slLong = na
+var float slShort = na
+var float tp1Long = na
+var float tp1Short = na
+var float trailingLong  = na
+var float trailingShort = na
+
+// Compute SL ref price on entry
+slLongCalc(p) =>
+    slType == "PP"          ? pp :
+    slType == "prev pivot"  ? s1 :
+    slType == "fixed pts"   ? p - slFixed :
+                              p - atrVal * slAtrMult
+
+slShortCalc(p) =>
+    slType == "PP"          ? pp :
+    slType == "prev pivot"  ? r1 :
+    slType == "fixed pts"   ? p + slFixed :
+                              p + atrVal * slAtrMult
+
+tp1LongCalc(p, sl) =>
+    tp1Type == "next pivot" ? r2 :
+    tp1Type == "fixed R"    ? p + (p - sl) * tp1R :
+                              p + atrVal * tp1AtrMult
+
+tp1ShortCalc(p, sl) =>
+    tp1Type == "next pivot" ? s2 :
+    tp1Type == "fixed R"    ? p - (sl - p) * tp1R :
+                              p - atrVal * tp1AtrMult
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ENTRIES
+// ═══════════════════════════════════════════════════════════════════════════
+longEntryOK  = longSig  and inSession and (stopReverse or strategy.position_size <= 0)
+shortEntryOK = shortSig and inSession and (stopReverse or strategy.position_size >= 0)
+
+if longEntryOK
+    entryPrice  := close
+    slLong      := slLongCalc(close)
+    tp1Long     := tp1LongCalc(close, slLong)
+    trailingLong := slLong
+    strategy.entry("L", strategy.long, comment="PChLE")
+
+if shortEntryOK
+    entryPrice  := close
+    slShort     := slShortCalc(close)
+    tp1Short    := tp1ShortCalc(close, slShort)
+    trailingShort := slShort
+    strategy.entry("S", strategy.short, comment="PChSE")
+
+// ═══════════════════════════════════════════════════════════════════════════
+// EXIT LOGIC
+// ═══════════════════════════════════════════════════════════════════════════
+if strategy.position_size > 0
+    if useHybrid
+        // First half: limit exit at TP1
+        strategy.exit("TP1-L", from_entry="L", limit=tp1Long, qty_percent=50, comment="TP1")
+        // Update trailing SL for remaining half
+        newTrail = trailType == "ATR" ? high - atrVal * trailAtr : high - trailPts
+        if newTrail > trailingLong
+            trailingLong := newTrail
+        // Never trail below initial SL
+        trailingLong := math.max(trailingLong, slLong)
+        // Exit remaining at trailing SL
+        strategy.exit("Trail-L", from_entry="L", stop=trailingLong, comment="Trail")
+    else
+        strategy.exit("Exit-L", from_entry="L", stop=slLong, limit=tp1Long, comment="Exit")
+
+if strategy.position_size < 0
+    if useHybrid
+        strategy.exit("TP1-S", from_entry="S", limit=tp1Short, qty_percent=50, comment="TP1")
+        newTrail = trailType == "ATR" ? low + atrVal * trailAtr : low + trailPts
+        if newTrail < trailingShort
+            trailingShort := newTrail
+        trailingShort := math.min(trailingShort, slShort)
+        strategy.exit("Trail-S", from_entry="S", stop=trailingShort, comment="Trail")
+    else
+        strategy.exit("Exit-S", from_entry="S", stop=slShort, limit=tp1Short, comment="Exit")
+
+// Reset trailing references when flat
+if strategy.position_size == 0
+    trailingLong  := na
+    trailingShort := na
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ENTRY MARKERS
+// ═══════════════════════════════════════════════════════════════════════════
+plotshape(showEntries and longEntryOK,  "Long Entry",  shape.triangleup,   location.belowbar, color.new(color.blue, 0),   size=size.small, text="LE")
+plotshape(showEntries and shortEntryOK, "Short Entry", shape.triangledown, location.abovebar, color.new(color.red, 0),    size=size.small, text="SE")

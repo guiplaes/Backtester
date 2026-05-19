@@ -1,0 +1,32 @@
+📊 COMPARATIVA FINAL TOTS ELS TF OPTIMITZATS
+
+Cada TF amb els seus paràmetres òptims per session + Streak sizing:
+
+| TF | Trades/any | WR | %/any | PF | DD% |
+| M5 | 720 | 47.5% | +50.1% ⭐ | 1.69 | 5.4% |
+| M15 | 240 | 58.9% | +46.9% | 2.29 | 5.9% |
+| M30 | 105 | 43% | +27.3% | 1.87 | 7.1% |
+| H1 | 25 | 50% | +32% | 2.5 | 10% |
+| H4 | 20 | 66% | +43% | 4.92 ⭐ | 5.6% |
+
+INSIGHT KEY:
+- M5 dóna +50%/any però PF 1.69 baix
+- M15 sweet spot: +47% amb PF 2.29
+- H4 més robust: PF 4.92, menys frequency
+
+ATENCIÓ — degradació live esperada per slippage:
+- M5: ~-20% (real ~+35-40%)
+- M15: ~-10% (real ~+40-44%)
+- H4: ~-5% (real ~+38-43%)
+
+H4 segueix sent EL MÉS FIABLE per a deploy real.
+M5 té max return teòric però risk de degradar.
+
+DECISIÓ:
+🥇 H4 ULTIMATE per implementar primer (segur)
+🥈 M15 per agressivitat moderada
+🥉 M5 NO recomanable (degrada massa)
+
+Tots ja són significativament millors que +10%/any (S&P 500) i +20%/any (hedge fund típic).
+
+Vols que documenti pla d'implementació final per al teu sistema?

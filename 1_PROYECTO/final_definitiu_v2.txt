@@ -1,0 +1,208 @@
+Running FINAL DEFINITIU portfolio comparison (3 lot sizes × session filter)...
+
+====================================================================================================
+LOT=0.05, SESSION_FILTER=True
+====================================================================================================
+  EURGBP 1D LONG       Net: $+1,804
+  EURGBP 1D SHORT      Net: $+1,083
+  EURGBP 4h LONG       Net: $+1,783
+  EURGBP 4h SHORT      Net: $+1,522
+  EURGBP 1h LONG       Net: $+1,156
+  EURGBP 1h SHORT      Net: $+914
+  EURGBP 15min LONG    Net: $+1,137
+  EURGBP 15min SHORT   Net: $+272
+  EURCHF 1D LONG       Net: $-97
+  EURCHF 1D SHORT      Net: $+1,190
+  EURCHF 4h LONG       Net: $-193
+  EURCHF 4h SHORT      Net: $+1,686
+  EURJPY 1D LONG       Net: $+40,873
+  EURJPY 1D SHORT      Net: $+10
+  EURJPY 4h LONG       Net: $+36,138
+  EURJPY 4h SHORT      Net: $-6,937
+  CHFJPY 1D LONG       Net: $+33,022
+  CHFJPY 1D SHORT      Net: $-68,786
+  CHFJPY 4h LONG       Net: $+41,244
+  CHFJPY 4h SHORT      Net: $-85,137
+  USDCHF 4h LONG       Net: $-79
+  USDCHF 4h SHORT      Net: $+1,095
+  GBPCHF 4h LONG       Net: $-949
+  GBPCHF 4h SHORT      Net: $+2,520
+  GBPCHF 1D LONG       Net: $-1,397
+  GBPCHF 1D SHORT      Net: $+908
+
+  *** RESULTAT ***
+  Annual:           +1.52%/any
+  Total return:     +7.58% ($+4,777)
+  Max DD:           96.55% ($+180,170)
+  Loss from init:   89.79%
+  % time under init: 11.2%
+  Calmar:           0.02
+  Max sim positions: 48
+  % time amb pos:   98%
+
+  Per any:
+    2021: $  +18,774 (+29.80%)
+    2022: $  +69,701 (+110.64%)
+    2023: $  -10,782 (-17.11%)
+    2024: $   -9,040 (-14.35%)
+    2025: $  -31,720 (-50.35%)
+    2026: $  -32,155 (-51.04%)
+
+====================================================================================================
+LOT=0.1, SESSION_FILTER=True
+====================================================================================================
+  EURGBP 1D LONG       Net: $+3,608
+  EURGBP 1D SHORT      Net: $+2,165
+  EURGBP 4h LONG       Net: $+3,566
+  EURGBP 4h SHORT      Net: $+3,045
+  EURGBP 1h LONG       Net: $+2,311
+  EURGBP 1h SHORT      Net: $+1,827
+  EURGBP 15min LONG    Net: $+2,273
+  EURGBP 15min SHORT   Net: $+543
+  EURCHF 1D LONG       Net: $-195
+  EURCHF 1D SHORT      Net: $+2,379
+  EURCHF 4h LONG       Net: $-386
+  EURCHF 4h SHORT      Net: $+3,371
+  EURJPY 1D LONG       Net: $+81,746
+  EURJPY 1D SHORT      Net: $+20
+  EURJPY 4h LONG       Net: $+72,276
+  EURJPY 4h SHORT      Net: $-13,875
+  CHFJPY 1D LONG       Net: $+66,043
+  CHFJPY 1D SHORT      Net: $-137,571
+  CHFJPY 4h LONG       Net: $+82,488
+  CHFJPY 4h SHORT      Net: $-170,274
+  USDCHF 4h LONG       Net: $-158
+  USDCHF 4h SHORT      Net: $+2,189
+  GBPCHF 4h LONG       Net: $-1,898
+  GBPCHF 4h SHORT      Net: $+5,039
+  GBPCHF 1D LONG       Net: $-2,794
+  GBPCHF 1D SHORT      Net: $+1,816
+
+  *** RESULTAT ***
+  Annual:           +3.04%/any
+  Total return:     +15.17% ($+9,555)
+  Max DD:           116.16% ($+360,339)
+  Loss from init:   179.58%
+  % time under init: 11.2%
+  Calmar:           0.03
+  Max sim positions: 48
+  % time amb pos:   98%
+
+  Per any:
+    2021: $  +37,547 (+59.60%)
+    2022: $ +139,402 (+221.27%)
+    2023: $  -21,564 (-34.23%)
+    2024: $  -18,079 (-28.70%)
+    2025: $  -63,441 (-100.70%)
+    2026: $  -64,311 (-102.08%)
+
+====================================================================================================
+LOT=0.15, SESSION_FILTER=True
+====================================================================================================
+  EURGBP 1D LONG       Net: $+5,412
+  EURGBP 1D SHORT      Net: $+3,248
+  EURGBP 4h LONG       Net: $+5,348
+  EURGBP 4h SHORT      Net: $+4,567
+  EURGBP 1h LONG       Net: $+3,467
+  EURGBP 1h SHORT      Net: $+2,741
+  EURGBP 15min LONG    Net: $+3,410
+  EURGBP 15min SHORT   Net: $+815
+  EURCHF 1D LONG       Net: $-292
+  EURCHF 1D SHORT      Net: $+3,569
+  EURCHF 4h LONG       Net: $-579
+  EURCHF 4h SHORT      Net: $+5,057
+  EURJPY 1D LONG       Net: $+122,619
+  EURJPY 1D SHORT      Net: $+30
+  EURJPY 4h LONG       Net: $+108,414
+  EURJPY 4h SHORT      Net: $-20,812
+  CHFJPY 1D LONG       Net: $+99,065
+  CHFJPY 1D SHORT      Net: $-206,357
+  CHFJPY 4h LONG       Net: $+123,732
+  CHFJPY 4h SHORT      Net: $-255,411
+  USDCHF 4h LONG       Net: $-237
+  USDCHF 4h SHORT      Net: $+3,284
+  GBPCHF 4h LONG       Net: $-2,846
+  GBPCHF 4h SHORT      Net: $+7,559
+  GBPCHF 1D LONG       Net: $-4,192
+  GBPCHF 1D SHORT      Net: $+2,724
+
+  *** RESULTAT ***
+  Annual:           +4.56%/any
+  Total return:     +22.75% ($+14,332)
+  Max DD:           124.60% ($+540,509)
+  Loss from init:   269.37%
+  % time under init: 11.2%
+  Calmar:           0.04
+  Max sim positions: 48
+  % time amb pos:   98%
+
+  Per any:
+    2021: $  +56,321 (+89.40%)
+    2022: $ +209,103 (+331.91%)
+    2023: $  -32,346 (-51.34%)
+    2024: $  -27,119 (-43.05%)
+    2025: $  -95,161 (-151.05%)
+    2026: $  -96,466 (-153.12%)
+
+====================================================================================================
+SENSE SESSION FILTER (lot 0.10)
+====================================================================================================
+
+====================================================================================================
+LOT=0.1, SESSION_FILTER=False
+====================================================================================================
+  EURGBP 1D LONG       Net: $+3,608
+  EURGBP 1D SHORT      Net: $+2,165
+  EURGBP 4h LONG       Net: $+3,591
+  EURGBP 4h SHORT      Net: $+3,050
+  EURGBP 1h LONG       Net: $+2,347
+  EURGBP 1h SHORT      Net: $+1,361
+  EURGBP 15min LONG    Net: $+2,656
+  EURGBP 15min SHORT   Net: $+687
+  EURCHF 1D LONG       Net: $-195
+  EURCHF 1D SHORT      Net: $+2,379
+  EURCHF 4h LONG       Net: $-487
+  EURCHF 4h SHORT      Net: $+3,289
+  EURJPY 1D LONG       Net: $+81,746
+  EURJPY 1D SHORT      Net: $+20
+  EURJPY 4h LONG       Net: $+71,547
+  EURJPY 4h SHORT      Net: $-12,515
+  CHFJPY 1D LONG       Net: $+66,043
+  CHFJPY 1D SHORT      Net: $-137,571
+  CHFJPY 4h LONG       Net: $+79,445
+  CHFJPY 4h SHORT      Net: $-164,557
+  USDCHF 4h LONG       Net: $-341
+  USDCHF 4h SHORT      Net: $+2,012
+  GBPCHF 4h LONG       Net: $-1,652
+  GBPCHF 4h SHORT      Net: $+4,915
+  GBPCHF 1D LONG       Net: $-2,794
+  GBPCHF 1D SHORT      Net: $+1,816
+
+  *** RESULTAT ***
+  Annual:           +4.00%/any
+  Total return:     +19.95% ($+12,566)
+  Max DD:           115.34% ($+354,270)
+  Loss from init:   174.80%
+  % time under init: 11.1%
+  Calmar:           0.03
+  Max sim positions: 48
+  % time amb pos:   98%
+
+  Per any:
+    2021: $  +37,936 (+60.22%)
+    2022: $ +139,870 (+222.02%)
+    2023: $  -23,659 (-37.55%)
+    2024: $  -12,208 (-19.38%)
+    2025: $  -64,791 (-102.84%)
+    2026: $  -64,582 (-102.51%)
+
+=======================================================================================================================================
+RESUM FINAL — quina configuracio adoptem:
+=======================================================================================================================================
+  Lot    Session     Annual     DD%  Loss init%  Calmar  Max Pos
+  0.05   ON       + 1.52%  96.55%      89.79%   0.02     48
+  0.1    ON       + 3.04%  116.16%     179.58%   0.03     48
+  0.15   ON       + 4.56%  124.60%     269.37%   0.04     48
+  0.1    OFF      + 4.00%  115.34%     174.80%   0.03     48
+
+DONE

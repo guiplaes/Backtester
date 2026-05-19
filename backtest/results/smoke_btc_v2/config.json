@@ -1,0 +1,18 @@
+{
+  "run_id": "smoke_btc_v2",
+  "initial_capital": 200.0,
+  "initial_reserve_pct": 0.0,
+  "snapshot_every_min": 60,
+  "rebalance_every_min": 2,
+  "bots": {
+    "BTC_USDT": {
+      "symbol": "BTC_USDT",
+      "width_pct": 0.0516,
+      "rows": 12
+    }
+  },
+  "weights": {
+    "BTC_USDT": 1.0
+  },
+  "started_at": "2026-05-13T18:06:54.513787+00:00"
+}

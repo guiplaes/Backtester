@@ -1,0 +1,144 @@
+//@version=5
+// =====================================================================
+// APPROACH PHASE TRACKER — observa aproximació a zones amb flux real CME
+// Per usar amb COMEX:GC1! (o qualsevol futures amb dades reals)
+//
+// Idea: quan el preu s'aproxima a una zona marcada, tracks el volum
+// acumulat i el delta net (compradors vs venedors agressius) durant
+// l'aproximació. Et diu visualment si hi ha INTERÈS INSTITUCIONAL
+// REAL apropant-se al nivell o és soroll retail.
+//
+// Funcionament:
+//   IDLE      → preu lluny de la zona
+//   APPROACH  → preu dins de approach_dist ($5 default)
+//   AT_ZONE   → preu dins de zone_tol ($1.5 default) — moment de decisió
+//
+// La taula mostra: zona, state, bars dins approach, vol acumulat,
+// delta net (verd=compradors dominen, vermell=venedors).
+//
+// Si veus la zona marcada com AT_ZONE amb delta verd fort i volum alt
+// → demanda institucional confirmada. Bona reacció probable.
+// Si AT_ZONE amb delta neutre/contrari + volum flat → soroll retail,
+// reacció improbable.
+// =====================================================================
+
+indicator("Approach Phase Tracker", overlay=true, max_labels_count=100)
+
+// ────── INPUTS ──────
+g_zones = "Zones a vigilar (posa preus dels supports/resistances)"
+zone_a = input.float(0.0, "Zona A", group=g_zones, tooltip="Posa preu del support/resistance. 0 = desactivat")
+zone_b = input.float(0.0, "Zona B", group=g_zones)
+zone_c = input.float(0.0, "Zona C", group=g_zones)
+zone_d = input.float(0.0, "Zona D", group=g_zones)
+
+g_set = "Settings"
+approach_dist = input.float(5.0, "Distància aproximació ($)", group=g_set, tooltip="Comença a trackjar quan preu < X $ de la zona")
+zone_tol = input.float(1.5, "Tolerància zona ($)", group=g_set, tooltip="Considerat AT_ZONE quan preu < Y $ de la zona")
+ltf_res = input.timeframe("1", "Resolució per delta (LTF)", group=g_set, tooltip="1 = M1 (Pro). Si tens Premium pots posar 5S/1S per més precisió")
+show_tbl = input.bool(true, "Mostra taula", group=g_set)
+
+// ────── DELTA CÀLCUL via LOWER TIMEFRAME ──────
+[ltf_o, ltf_c, ltf_v] = request.security_lower_tf(syminfo.tickerid, ltf_res, [open, close, volume])
+
+bar_buy_vol = 0.0
+bar_sell_vol = 0.0
+n_ticks = array.size(ltf_v)
+if n_ticks > 0
+    for i = 0 to n_ticks - 1
+        v = array.get(ltf_v, i)
+        c = array.get(ltf_c, i)
+        o = array.get(ltf_o, i)
+        if c > o
+            bar_buy_vol += v
+        else if c < o
+            bar_sell_vol += v
+bar_delta_val = bar_buy_vol - bar_sell_vol
+
+// ────── PER-ZONA STATE ──────
+// state: 0=IDLE  1=APPROACH  2=AT_ZONE
+var float[] zones_arr = array.new_float(4, 0)
+var int[]   states    = array.new_int(4, 0)
+var int[]   bars_acc  = array.new_int(4, 0)
+var float[] vol_acc   = array.new_float(4, 0)
+var float[] delta_acc = array.new_float(4, 0)
+
+// Refresca les zones de l'input cada bar (per si l'usuari les canvia)
+array.set(zones_arr, 0, zone_a)
+array.set(zones_arr, 1, zone_b)
+array.set(zones_arr, 2, zone_c)
+array.set(zones_arr, 3, zone_d)
+
+// Update state per cada zona
+for i = 0 to 3
+    z_price = array.get(zones_arr, i)
+    if z_price > 0
+        dist = math.abs(close - z_price)
+        cur_st = array.get(states, i)
+
+        if dist <= zone_tol
+            // AT_ZONE — continuem accumulating
+            array.set(states, i, 2)
+            array.set(bars_acc, i, array.get(bars_acc, i) + 1)
+            array.set(vol_acc, i, array.get(vol_acc, i) + volume)
+            array.set(delta_acc, i, array.get(delta_acc, i) + bar_delta_val)
+        else if dist <= approach_dist
+            // APPROACH — accumulem
+            if cur_st == 0
+                // Comença nou approach phase
+                array.set(states, i, 1)
+                array.set(bars_acc, i, 1)
+                array.set(vol_acc, i, volume)
+                array.set(delta_acc, i, bar_delta_val)
+            else
+                // Continuem accumulating
+                array.set(states, i, math.max(cur_st, 1))
+                array.set(bars_acc, i, array.get(bars_acc, i) + 1)
+                array.set(vol_acc, i, array.get(vol_acc, i) + volume)
+                array.set(delta_acc, i, array.get(delta_acc, i) + bar_delta_val)
+        else
+            // Lluny — reset
+            array.set(states, i, 0)
+            array.set(bars_acc, i, 0)
+            array.set(vol_acc, i, 0)
+            array.set(delta_acc, i, 0)
+
+// ────── DIBUIXEN LES ZONES COM A LÍNIES ──────
+plot(zone_a > 0 ? zone_a : na, color=color.new(color.yellow, 30), linewidth=1, style=plot.style_line, title="Zone A")
+plot(zone_b > 0 ? zone_b : na, color=color.new(color.yellow, 30), linewidth=1, style=plot.style_line, title="Zone B")
+plot(zone_c > 0 ? zone_c : na, color=color.new(color.yellow, 30), linewidth=1, style=plot.style_line, title="Zone C")
+plot(zone_d > 0 ? zone_d : na, color=color.new(color.yellow, 30), linewidth=1, style=plot.style_line, title="Zone D")
+
+// ────── TAULA D'ESTAT ──────
+if show_tbl and barstate.islast
+    var table tbl = table.new(position.top_right, 5, 5, bgcolor=color.new(color.gray, 70), border_color=color.new(color.white, 50), border_width=1)
+
+    // Header
+    table.cell(tbl, 0, 0, "Zona", text_color=color.white, bgcolor=color.new(color.black, 30))
+    table.cell(tbl, 1, 0, "State", text_color=color.white, bgcolor=color.new(color.black, 30))
+    table.cell(tbl, 2, 0, "Bars", text_color=color.white, bgcolor=color.new(color.black, 30))
+    table.cell(tbl, 3, 0, "Vol acc", text_color=color.white, bgcolor=color.new(color.black, 30))
+    table.cell(tbl, 4, 0, "Delta net", text_color=color.white, bgcolor=color.new(color.black, 30))
+
+    state_names = array.from("IDLE", "APPROACH", "AT ZONE")
+    state_colors = array.from(color.gray, color.orange, color.yellow)
+
+    for i = 0 to 3
+        z_price = array.get(zones_arr, i)
+        if z_price > 0
+            s = array.get(states, i)
+            b = array.get(bars_acc, i)
+            v = array.get(vol_acc, i)
+            d = array.get(delta_acc, i)
+            d_pct = v > 0 ? d / v * 100 : 0
+            // Color del delta: verd compradors, vermell venedors
+            d_color = d > 0 ? color.lime : (d < 0 ? color.red : color.gray)
+
+            table.cell(tbl, 0, i + 1, str.tostring(z_price, "#.##"), text_color=color.white)
+            table.cell(tbl, 1, i + 1, array.get(state_names, math.min(s, 2)), text_color=array.get(state_colors, math.min(s, 2)))
+            table.cell(tbl, 2, i + 1, str.tostring(b), text_color=color.white)
+            table.cell(tbl, 3, i + 1, str.tostring(v, "#"), text_color=color.white)
+            table.cell(tbl, 4, i + 1, str.tostring(d, "+#") + " (" + str.tostring(d_pct, "+#.#") + "%)", text_color=d_color)
+
+// ────── ALERTES quan zona entra AT_ZONE ──────
+zone_a_just_at = array.get(states, 0) == 2 and nz(array.get(states, 0)[1], 0) != 2
+alertcondition(zone_a_just_at, "Zone A — preu ha entrat a la zona", "Preu ha entrat a la zona A. Mira el delta.")
