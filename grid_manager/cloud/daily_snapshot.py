@@ -31,18 +31,26 @@ log = logging.getLogger("daily_snapshot")
 
 
 def _calc_lifetime_profit(bot_id: str, current_grid_profit: float) -> float:
-    """Lifetime profit = SUM of all reinvest_profit events + current grid_profit.
-    Simplification: si no hem fet cap reinvest, lifetime = current_grid_profit (Pionex).
-    Quan reinvertim (event 'reinvest_profit'), guardem el snapshot a lifetime_profit_calc.
+    """Lifetime profit acumulat REAL d'un bot, preservat encara que Pionex reseteja.
+
+    Quan extreiem profit via /spotGrid/profit, Pionex baixa el seu gridProfit
+    a 0. Nosaltres registrem un 'withdraw_profit' event a capital_events.
+
+    Lifetime = SUM(withdraw_profit events del bot) + current Pionex gridProfit.
+
+    Així el comptador nostre creix monotonicament, fins i tot després d'extraccions
+    setmanals. La història completa queda guardada a capital_events.
     """
     with conn() as c, c.cursor() as cur:
         cur.execute("""
-            SELECT COALESCE(MAX(lifetime_profit_calc), 0)
+            SELECT COALESCE(SUM(amount_usdt), 0)::float
             FROM capital_events
-            WHERE bot_id = %s AND event_type = 'reinvest_profit'
+            WHERE bot_id = %s
+              AND event_type = 'withdraw_profit'
+              AND success = TRUE
         """, (bot_id,))
-        prev_lifetime = float(cur.fetchone()[0] or 0)
-    return prev_lifetime + current_grid_profit
+        prev_withdrawn = float(cur.fetchone()[0] or 0)
+    return prev_withdrawn + current_grid_profit
 
 
 def snapshot_all_bots() -> int:
