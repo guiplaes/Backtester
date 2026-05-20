@@ -22,9 +22,9 @@ if _USER_SITE not in sys.path:
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from cloud.db_cloud import upsert_daily_snapshot, conn
+from cloud.db_cloud import upsert_daily_snapshot, conn, log_wallet_snapshot
 from config import BOTS
-from pionex_client import get_bot_range
+from pionex_client import get_bot_range, get_balance, get_current_price
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s")
 log = logging.getLogger("daily_snapshot")
@@ -45,9 +45,13 @@ def _calc_lifetime_profit(bot_id: str, current_grid_profit: float) -> float:
     return prev_lifetime + current_grid_profit
 
 
-def main():
+def snapshot_all_bots() -> int:
+    """Recull snapshot de TOTS els bots i fa UPSERT a daily_snapshots
+    (mateixa data → actualitza els camps en lloc de crear fila nova).
+    Cridable des de daily_snapshot.py o sync_health.py.
+    Retorna: nombre de bots amb snapshot OK.
+    """
     today = date.today()
-    log.info(f"Daily snapshot per a {today} ({len(BOTS)} bots actius)")
     saved = 0
     for name, cfg in BOTS.items():
         try:
@@ -64,7 +68,9 @@ def main():
             base_amt = float(s.get("base_in_bot", 0))
             price = float(s.get("price", 0))
             base_v = base_amt * price
-            invested = float(s.get("usdt_investment", 0))
+            # Usar quote_total_investment (current, inclou rebalances)
+            # i caure a usdt_investment (initial) si no està disponible
+            invested = float(s.get("quote_total_investment") or s.get("usdt_investment") or 0)
 
             upsert_daily_snapshot(
                 date_=today,
@@ -76,7 +82,7 @@ def main():
                 base_value_usdt=base_v,
                 quote_value_usdt=quote_v,
                 current_value_total=quote_v + base_v,
-                cycles_completed_today=0,  # TODO: delta vs ahir
+                cycles_completed_today=0,
                 cycles_total=int(s.get("paired_cycles", 0)),
                 price_close=price, top=top, bottom=bottom,
             )
@@ -84,7 +90,35 @@ def main():
             log.info(f"[{name}] snapshot OK: value={quote_v+base_v:.2f} lifetime={lifetime:.4f}")
         except Exception as e:
             log.error(f"[{name}] snapshot failed: {e}")
+    return saved
+
+
+def main():
+    log.info(f"Daily snapshot per a {date.today()} ({len(BOTS)} bots actius)")
+    saved = snapshot_all_bots()
     log.info(f"Saved {saved}/{len(BOTS)} snapshots")
+
+    # ─── Wallet balance snapshot (per al dashboard 'Reserva del sistema') ──
+    try:
+        bal = get_balance() or {}
+        # Preus per a convertir a USDT
+        btc_price = 0.0
+        try:
+            btc_price = float(get_current_price("BTC_USDT"))
+        except Exception:
+            pass
+        for coin, free_amt in bal.items():
+            free_f = float(free_amt or 0)
+            value = free_f
+            if coin == "BTC":
+                value = free_f * btc_price
+            elif coin not in ("USDT", "USDC"):
+                # Per la resta de coins, valor aproximat = 0 (no ho fem servir activament)
+                value = 0.0
+            log_wallet_snapshot(coin=coin, free=free_f, value_usdt=value, source="daily_snapshot")
+        log.info(f"Wallet snapshot OK ({len(bal)} coins)")
+    except Exception as e:
+        log.error(f"Wallet snapshot failed: {e}")
 
 
 if __name__ == "__main__":

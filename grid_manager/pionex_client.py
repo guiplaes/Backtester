@@ -246,6 +246,7 @@ def get_bot_range(bot_id: str, symbol: str = None):
         "base_in_bot": float(data.get("baseAmount", 0)),
         "quote_in_bot": float(data.get("quoteAmount", 0)),
         "usdt_investment": float(data.get("usdtInvestment", 0)),
+        "quote_total_investment": float(data.get("quoteTotalInvestment", 0)),
         "filled_orders": int(data.get("closedExchangeOrderCount", 0)),
         "placed_orders": int(data.get("placedExchangeOrderCount", 0)),
         "paired_cycles": int(data.get("exchangeOrderPairedCount", 0)),

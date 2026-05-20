@@ -360,6 +360,214 @@ def log_reconciliation(
 
 
 # ═══════════════════════════════════════════════════════════════════════
+# B1: Wallet snapshots
+# ═══════════════════════════════════════════════════════════════════════
+def log_wallet_snapshot(coin: str, free: float, frozen: float = 0,
+                        value_usdt: float | None = None,
+                        source: str = "daily_snapshot",
+                        ts: datetime | None = None) -> None:
+    if ts is None: ts = datetime.now(timezone.utc)
+    with conn() as c, c.cursor() as cur:
+        cur.execute("""
+            INSERT INTO wallet_snapshots (ts, coin, free, frozen, value_usdt, source)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        """, (ts, coin, free, frozen, value_usdt, source))
+        c.commit()
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# B2: System health (heartbeat)
+# ═══════════════════════════════════════════════════════════════════════
+def log_system_health(*, component: str, status: str,
+                      last_cycle_ms: int | None = None,
+                      triggers_today: int = 0,
+                      adjusts_ok_today: int = 0,
+                      adjusts_fail_today: int = 0,
+                      last_trigger_text: str | None = None,
+                      last_adjust_text: str | None = None,
+                      error_msg: str | None = None,
+                      extra: dict | None = None) -> None:
+    extra_json = json.dumps(extra) if extra is not None else None
+    with conn() as c, c.cursor() as cur:
+        cur.execute("""
+            INSERT INTO system_health
+            (component, status, last_cycle_ms, triggers_today, adjusts_ok_today,
+             adjusts_fail_today, last_trigger_text, last_adjust_text, error_msg, extra)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (component, status, last_cycle_ms, triggers_today,
+              adjusts_ok_today, adjusts_fail_today,
+              last_trigger_text, last_adjust_text, error_msg, extra_json))
+        c.commit()
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# B3: Monitor log (últimes línies sincronitzades)
+# ═══════════════════════════════════════════════════════════════════════
+def log_monitor_lines(lines: list[tuple]) -> None:
+    """lines: list of (ts, level, component, message). Bulk insert."""
+    if not lines: return
+    with conn() as c, c.cursor() as cur:
+        cur.executemany("""
+            INSERT INTO monitor_log (ts, level, component, message)
+            VALUES (%s, %s, %s, %s)
+        """, lines)
+        c.commit()
+
+
+def trim_monitor_log(max_rows: int = 500) -> int:
+    """Mantenir només les últimes N files al monitor_log."""
+    with conn() as c, c.cursor() as cur:
+        cur.execute("""
+            DELETE FROM monitor_log
+            WHERE id NOT IN (
+                SELECT id FROM monitor_log ORDER BY ts DESC LIMIT %s
+            )
+        """, (max_rows,))
+        deleted = cur.rowcount
+        c.commit()
+        return deleted
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# B4: Price snapshots
+# ═══════════════════════════════════════════════════════════════════════
+def log_price_snapshot(symbol: str, price: float,
+                       bot_top: float | None = None,
+                       bot_bottom: float | None = None,
+                       ts: datetime | None = None) -> None:
+    if ts is None: ts = datetime.now(timezone.utc)
+    with conn() as c, c.cursor() as cur:
+        cur.execute("""
+            INSERT INTO price_snapshots (ts, symbol, price, bot_top, bot_bottom)
+            VALUES (%s, %s, %s, %s, %s)
+        """, (ts, symbol, price, bot_top, bot_bottom))
+        c.commit()
+
+
+def trim_price_snapshots(days_to_keep: int = 60) -> int:
+    """Eliminar snapshots > N dies (per evitar acumulació)."""
+    with conn() as c, c.cursor() as cur:
+        cur.execute("""
+            DELETE FROM price_snapshots
+            WHERE ts < NOW() - INTERVAL '%s days'
+        """ % int(days_to_keep))
+        deleted = cur.rowcount
+        c.commit()
+        return deleted
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# MT5 state
+# ═══════════════════════════════════════════════════════════════════════
+def log_mt5_state(*, available: bool, equity: float | None = None,
+                  balance: float | None = None, floating_pnl: float | None = None,
+                  daily_profit: float | None = None, cum_profit: float | None = None,
+                  open_positions: int | None = None, raw_json: dict | None = None) -> None:
+    raw = json.dumps(raw_json) if raw_json else None
+    with conn() as c, c.cursor() as cur:
+        cur.execute("""
+            INSERT INTO mt5_state
+            (available, equity, balance, floating_pnl, daily_profit, cum_profit, open_positions, raw_json)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        """, (available, equity, balance, floating_pnl, daily_profit, cum_profit, open_positions, raw))
+        c.commit()
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# v3: grid_trades, operation_log, cron_runs, bot_lifecycle_events
+# ═══════════════════════════════════════════════════════════════════════
+def log_grid_trade(*, pionex_fill_id: int, pionex_order_id: int,
+                   bot_id: str | None, bot_name: str | None,
+                   symbol: str, side: str, role: str | None,
+                   price: float, size: float, fee: float,
+                   fee_coin: str | None, ts: datetime) -> int | None:
+    """Insert d'un fill. Idempotent per pionex_fill_id."""
+    quote_value = price * size
+    with conn() as c, c.cursor() as cur:
+        cur.execute("""
+            INSERT INTO grid_trades
+              (pionex_fill_id, pionex_order_id, bot_id, bot_name, symbol,
+               side, role, price, size, quote_value, fee, fee_coin, ts)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            ON CONFLICT (pionex_fill_id) DO NOTHING
+            RETURNING id
+        """, (pionex_fill_id, pionex_order_id, bot_id, bot_name, symbol,
+              side, role, price, size, quote_value, fee, fee_coin, ts))
+        row = cur.fetchone()
+        c.commit()
+        return row[0] if row else None
+
+
+def log_operation(*, component: str, operation: str,
+                  status: str = "success",
+                  bot_id: str | None = None, bot_name: str | None = None,
+                  duration_ms: int | None = None,
+                  details: dict | None = None,
+                  error_msg: str | None = None) -> None:
+    """Registra una acció del sistema (rebalance, recolocation, snapshot, etc)."""
+    details_json = json.dumps(details) if details is not None else None
+    with conn() as c, c.cursor() as cur:
+        cur.execute("""
+            INSERT INTO operation_log
+              (component, operation, bot_id, bot_name, status,
+               duration_ms, details, error_msg)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        """, (component, operation, bot_id, bot_name, status,
+              duration_ms, details_json, error_msg))
+        c.commit()
+
+
+@contextmanager
+def cron_run(task_name: str):
+    """Context manager per registrar inici/fi d'un cron + duració.
+    Ús:
+        with cron_run('sync_health') as ctx:
+            ctx['items'] = 6
+            ctx['notes'] = 'all OK'
+    """
+    started = datetime.now(timezone.utc)
+    ctx = {"items": 0, "notes": None, "status": "success", "error": None}
+    try:
+        yield ctx
+    except Exception as e:
+        ctx["status"] = "failed"
+        ctx["error"] = str(e)[:500]
+        raise
+    finally:
+        finished = datetime.now(timezone.utc)
+        duration_ms = int((finished - started).total_seconds() * 1000)
+        try:
+            with conn() as c, c.cursor() as cur:
+                cur.execute("""
+                    INSERT INTO cron_runs
+                      (task_name, started_at, finished_at, duration_ms,
+                       status, items_processed, notes, error_msg)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                """, (task_name, started, finished, duration_ms,
+                      ctx["status"], ctx["items"], ctx["notes"], ctx["error"]))
+                c.commit()
+        except Exception as e:
+            log.warning(f"cron_runs insert failed: {e}")
+
+
+def log_bot_lifecycle(*, bot_id: str, bot_name: str | None,
+                      event_type: str,
+                      last_grid_profit: float | None = None,
+                      last_quote_invested: float | None = None,
+                      notes: str | None = None,
+                      detected_by: str = "sync_health") -> None:
+    with conn() as c, c.cursor() as cur:
+        cur.execute("""
+            INSERT INTO bot_lifecycle_events
+              (bot_id, bot_name, event_type, last_grid_profit,
+               last_quote_invested, notes, detected_by)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+        """, (bot_id, bot_name, event_type, last_grid_profit,
+              last_quote_invested, notes, detected_by))
+        c.commit()
+
+
+# ═══════════════════════════════════════════════════════════════════════
 # Health check
 # ═══════════════════════════════════════════════════════════════════════
 def ping() -> bool:
