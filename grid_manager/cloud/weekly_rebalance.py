@@ -31,7 +31,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from config import BOTS, TARGET_WEIGHTS
 from cloud.db_cloud import log_capital_event, conn as cloud_conn
-from pionex_client import get_bot_order, get_balance, get_current_price, invest_in_bot, reduce_bot
+from pionex_client import get_bot_order, get_balance, get_current_price, invest_in_bot, extract_grid_profit
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s")
 log = logging.getLogger("weekly_rebalance")
@@ -156,23 +156,23 @@ def main():
 
     log.info(f"\n→ Tot el pot (${pool_total:.2f}) anirà a {target_bot['name']} (més desbalancejat)")
 
-    # ─── 4) EXTRACCIÓ DEL PROFIT: reduce_bot per a cada bot per la quantitat de gridProfit
-    # Pionex no té withdraw_profit directe. reduce_bot allibera USDT del bot al wallet.
-    # IMPORTANT: això converteix una part del base/quote del bot en USDT lliure.
-    log.info("Extracció del profit de cada bot...")
+    # ─── 4) EXTRACCIÓ DEL GRID PROFIT pur (endpoint Pionex /spotGrid/profit)
+    # Aquest endpoint específic extreu només la part de profit del grid,
+    # sense tocar el base/quote del bot. Cash pur cap al wallet.
+    log.info("Extracció del grid profit de cada bot...")
+    MIN_EXTRACT = 0.50   # Pionex permet extraccions petites a través d'aquest endpoint
     extracted_total = 0.0
     extraction_results = []
     for name, bcfg in BOTS.items():
         gp = bot_states[name]["grid_profit"]
-        # Saltem si profit menor que mínim Pionex
-        if gp < MIN_INVEST_PIONEX:
-            log.info(f"  {name}: gridProfit ${gp:.2f} < mínim ${MIN_INVEST_PIONEX}, skip")
+        if gp < MIN_EXTRACT:
+            log.info(f"  {name}: gridProfit ${gp:.4f} < ${MIN_EXTRACT}, skip")
             extraction_results.append({"bot": name, "amount": gp, "ok": False, "msg": "below min", "extracted": 0})
             continue
-        amount = round(gp, 2)
-        log.info(f"  reduce_bot({name}, ${amount:.2f})")
+        amount = round(gp, 4)
+        log.info(f"  extract_grid_profit({name}, ${amount:.4f})")
         try:
-            r = reduce_bot(name, amount)
+            r = extract_grid_profit(name, amount)
             ok = bool(r.get("result", False))
             if ok:
                 extracted_total += amount

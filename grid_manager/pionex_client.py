@@ -183,6 +183,16 @@ def invest_in_bot(bot_id_or_name, quote_amount: float) -> dict:
     return _post_signed("/api/v1/bot/orders/spotGrid/investIn", body)
 
 
+def extract_grid_profit(bot_id_or_name, amount: float) -> dict:
+    """Extreure grid profit pur d'un spot grid bot.
+    Pionex envia el cash directament al wallet sense vendre cap base.
+    Endpoint: POST /api/v1/bot/orders/spotGrid/profit
+    """
+    bot_id = _resolve_bot_id(bot_id_or_name)
+    body = {"buOrderId": bot_id, "amount": f"{amount:.4f}"}
+    return _post_signed("/api/v1/bot/orders/spotGrid/profit", body)
+
+
 def reduce_bot(bot_id_or_name, quote_amount: float) -> dict:
     """Redueix capital d'un bot, retornant USDT al wallet."""
     bot_id = _resolve_bot_id(bot_id_or_name)
