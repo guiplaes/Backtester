@@ -31,7 +31,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from config import BOTS, TARGET_WEIGHTS
 from cloud.db_cloud import log_capital_event, conn as cloud_conn
-from pionex_client import get_bot_order, get_balance, get_current_price, invest_in_bot
+from pionex_client import get_bot_order, get_balance, get_current_price, invest_in_bot, reduce_bot
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s")
 log = logging.getLogger("weekly_rebalance")
@@ -102,94 +102,120 @@ def main():
     log.info(f"Total invertit: ${total_invested:.2f}")
     log.info(f"Total gridProfit acumulat: ${total_grid_profit:.2f}")
 
-    # ─── 2) Calcular pot setmanal ────────────────────────────────────
-    reinvest_amount = total_grid_profit if auto_reinv else 0.0
-    pool_total = dca + reinvest_amount
-    log.info(f"Pot setmanal: ${dca:.2f} DCA + ${reinvest_amount:.2f} reinvest = ${pool_total:.2f}")
+    # ─── 2) Pot = NOMÉS gridProfit acumulat (interès compost pur, sense DCA extern)
+    # NOTA: a partir d'ara ignorem dca, només reinvertim el profit del trading.
+    pool_total = total_grid_profit
+    log.info(f"Pot setmanal (només grid profit, compound): ${pool_total:.2f}")
 
     if pool_total < MIN_INVEST_PIONEX:
-        msg = (f"📅 Weekly rebalance: pot setmanal ${pool_total:.2f} < mínim ${MIN_INVEST_PIONEX}. "
-               f"No s'executa res. Sumat al pot per la propera setmana.")
+        msg = (f"📅 Weekly compound: gridProfit acumulat ${pool_total:.2f} < mínim ${MIN_INVEST_PIONEX}. "
+               f"Cap acció aquesta setmana. Es sumarà a la pròxima.")
         log.info(msg)
         _notify_tg(msg)
         return 0
 
-    # ─── 3) Verificar wallet USDT ────────────────────────────────────
-    try:
-        bal = get_balance() or {}
-        usdt_free = float(bal.get("USDT", 0))
-    except Exception as e:
-        log.error(f"No s'ha pogut llegir balance: {e}")
-        _notify_tg(f"❌ Weekly rebalance ABORTAT: no s'ha pogut llegir wallet: {e}")
-        return 1
+    # NOTA: amb withdraw_profit + invest_in necessitarem Pionex API.
+    # Per ara assumim que el sistema POT extreure el gridProfit i reinvertir-lo.
+    # La verificació de wallet ja no aplica perquè els diners surten dels propis bots.
 
-    log.info(f"Wallet USDT lliure: ${usdt_free:.2f}")
+    # ─── 3) Detectar bot MÉS DESBALANCEJAT (delta més negatiu) ─────────
+    # delta_pct = (current_weight - target_weight) / target_weight
+    # El bot més per sota del seu target rep tot el compound pot
+    total_after_invested = total_invested  # invested no canvia (només mou profit entre bots)
+    candidates = []
+    for name, bcfg in BOTS.items():
+        target_w = TARGET_WEIGHTS.get(name, 1.0 / len(BOTS))
+        target_amount = total_after_invested * target_w
+        invested = bot_states[name]["invested"]
+        # delta negatiu = bot per SOTA del target = necessita capital
+        delta = target_amount - invested
+        delta_pct_target = (delta / target_amount * 100) if target_amount > 0 else 0
+        candidates.append({
+            "name": name, "bot_id": bcfg["id"],
+            "invested": invested, "target": target_amount,
+            "delta": delta, "delta_pct_target": delta_pct_target,
+        })
 
-    if usdt_free < pool_total - 0.5:  # 0.5 tolerance
-        msg = (f"⚠️ Weekly rebalance: pot necessari ${pool_total:.2f} però només "
-               f"${usdt_free:.2f} al wallet. Manquen ${pool_total - usdt_free:.2f}. "
-               f"\nDiposita la diferència a Pionex i el sistema executarà el dilluns vinent.")
+    log.info("Estat actual vs target:")
+    for c in candidates:
+        marker = "← MÉS DESBALANCEJAT" if c == max(candidates, key=lambda x: x["delta"]) else ""
+        log.info(f"  {c['name']:<12} actual=${c['invested']:>7.2f} target=${c['target']:>7.2f} "
+                 f"delta=${c['delta']:>+7.2f} ({c['delta_pct_target']:+5.1f}%) {marker}")
+
+    # El bot més desbalancejat = el que té el delta més POSITIU
+    # (= més per sota del seu target objectiu)
+    target_bot = max(candidates, key=lambda x: x["delta"])
+
+    if target_bot["delta"] <= 0:
+        msg = (f"📅 Weekly compound: TOTS els bots estan AL o PER SOBRE del seu target. "
+               f"No té sentit reinvertir el pot a cap d'ells. "
+               f"Pot ${pool_total:.2f} es deixa al gridProfit per a la pròxima setmana.")
+        log.info(msg)
+        _notify_tg(msg)
+        return 0
+
+    log.info(f"\n→ Tot el pot (${pool_total:.2f}) anirà a {target_bot['name']} (més desbalancejat)")
+
+    # ─── 4) EXTRACCIÓ DEL PROFIT: reduce_bot per a cada bot per la quantitat de gridProfit
+    # Pionex no té withdraw_profit directe. reduce_bot allibera USDT del bot al wallet.
+    # IMPORTANT: això converteix una part del base/quote del bot en USDT lliure.
+    log.info("Extracció del profit de cada bot...")
+    extracted_total = 0.0
+    extraction_results = []
+    for name, bcfg in BOTS.items():
+        gp = bot_states[name]["grid_profit"]
+        # Saltem si profit menor que mínim Pionex
+        if gp < MIN_INVEST_PIONEX:
+            log.info(f"  {name}: gridProfit ${gp:.2f} < mínim ${MIN_INVEST_PIONEX}, skip")
+            extraction_results.append({"bot": name, "amount": gp, "ok": False, "msg": "below min", "extracted": 0})
+            continue
+        amount = round(gp, 2)
+        log.info(f"  reduce_bot({name}, ${amount:.2f})")
+        try:
+            r = reduce_bot(name, amount)
+            ok = bool(r.get("result", False))
+            if ok:
+                extracted_total += amount
+                extraction_results.append({"bot": name, "amount": amount, "ok": True, "msg": "extracted", "extracted": amount})
+                # Log capital_event
+                try:
+                    log_capital_event(
+                        bot_id=bcfg["id"], bot_name=name,
+                        event_type="withdraw_profit",
+                        amount_usdt=amount,
+                        source="weekly_cron",
+                        idempotency_key=f"weekly_extract_{week_id if 'week_id' in dir() else datetime.now(timezone.utc).strftime('%Y_W%W')}_{name}",
+                        success=True,
+                        notes=f"Profit extraction (reduce_bot) — pre-compound to target {target_bot['name']}",
+                        created_by="weekly_rebalance",
+                    )
+                except Exception as e:
+                    log.warning(f"[{name}] cloud log failed: {e}")
+            else:
+                extraction_results.append({"bot": name, "amount": amount, "ok": False, "msg": f"result=False: {r}", "extracted": 0})
+        except Exception as e:
+            extraction_results.append({"bot": name, "amount": amount, "ok": False, "msg": str(e)[:200], "extracted": 0})
+
+    log.info(f"Total extret: ${extracted_total:.2f}")
+
+    if extracted_total < MIN_INVEST_PIONEX:
+        msg = f"⚠️ Weekly compound: extret total ${extracted_total:.2f} < mínim. No es pot reinvertir."
         log.warning(msg)
         _notify_tg(msg)
         return 1
 
-    # ─── 4) Calcular distribució objectiu i deltes ───────────────────
-    # Capital total POST-rebalance = invertit actual + pot
-    total_after = total_invested + pool_total
-    # Per cada bot: target = total_after * target_weight; delta = target - invested
-    plan = []
-    for name, bcfg in BOTS.items():
-        target_w = TARGET_WEIGHTS.get(name, 1.0 / len(BOTS))
-        target_amount = total_after * target_w
-        invested = bot_states[name]["invested"]
-        delta = target_amount - invested
-        delta_pct = (delta / invested * 100) if invested > 0 else 0
-        plan.append({
-            "name": name, "bot_id": bcfg["id"],
-            "invested": invested, "target": target_amount,
-            "delta": delta, "delta_pct": delta_pct,
-        })
-
-    # Mostrar pla
-    log.info("Pla de redistribució:")
-    for p in plan:
-        log.info(f"  {p['name']:<12} actual=${p['invested']:>7.2f} target=${p['target']:>7.2f} "
-                 f"delta=${p['delta']:>+7.2f} ({p['delta_pct']:+5.1f}%)")
-
-    # ─── 5) Filtrar només els que requereixen acció ──────────────────
-    # Només bots que necessiten REBRE (delta > 0). Els que tenen excés (delta < 0)
-    # NO els toquem en aquesta lògica simple — el pot només suma capital.
-    # (Si volguéssim igualar agressivament, hauríem de fer reduce, però el risc operatiu
-    # és més alt — preferim deixar que la natural drift acabi corregint via DCA.)
-    to_add = [p for p in plan if p["delta"] >= min_per_bot]
-    # Si el delta agregat dels positius > pool, escalem proporcionalment
-    total_positive_delta = sum(p["delta"] for p in to_add)
-    if total_positive_delta > pool_total:
-        scale = pool_total / total_positive_delta
-        for p in to_add:
-            p["delta_to_invest"] = p["delta"] * scale
-    else:
-        # Hi ha sobrant. Repartim sobrant proporcional als targets.
-        leftover = pool_total - total_positive_delta
-        for p in to_add:
-            p["delta_to_invest"] = p["delta"]
-        if leftover > 0 and to_add:
-            # Reparteix leftover proporcional a target_weight
-            total_w = sum(TARGET_WEIGHTS.get(p["name"], 0) for p in to_add)
-            if total_w > 0:
-                for p in to_add:
-                    p["delta_to_invest"] += leftover * (TARGET_WEIGHTS.get(p["name"], 0) / total_w)
-
-    # Filter operacions sota mínim Pionex
-    final_ops = [p for p in to_add if p.get("delta_to_invest", 0) >= MIN_INVEST_PIONEX]
-    skipped = [p for p in to_add if 0 < p.get("delta_to_invest", 0) < MIN_INVEST_PIONEX]
-
-    if not final_ops:
-        msg = (f"📅 Weekly rebalance: cap operació arribar a mínim Pionex (${MIN_INVEST_PIONEX}). "
-               f"Pot ${pool_total:.2f} no distribuible aquesta setmana.")
-        log.info(msg)
-        _notify_tg(msg)
-        return 0
+    # ─── 5) Operació única: invest_in_bot(target, extracted_total)
+    final_ops = [{
+        "name": target_bot["name"],
+        "bot_id": target_bot["bot_id"],
+        "delta_to_invest": extracted_total,
+        "delta": target_bot["delta"],
+        "invested": target_bot["invested"],
+        "target": target_bot["target"],
+    }]
+    skipped = []
+    # Actualitzem pool_total per al notify final
+    pool_total = extracted_total
 
     # ─── 6) Executar invest_in_bot amb verificació empírica ──────────
     log.info(f"Executant {len(final_ops)} operacions...")
@@ -273,9 +299,10 @@ def main():
     total_deployed = sum(r["amount"] for r in results if r["ok"])
 
     lines = [
-        f"📅 Weekly rebalance executat:",
+        f"📅 Weekly compound executat:",
         f"",
-        f"💵 Pot: ${dca:.2f} DCA + ${reinvest_amount:.2f} reinvest = ${pool_total:.2f}",
+        f"💰 Pot (gridProfit acumulat): ${pool_total:.2f}",
+        f"🎯 Bot destí (més desbalancejat): {target_bot['name']}",
         f"✅ Operacions OK: {n_ok}",
         f"❌ Fallades: {n_fail}",
         f"💰 Capital desplegat: ${total_deployed:.2f}",
