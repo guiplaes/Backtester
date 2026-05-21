@@ -30,7 +30,7 @@ if _USER_SITE not in sys.path:
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from config import BOTS, TARGET_WEIGHTS
-from cloud.db_cloud import log_capital_event, conn as cloud_conn
+from cloud.db_cloud import log_capital_event, snapshot_bot_state, conn as cloud_conn
 from pionex_client import get_bot_order, get_balance, get_current_price, invest_in_bot, extract_grid_profit
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s")
@@ -177,7 +177,7 @@ def main():
             if ok:
                 extracted_total += amount
                 extraction_results.append({"bot": name, "amount": amount, "ok": True, "msg": "extracted", "extracted": amount})
-                # Log capital_event
+                # Log capital_event — STRICT: si Neon falla, alerta TG (no és best-effort)
                 try:
                     log_capital_event(
                         bot_id=bcfg["id"], bot_name=name,
@@ -189,8 +189,15 @@ def main():
                         notes=f"Profit extraction (reduce_bot) — pre-compound to target {target_bot['name']}",
                         created_by="weekly_rebalance",
                     )
+                    # Event snapshot POST-extract
+                    snapshot_bot_state(
+                        bot_id=bcfg["id"], bot_name=name,
+                        event_type="weekly_extract", source="weekly_cron",
+                        notes=f"Weekly extract ${amount:.2f} -> target {target_bot['name']}",
+                    )
                 except Exception as e:
-                    log.warning(f"[{name}] cloud log failed: {e}")
+                    log.error(f"[{name}] CRITICAL: cloud log failed weekly extract: {e}")
+                    _notify_tg(f"NEON LOG FAIL weekly extract {name}: profit \\${amount:.2f} extret OK pero NO loggat. Reconcile diari ho detectara.")
             else:
                 extraction_results.append({"bot": name, "amount": amount, "ok": False, "msg": f"result=False: {r}", "extracted": 0})
         except Exception as e:
@@ -264,24 +271,54 @@ def main():
             ok = False
             msg = f"qti delta {delta_real:+.2f} vs esperat {amount:+.2f}"
 
-        # Log a Neon (sempre, èxit o fallada)
+        # Log a Neon (sempre, èxit o fallada) — STRICT: si Neon falla, alerta TG
+        # NOTA: en la nova lògica "compound only", TOT el pot ve de grid profit
+        # extret, no hi ha DCA extern. Per tant event_type sempre és reinvest_profit.
         try:
             log_capital_event(
                 bot_id=op["bot_id"], bot_name=name,
-                event_type="reinvest_profit" if reinvest_amount > 0 else "rebalance_in",
+                event_type="reinvest_profit",
                 amount_usdt=amount,
                 qti_before=qti_before, qti_after=qti_after,
                 grid_profit_snapshot=bot_states[name]["grid_profit"],
-                lifetime_profit_calc=bot_states[name]["grid_profit"],  # acumulat lifetime
+                lifetime_profit_calc=bot_states[name]["grid_profit"],
                 source="weekly_cron",
                 idempotency_key=f"weekly_{week_id}_{name}",
                 success=ok, error_msg=None if ok else msg,
                 raw_response=resp if isinstance(resp, dict) else None,
-                notes=f"Weekly: DCA ${dca} + reinvest ${reinvest_amount:.2f} = pot ${pool_total:.2f}",
+                notes=f"Weekly compound: pot ${pool_total:.2f} extret de tots els bots -> {name}",
                 created_by="weekly_rebalance",
             )
+            # Event snapshot POST-reinvest
+            if ok:
+                snapshot_bot_state(
+                    bot_id=op["bot_id"], bot_name=name,
+                    event_type="weekly_compound",
+                    source="weekly_cron",
+                    notes=f"Weekly: +${amount:.2f} (qti ${qti_before:.2f}->${qti_after:.2f})",
+                )
         except Exception as e:
-            log.warning(f"[{name}] cloud log failed: {e}")
+            log.error(f"[{name}] CRITICAL: cloud log failed weekly reinvest: {e}")
+            # Fallback: dump al JSONL pendent (sync_health el recull)
+            try:
+                import json as _json
+                from config import LOG_DIR as _LOG_DIR
+                pending = _LOG_DIR / "pending_capital_events.jsonl"
+                with open(pending, "a", encoding="utf-8") as _f:
+                    _f.write(_json.dumps({
+                        "bot_id": op["bot_id"], "bot_name": name,
+                        "event_type": "reinvest_profit", "amount_usdt": amount,
+                        "qti_before": qti_before, "qti_after": qti_after,
+                        "grid_profit_snapshot": bot_states[name]["grid_profit"],
+                        "source": "weekly_cron",
+                        "idempotency_key": f"weekly_{week_id}_{name}",
+                        "success": ok, "notes": f"Weekly compound: pot ${pool_total:.2f}",
+                        "created_by": "weekly_rebalance",
+                        "import_error": str(e)[:200],
+                    }) + "\n")
+            except Exception as _e_dump:
+                log.error(f"[{name}] also failed to dump fallback: {_e_dump}")
+            _notify_tg(f"NEON LOG FAIL weekly invest_in {name}: \\${amount:.2f} aplicat OK pero NO loggat. Guardat a pending_capital_events.jsonl.")
 
         results.append({"bot": name, "amount": amount, "ok": ok, "msg": msg})
 

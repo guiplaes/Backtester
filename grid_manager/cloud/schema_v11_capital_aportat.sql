@@ -12,9 +12,14 @@
 --
 -- Per bot RUNNING:
 --   capital_aportat_estim = sum(IN aportat) − sum(OUT aportat)
---   reinvested_into       = sum(reinvest_profit) − sum(withdraw_profit)
+--   reinvested_into       = sum(reinvest_profit)  -- ONLY positive inflows
 --   current_invested      = capital_aportat_estim + reinvested_into
---                           (hauria de coincidir amb invested_capital del darrer snapshot)
+--                           (coincideix amb quoteTotalInvestment del bot a Pionex)
+--
+-- IMPORTANT: withdraw_profit NO redueix `reinvested_into` ni `current_invested`
+-- perquè Pionex NO redueix `quoteTotalInvestment` quan extreuem via /spotGrid/profit
+-- (la "reserva" queda dins del bot conceptualment). El withdraw_profit només
+-- documenta que el comptador `gridProfit` de Pionex es va resetar.
 
 DROP VIEW IF EXISTS capital_aportat CASCADE;
 
@@ -28,9 +33,9 @@ WITH event_sums AS (
             WHEN ce.event_type IN ('reduce', 'rebalance_out', 'withdraw_external') THEN -ce.amount_usdt
             ELSE 0
         END)::numeric(20,8) AS aportat_sum,
+        -- withdraw_profit NO compta aquí (Pionex no redueix quoteTotalInvestment)
         SUM(CASE
             WHEN ce.event_type = 'reinvest_profit' THEN ce.amount_usdt
-            WHEN ce.event_type = 'withdraw_profit' THEN -ce.amount_usdt
             ELSE 0
         END)::numeric(20,8) AS reinvested_sum,
         SUM(CASE
