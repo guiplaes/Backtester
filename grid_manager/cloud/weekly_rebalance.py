@@ -78,37 +78,47 @@ def main():
     bot_states = {}
     total_invested = 0.0
     total_grid_profit = 0.0
+    total_extractable = 0.0
     for name, bcfg in BOTS.items():
         try:
             bot = get_bot_order(bcfg["id"])
             d = bot.get("buOrderData", {})
             invested = float(d.get("quoteTotalInvestment", 0))
             gp = float(d.get("gridProfit", 0))
+            # IMPORTANT: Pionex preserva gridProfit (lifetime). Per saber el profit
+            # EXTRACTABLE ARA usem gp - profitWithdrawn (cumulatiu ja extret).
+            pw = float(d.get("profitWithdrawn", 0))
+            extractable = max(0.0, gp - pw)
             price = get_current_price(bcfg["symbol"])
             quote = float(d.get("quoteAmount", 0))
             base = float(d.get("baseAmount", 0))
             value = quote + base * price
             bot_states[name] = {
-                "id": bcfg["id"], "invested": invested, "grid_profit": gp,
+                "id": bcfg["id"], "invested": invested,
+                "grid_profit": gp, "profit_withdrawn": pw, "extractable": extractable,
                 "current_value": value, "price": price,
             }
             total_invested += invested
             total_grid_profit += gp
+            total_extractable += extractable
         except Exception as e:
             log.error(f"[{name}] no s'ha pogut llegir estat: {e}")
             _notify_tg(f"❌ Weekly rebalance ABORTAT: no s'ha pogut llegir {name}: {e}")
             return 1
 
     log.info(f"Total invertit: ${total_invested:.2f}")
-    log.info(f"Total gridProfit acumulat: ${total_grid_profit:.2f}")
+    log.info(f"Total gridProfit lifetime: ${total_grid_profit:.2f}")
+    log.info(f"Total EXTRACTABLE (gridProfit - profitWithdrawn): ${total_extractable:.2f}")
 
-    # ─── 2) Pot = NOMÉS gridProfit acumulat (interès compost pur, sense DCA extern)
-    # NOTA: a partir d'ara ignorem dca, només reinvertim el profit del trading.
-    pool_total = total_grid_profit
-    log.info(f"Pot setmanal (només grid profit, compound): ${pool_total:.2f}")
+    # ─── 2) Pot = profit EXTRACTABLE (gridProfit - profitWithdrawn).
+    # Pionex preserva gridProfit lifetime. Només el delta des de la darrera
+    # extracció és realment extractable. Si re-extraem el lifetime, fallaria
+    # o pitjor, extreuria del principal.
+    pool_total = total_extractable
+    log.info(f"Pot setmanal (profit nou des de darrera extracció): ${pool_total:.2f}")
 
     if pool_total < MIN_INVEST_PIONEX:
-        msg = (f"📅 Weekly compound: gridProfit acumulat ${pool_total:.2f} < mínim ${MIN_INVEST_PIONEX}. "
+        msg = (f"📅 Weekly compound: extractable ${pool_total:.2f} < mínim ${MIN_INVEST_PIONEX}. "
                f"Cap acció aquesta setmana. Es sumarà a la pròxima.")
         log.info(msg)
         _notify_tg(msg)
@@ -164,13 +174,16 @@ def main():
     extracted_total = 0.0
     extraction_results = []
     for name, bcfg in BOTS.items():
-        gp = bot_states[name]["grid_profit"]
-        if gp < MIN_EXTRACT:
-            log.info(f"  {name}: gridProfit ${gp:.4f} < ${MIN_EXTRACT}, skip")
-            extraction_results.append({"bot": name, "amount": gp, "ok": False, "msg": "below min", "extracted": 0})
+        # Usem extractable (gridProfit - profitWithdrawn) NO gridProfit lifetime
+        extractable = bot_states[name]["extractable"]
+        gp_lifetime = bot_states[name]["grid_profit"]
+        pw = bot_states[name]["profit_withdrawn"]
+        if extractable < MIN_EXTRACT:
+            log.info(f"  {name}: extractable ${extractable:.4f} (lifetime ${gp_lifetime:.4f}, withdrawn ${pw:.4f}) < ${MIN_EXTRACT}, skip")
+            extraction_results.append({"bot": name, "amount": extractable, "ok": False, "msg": "below min", "extracted": 0})
             continue
-        amount = round(gp, 4)
-        log.info(f"  extract_grid_profit({name}, ${amount:.4f})")
+        amount = round(extractable, 4)
+        log.info(f"  extract_grid_profit({name}, ${amount:.4f}) [extractable={extractable:.4f}]")
         try:
             r = extract_grid_profit(name, amount)
             ok = bool(r.get("result", False))
