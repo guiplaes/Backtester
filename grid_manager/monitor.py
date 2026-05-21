@@ -15,7 +15,11 @@ if os.path.isdir(_user_site) and _user_site not in sys.path:
 
 from config import BOTS, EDGE_TRIGGER_PCT, LOG_DIR
 from pionex_client import get_bot_range, get_atr, adjust_grid_range
-from db import log_snapshot, log_decision, log_recolocation_cost
+# LEGACY: log_snapshot/log_decision/log_recolocation_cost del SQLite local.
+# A partir de Neon=única-DB ja NO escrivim a SQLite. Stub silenciós.
+def log_snapshot(*a, **kw): pass
+def log_decision(*a, **kw): pass
+def log_recolocation_cost(*a, **kw): pass
 from notifier import notify_trigger, notify_rebalance, notify_error
 
 
@@ -201,9 +205,12 @@ def _trigger(name: str, cfg: dict, reason: str, state: dict):
                 fee_pool_before=consumed_before, fee_pool_after=consumed_after,
             )
 
-            # ── Mirror a Neon (best-effort, no bloqueja) ──
+            # ── Espill a Neon (STRICT: Neon és font autoritzativa). ──
+            # Si Neon falla, alertem fort (notify_error) i marquem failure_count
+            # perquè el watchdog ho detecti. NO retry silenciós: el reconcile cron
+            # diari es la xarxa de seguretat per omplir gaps temporals de network.
             try:
-                from cloud.db_cloud import log_recolocation as _cloud_reloc
+                from cloud.db_cloud import log_recolocation as _cloud_reloc, snapshot_bot_state as _snapshot
                 _cloud_reloc(
                     bot_id=cfg["id"], bot_name=name, trigger=reason,
                     price_at_trigger=state["price"],
@@ -216,8 +223,49 @@ def _trigger(name: str, cfg: dict, reason: str, state: dict):
                     action_taken=action_taken, error_msg=err_msg,
                     idempotency_key=f"reloc_{cfg['id']}_{int(state.get('price',0)*1000)}_{action_taken}",
                 )
+                # Event snapshot POST-reloc: captura estat per a la gràfica evolutiva
+                if ok:
+                    try:
+                        _snapshot(
+                            bot_id=cfg["id"], bot_name=name,
+                            event_type="recolocation", source="monitor",
+                            price=state["price"],
+                            notes=f"reloc {reason}: cost ${cost_recolocation:.4f}",
+                        )
+                    except Exception as _e_snap:
+                        log.warning(f"[{name}] event_snapshot post-reloc fail: {_e_snap}")
             except Exception as _e_cloud:
-                log.warning(f"[{name}] cloud reloc log failed (no bloca): {_e_cloud}")
+                log.error(f"[{name}] CRITICAL: cloud reloc log failed — Neon desincronitzat: {_e_cloud}")
+                # Fallback: dump a fitxer JSON local perquè sync_health (cron 1min)
+                # ho reculli i ho insereixi a Neon retroactivament. Evita perdre
+                # records per transient ImportErrors o errors de connexió.
+                try:
+                    import json as _json
+                    pending_path = LOG_DIR / "pending_recolocations.jsonl"
+                    payload = {
+                        "ts": datetime.now(timezone.utc).isoformat(),
+                        "bot_id": cfg["id"], "bot_name": name, "trigger": reason,
+                        "price_at_trigger": state["price"],
+                        "old_top": float(state.get("top") or 0),
+                        "old_bottom": float(state.get("bottom") or 0),
+                        "new_top": new_top, "new_bottom": new_bottom,
+                        "grid_profit_before": gp_before, "grid_profit_after": gp_after,
+                        "fee_consumed_before": consumed_before, "fee_consumed_after": consumed_after,
+                        "cost_usdt": cost_recolocation, "executed": ok,
+                        "action_taken": action_taken, "error_msg": err_msg,
+                        "import_error": str(_e_cloud)[:200],
+                    }
+                    with open(pending_path, "a", encoding="utf-8") as _f:
+                        _f.write(_json.dumps(payload) + "\n")
+                except Exception as _e_dump:
+                    log.error(f"[{name}] CRITICAL: also failed to dump fallback JSON: {_e_dump}")
+                try:
+                    notify_error(f"NEON LOG FAIL {name}",
+                                 f"Reloc executada localment OK però NO loggada a Neon. "
+                                 f"Guardat a pending_recolocations.jsonl per sync_health. "
+                                 f"Error: {str(_e_cloud)[:200]}")
+                except Exception:
+                    pass
         except Exception as e:
             log.warning(f"[{name}] post-reloc snapshot failed: {e}")
 

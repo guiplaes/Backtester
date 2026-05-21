@@ -113,13 +113,19 @@ def sync_monitor_health():
 
 
 def sync_monitor_log_tail(n_lines: int = 50):
-    """Pujar les últimes N línies del monitor.log a Neon."""
+    """Pujar les últimes N línies del monitor.log a Neon, deduplicant amb el ts
+    més recent ja existent. Evita triplicats quan sync_health corre sovint."""
     if not MONITOR_LOG.exists(): return
     with open(MONITOR_LOG, encoding="utf-8", errors="ignore") as f:
         f.seek(0, 2)
         size = f.tell()
-        f.seek(max(0, size - 200 * 1024))  # últims 200KB suficients
+        f.seek(max(0, size - 200 * 1024))
         lines = f.readlines()[-n_lines:]
+
+    # Llegir el ts més recent ja a Neon, només pujem els més nous (estricte).
+    with conn() as c, c.cursor() as cur:
+        cur.execute("SELECT MAX(ts) FROM monitor_log")
+        max_ts = cur.fetchone()[0]
 
     rows = []
     pat = re.compile(r"^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d+)\s*\|\s*(\w+)\s*\|\s*(.+)$")
@@ -131,7 +137,8 @@ def sync_monitor_log_tail(n_lines: int = 50):
             ts = datetime.strptime(ts_str, "%Y-%m-%d %H:%M:%S,%f").replace(tzinfo=timezone.utc)
         except Exception:
             ts = datetime.now(timezone.utc)
-        # Component heuristic
+        if max_ts is not None and ts <= max_ts:
+            continue  # ja sincronitzat
         comp = "monitor"
         if msg.startswith("["):
             end = msg.find("]")
@@ -139,14 +146,71 @@ def sync_monitor_log_tail(n_lines: int = 50):
                 comp = msg[1:end]
         rows.append((ts, level, comp, msg[:1000]))
 
-    # Esborrem les que ja hi siguin: NO podem detectar exactes per ts (mateix segon → diferents files).
-    # Simple: bulk insert. La taula es manté trimmed a 500 files.
     if rows:
-        # Per evitar duplicats absoluts, esborrem primer les que tinguin el ts del nostre rang
-        # NO ho fem perquè és costós; en lloc, simplement trimmem.
         log_monitor_lines(rows)
     trim_monitor_log(max_rows=500)
-    log.info(f"Synced {len(rows)} log lines (trimmed to 500 max)")
+    log.info(f"Synced {len(rows)} new log lines (trimmed to 500 max)")
+
+
+def sync_pending_recolocations() -> int:
+    """Self-healing v2: si monitor.py va dumpejar una recolocació a
+    logs/pending_recolocations.jsonl (transient ImportError o connection fail),
+    aquí la insertem a Neon i netegem el fitxer."""
+    import json
+    pending_path = LOG_DIR / "pending_recolocations.jsonl"
+    if not pending_path.exists():
+        return 0
+
+    try:
+        with open(pending_path, "r", encoding="utf-8") as f:
+            lines = [ln.strip() for ln in f.readlines() if ln.strip()]
+    except Exception as e:
+        log.warning(f"sync_pending_recolocations: read failed: {e}")
+        return 0
+
+    if not lines:
+        try: pending_path.unlink()
+        except Exception: pass
+        return 0
+
+    from cloud.db_cloud import log_recolocation
+    inserted = 0
+    unhandled = []
+    for ln in lines:
+        try:
+            p = json.loads(ln)
+            log_recolocation(
+                bot_id=p["bot_id"], bot_name=p["bot_name"], trigger=p["trigger"],
+                price_at_trigger=p["price_at_trigger"],
+                old_top=p.get("old_top", 0), old_bottom=p.get("old_bottom", 0),
+                new_top=p.get("new_top", 0), new_bottom=p.get("new_bottom", 0),
+                grid_profit_before=p.get("grid_profit_before", 0),
+                grid_profit_after=p.get("grid_profit_after", 0),
+                fee_consumed_before=p.get("fee_consumed_before", 0),
+                fee_consumed_after=p.get("fee_consumed_after", 0),
+                cost_usdt=p.get("cost_usdt", 0), executed=p.get("executed", True),
+                action_taken=p.get("action_taken", "adjust_params"),
+                error_msg=p.get("error_msg"),
+                idempotency_key=f"reloc_{p['bot_id']}_{int(float(p['price_at_trigger'])*1000)}_{p.get('action_taken','adj')}",
+            )
+            inserted += 1
+        except Exception as e:
+            log.warning(f"sync_pending_recolocations: failed to insert one record: {e}")
+            unhandled.append(ln)
+
+    # Reescriure el fitxer només amb els no processats
+    try:
+        if unhandled:
+            with open(pending_path, "w", encoding="utf-8") as f:
+                f.write("\n".join(unhandled) + "\n")
+        else:
+            pending_path.unlink()
+    except Exception as e:
+        log.warning(f"sync_pending_recolocations: cleanup failed: {e}")
+
+    if inserted:
+        log.warning(f"sync_pending_recolocations: recovered {inserted} reloc(s) from JSONL fallback")
+    return inserted
 
 
 def sync_prices():
@@ -345,6 +409,80 @@ def sync_bot_snapshots():
         log.error(f"Bot snapshots failed: {e}")
 
 
+def sync_recolocations_from_sqlite() -> int:
+    """Self-healing: si monitor.py va fallar mirroring una recolocació a Neon
+    (p.ex. transient ImportError de psycopg), aquesta funció la backfilleja
+    des de SQLite. Match per (bot_id, ts ±120s)."""
+    import sqlite3 as _sq
+    try:
+        from config import DB_PATH as _DB
+    except Exception:
+        return 0
+    if not Path(_DB).exists():
+        return 0
+
+    try:
+        sq = _sq.connect(str(_DB))
+        sq.row_factory = _sq.Row
+        rows = sq.execute(
+            "SELECT ts, bot_id, bot_name, trigger, price, "
+            "new_top, new_bottom, grid_profit_before, grid_profit_after, "
+            "fee_pool_before, fee_pool_after FROM recolocation_costs ORDER BY ts DESC LIMIT 200"
+        ).fetchall()
+        sq.close()
+    except Exception as e:
+        log.warning(f"sync_recolocations: sqlite read failed: {e}")
+        return 0
+
+    if not rows:
+        return 0
+
+    inserted = 0
+    with conn() as c, c.cursor() as cur:
+        cur.execute("SELECT bot_id, ts FROM recolocations ORDER BY ts DESC LIMIT 500")
+        neon_by_bot: dict = {}
+        for bot_id, ts in cur.fetchall():
+            neon_by_bot.setdefault(bot_id, []).append(ts)
+
+        for r in rows:
+            try:
+                sq_ts = datetime.fromisoformat(r["ts"].replace("Z", "+00:00"))
+            except Exception:
+                continue
+            cands = neon_by_bot.get(r["bot_id"], [])
+            if any(abs((ct - sq_ts).total_seconds()) <= 120 for ct in cands):
+                continue
+            gp_b = float(r["grid_profit_before"] or 0)
+            gp_a = float(r["grid_profit_after"] or 0)
+            fc_b = float(r["fee_pool_before"] or 0)
+            fc_a = float(r["fee_pool_after"] or 0)
+            cost = max(0.0, fc_a - fc_b) + max(0.0, -(gp_a - gp_b))
+            idem = f"reloc_{r['bot_id']}_{int(sq_ts.timestamp())}"
+            cur.execute("""
+                INSERT INTO recolocations
+                  (ts, bot_id, bot_name, trigger, price_at_trigger,
+                   new_top, new_bottom, grid_profit_before, grid_profit_after,
+                   fee_consumed_before, fee_consumed_after, cost_usdt,
+                   executed, action_taken, error_msg, idempotency_key)
+                VALUES
+                  (%s::timestamptz, %s, %s, %s, %s, %s, %s, %s, %s,
+                   %s, %s, %s, TRUE, 'adjust_params_ok',
+                   'sync_health_backfill_from_sqlite', %s)
+                ON CONFLICT (idempotency_key) DO NOTHING
+            """, (
+                r["ts"], r["bot_id"], r["bot_name"], r["trigger"], float(r["price"] or 0),
+                float(r["new_top"]), float(r["new_bottom"]),
+                gp_b, gp_a, fc_b, fc_a, cost, idem,
+            ))
+            if cur.rowcount:
+                inserted += 1
+        c.commit()
+
+    if inserted:
+        log.warning(f"sync_recolocations: backfilled {inserted} missed by monitor.py cloud mirror")
+    return inserted
+
+
 def main():
     log.info("Starting sync_health cycle")
     with cron_run("sync_health") as ctx:
@@ -356,8 +494,12 @@ def main():
         trades = sync_grid_trades()
         lifecycle_changes = sync_bot_lifecycle()
         sync_mt5_state()
-        ctx["items"] = trades + lifecycle_changes
-        ctx["notes"] = f"{trades} new fills, {lifecycle_changes} lifecycle changes"
+        relocs_recovered = sync_recolocations_from_sqlite()
+        relocs_pending = sync_pending_recolocations()
+        ctx["items"] = trades + lifecycle_changes + relocs_recovered + relocs_pending
+        ctx["notes"] = (f"{trades} new fills, {lifecycle_changes} lifecycle changes, "
+                        f"{relocs_recovered} sqlite backfilled, "
+                        f"{relocs_pending} jsonl recovered")
     log.info("Done")
 
 
