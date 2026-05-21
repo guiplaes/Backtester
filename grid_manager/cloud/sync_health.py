@@ -268,6 +268,175 @@ def sync_pending_capital_events() -> int:
     return inserted
 
 
+def _process_pending_jsonl(entity: str, handler) -> int:
+    """Helper genèric: llegeix logs/pending_<entity>.jsonl, intenta processar
+    cada línia amb handler(payload), reescriu les fallides, esborra el fitxer
+    si tot va bé. Garanteix que ningún record es perdi mai."""
+    import json
+    pending_path = LOG_DIR / f"pending_{entity}.jsonl"
+    if not pending_path.exists():
+        return 0
+    try:
+        with open(pending_path, "r", encoding="utf-8") as f:
+            lines = [ln.strip() for ln in f.readlines() if ln.strip()]
+    except Exception as e:
+        log.warning(f"sync_pending_{entity}: read failed: {e}")
+        return 0
+    if not lines:
+        try: pending_path.unlink()
+        except Exception: pass
+        return 0
+
+    inserted = 0
+    unhandled = []
+    for ln in lines:
+        try:
+            p = json.loads(ln)
+            handler(p)
+            inserted += 1
+        except Exception as e:
+            log.warning(f"sync_pending_{entity}: insert failed: {e}")
+            unhandled.append(ln)
+
+    try:
+        if unhandled:
+            with open(pending_path, "w", encoding="utf-8") as f:
+                f.write("\n".join(unhandled) + "\n")
+        else:
+            pending_path.unlink()
+    except Exception as e:
+        log.warning(f"sync_pending_{entity}: cleanup failed: {e}")
+
+    if inserted:
+        log.warning(f"sync_pending_{entity}: recovered {inserted} record(s)")
+    return inserted
+
+
+def sync_all_pending_writes() -> dict:
+    """Recovery UNIVERSAL: processa tots els pending_*.jsonl que monitor,
+    weekly_rebalance, daily_snapshot, etc. han pogut generar quan Neon ha
+    fallat puntualment. Garanteix que NO PERDEM CAP DADA per transient errors.
+
+    Cada handler usa la funció original de db_cloud, que té el seu fallback
+    al JSONL si torna a fallar (loop), però amb sync_health corrent cada
+    minut això s'amortitza.
+    """
+    from datetime import datetime as _dt
+    from cloud.db_cloud import (
+        log_recolocation as _reloc,
+        log_capital_event as _cap,
+        log_system_health as _health,
+        log_wallet_snapshot as _wallet,
+        log_monitor_lines as _monlog,
+        snapshot_bot_state as _evt_snap,
+        upsert_daily_snapshot as _daily,
+    )
+    from datetime import date as _date
+
+    def _parse_dt(s):
+        if s is None: return None
+        if isinstance(s, _dt): return s
+        try: return _dt.fromisoformat(str(s).replace("Z", "+00:00"))
+        except Exception: return None
+
+    def _h_reloc(p):
+        _reloc(
+            bot_id=p["bot_id"], bot_name=p["bot_name"], trigger=p["trigger"],
+            price_at_trigger=p["price_at_trigger"],
+            old_top=p.get("old_top", 0), old_bottom=p.get("old_bottom", 0),
+            new_top=p.get("new_top", 0), new_bottom=p.get("new_bottom", 0),
+            grid_profit_before=p.get("grid_profit_before", 0),
+            grid_profit_after=p.get("grid_profit_after", 0),
+            fee_consumed_before=p.get("fee_consumed_before", 0),
+            fee_consumed_after=p.get("fee_consumed_after", 0),
+            cost_usdt=p.get("cost_usdt", 0), executed=p.get("executed", True),
+            action_taken=p.get("action_taken", "adjust_params"),
+            error_msg=p.get("error_msg"),
+            idempotency_key=p.get("idempotency_key") or f"reloc_{p['bot_id']}_recovered_{p.get('ts','')}",
+            ts=_parse_dt(p.get("ts")),
+        )
+
+    def _h_cap(p):
+        _cap(
+            bot_id=p["bot_id"], bot_name=p["bot_name"],
+            event_type=p["event_type"], amount_usdt=p["amount_usdt"],
+            qti_before=p.get("qti_before"), qti_after=p.get("qti_after"),
+            grid_profit_snapshot=p.get("grid_profit_snapshot"),
+            lifetime_profit_calc=p.get("lifetime_profit_calc"),
+            source=p.get("source", "recovery"),
+            idempotency_key=p.get("idempotency_key"),
+            success=p.get("success", True),
+            error_msg=p.get("error_msg"),
+            notes=(p.get("notes") or "") + " (recovered)",
+            created_by=p.get("created_by", "sync_recovery"),
+            ts=_parse_dt(p.get("ts")),
+        )
+
+    def _h_daily(p):
+        d = p.get("date_")
+        if isinstance(d, str):
+            d = _date.fromisoformat(d)
+        _daily(
+            date_=d, bot_id=p["bot_id"], bot_name=p["bot_name"],
+            gross_grid_profit=p.get("gross_grid_profit", 0),
+            cum_lifetime_profit=p.get("cum_lifetime_profit", 0),
+            invested_capital=p.get("invested_capital", 0),
+            base_amount=p.get("base_amount", 0),
+            base_value_usdt=p.get("base_value_usdt", 0),
+            quote_value_usdt=p.get("quote_value_usdt", 0),
+            current_value_total=p.get("current_value_total", 0),
+            cycles_completed_today=p.get("cycles_completed_today", 0),
+            cycles_total=p.get("cycles_total", 0),
+            price_close=p.get("price_close", 0),
+            top=p.get("top", 0), bottom=p.get("bottom", 0),
+            avg_cost=p.get("avg_cost", 0),
+            grid_avg_open_price=p.get("grid_avg_open_price", 0),
+            break_even_price=p.get("break_even_price", 0),
+        )
+
+    def _h_evt_snap(p):
+        _evt_snap(
+            bot_id=p["bot_id"], bot_name=p["bot_name"],
+            event_type=p["event_type"], source=p.get("source", "recovery"),
+            event_ref=p.get("event_ref"), notes=p.get("notes"),
+            pionex_data=p.get("pionex_data"), price=p.get("price"),
+            ts=_parse_dt(p.get("ts")),
+        )
+
+    def _h_wallet(p):
+        _wallet(
+            coin=p["coin"], free=p["free"], frozen=p.get("frozen", 0),
+            value_usdt=p.get("value_usdt"), source=p.get("source", "recovery"),
+            ts=_parse_dt(p.get("ts")),
+        )
+
+    def _h_health(p):
+        _health(
+            component=p["component"], status=p["status"],
+            last_cycle_ms=p.get("last_cycle_ms"),
+            triggers_today=p.get("triggers_today", 0),
+            adjusts_ok_today=p.get("adjusts_ok_today", 0),
+            adjusts_fail_today=p.get("adjusts_fail_today", 0),
+            last_trigger_text=p.get("last_trigger_text"),
+            last_adjust_text=p.get("last_adjust_text"),
+            error_msg=p.get("error_msg"), extra=p.get("extra"),
+        )
+
+    def _h_monlog(p):
+        ts = _parse_dt(p.get("ts")) or _dt.utcnow()
+        _monlog([(ts, p.get("level", "INFO"), p.get("component", "unknown"), p.get("message", ""))])
+
+    results = {}
+    results["recolocations"] = _process_pending_jsonl("recolocations", _h_reloc)
+    results["capital_events"] = _process_pending_jsonl("capital_events", _h_cap)
+    results["daily_snapshots"] = _process_pending_jsonl("daily_snapshots", _h_daily)
+    results["event_snapshots"] = _process_pending_jsonl("event_snapshots", _h_evt_snap)
+    results["wallet_snapshots"] = _process_pending_jsonl("wallet_snapshots", _h_wallet)
+    results["system_health"] = _process_pending_jsonl("system_health", _h_health)
+    results["monitor_log"] = _process_pending_jsonl("monitor_log", _h_monlog)
+    return results
+
+
 def sync_prices():
     """Snapshot del preu actual de cada bot + rang."""
     from pionex_client import get_bot_range
@@ -550,13 +719,16 @@ def main():
         lifecycle_changes = sync_bot_lifecycle()
         sync_mt5_state()
         relocs_recovered = sync_recolocations_from_sqlite()
-        relocs_pending = sync_pending_recolocations()
-        events_pending = sync_pending_capital_events()
-        ctx["items"] = trades + lifecycle_changes + relocs_recovered + relocs_pending + events_pending
-        ctx["notes"] = (f"{trades} new fills, {lifecycle_changes} lifecycle changes, "
-                        f"{relocs_recovered} sqlite backfilled, "
-                        f"{relocs_pending} reloc jsonl recovered, "
-                        f"{events_pending} events jsonl recovered")
+        # Recovery UNIVERSAL de tots els pending_*.jsonl (recolocations,
+        # capital_events, daily_snapshots, event_snapshots, wallet_snapshots,
+        # system_health, monitor_log). Garanteix zero pèrdua de dades per
+        # transient errors de Neon.
+        recovered = sync_all_pending_writes()
+        total_recovered = sum(recovered.values())
+        ctx["items"] = trades + lifecycle_changes + relocs_recovered + total_recovered
+        ctx["notes"] = (f"{trades} fills, {lifecycle_changes} lifecycle, "
+                        f"{relocs_recovered} sqlite backfill, "
+                        f"recovered: {recovered}")
     log.info("Done")
 
 
