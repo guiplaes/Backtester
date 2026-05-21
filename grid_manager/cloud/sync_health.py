@@ -213,6 +213,61 @@ def sync_pending_recolocations() -> int:
     return inserted
 
 
+def sync_pending_capital_events() -> int:
+    """Recovery: si weekly_rebalance.py va dumpejar capital events a
+    logs/pending_capital_events.jsonl (per fail de log_capital_event),
+    els reinserim a Neon i netegem."""
+    import json
+    pending_path = LOG_DIR / "pending_capital_events.jsonl"
+    if not pending_path.exists():
+        return 0
+    try:
+        with open(pending_path, "r", encoding="utf-8") as f:
+            lines = [ln.strip() for ln in f.readlines() if ln.strip()]
+    except Exception as e:
+        log.warning(f"sync_pending_capital_events: read failed: {e}")
+        return 0
+    if not lines:
+        try: pending_path.unlink()
+        except Exception: pass
+        return 0
+
+    from cloud.db_cloud import log_capital_event
+    inserted = 0
+    unhandled = []
+    for ln in lines:
+        try:
+            p = json.loads(ln)
+            log_capital_event(
+                bot_id=p["bot_id"], bot_name=p["bot_name"],
+                event_type=p["event_type"], amount_usdt=p["amount_usdt"],
+                qti_before=p.get("qti_before"), qti_after=p.get("qti_after"),
+                grid_profit_snapshot=p.get("grid_profit_snapshot"),
+                source=p.get("source", "recovery"),
+                idempotency_key=p.get("idempotency_key"),
+                success=p.get("success", True),
+                notes=p.get("notes", "") + " (recovered from JSONL)",
+                created_by=p.get("created_by", "sync_pending_capital_events"),
+            )
+            inserted += 1
+        except Exception as e:
+            log.warning(f"sync_pending_capital_events: insert failed: {e}")
+            unhandled.append(ln)
+
+    try:
+        if unhandled:
+            with open(pending_path, "w", encoding="utf-8") as f:
+                f.write("\n".join(unhandled) + "\n")
+        else:
+            pending_path.unlink()
+    except Exception as e:
+        log.warning(f"sync_pending_capital_events: cleanup failed: {e}")
+
+    if inserted:
+        log.warning(f"sync_pending_capital_events: recovered {inserted} event(s) from JSONL")
+    return inserted
+
+
 def sync_prices():
     """Snapshot del preu actual de cada bot + rang."""
     from pionex_client import get_bot_range
@@ -496,10 +551,12 @@ def main():
         sync_mt5_state()
         relocs_recovered = sync_recolocations_from_sqlite()
         relocs_pending = sync_pending_recolocations()
-        ctx["items"] = trades + lifecycle_changes + relocs_recovered + relocs_pending
+        events_pending = sync_pending_capital_events()
+        ctx["items"] = trades + lifecycle_changes + relocs_recovered + relocs_pending + events_pending
         ctx["notes"] = (f"{trades} new fills, {lifecycle_changes} lifecycle changes, "
                         f"{relocs_recovered} sqlite backfilled, "
-                        f"{relocs_pending} jsonl recovered")
+                        f"{relocs_pending} reloc jsonl recovered, "
+                        f"{events_pending} events jsonl recovered")
     log.info("Done")
 
 
