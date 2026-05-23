@@ -464,18 +464,38 @@ def sync_prices():
 
 
 def sync_wallet_fresh():
-    """Snapshot del wallet ara mateix (no cada 24h)."""
+    """Snapshot del wallet ara mateix (no cada 24h).
+
+    Calcula value_usdt per CADA coin del wallet (no només USDT/BTC/USDC).
+    Bug pre-existent fixed 2026-05-23: abans posava value_usdt=0 per a tot el que no
+    fos USDT/USDC/BTC, fent que assets al vault (ex: PAXG fora del bot) no
+    contessin al Patrimoni total del dashboard.
+    """
     try:
         from pionex_client import get_balance, get_current_price
         bal = get_balance() or {}
-        btc_price = 0.0
-        try: btc_price = float(get_current_price("BTC_USDT"))
-        except Exception: pass
+        # Pre-fetch preus per a totes les coins que tenim > 0 free
+        prices = {}
         for coin, free_amt in bal.items():
             free_f = float(free_amt or 0)
-            value = free_f if coin in ("USDT", "USDC") else (free_f * btc_price if coin == "BTC" else 0)
+            if free_f <= 0:
+                prices[coin] = 0.0
+                continue
+            if coin in ("USDT", "USDC"):
+                prices[coin] = 1.0
+                continue
+            # Intenta fetch preu via ticker {COIN}_USDT
+            try:
+                prices[coin] = float(get_current_price(f"{coin}_USDT"))
+            except Exception as e:
+                log.debug(f"price fetch {coin}_USDT failed: {e}")
+                prices[coin] = 0.0  # coin sense par USDT (raríssim)
+        # Escriu snapshots amb value_usdt correcte
+        for coin, free_amt in bal.items():
+            free_f = float(free_amt or 0)
+            value = free_f * prices.get(coin, 0)
             log_wallet_snapshot(coin=coin, free=free_f, value_usdt=value, source="sync_health")
-        log.info(f"Wallet snapshot fresh OK ({len(bal)} coins)")
+        log.info(f"Wallet snapshot fresh OK ({len(bal)} coins, total value=${sum(float(b or 0) * prices.get(c, 0) for c, b in bal.items()):.2f})")
     except Exception as e:
         log.error(f"Wallet snapshot failed: {e}")
 
