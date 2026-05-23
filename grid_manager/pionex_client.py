@@ -200,6 +200,65 @@ def reduce_bot(bot_id_or_name, quote_amount: float) -> dict:
     return _post_signed("/api/v1/bot/orders/spotGrid/reduce", body)
 
 
+def cancel_bot(bot_id_or_name) -> dict:
+    """Cancela un spot grid bot. El comportament al tancar depèn del
+    closeSellModel definit al moment de la creació:
+      - NOT_SELL (default als nostres bots): conserva base+quote al wallet
+      - TO_QUOTE: converteix tot a USDT
+      - TO_USDT: converteix tot a USDT
+
+    Endpoint: POST /api/v1/bot/orders/spotGrid/cancel
+    Retorna el resultat amb el desglossament del que s'ha retornat.
+    """
+    bot_id = _resolve_bot_id(bot_id_or_name)
+    body = {"buOrderId": bot_id}
+    return _post_signed("/api/v1/bot/orders/spotGrid/cancel", body)
+
+
+def create_spot_grid(*, base: str, quote: str,
+                     top: float, bottom: float, row: int,
+                     quote_total_investment: float,
+                     grid_type: str = "arithmetic",
+                     close_sell_model: str = "NOT_SELL",
+                     slippage: float = 0.001) -> dict:
+    """Crea un nou spot grid bot.
+
+    Args:
+        base: e.g. 'BTC'
+        quote: e.g. 'USDT'
+        top: preu superior del grid
+        bottom: preu inferior
+        row: nombre de nivells (cel·les)
+        quote_total_investment: USDT a invertir
+        grid_type: 'arithmetic' (default) | 'geometric'
+        close_sell_model: 'NOT_SELL' (vault-friendly) | 'TO_QUOTE' | 'TO_USDT'
+        slippage: tolerància (default 0.1%)
+
+    Endpoint: POST /api/v1/bot/orders/spotGrid
+    Retorna dict amb buOrderId del nou bot.
+    """
+    # Format dels preus segons magnitud
+    def _fmt(v):
+        if v < 1: return f"{v:.6f}"
+        if v < 100: return f"{v:.4f}"
+        return f"{v:.2f}"
+
+    body = {
+        "base": base,
+        "quote": quote,
+        "buOrderData": {
+            "top": _fmt(top),
+            "bottom": _fmt(bottom),
+            "row": int(row),
+            "gridType": grid_type,
+            "quoteTotalInvestment": f"{quote_total_investment:.4f}",
+            "closeSellModel": close_sell_model,
+            "slippage": f"{slippage:.4f}",
+        },
+    }
+    return _post_signed("/api/v1/bot/orders/spotGrid", body)
+
+
 def _resolve_bot_id(bot_id_or_name: str) -> str:
     """Resol nom de bot (PAXG_USDT) a id, o retorna l'id si ja és uuid."""
     from config import BOTS
@@ -255,12 +314,19 @@ def get_bot_range(bot_id: str, symbol: str = None):
         "realized_profit": float(data.get("realizedProfit", 0)),
         "base_in_bot": float(data.get("baseAmount", 0)),
         "quote_in_bot": float(data.get("quoteAmount", 0)),
-        "usdt_investment": float(data.get("usdtInvestment", 0)),
+        # NB: `usdtInvestment` és el camp ESTÀTIC del bot (només es fixa a la creació, NO s'actualitza
+        # després de invest_in/reduce). Per al "currently invested" cal `quoteTotalInvestment` que SÍ
+        # és live. Per evitar bugs antics, mantenim `usdt_investment` apuntant al valor live i
+        # `usdt_investment_initial` per al estàtic original (només si algun report el necessita).
+        "usdt_investment": float(data.get("quoteTotalInvestment", 0)),
+        "usdt_investment_initial": float(data.get("usdtInvestment", 0)),
         "quote_total_investment": float(data.get("quoteTotalInvestment", 0)),
         "filled_orders": int(data.get("closedExchangeOrderCount", 0)),
         "placed_orders": int(data.get("placedExchangeOrderCount", 0)),
         "paired_cycles": int(data.get("exchangeOrderPairedCount", 0)),
         "avg_cost": float(data.get("averageCost", 0)),
+        "grid_avg_open_price": float(data.get("gridAverageOpenPrice", 0) or 0),
+        "break_even_price": float(data.get("breakEvenWithGridProfit", 0) or 0),
         "grid_rows": int(data.get("row", 0)),
         "create_time_ms": int(data.get("createTime", 0)),
         # Fee tracking (per a cost real de recolocacions)

@@ -1,0 +1,185 @@
+"""
+vault/profit_harvester.py — Cron diari 22:00 UTC.
+
+Per cada bot actiu:
+  1. Llegeix gridProfit i profitWithdrawn actuals de Pionex
+  2. Si gridProfit - safety_buffer > min_harvest → extract via API
+  3. Afegeix l'USDT recaptat al vault_inventory (asset='USDT')
+  4. Logueja a capital_events (event_type='withdraw_profit') + vault_events
+  5. TG notify amb resum total
+
+Difere del weekly_rebalance.py existent:
+  - WeeklyRebalance: extrae + REINVERTEIX al bot més desbalancejat (compounding intern)
+  - ProfitHarvester (aquest): extrae + AFEGEIX A VAULT (per finançar relocacions
+    futures, no per re-injectar als grids existents)
+
+Aquests dos crons poden coexistir, però normalment es desactiva un dels dos
+segons l'estratègia. El de l'usuari és "afegir a vault, no reinvertir al bot"
+→ aquest profit_harvester és el que cal activar.
+
+Safety buffer: deixem $1-2 al gridProfit del bot per evitar que Pionex
+reporti errors de "amount too small" al pròxim cycle.
+"""
+from __future__ import annotations
+
+import logging
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from cloud.db_cloud import conn, cron_run, log_capital_event, log_bot_lifecycle
+from config import BOTS
+from pionex_client import get_bot_order, extract_grid_profit
+from vault.inventory import add_usdt
+
+try:
+    from notifier import notify, notify_vault_event
+except Exception:
+    notify = None
+    notify_vault_event = None
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+)
+log = logging.getLogger("profit_harvester")
+
+# Configuració
+MIN_HARVEST_USDT = 1.00       # No extreure < $1 (no val la pena)
+SAFETY_BUFFER_USDT = 0.50     # Deixem $0.50 al bot per seguretat
+DRY_RUN = False               # Posa True per simular sense executar
+
+
+def harvest_one(bot_name: str, cfg: dict) -> dict:
+    """Extreu profit d'un bot. Retorna {ok, amount, error}."""
+    bot_id = cfg["id"]
+    try:
+        d = get_bot_order(bot_id)
+    except Exception as e:
+        return {"ok": False, "amount": 0, "error": f"get_bot_order: {e}"}
+
+    bu = d.get("buOrderData") or {}
+    grid_profit = float(bu.get("gridProfit") or 0)
+    qti_before = float(bu.get("quoteTotalInvestment") or 0)
+
+    extractable = grid_profit - SAFETY_BUFFER_USDT
+    if extractable < MIN_HARVEST_USDT:
+        return {"ok": True, "amount": 0, "skipped": True,
+                "grid_profit": grid_profit,
+                "reason": f"grid_profit ${grid_profit:.4f} below threshold"}
+
+    extract_amount = round(extractable, 4)
+    log.info(f"  {bot_name}: gridProfit=${grid_profit:.4f}, extracting ${extract_amount:.4f}")
+
+    if DRY_RUN:
+        return {"ok": True, "amount": extract_amount, "dry_run": True}
+
+    # Executa l'extracció a Pionex
+    try:
+        result = extract_grid_profit(bot_id, extract_amount)
+    except Exception as e:
+        return {"ok": False, "amount": 0, "error": f"extract_grid_profit: {e}"}
+
+    if not result.get("result"):
+        return {"ok": False, "amount": 0, "error": f"Pionex returned non-result: {result}"}
+
+    # Logueja a capital_events (event existent, no nou)
+    now = datetime.now(timezone.utc)
+    idem_key = f"harvest_{bot_name}_{now.strftime('%Y%m%d')}"
+    try:
+        log_capital_event(
+            bot_id=bot_id, bot_name=bot_name,
+            event_type="withdraw_profit",
+            amount_usdt=extract_amount,
+            source="vault.profit_harvester",
+            qti_before=qti_before,
+            qti_after=qti_before,  # qti no canvia, només es treu profit
+            grid_profit_snapshot=grid_profit,
+            idempotency_key=idem_key,
+            notes=f"Daily harvest → vault USDT. SAFETY_BUFFER=${SAFETY_BUFFER_USDT}",
+            created_by="vault.profit_harvester",
+            ts=now,
+        )
+        log_bot_lifecycle(
+            bot_id=bot_id, bot_name=bot_name,
+            event_type="profit_harvest_to_vault",
+            last_grid_profit=grid_profit,
+            last_quote_invested=qti_before,
+            notes=f"Extracted ${extract_amount:.4f} → vault USDT",
+            detected_by="vault.profit_harvester",
+        )
+    except Exception as e:
+        log.warning(f"  {bot_name}: capital_events log failed: {e}")
+
+    # Afegeix al vault USDT (dispara TG notify per defecte)
+    add_usdt(
+        amount=extract_amount,
+        source=f"profit_harvester/{bot_name}",
+        idempotency_key=idem_key + "_vault",
+        notes=f"Daily harvest from {bot_name} grid",
+    )
+
+    return {"ok": True, "amount": extract_amount,
+            "grid_profit_before": grid_profit}
+
+
+def main():
+    with cron_run("vault_profit_harvester") as ctx:
+        results = {}
+        total_harvested = 0.0
+        n_ok = 0
+        n_skip = 0
+        n_fail = 0
+
+        log.info(f"=== Profit Harvester start ({len(BOTS)} bots) ===")
+        if DRY_RUN:
+            log.info("DRY_RUN=True (cap execució real)")
+
+        for name, cfg in BOTS.items():
+            r = harvest_one(name, cfg)
+            results[name] = r
+            if r.get("ok"):
+                if r.get("skipped"):
+                    n_skip += 1
+                else:
+                    n_ok += 1
+                    total_harvested += r.get("amount", 0)
+            else:
+                n_fail += 1
+                log.error(f"  {name}: FAIL {r.get('error')}")
+
+        log.info(f"=== Harvest done: extracted=${total_harvested:.4f} "
+                 f"from {n_ok} bots ({n_skip} skipped, {n_fail} failed) ===")
+
+        ctx["items"] = n_ok
+        ctx["notes"] = (
+            f"harvested=${total_harvested:.4f} ok={n_ok} skip={n_skip} fail={n_fail}"
+        )
+
+        # TG resum (un sol missatge agregat, no un per bot, per evitar spam)
+        if total_harvested > 0 and notify is not None:
+            def _esc(s):  # Markdown escape per evitar parse errors
+                return str(s).replace("_", "\\_").replace("*", "\\*")
+            lines = []
+            for name, r in results.items():
+                if r.get("ok") and r.get("amount", 0) > 0:
+                    lines.append(f"• {_esc(name)}: +${r['amount']:.4f}")
+            body = (
+                f"S'han recollit profits de {n_ok} bots actius:\n\n" +
+                "\n".join(lines) +
+                f"\n\n*Total a la reserva: +${total_harvested:.4f}*"
+            )
+            if n_fail > 0:
+                body += f"\n\n⚠️ {n_fail} bots han fallat (revisar logs)"
+            try:
+                notify(f"🌾 Profits recollits: +${total_harvested:.2f}",
+                       body, category="vault", key="profit_harvest_daily",
+                       urgent=True)
+            except Exception as e:
+                log.warning(f"TG notify failed: {e}")
+
+
+if __name__ == "__main__":
+    main()

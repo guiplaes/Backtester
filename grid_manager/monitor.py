@@ -321,9 +321,26 @@ def _build_bot_states_for_rebalance() -> dict:
 
 
 def main():
-    log.info(f"=== Monitor cycle start: {len(BOTS)} bots ===")
+    # Llegir quins assets gestiona el vault closer (per skipping). Si no es pot
+    # importar, assume cap (cap skip) — backward compatible.
+    try:
+        from vault.closer import VAULT_LIVE_ASSETS
+    except Exception:
+        VAULT_LIVE_ASSETS = set()
+
+    skipped_bots = [name for name, cfg in BOTS.items()
+                    if cfg.get("base") in VAULT_LIVE_ASSETS]
+    if skipped_bots:
+        log.info(f"=== Monitor cycle start: {len(BOTS)} bots "
+                 f"(skipping {len(skipped_bots)} gestionats per vault: {skipped_bots}) ===")
+    else:
+        log.info(f"=== Monitor cycle start: {len(BOTS)} bots ===")
+
     results = []
     for name, cfg in BOTS.items():
+        if cfg.get("base") in VAULT_LIVE_ASSETS:
+            results.append({"bot": name, "action": "skipped_vault_managed"})
+            continue
         results.append(check_bot(name, cfg))
     # ── Rebalance check (portfolio level) ───────────────────────────────
     try:
