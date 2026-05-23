@@ -256,7 +256,69 @@ def create_spot_grid(*, base: str, quote: str,
             "slippage": f"{slippage:.4f}",
         },
     }
-    return _post_signed("/api/v1/bot/orders/spotGrid", body)
+    # URL real (descoberta dels MCP sources): /api/v1/bot/orders/spotGrid/create
+    # Sense /create al final dóna 404 (el meu primer intent va fallar per aixo).
+    return _post_signed("/api/v1/bot/orders/spotGrid/create", body)
+
+
+# Mida mínima per asset (Pionex symbol_info). Cau aquí en lloc de fetch cada vegada.
+# Format: {asset: (min_trade_size, base_precision, min_amount_usdt)}
+SYMBOL_FILTERS = {
+    "BTC":  (0.000001, 6, 10),
+    "ETH":  (0.00001,  5, 10),
+    "PAXG": (0.000001, 6, 10),
+    "SOL":  (0.01,     2, 10),
+    "USOX": (0.001,    3, 10),
+    "SPYX": (0.0001,   4, 10),
+}
+
+
+def fmt_size(asset: str, qty: float) -> str:
+    """Formata qty amb la precisió decimal correcta de l'asset (sense zeros trailing).
+    Pionex valida amb basePrecision — 8 decimals pot fer TRADE_SIZE_FILTER_DENIED."""
+    _, precision, _ = SYMBOL_FILTERS.get(asset, (0, 8, 10))
+    return f"{qty:.{precision}f}".rstrip('0').rstrip('.')
+
+
+def round_up_to_min(asset: str, qty: float, price: float) -> tuple[float, str]:
+    """Si qty està sota el mínim de Pionex (per size O per amount USDT), retorna el
+    mínim necessari. Si ja és vàlid, retorna qty original.
+    Retorna (qty_final, reason).
+    """
+    min_size, _, min_amount = SYMBOL_FILTERS.get(asset, (0, 8, 10))
+    qty_for_min_amount = (min_amount * 1.05) / price  # 5% marge per slippage
+    needed = max(qty, min_size, qty_for_min_amount)
+    if needed > qty:
+        reason = f"rounded up from {qty:.8f} to {needed:.8f} (min_size={min_size}, min_amount=${min_amount})"
+        return needed, reason
+    return qty, "already valid"
+
+
+def market_sell(asset: str, qty: float, price_estimate: float = None) -> dict:
+    """Market SELL d'un base asset. Format de size correcte per Pionex.
+    Si qty sota mínim, fa round-up automàtic.
+    Retorna {ok, orderId, raised_usdt_estimate, qty_sold, error}."""
+    symbol = f"{asset}_USDT"
+    if price_estimate:
+        qty_final, reason = round_up_to_min(asset, qty, price_estimate)
+    else:
+        qty_final = qty
+        reason = "no price estimate, no round-up applied"
+    size_str = fmt_size(asset, qty_final)
+    body = {"symbol": symbol, "side": "SELL", "type": "MARKET", "size": size_str}
+    try:
+        resp = _post_signed("/api/v1/trade/order", body)
+        if not resp.get("result"):
+            return {"ok": False, "error": resp.get("message") or str(resp),
+                    "code": resp.get("code")}
+        order_id = resp.get("data", {}).get("orderId")
+        return {
+            "ok": True, "orderId": order_id, "qty_sold": qty_final,
+            "raised_usdt_estimate": qty_final * (price_estimate or 0) * 0.9995,
+            "size_str": size_str, "round_up_reason": reason,
+        }
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
 
 
 def _resolve_bot_id(bot_id_or_name: str) -> str:

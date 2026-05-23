@@ -166,6 +166,117 @@ def notify_error(component: str, error: str) -> bool:
                   category="error", key=component[:30])
 
 
+# ── Vault DCA System: batch mode (1 TG per relocació) ──────────────
+# Durant una relocació, en lloc d'enviar 5-6 TGs (cancel, add base, add usdt,
+# fund p2, fund p4, create), els collectem en una "transacció" i enviem
+# 1 resum final. Implementat amb contextvars (thread-safe, process-safe).
+import contextlib
+import contextvars
+import time as _time
+
+_vault_batch: contextvars.ContextVar = contextvars.ContextVar("vault_batch", default=None)
+
+
+@contextlib.contextmanager
+def vault_batch(title: str, key: str | None = None):
+    """Context manager: collect vault events i emet UN sol TG al sortir.
+
+    Ús:
+        with vault_batch("Relocació PAXG_USDT", key="reloc:PAXG"):
+            add_base(...)   # no envia TG
+            add_usdt(...)   # no envia TG
+            ...
+        # ← Aquí s'envia el resum agregat
+    """
+    batch = {"title": title, "key": key or title[:30],
+             "events": [], "started_at": _time.time(),
+             "errors": [], "extra_notes": []}
+    token = _vault_batch.set(batch)
+    try:
+        yield batch
+    except Exception as e:
+        batch["errors"].append(str(e)[:300])
+        raise
+    finally:
+        _vault_batch.reset(token)
+        _send_batch_summary(batch)
+
+
+def _batch_active() -> dict | None:
+    """Retorna el batch actiu si estem dins d'un with vault_batch(), o None."""
+    return _vault_batch.get()
+
+
+def _send_batch_summary(batch: dict) -> None:
+    """Construeix i envia el TG resum d'un batch de vault events."""
+    elapsed = _time.time() - batch["started_at"]
+    n_events = len(batch["events"])
+    has_errors = bool(batch["errors"])
+
+    if n_events == 0 and not has_errors:
+        return  # res a notificar
+
+    def _esc(s):
+        return str(s).replace("_", "\\_").replace("*", "\\*").replace("[", "\\[").replace("`", "\\`")
+
+    emoji_overall = "❌" if has_errors else ("✅" if n_events > 0 else "ℹ️")
+    title = f"{emoji_overall} {_esc(batch['title'])}"
+
+    lines = []
+    # Agrupar events per tipus per a ordre lògic al resum
+    order = ["vault_add_base", "vault_add_usdt", "vault_remove_base", "vault_remove_usdt",
+             "fund_p1_vault_profit", "fund_p2_usdt_reserve",
+             "fund_p3_vault_loss", "fund_p4_own_asset", "profit_harvest"]
+    sorted_events = sorted(batch["events"],
+                           key=lambda e: order.index(e["event_type"]) if e["event_type"] in order else 99)
+
+    for ev in sorted_events:
+        emoji = {
+            "vault_add_base": "📥", "vault_add_usdt": "💰",
+            "vault_remove_base": "📤", "vault_remove_usdt": "💸",
+            "fund_p1_vault_profit": "✅", "fund_p2_usdt_reserve": "🏦",
+            "fund_p3_vault_loss": "⚠️", "fund_p4_own_asset": "🚨",
+            "profit_harvest": "🌾",
+        }.get(ev["event_type"], "•")
+        short = ev["event_type"].replace("vault_", "").replace("fund_", "")
+        direction = "+" if ev["qty_delta"] >= 0 else "−"
+        asset = _esc(ev["asset"])
+        if ev["asset"] == "USDT":
+            lines.append(f"  {emoji} {short}: {direction}${abs(ev['qty_delta']):,.2f} → reserva *${ev['qty_after']:,.2f}*")
+        else:
+            delta_str = f"{direction}{abs(ev['qty_delta']):,.6f}"
+            avg = (ev["cost_after"] / ev["qty_after"]) if ev["qty_after"] > 0 else None
+            avg_str = f"avg ${avg:,.2f}" if avg else "buit"
+            usd_delta = f"${abs(ev['cost_delta_usdt']):,.2f}"
+            lines.append(f"  {emoji} {short} {asset}: {delta_str} ({usd_delta}) → {avg_str}")
+
+    body_parts = []
+    if batch["extra_notes"]:
+        body_parts.append("\n".join(batch["extra_notes"]))
+        body_parts.append("")  # spacer
+    body_parts.append("*Moviments:*")
+    body_parts.extend(lines)
+    body_parts.append("")
+    body_parts.append(f"⏱️ Completat en {elapsed:.1f}s")
+    if has_errors:
+        body_parts.append("")
+        body_parts.append("*Errors:*")
+        for err in batch["errors"][:3]:
+            body_parts.append(f"  • {_esc(err[:200])}")
+
+    notify(title, "\n".join(body_parts), category="vault_batch",
+           key=batch["key"], urgent=True)
+
+
+def add_batch_note(note: str) -> bool:
+    """Afegeix una línia descriptiva al resum del batch actiu (si n'hi ha)."""
+    batch = _batch_active()
+    if batch is None:
+        return False
+    batch["extra_notes"].append(note)
+    return True
+
+
 # ── Vault DCA System ────────────────────────────────────────────────
 
 # Decimals raonables per fer els missatges llegibles. USDT 2, BTC 6, ETH 4, etc.
@@ -202,7 +313,20 @@ def notify_vault_event(*, event_type: str, asset: str,
 
     El format varia segons event_type per explicar QUÈ ha passat
     i QUÈ vol dir, no només els números bruts.
+
+    Si estem dins d'un with vault_batch(...): NO envia TG individual,
+    només acumula l'event al batch per al resum final.
     """
+    # ── Batch mode check ───────────────────────────────────────
+    batch = _batch_active()
+    if batch is not None:
+        batch["events"].append({
+            "event_type": event_type, "asset": asset,
+            "qty_delta": qty_delta, "cost_delta_usdt": cost_delta_usdt,
+            "qty_after": qty_after, "cost_after": cost_after,
+            "source": source, "notes": notes,
+        })
+        return True  # collected, not sent
     # Estat resultant comú a tots els missatges
     avg_after = (cost_after / qty_after) if qty_after > 0 else None
     qty_str = _fmt_qty(asset, abs(qty_delta))

@@ -11,7 +11,7 @@ QUOTE = "USDT"
 # Multi-bot config
 BOTS = {
     "PAXG_USDT": {
-        "id": "76e6b1c8-af3b-42a0-b813-7462d60b303e",  # re-creat 2026-05-12 amb 8 rows optim
+        "id": "6a8b29cf-d43a-4604-bac8-4c3ee4b0fea5",  # re-creat 2026-05-23 test vault relauncher (parent 76e6b1c8)
         "symbol": "PAXG_USDT",
         "base": "PAXG",
         "quote": "USDT",
@@ -51,7 +51,7 @@ BOTS = {
         "rows": 10,
     },
     "SPYX_USDT": {
-        "id": "ed1e50c8-8191-478e-9551-93de23d976f7",  # creat 2026-05-14: diversificacio 15% portfolio (BTC venut $200 per finançar)
+        "id": "995435be-7b15-4ac8-9514-2f80497e6619",  # recreat 2026-05-21: realloc 15->10%, $136 (era $200, $64 a PAXG)
         "symbol": "SPYX_USDT",
         "base": "SPYX",
         "quote": "USDT",
@@ -60,14 +60,14 @@ BOTS = {
     },
 }
 
-# Target weights for rebalancing (nou portfolio 2026-05-14: diversificacio amb USOX + SPYX)
+# Target weights for rebalancing (2026-05-21: SPYX 15→10, PAXG 30→35)
 TARGET_WEIGHTS = {
-    "PAXG_USDT": 0.30,
+    "PAXG_USDT": 0.35,
     "BTC_USDT":  0.22,
     "ETH_USDT":  0.15,
     "SOL_USDT":  0.08,
     "USOX_USDT": 0.10,
-    "SPYX_USDT": 0.15,
+    "SPYX_USDT": 0.10,
 }
 
 # ─── Rebalancer (portfolio level, on top of grids) ──────────────────

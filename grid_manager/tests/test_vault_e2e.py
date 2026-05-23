@@ -1,26 +1,28 @@
 """
 E2E test: cycle complet contra Neon REAL, sense Pionex.
 
-Verifica el flow operatiu:
-  1. Insert a injection_queue → consume → vault_inventory s'actualitza
-  2. add_base directe (simulant bot close)
-  3. Funding plan amb dades reals del vault
-  4. remove_base directe (simulant venda P1)
-  5. Reset clean al final
+⚠️ AQUESTS TESTS MODIFIQUEN vault_inventory DE PRODUCCIO!
+⚠️ El setUp/tearDown reseteja l'USDT a $20.25, perdent qualsevol injection
+   manual que hi hagués. Només córrer-los quan saps que el vault NO té
+   diners gestionats actius.
 
-Toca Neon real (vault_inventory, vault_events, injection_queue). Tot dins
-de una transacció lògica amb cleanup al final.
-
-NO toca cap bot real. NO crida Pionex.
+Per evitar accidents, els tests només corren si VAULT_E2E_ALLOW=1:
+    set VAULT_E2E_ALLOW=1
+    python -m unittest tests.test_vault_e2e
 """
 from __future__ import annotations
 
+import os
 import sys
 import time
 import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+
+# Salvaguarda: per evitar pèrdua accidental d'estat al vault de producció
+_E2E_ENABLED = os.environ.get("VAULT_E2E_ALLOW", "") == "1"
 
 from cloud.db_cloud import conn
 from vault.inventory import (
@@ -50,6 +52,7 @@ def _reset_vault():
         c.commit()
 
 
+@unittest.skipUnless(_E2E_ENABLED, "E2E tests modifiquen vault real. Activa amb VAULT_E2E_ALLOW=1")
 class TestVaultE2E(unittest.TestCase):
 
     def setUp(self):

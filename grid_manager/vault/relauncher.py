@@ -78,18 +78,21 @@ def _compute_new_range(price: float, width_pct: float, rows: int) -> tuple[float
 def relaunch_after_breakout(*, bot_name: str, bot_id: str, cfg: dict,
                             price_at_breakout: float,
                             dry_run: bool = True) -> dict:
-    """Orquestra el cicle complet close + fund + create per a un bot.
+    """Wrapper that runs the relocation inside a vault_batch context.
+    All vault events collected → 1 single TG summary at the end."""
+    from notifier import vault_batch
+    title_prefix = "🔍 [SHADOW] " if dry_run else ""
+    title = f"{title_prefix}Relocació {bot_name.replace('_', '-')}"
+    with vault_batch(title=title, key=f"relaunch:{bot_name}"):
+        return _relaunch_inner(
+            bot_name=bot_name, bot_id=bot_id, cfg=cfg,
+            price_at_breakout=price_at_breakout, dry_run=dry_run,
+        )
 
-    Args:
-        bot_name: e.g. 'BTC_USDT'
-        bot_id: pionex buOrderId actual
-        cfg: BOTS[bot_name] dict
-        price_at_breakout: preu en el moment del breakout
-        dry_run: True (SHADOW) per simular sense executar
 
-    Returns:
-        {ok, dry_run, target_value, recovered, funding_plan, new_bot_id, errors}
-    """
+def _relaunch_inner(*, bot_name: str, bot_id: str, cfg: dict,
+                    price_at_breakout: float, dry_run: bool) -> dict:
+    """Cos real de la relocació. Tots els TGs van al batch del wrapper."""
     asset = cfg["base"]
     now = datetime.now(timezone.utc)
     idem_prefix = f"relaunch_{bot_name}_{now.strftime('%Y%m%dT%H%M%S')}"
@@ -195,20 +198,12 @@ def relaunch_after_breakout(*, bot_name: str, bot_id: str, cfg: dict,
                 f"after waterfall. ABORT relocació."
             )
             log.warning(f"  {bot_name}: funding NOT feasible — base recovered restarà al vault")
-            # Si dry_run, igualment TG notify per visibilitat
+            # Nota addicional al batch
             try:
-                from notifier import notify
-                _e = lambda s: str(s).replace("_", "\\_").replace("*", "\\*").replace("[", "\\[")
-                notify(
-                    f"⚠️ Relocació abortada: {_e(bot_name)}",
-                    f"S'ha fet close de {_e(bot_name)} però el funding waterfall "
-                    f"no cobreix el target ${target_value:.2f}.\n\n"
-                    f"Recuperat al vault:\n"
-                    f"  • {_e(asset)}: {recovered_base:.6f}\n"
-                    f"  • USDT: ${recovered_usdt:.2f}\n\n"
-                    f"Shortfall: *${funding_plan.shortfall:.2f}*\n\n"
-                    f"Considera afegir USDT manualment al sistema.",
-                    category="vault", key=f"abort:{bot_name}", urgent=True,
+                from notifier import add_batch_note
+                add_batch_note(
+                    f"⚠️ *Relocació abortada:* funding waterfall no cobreix target ${target_value:.2f}\n"
+                    f"Shortfall: *${funding_plan.shortfall:.2f}*. Considera afegir USDT manualment."
                 )
             except Exception:
                 pass
@@ -232,39 +227,15 @@ def relaunch_after_breakout(*, bot_name: str, bot_id: str, cfg: dict,
     if dry_run:
         out["ok"] = True
         out["status"] = "dry_run_complete"
-        # TG notify amb el pla complet per revisió
+        # Afegir nota al batch perquè aparegui al resum (sense TG addicional)
         try:
-            from notifier import notify
-            def _esc(s):
-                return str(s).replace("_", "\\_").replace("*", "\\*").replace("[", "\\[").replace("`", "\\`")
-            # Resum de funding plan en format pla (no code block — incompatible Markdown V1)
-            if funding_plan:
-                plan_lines = []
-                for s in funding_plan.steps[:6]:  # max 6 steps al missatge
-                    plan_lines.append(
-                        f"  • {s.priority}: {_esc(s.asset)} qty={s.qty_to_sell:.6f} → ${s.expected_usdt:.2f}"
-                    )
-                plan_str = "\n".join(plan_lines) if plan_lines else "(buit)"
-                plan_total = f"\nTotal raised: ${funding_plan.total_raised:.2f} / ${funding_plan.target_usdt:.2f}"
-                if not funding_plan.feasible:
-                    plan_total += f"  ⚠️ Shortfall: ${funding_plan.shortfall:.2f}"
-            else:
-                plan_str = "(no funding needed)"
-                plan_total = ""
-            notify(
-                f"🔍 [SHADOW] Relocació planificada: {_esc(bot_name)}",
-                f"S'executaria aquest fluxe (mode SHADOW, no realitzat):\n\n"
-                f"*PRE:* base={recovered_base:.6f} {_esc(asset)}, "
-                f"quote=${recovered_usdt:.2f}, value=*${target_value:.2f}*\n\n"
-                f"*Funding plan:*\n{plan_str}{plan_total}\n\n"
-                f"*Nou bot:* rang ${bottom:.4f} – ${top:.4f} × {rows} rows "
-                f"amb *${target_value:.2f}*\n\n"
-                f"Per activar LIVE per {_esc(asset)}, afegeix l'asset a "
-                f"VAULT\\_LIVE\\_ASSETS a closer.py",
-                category="vault_shadow", key=f"plan:{bot_name}", urgent=True,
+            from notifier import add_batch_note
+            add_batch_note(
+                f"*PRE bot:* base={recovered_base:.6f} {asset}, quote=${recovered_usdt:.2f}, value=*${target_value:.2f}*\n"
+                f"*NOU bot planejat:* rang ${bottom:.4f} – ${top:.4f} × {rows} rows amb *${target_value:.2f}*"
             )
-        except Exception as e:
-            log.warning(f"TG notify failed: {e}")
+        except Exception:
+            pass
         return out
 
     # ── LIVE create_spot_grid ──
@@ -345,20 +316,15 @@ def relaunch_after_breakout(*, bot_name: str, bot_id: str, cfg: dict,
         log.error(f"  {bot_name}: Neon sync after create FAILED: {e}")
         out["errors"].append(f"neon sync: {e}")
 
-    # ── 9. Update config.py BOTS[name]["id"] ──
-    # NO modifiquem config.py automàticament — això és canvi a codi.
-    # Telegram alerta l'usuari per actualitzar manualment.
+    # ── 9. Nota al batch amb new_bot_id (acció manual config.py) ──
     try:
-        from notifier import notify
-        notify(
-            f"✅ Bot recreat: {bot_name}",
-            f"S'ha tancat el bot anterior de *{bot_name}* per breakout i creat un de nou.\n\n"
-            f"*Old bot_id:* `{bot_id}`\n"
-            f"*New bot_id:* `{new_bot_id}`\n\n"
-            f"*Nou rang:* [${bottom:.4f}, ${top:.4f}] × {rows} rows\n"
-            f"*Capital:* ${target_value:.2f}\n\n"
-            f"⚠️ *Acció requerida:* actualitza `config.py` BOTS\\['{bot_name}'\\]\\['id'\\] = '{new_bot_id}'",
-            category="vault", key=f"relaunch_live:{bot_name}", urgent=True,
+        from notifier import add_batch_note
+        add_batch_note(
+            f"*OLD bot_id:* `{bot_id}`\n"
+            f"*NEW bot_id:* `{new_bot_id}`\n"
+            f"*Nou rang:* ${bottom:.4f} – ${top:.4f} × {rows} rows\n"
+            f"*Capital:* *${target_value:.2f}*\n\n"
+            f"⚠️ *Acció requerida:* actualitza `config.py` BOTS\\['{bot_name}'\\]\\['id'\\]"
         )
     except Exception:
         pass

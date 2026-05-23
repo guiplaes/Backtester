@@ -240,7 +240,7 @@ def execute_funding_plan(plan: FundingPlan, idempotency_prefix: str,
 
     # Importem aquí per evitar cicle si pionex_client falla
     try:
-        from pionex_client import _post_signed, get_current_price
+        from pionex_client import market_sell, get_current_price
     except Exception as e:
         return {"ok": False, "error": f"pionex_client import: {e}"}
 
@@ -267,36 +267,38 @@ def execute_funding_plan(plan: FundingPlan, idempotency_prefix: str,
                 else:
                     errors.append(f"{step.priority} {step.asset}: remove_usdt failed")
             else:
-                # P1/P3/P4: market sell base via Pionex
-                symbol = f"{step.asset}_USDT"
-                body = {
-                    "symbol": symbol,
-                    "side": "SELL",
-                    "type": "MARKET",
-                    "size": f"{step.qty_to_sell:.8f}",
-                }
-                # Crida Pionex market order
-                resp = _post_signed("/api/v1/trade/order", body)
-                if not resp.get("result"):
-                    errors.append(f"{step.priority} {step.asset}: Pionex SELL failed: {resp}")
-                    continue
-                # Llegir preu real de fill (potser diferent del price_now si slippage)
-                # Per simplicitat usem step.expected_usdt; el reconcile diari ajustarà
-                ok1 = remove_base(
+                # P1/P3/P4: market sell base via Pionex (amb round-up i format precisió)
+                sell_result = market_sell(
                     asset=step.asset, qty=step.qty_to_sell,
+                    price_estimate=step.price_now,
+                )
+                if not sell_result.get("ok"):
+                    errors.append(f"{step.priority} {step.asset}: Pionex SELL failed: "
+                                  f"{sell_result.get('error')} (code={sell_result.get('code')})")
+                    continue
+
+                qty_sold = sell_result["qty_sold"]
+                raised_estimate = qty_sold * step.price_now * 0.9995  # ~real proceeds
+                log.info(f"  {step.priority} {step.asset}: sold {qty_sold} → ~${raised_estimate:.4f} "
+                         f"(orderId={sell_result.get('orderId')}, {sell_result.get('round_up_reason')})")
+
+                ok1 = remove_base(
+                    asset=step.asset, qty=qty_sold,
                     source=f"funding/{idempotency_prefix}",
                     idempotency_key=idem_key + "_rmbase",
-                    notes=f"{step.priority} sell at ${step.price_now:.4f}",
+                    notes=f"{step.priority} sell at ${step.price_now:.4f}, orderId={sell_result.get('orderId')}",
                 )
                 ok2 = add_usdt(
-                    amount=step.expected_usdt,
+                    amount=raised_estimate,
                     source=f"funding/{idempotency_prefix}/{step.asset}",
                     idempotency_key=idem_key + "_addusdt",
-                    notes=f"Proceeds from {step.priority} sell of {step.asset}",
+                    notes=f"Proceeds from {step.priority} sell of {step.asset} (orderId={sell_result.get('orderId')})",
                 )
                 if ok1 and ok2:
-                    total_raised += step.expected_usdt
-                    executions.append({"step": str(step), "result": "ok", "pionex": resp})
+                    total_raised += raised_estimate
+                    executions.append({"step": str(step), "result": "ok",
+                                       "pionex_orderId": sell_result.get('orderId'),
+                                       "qty_sold": qty_sold, "raised": raised_estimate})
                 else:
                     errors.append(f"{step.priority} {step.asset}: vault update failed (ok1={ok1} ok2={ok2})")
         except Exception as e:
