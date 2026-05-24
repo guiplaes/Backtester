@@ -119,26 +119,71 @@ def _relaunch_inner(*, bot_name: str, bot_id: str, cfg: dict,
     log.info(f"  {bot_name} PRE: base={pre['base_amount']:.6f} @ avg ${pre['average_cost']:.4f}, "
              f"quote=${pre['quote_amount']:.4f}, value=${target_value:.4f}")
 
-    # ── 2. Cancel bot (NOT_SELL) ──────────────────────────────────
-    recovered_base = pre["base_amount"]
-    recovered_usdt = pre["quote_amount"]
-    recovered_cost = pre["base_amount"] * pre["average_cost"] if pre["average_cost"] else 0
-
+    # ── 2. Cancel bot (NOT_SELL) — VERIFICAT amb wallet delta ─────
+    # IMPORTANT: usar pre.base_amount/quote_amount és OPTIMISTIC. Pionex
+    # pot retornar amounts diferents per fees, pending orders, etc.
+    # Calculem via wallet BALANCE DELTA pre vs post cancel.
     if not dry_run:
         try:
-            from pionex_client import cancel_bot
+            from pionex_client import cancel_bot, get_balance
+            # 1. Wallet snapshot PRE-cancel
+            try:
+                bal_pre = get_balance() or {}
+                base_pre_wallet = float(bal_pre.get(asset, 0))
+                usdt_pre_wallet = float(bal_pre.get("USDT", 0))
+            except Exception as e:
+                log.warning(f"  {bot_name}: no he pogut llegir wallet PRE-cancel: {e}")
+                # Fallback: usar valors del bot state (less accurate)
+                base_pre_wallet = None
+                usdt_pre_wallet = None
+
+            # 2. Cancel
             cancel_result = cancel_bot(bot_id)
             log.info(f"  {bot_name} cancel: {cancel_result.get('result')}")
             if not cancel_result.get("result"):
                 out["ok"] = False
                 out["errors"].append(f"cancel failed: {cancel_result}")
                 return out
-            # Esperem 3s perquè Pionex actualitzi balances
+
+            # 3. Esperem 3s perquè Pionex actualitzi balances
             time.sleep(3)
+
+            # 4. Wallet snapshot POST-cancel + delta
+            if base_pre_wallet is not None and usdt_pre_wallet is not None:
+                try:
+                    bal_post = get_balance() or {}
+                    base_post_wallet = float(bal_post.get(asset, 0))
+                    usdt_post_wallet = float(bal_post.get("USDT", 0))
+                    recovered_base = base_post_wallet - base_pre_wallet
+                    recovered_usdt = usdt_post_wallet - usdt_pre_wallet
+                    log.info(f"  {bot_name} wallet delta REAL: +{recovered_base:.8f} {asset}, +${recovered_usdt:.4f} USDT")
+                    # Defensiu: si delta negatiu (no hauria de passar), usar valors pre del bot
+                    if recovered_base < 0 or recovered_usdt < 0:
+                        log.warning(f"  {bot_name}: wallet delta negatiu! fallback a valors pre-bot")
+                        recovered_base = pre["base_amount"]
+                        recovered_usdt = pre["quote_amount"]
+                except Exception as e:
+                    log.warning(f"  {bot_name}: no he pogut llegir wallet POST-cancel ({e}), fallback")
+                    recovered_base = pre["base_amount"]
+                    recovered_usdt = pre["quote_amount"]
+            else:
+                # No wallet pre, usar valors del bot (less accurate)
+                recovered_base = pre["base_amount"]
+                recovered_usdt = pre["quote_amount"]
         except Exception as e:
             out["ok"] = False
             out["errors"].append(f"cancel exception: {e}")
             return out
+    else:
+        # Dry run: usar valors del bot pre-state
+        recovered_base = pre["base_amount"]
+        recovered_usdt = pre["quote_amount"]
+
+    # Cost basis = recovered_base × avg_cost (preserva el cost original al vault)
+    recovered_cost = recovered_base * pre["average_cost"] if pre["average_cost"] else 0
+    out["recovered"] = {
+        "base": recovered_base, "usdt": recovered_usdt, "cost_basis": recovered_cost,
+    }
 
     # ── 3. Add recovered base + USDT al vault_inventory ───────────
     if not dry_run:

@@ -185,11 +185,36 @@ def main():
         amount = round(extractable, 4)
         log.info(f"  extract_grid_profit({name}, ${amount:.4f}) [extractable={extractable:.4f}]")
         try:
+            # Read quote AMOUNT del bot PRE-extract per a verificació
+            quote_before = float(get_bot_order(bcfg["id"]).get("buOrderData", {}).get("quoteAmount", 0))
             r = extract_grid_profit(name, amount)
             ok = bool(r.get("result", False))
+            real_extracted = amount  # default optimistic
             if ok:
-                extracted_total += amount
-                extraction_results.append({"bot": name, "amount": amount, "ok": True, "msg": "extracted", "extracted": amount})
+                # POST-extract verification: llegim quoteAmount post per a saber el delta real
+                # (Pionex pot retornar result=True però no aplicar si > disponible real)
+                import time as _t
+                _t.sleep(2)
+                try:
+                    quote_after = float(get_bot_order(bcfg["id"]).get("buOrderData", {}).get("quoteAmount", 0))
+                    real_extracted = quote_before - quote_after
+                    if real_extracted < 0.01:
+                        log.warning(f"  {name}: Pionex result=True PERÒ quoteAmount no baixa "
+                                    f"({quote_before:.4f}→{quote_after:.4f}). Treatat com fallit.")
+                        ok = False
+                        extraction_results.append({"bot": name, "amount": amount, "ok": False,
+                                                   "msg": "phantom extract (Pionex no va aplicar)", "extracted": 0})
+                        continue
+                    if abs(real_extracted - amount) > 0.01:
+                        log.warning(f"  {name}: Pionex va donar ${real_extracted:.4f} en lloc dels ${amount:.4f} demanats")
+                except Exception as e:
+                    log.warning(f"  {name}: no he pogut verificar post-extract ({e}), usem amount demanat")
+                    real_extracted = amount
+
+                extracted_total += real_extracted
+                extraction_results.append({"bot": name, "amount": real_extracted, "ok": True, "msg": "extracted", "extracted": real_extracted})
+                # IMPORTANT: usem real_extracted no amount per a evitar logs fantasma
+                amount = real_extracted  # per al log capital_event sota
                 # Log capital_event — STRICT: si Neon falla, alerta TG (no és best-effort)
                 try:
                     log_capital_event(

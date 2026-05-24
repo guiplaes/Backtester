@@ -92,6 +92,21 @@ def _isolate_vault_writes():
             stack.enter_context(patch(f"vault.relauncher.{fn}", return_value=None))
         except Exception:
             pass
+    # Mock get_balance: el relauncher nou calcula delta wallet pre/post cancel.
+    # Si retornem mateix dict cada cop, delta=0 → fallback a pre_state values.
+    # Però per a tests que necessiten valors específics, override individual.
+    # Per defecte: retorna 0 (delta = 0 → fallback al pre_state, que és el que
+    # els tests E/D usen via _read_bot_state mock).
+    def _balance_side_effect(*args, **kwargs):
+        # Pre cancel: wallet ja té base i USDT (per simular que ja teníem)
+        # Post cancel: + valors recuperats del bot mock
+        # Per simplicitat: retorna fixe — el delta serà 0 → fallback pre_state
+        return {"USDT": 1000, "BTC": 1, "ETH": 1, "PAXG": 1, "SOL": 1,
+                "USOX": 1, "SPYX": 1}
+    try:
+        stack.enter_context(patch("pionex_client.get_balance", side_effect=_balance_side_effect))
+    except Exception:
+        pass
     return stack
 
 
@@ -283,7 +298,13 @@ class D_CreateSpotGridFailures(unittest.TestCase):
     def test_D1_create_returns_no_bot_id(self):
         """create_spot_grid returna success but no buOrderId — error."""
         # Pre_state amb QUOTE alt perquè recovered USDT cobreixi target sense funding
+        # Mock get_balance per simular wallet recovery (delta = bot pre values)
+        balance_calls = [
+            {"USDT": 100, "BTC": 0},      # pre-cancel
+            {"USDT": 600, "BTC": 0.001},  # post-cancel: +500 USDT +0.001 BTC
+        ]
         with _isolate_vault_writes(), \
+             patch("pionex_client.get_balance", side_effect=lambda: balance_calls.pop(0) if balance_calls else {"USDT":600, "BTC":0.001}), \
              patch("vault.relauncher._read_bot_state") as mock_read:
             mock_read.return_value = {
                 "base_amount": 0.001, "quote_amount": 500, "price": 70000,
@@ -313,8 +334,14 @@ class E_PartialFailures(unittest.TestCase):
     def test_E1_cancel_ok_then_create_404(self):
         """Cancel reixit, create dóna 404 (el bug que ens va passar).
         Per disseny: bot original ja cancellat, error logged, state inconsistent."""
-        # Simulem el bug exact que vam veure
+        # Simulem el bug exact que vam veure (amb wallet delta realista + vault prou)
+        balance_calls = [
+            {"USDT": 100, "BTC": 0},      # pre-cancel
+            {"USDT": 300, "BTC": 0.005},  # post-cancel: +200 USDT, +0.005 BTC
+        ]
         with _isolate_vault_writes(), \
+             patch("pionex_client.get_balance", side_effect=lambda: balance_calls.pop(0) if balance_calls else {"USDT":300, "BTC":0.005}), \
+             patch("vault.funding.get_inventory", return_value=_mock_full_inv(usdt_qty=500)), \
              patch("vault.relauncher._read_bot_state") as mock_read:
             mock_read.return_value = {
                 "base_amount": 0.005, "quote_amount": 200, "price": 70000,
