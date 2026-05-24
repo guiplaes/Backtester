@@ -1,8 +1,15 @@
 """
 test_vault_battle.py — Simulacions exhaustives de situacions que poden donar bug.
 
-Cobreix els camins de fallada més probables del sistema vault LIVE,
-amb mocks de Pionex i Neon per simular escenaris reals sense risc.
+⚠️ CRITICAL: aquests tests MAI han de tocar Neon de producció.
+Els tests del Class B/D/E (relauncher amb mocks de cancel/create) usen
+mocks de vault.inventory.add_base/add_usdt/remove_usdt per evitar
+contaminar vault_inventory real.
+
+⚠️ Bug descobert 2026-05-23: la primera versió d'aquests tests SÍ tocava
+Neon (els mocks de cancel_bot/create_spot_grid no mockejaven add_usdt),
+causant que vault_inventory.USDT pugés a \$353 (de \$11). Calia neteja
+manual. Mai més.
 
 Categories cobertes:
   A) Closer breakout detection edge cases
@@ -61,6 +68,33 @@ PRICES = {
 }
 
 
+def _isolate_vault_writes():
+    """Helper: bloquegen els writes a vault_inventory per evitar contaminar Neon.
+    Retorna llista de patches per usar amb 'with ExitStack'."""
+    from contextlib import ExitStack
+    stack = ExitStack()
+    # Mock totes les funcions que escriuen al vault real
+    for fn in ["add_base", "remove_base", "add_usdt", "remove_usdt"]:
+        # Mock al lloc on s'importa (vault.relauncher i vault.funding)
+        p1 = patch(f"vault.inventory.{fn}", return_value=True)
+        p2 = patch(f"vault.relauncher.{fn}", return_value=True, create=True)
+        p3 = patch(f"vault.funding.{fn}", return_value=True, create=True)
+        stack.enter_context(p1)
+        try: stack.enter_context(p2)
+        except Exception: pass
+        try: stack.enter_context(p3)
+        except Exception: pass
+    # També mock log_capital_event, log_bot_lifecycle, etc per no contaminar
+    for fn in ["log_capital_event", "log_bot_lifecycle", "log_recolocation",
+               "upsert_bot", "open_epoch", "close_epoch", "mark_bot_closed",
+               "snapshot_bot_state"]:
+        try:
+            stack.enter_context(patch(f"vault.relauncher.{fn}", return_value=None))
+        except Exception:
+            pass
+    return stack
+
+
 class A_ClosingEdgeCases(unittest.TestCase):
     """Closer: situacions del detector de breakout."""
 
@@ -108,7 +142,8 @@ class B_CancelBotFailureModes(unittest.TestCase):
 
     def test_B1_cancel_returns_result_false(self):
         """Si cancel_bot returna {result:False}, relauncher ha d'abortar net."""
-        with patch("vault.relauncher._read_bot_state") as mock_read:
+        with _isolate_vault_writes(), \
+             patch("vault.relauncher._read_bot_state") as mock_read:
             mock_read.return_value = {
                 "base_amount": 0.005, "quote_amount": 50, "price": 70000,
                 "average_cost": 75000, "grid_profit": 5.0, "cycles": 30, "raw": {},
@@ -126,7 +161,8 @@ class B_CancelBotFailureModes(unittest.TestCase):
 
     def test_B2_cancel_exception(self):
         """Si cancel_bot llança exception, relauncher ha d'abortar net."""
-        with patch("vault.relauncher._read_bot_state") as mock_read:
+        with _isolate_vault_writes(), \
+             patch("vault.relauncher._read_bot_state") as mock_read:
             mock_read.return_value = {
                 "base_amount": 0.005, "quote_amount": 50, "price": 70000,
                 "average_cost": 75000, "grid_profit": 5.0, "cycles": 30, "raw": {},
@@ -247,7 +283,8 @@ class D_CreateSpotGridFailures(unittest.TestCase):
     def test_D1_create_returns_no_bot_id(self):
         """create_spot_grid returna success but no buOrderId — error."""
         # Pre_state amb QUOTE alt perquè recovered USDT cobreixi target sense funding
-        with patch("vault.relauncher._read_bot_state") as mock_read:
+        with _isolate_vault_writes(), \
+             patch("vault.relauncher._read_bot_state") as mock_read:
             mock_read.return_value = {
                 "base_amount": 0.001, "quote_amount": 500, "price": 70000,
                 "average_cost": 75000, "grid_profit": 5.0, "cycles": 30, "raw": {},
@@ -277,7 +314,8 @@ class E_PartialFailures(unittest.TestCase):
         """Cancel reixit, create dóna 404 (el bug que ens va passar).
         Per disseny: bot original ja cancellat, error logged, state inconsistent."""
         # Simulem el bug exact que vam veure
-        with patch("vault.relauncher._read_bot_state") as mock_read:
+        with _isolate_vault_writes(), \
+             patch("vault.relauncher._read_bot_state") as mock_read:
             mock_read.return_value = {
                 "base_amount": 0.005, "quote_amount": 200, "price": 70000,
                 "average_cost": 75000, "grid_profit": 5.0, "cycles": 30, "raw": {},
