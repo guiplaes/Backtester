@@ -559,7 +559,12 @@ def sync_bot_lifecycle():
     for bot_id, bot_name in our_running:
         if bot_id not in pionex_ids:
             # Bot ja no existeix a Pionex → tanca
-            # Obtenim últim snapshot per a grid_profit_at_close
+            # Obtenim últim snapshot per a grid_profit_at_close + cycles_completed.
+            # cycles_completed = MAX(cycles_paired) dels event_snapshots — això
+            # captura tots els cicles que el bot va fer abans del tancament.
+            # IMPORTANT: si no poblem cycles_completed, lifetime_summary_v3
+            # perdrà aquests cicles per sempre quan el bot estigui closed
+            # (bug detectat 2026-05-24: PAXG_76e6b1c8 va perdre 31 cicles).
             with conn() as c, c.cursor() as cur:
                 cur.execute("""
                     SELECT gross_grid_profit::float, invested_capital::float
@@ -567,18 +572,24 @@ def sync_bot_lifecycle():
                     ORDER BY date DESC LIMIT 1
                 """, (bot_id,))
                 row = cur.fetchone()
+                cur.execute("""
+                    SELECT COALESCE(MAX(cycles_paired), 0) FROM event_snapshots
+                    WHERE bot_id=%s
+                """, (bot_id,))
+                last_cycles = int(cur.fetchone()[0] or 0)
             last_gp = row[0] if row else 0
             last_inv = row[1] if row else 0
-            # Tanca epoch obert
+            # Tanca epoch obert (POBLA cycles_completed per evitar leak)
             with conn() as c, c.cursor() as cur:
                 cur.execute("""
                     UPDATE bot_epochs
                     SET closed_at=NOW(),
                         grid_profit_at_close=%s,
                         final_capital_usdt=%s,
+                        cycles_completed=%s,
                         notes=COALESCE(notes,'') || ' [auto-closed by sync_health]'
                     WHERE bot_id=%s AND closed_at IS NULL
-                """, (last_gp, last_inv, bot_id))
+                """, (last_gp, last_inv, last_cycles, bot_id))
                 cur.execute(
                     "UPDATE bots SET status='closed', closed_at=NOW() WHERE bot_id=%s",
                     (bot_id,),
