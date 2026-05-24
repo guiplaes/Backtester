@@ -715,8 +715,15 @@ def snapshot_bot_state(
         invested = float(bu.get("quoteTotalInvestment", 0) or 0)
         gp = float(bu.get("gridProfit", 0) or 0)
         pw = float(bu.get("profitWithdrawnUsdt", 0) or 0)
-        cycles = int(bu.get("closedExchangeOrderCount", 0) or 0)
+        # UNIFICAT (2026-05-24): cycles_total = exchangeOrderPairedCount
+        # (round-trips buy+sell complets). Abans usàvem closedExchangeOrderCount
+        # (orders individuals — buy O sell — i comptava el doble).
+        # event_snapshots.cycles_paired manté també paired (legacy compat).
+        cycles = int(bu.get("exchangeOrderPairedCount", 0) or 0)
         cycles_p = int(bu.get("exchangeOrderPairedCount", 0) or 0)
+        # `closedExchangeOrderCount` (individual orders) NO es guarda més com
+        # a cycles_total per evitar confusió. Si cal en el futur, afegir camp
+        # explícit `total_trades`.
         base_amt = float(bu.get("baseAmount", 0) or 0)
         quote_amt = float(bu.get("quoteAmount", 0) or 0)
         top = float(bu.get("top", 0) or 0)
