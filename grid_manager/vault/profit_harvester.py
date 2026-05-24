@@ -53,7 +53,17 @@ DRY_RUN = False               # Posa True per simular sense executar
 
 
 def harvest_one(bot_name: str, cfg: dict) -> dict:
-    """Extreu profit d'un bot. Retorna {ok, amount, error}."""
+    """Extreu profit d'un bot. Retorna {ok, amount, error}.
+
+    BUG FIX 2026-05-24: ANTES usava `gridProfit` cumulatiu, comptant doble
+    profits que ja s'havien extret en cycles anteriors. Pionex llavors
+    rebutjava silenciosament o donava menys del demanat, però nosaltres
+    apuntàvem el demanat (no el rebut) → vault inflat amb USDT fantasma.
+
+    Fix correcte: `extractable = gridProfit - profitWithdrawn - SAFETY_BUFFER`
+    (mateix que weekly_rebalance.py ja feia bé).
+    A més verifiquem el delta REAL a Pionex post-extract (qti_before vs qti_after).
+    """
     bot_id = cfg["id"]
     try:
         d = get_bot_order(bot_id)
@@ -62,16 +72,23 @@ def harvest_one(bot_name: str, cfg: dict) -> dict:
 
     bu = d.get("buOrderData") or {}
     grid_profit = float(bu.get("gridProfit") or 0)
+    # CRITIC: profitWithdrawn és la SUMA cumulative ja extreta lifetime.
+    # Disponible REAL = gridProfit lifetime - ja extret lifetime.
+    profit_withdrawn = float(bu.get("profitWithdrawn") or 0)
     qti_before = float(bu.get("quoteTotalInvestment") or 0)
+    quote_before = float(bu.get("quoteAmount") or 0)  # USDT dins el bot
 
-    extractable = grid_profit - SAFETY_BUFFER_USDT
+    real_available = grid_profit - profit_withdrawn
+    extractable = real_available - SAFETY_BUFFER_USDT
     if extractable < MIN_HARVEST_USDT:
         return {"ok": True, "amount": 0, "skipped": True,
                 "grid_profit": grid_profit,
-                "reason": f"grid_profit ${grid_profit:.4f} below threshold"}
+                "profit_withdrawn": profit_withdrawn,
+                "real_available": real_available,
+                "reason": f"real_available ${real_available:.4f} below threshold (gp=${grid_profit:.4f} - withdrawn=${profit_withdrawn:.4f})"}
 
     extract_amount = round(extractable, 4)
-    log.info(f"  {bot_name}: gridProfit=${grid_profit:.4f}, extracting ${extract_amount:.4f}")
+    log.info(f"  {bot_name}: gridProfit=${grid_profit:.4f} - withdrawn=${profit_withdrawn:.4f} = ${real_available:.4f} available, extracting ${extract_amount:.4f}")
 
     if DRY_RUN:
         return {"ok": True, "amount": extract_amount, "dry_run": True}
@@ -84,6 +101,27 @@ def harvest_one(bot_name: str, cfg: dict) -> dict:
 
     if not result.get("result"):
         return {"ok": False, "amount": 0, "error": f"Pionex returned non-result: {result}"}
+
+    # VERIFICACIO POST: llegeix bot un altre cop per veure si quoteAmount va baixar
+    # de veritat (Pionex de vegades retorna result=True però no aplica si no hi
+    # ha prou disponible). Esperem 2s.
+    import time
+    time.sleep(2)
+    try:
+        d_after = get_bot_order(bot_id)
+        bu_after = d_after.get("buOrderData") or {}
+        quote_after = float(bu_after.get("quoteAmount") or 0)
+        real_extracted = quote_before - quote_after
+        if real_extracted < 0.01:
+            log.warning(f"  {bot_name}: Pionex result=True però quoteAmount NO baixa "
+                        f"({quote_before:.4f} → {quote_after:.4f}). NO logging fals.")
+            return {"ok": False, "amount": 0, "error": "phantom extract — Pionex no va aplicar"}
+        if abs(real_extracted - extract_amount) > 0.01:
+            log.warning(f"  {bot_name}: Pionex va donar ${real_extracted:.4f} en lloc dels ${extract_amount:.4f} demanats")
+        # Usem el delta REAL per al log al vault
+        extract_amount = real_extracted
+    except Exception as e:
+        log.warning(f"  {bot_name}: no he pogut verificar post-extract ({e}), usant amount demanat")
 
     # Logueja a capital_events (event existent, no nou)
     now = datetime.now(timezone.utc)
