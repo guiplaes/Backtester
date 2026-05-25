@@ -105,9 +105,14 @@ def harvest_one(bot_name: str, cfg: dict) -> dict:
     if not result.get("result"):
         return {"ok": False, "amount": 0, "error": f"Pionex returned non-result: {result}"}
 
-    # VERIFICACIO POST: llegeix bot un altre cop per veure si quoteAmount va baixar
-    # de veritat (Pionex de vegades retorna result=True però no aplica si no hi
-    # ha prou disponible). Esperem 2s.
+    # VERIFICACIO POST: llegeix bot un altre cop per veure quant ha baixat de veritat
+    # el quoteAmount. Pionex de vegades dona menys del demanat (rate limits interns,
+    # profits ja consumits pel pròxim cycle, etc.). Usem el delta REAL per al log.
+    #
+    # 2026-05-25 (post test empíric): Pionex SÍ dóna qualsevol delta > 0 fins i tot
+    # microscòpic ($0.00004 a un test). El check anterior de "< $0.01 = phantom"
+    # era massa estricte i descartava extraccions vàlides. Ara acceptem qualsevol
+    # delta > 0 (només considerem phantom si el delta és exactament 0 o negatiu).
     import time
     time.sleep(2)
     try:
@@ -115,13 +120,13 @@ def harvest_one(bot_name: str, cfg: dict) -> dict:
         bu_after = d_after.get("buOrderData") or {}
         quote_after = float(bu_after.get("quoteAmount") or 0)
         real_extracted = quote_before - quote_after
-        if real_extracted < 0.01:
+        if real_extracted <= 0:
             log.warning(f"  {bot_name}: Pionex result=True però quoteAmount NO baixa "
-                        f"({quote_before:.4f} → {quote_after:.4f}). NO logging fals.")
-            return {"ok": False, "amount": 0, "error": "phantom extract — Pionex no va aplicar"}
+                        f"({quote_before:.4f} → {quote_after:.4f}). Skip — phantom real.")
+            return {"ok": False, "amount": 0, "error": "phantom extract — quoteAmount no va canviar"}
         if abs(real_extracted - extract_amount) > 0.01:
-            log.warning(f"  {bot_name}: Pionex va donar ${real_extracted:.4f} en lloc dels ${extract_amount:.4f} demanats")
-        # Usem el delta REAL per al log al vault
+            log.info(f"  {bot_name}: Pionex va donar ${real_extracted:.6f} en lloc dels ${extract_amount:.4f} demanats (diferent del demanat, però vàlid)")
+        # Usem el delta REAL per al log al vault — fins i tot si és microscòpic
         extract_amount = real_extracted
     except Exception as e:
         log.warning(f"  {bot_name}: no he pogut verificar post-extract ({e}), usant amount demanat")
