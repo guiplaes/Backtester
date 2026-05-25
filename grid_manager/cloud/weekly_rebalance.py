@@ -170,7 +170,10 @@ def main():
     # Aquest endpoint específic extreu només la part de profit del grid,
     # sense tocar el base/quote del bot. Cash pur cap al wallet.
     log.info("Extracció del grid profit de cada bot...")
-    MIN_EXTRACT = 0.50   # Pionex permet extraccions petites a través d'aquest endpoint
+    # 2026-05-25: Guillem confirma que l'app Pionex "Liberar ganancias" accepta
+    # qualsevol quantitat. Test empíric: $0.05 demanat → $0.00004 retornat OK.
+    # Baixem a $0.01 (consistent amb profit_harvester.py).
+    MIN_EXTRACT = 0.01
     extracted_total = 0.0
     extraction_results = []
     for name, bcfg in BOTS.items():
@@ -198,15 +201,17 @@ def main():
                 try:
                     quote_after = float(get_bot_order(bcfg["id"]).get("buOrderData", {}).get("quoteAmount", 0))
                     real_extracted = quote_before - quote_after
-                    if real_extracted < 0.01:
+                    # 2026-05-25: phantom només si delta exactament 0 o negatiu.
+                    # Abans < 0.01 = fals positiu (Pionex SÍ dóna microdeltes).
+                    if real_extracted <= 0:
                         log.warning(f"  {name}: Pionex result=True PERÒ quoteAmount no baixa "
-                                    f"({quote_before:.4f}→{quote_after:.4f}). Treatat com fallit.")
+                                    f"({quote_before:.4f}→{quote_after:.4f}). Phantom real.")
                         ok = False
                         extraction_results.append({"bot": name, "amount": amount, "ok": False,
                                                    "msg": "phantom extract (Pionex no va aplicar)", "extracted": 0})
                         continue
                     if abs(real_extracted - amount) > 0.01:
-                        log.warning(f"  {name}: Pionex va donar ${real_extracted:.4f} en lloc dels ${amount:.4f} demanats")
+                        log.info(f"  {name}: Pionex va donar ${real_extracted:.6f} en lloc dels ${amount:.4f} demanats (vàlid, delta real)")
                 except Exception as e:
                     log.warning(f"  {name}: no he pogut verificar post-extract ({e}), usem amount demanat")
                     real_extracted = amount
