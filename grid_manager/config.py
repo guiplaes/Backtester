@@ -62,12 +62,16 @@ BOTS = {
 
 # Target weights for rebalancing (2026-05-21: SPYX 15→10, PAXG 30→35)
 TARGET_WEIGHTS = {
-    "PAXG_USDT": 0.35,
-    "BTC_USDT":  0.22,
-    "ETH_USDT":  0.15,
-    "SOL_USDT":  0.08,
-    "USOX_USDT": 0.10,
-    "SPYX_USDT": 0.10,
+    # 2026-05-25 (replantejament Guillem): aquests targets són només de referència
+    # per al dashboard (mostren la desviació actual vs objectiu). El cron
+    # GridWeeklyRebalance està DESACTIVAT — Guillem fa reassignacions manuals
+    # quan ho considera, no automàticament.
+    "PAXG_USDT": 0.40,
+    "BTC_USDT":  0.30,
+    "ETH_USDT":  0.10,
+    "SOL_USDT":  0.05,
+    "USOX_USDT": 0.075,
+    "SPYX_USDT": 0.075,
 }
 
 # ─── Rebalancer (portfolio level, on top of grids) ──────────────────
