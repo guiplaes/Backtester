@@ -47,8 +47,11 @@ logging.basicConfig(
 log = logging.getLogger("profit_harvester")
 
 # Configuració
-MIN_HARVEST_USDT = 1.00       # No extreure < $1 (no val la pena)
-SAFETY_BUFFER_USDT = 0.50     # Deixem $0.50 al bot per seguretat
+# 2026-05-25: Guillem vol agressivitat màxima — recuperar és gratis a Pionex.
+# Per poc que hi hagi al gridProfit, ho extreu. El check post-extract
+# (línies 105-124) detecta phantom extracts si Pionex no aplica res.
+MIN_HARVEST_USDT = 0.01       # Recuperar tot, fins i tot 1 cèntim
+SAFETY_BUFFER_USDT = 0.0      # Sense buffer — agafem tot el profit disponible
 DRY_RUN = False               # Posa True per simular sense executar
 
 
